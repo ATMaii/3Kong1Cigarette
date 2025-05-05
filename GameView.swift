@@ -170,7 +170,7 @@ struct GameView: View {
                 HStack {
                     Text("ผู้เล่น
 
-                         import SwiftUI
+import SwiftUI
 
 struct GameView: View {
     @StateObject private var gameManager = GameManager()
@@ -181,13 +181,25 @@ struct GameView: View {
                 VStack {
                     Text("ผู้เล่น
 
-                         import SwiftUI
+import SwiftUI
 
 struct GameView: View {
     @StateObject private var gameManager = GameManager()
 
     var body: some View {
         VStack {
+            ForEach(gameManager.players) { player in
+                VStack {
+                    Text("ผู้เล่น
+
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+
+    var body: some View {
+        VStack {
+            // แสดงไพ่และคะแนนของผู้เล่น
             ForEach(gameManager.players) { player in
                 VStack {
                     Text("ผู้เล่น
