@@ -273,4 +273,6 @@ func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
     return (head, middle, tail)
 }
 
-      
+    let (head, middle, tail) = splitIntoThreePiles()
+
+print("หัว:
