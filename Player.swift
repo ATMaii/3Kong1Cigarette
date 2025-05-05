@@ -101,3 +101,9 @@ struct Player {
     }
 }
 
+struct Player {
+    var fullHand: [Card] = []
+    var tail: [Card] = []
+    var middle: [Card] = []
+    var head: [Card] = []
+}
