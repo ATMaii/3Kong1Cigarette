@@ -239,3 +239,45 @@ struct DraggableCard: View {
             .onDrag {
                 return NSItemProvider(object: NSString(string: "
 
+import SwiftUI
+
+class GameTimer: ObservableObject {
+    @Published var secondsRemaining: Int = 120 // เปลี่ยนเป็น 120 วินาที
+    var timer: Timer?
+    var isRunning = false
+
+    func start() {
+        if isRunning { return } // ห้ามเริ่มใหม่ถ้ากำลังจับเวลาอยู่
+        isRunning = true
+        secondsRemaining = 120 // รีเซ็ตเวลาให้กลับไปที่ 120 วินาที
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if self.secondsRemaining > 0 {
+                self.secondsRemaining -= 1
+            } else {
+                self.stop() // หยุดเวลาเมื่อหมดเวลา
+            }
+        }
+    }
+
+    func stop() {
+        timer?.invalidate() // หยุดจับเวลา
+        isRunning = false
+    }
+
+    func reset() {
+        stop()
+        secondsRemaining = 120 // รีเซ็ตเวลาเป็น 120 วินาที
+    }
+}
+
+struct GameView: View {
+    @StateObject var gameTimer = GameTimer()
+    
+    @State private var isGameStarted = false
+    
+    var body: some View {
+        VStack {
+            // แสดงเวลาที่เหลือ
+            Text("Time Remaining:
+
+                 
