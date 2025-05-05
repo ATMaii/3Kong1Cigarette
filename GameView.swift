@@ -211,3 +211,8 @@ struct GameView: View {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
         print("ผู้เล่น                       
+
+        VStack {
+    ForEach(players.indices, id: \.self) { index in
+        VStack(alignment: .leading) {
+            Text("ผู้เล่น
