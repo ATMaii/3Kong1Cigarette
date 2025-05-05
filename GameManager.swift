@@ -67,3 +67,28 @@ func startNewGame() {
     players = [Player(), Player(), Player(), Player()]
     dealCards()
 }
+
+import Foundation
+
+class GameManager: ObservableObject {
+    @Published var players: [Player] = []
+    private var deck = Deck()
+
+    init() {
+        startNewGame()
+    }
+
+    func startNewGame() {
+        deck = Deck()
+        players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
+        dealCards()
+    }
+
+    private func dealCards() {
+        deck.shuffle()
+        for i in 0..<players.count {
+            players[i].hand = (0..<13).compactMap { _ in deck.dealCard() }
+            players[i].sortHand() // เรียงไพ่ตามดอก + แต้ม
+        }
+    }
+}
