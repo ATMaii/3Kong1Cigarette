@@ -226,3 +226,16 @@ struct GameView: View {
             ForEach(gameManager.players.indices, id: \.self) { index in
                 VStack(alignment: .leading) {
                     Text("ผู้เล่น
+
+
+struct DraggableCard: View {
+    let card: Card
+    var body: some View {
+        Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                return NSItemProvider(object: NSString(string: "
+
