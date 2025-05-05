@@ -286,3 +286,38 @@ func startNewGame() {
         players[i].splitHandIntoPiles()
     }
       }
+
+
+      class GameManager: ObservableObject {
+    static let shared = GameManager()
+
+    @Published var players: [Player] = []
+
+    func startNewGame() {
+        var deck = Card.allCards.shuffled()
+        players = []
+
+        for _ in 0..<4 {
+            var hand: [Card] = []
+            for _ in 0..<13 {
+                hand.append(deck.removeFirst())
+            }
+
+            let sortedHand = hand.sorted(by: cardSort)
+            let tail = Array(sortedHand[0..<5])
+            let middle = Array(sortedHand[5..<10])
+            let head = Array(sortedHand[10..<13])
+
+            let player = Player(fullHand: hand, tail: tail, middle: middle, head: head)
+            players.append(player)
+        }
+    }
+
+    private func cardSort(_ a: Card, _ b: Card) -> Bool {
+        if a.suit.rawValue == b.suit.rawValue {
+            return a.rank.rawValue < b.rank.rawValue
+        } else {
+            return a.suit.rawValue < b.suit.rawValue
+        }
+    }
+      }
