@@ -211,3 +211,7 @@ struct GameView: View {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
         print("ผู้เล่น                       
+
+        let (head, middle, tail) = splitIntoThreePiles()
+
+        print("หัว:
