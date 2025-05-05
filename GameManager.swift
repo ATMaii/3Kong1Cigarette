@@ -37,3 +37,27 @@ func evaluateHand(_ cards: [Card]) -> Int {
     return Int.random(in: 0...10) // ใช้แบบสุ่มแทนก่อน
 }
 
+import Foundation
+
+class GameManager: ObservableObject {
+    @Published var players: [Player] = []
+    @Published var deck = Deck()
+
+    func startNewGame() {
+        deck = Deck()
+        players = [Player(), Player(), Player(), Player()]
+        dealCards()
+    }
+
+    func dealCards() {
+        for i in 0..<players.count {
+            players[i].hand = []
+            for _ in 0..<13 {
+                if let card = deck.dealCard() {
+                    players[i].hand.append(card)
+                }
+            }
+            players[i].sortHand()
+        }
+    }
+}
