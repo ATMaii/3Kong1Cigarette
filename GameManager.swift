@@ -194,3 +194,53 @@ class GameManager: ObservableObject {
     }
 }
 
+class GameManager: ObservableObject {
+    @Published var players: [Player] = []
+    private var deck = Deck()
+
+    init() {
+        startNewGame()
+    }
+
+    func startNewGame() {
+        deck = Deck()
+        players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
+        dealCards()
+    }
+
+    private func dealCards() {
+        deck.shuffle()
+        for i in 0..<players.count {
+            players[i].hand = (0..<13).compactMap { _ in deck.dealCard() }
+            players[i].sortHand()
+        }
+    }
+
+    func calculateScore(player: Player) -> Int {
+        let headScore = evaluateHand(player: player, hand: Array(player.hand.prefix(5)))
+        let middleScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(5).prefix(5)))
+        let tailScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(10).prefix(3)))
+        return headScore + middleScore + tailScore
+    }
+
+    func evaluateHand(player: Player, hand: [Card]) -> Int {
+        // เพิ่มเงื่อนไขในการประเมินคะแนนตามแถวต่าง ๆ
+        return hand.count
+    }
+
+    func compareScores() -> Player? {
+        var winner: Player? = nil
+        var highestScore = 0
+
+        for player in players {
+            let score = calculateScore(player: player)
+            if score > highestScore {
+                highestScore = score
+                winner = player
+            }
+        }
+
+        return winner
+    }
+}
+
