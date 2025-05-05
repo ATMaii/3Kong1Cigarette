@@ -101,4 +101,5 @@ struct GameView: View {
 
                     Text("คะแนน:
 
-                         
+VStack(alignment: .leading, spacing: 4) {
+    Text("หัว:                       
