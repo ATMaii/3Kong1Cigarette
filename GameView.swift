@@ -158,3 +158,14 @@ var body: some View {
 Button("เริ่มเกมใหม่") {
     gameManager.startNewGame()
    }                          
+
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+
+    var body: some View {
+        VStack {
+            ForEach(gameManager.players) { player in
+                HStack {
+                    Text("ผู้เล่น
