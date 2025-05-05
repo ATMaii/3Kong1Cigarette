@@ -155,4 +155,6 @@ var body: some View {
                     ForEach(player.hand, id: \.self) { card in
                         Text("
 
-                             
+Button("เริ่มเกมใหม่") {
+    gameManager.startNewGame()
+   }                          
