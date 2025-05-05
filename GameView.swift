@@ -1,4 +1,7 @@
-import SwiftUI
+Button("แยกไพ่ 3 กอง") {
+    for player in gameManager.players {
+        let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
+        print("ผู้เล่นimport SwiftUI
 
 struct GameView: View {
     @State private var deck = Deck()
@@ -203,3 +206,8 @@ struct GameView: View {
             ForEach(gameManager.players) { player in
                 VStack {
                     Text("ผู้เล่น
+
+  Button("แยกไพ่ 3 กอง") {
+    for player in gameManager.players {
+        let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
+        print("ผู้เล่น                       
