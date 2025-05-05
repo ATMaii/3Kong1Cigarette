@@ -17,3 +17,19 @@ class Player: Identifiable {
         self.hand = []
     }
 }
+
+// Player.swift
+
+import Foundation
+
+class Player: ObservableObject {
+    let name: String
+    @Published var hand: [Card]
+    @Published var score: Int
+    
+    init(name: String) {
+        self.name = name
+        self.hand = []
+        self.score = 0
+    }
+}
