@@ -80,3 +80,40 @@ class GameLogic: ObservableObject {
         return score
     }
 }
+
+// GameLogic.swift
+
+private func calculateScore(for hand: [Card]) -> Int {
+    let sortedHand = hand.sorted { $0.rank.rawValue < $1.rank.rawValue }
+    var score = 0
+    
+    // คำนวณคะแนนจากไพ่ในมือ
+    for card in sortedHand {
+        score += card.rank.rawValue
+    }
+
+    // ตรวจสอบว่ามีการชนะทั้ง 3 แถวหรือไม่ (ตัวอย่าง)
+    let isTripleWin = checkTripleWin(for: hand)
+    if isTripleWin {
+        score *= 3  // ถ้าชนะทั้ง 3 แถว จะคูณคะแนน
+    }
+    
+    return score
+}
+
+// ฟังก์ชันตรวจสอบการชนะทั้ง 3 แถว
+private func checkTripleWin(for hand: [Card]) -> Bool {
+    // ตัวอย่างการตรวจสอบ ถ้ามีชุดที่เป็นไพ่ชุดพิเศษ (เช่น ตอง, โฟร์)
+    // สามารถปรับแก้ตามกฎที่ต้องการ
+    let hasThreeOfAKind = hand.filter { $0.rank == .three }.count == 3
+    let hasFourOfAKind = hand.filter { $0.rank == .four }.count == 4
+    let hasStraightFlush = checkStraightFlush(for: hand)
+
+    return hasThreeOfAKind && hasFourOfAKind && hasStraightFlush
+}
+
+private func checkStraightFlush(for hand: [Card]) -> Bool {
+    // ตัวอย่างการตรวจสอบ ฟรัช และเรียงลำดับ
+    return true
+}
+
