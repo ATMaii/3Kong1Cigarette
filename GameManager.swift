@@ -22,3 +22,18 @@ func startNewGame() {
 
     winner = players.max(by: { $0.score < $1.score })
 }
+
+func evaluateThreePiles(head: [Card], middle: [Card], tail: [Card]) -> Int {
+    var score = 0
+    score += evaluateHand(head)      // อาจให้คะแนนน้อยหน่อย
+    score += evaluateHand(middle) * 2
+    score += evaluateHand(tail) * 3
+    return score
+}
+
+func evaluateHand(_ cards: [Card]) -> Int {
+    // ตัวอย่างการให้คะแนนเบื้องต้น: คู่ = 1, ตอง = 3, โฟว์ = 6, ฟูลเฮาส์ = 4, สเตรทฟลัช = 10 ฯลฯ
+    // TODO: เขียนระบบตรวจมือจริง ๆ
+    return Int.random(in: 0...10) // ใช้แบบสุ่มแทนก่อน
+}
+
