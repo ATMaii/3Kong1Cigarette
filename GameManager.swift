@@ -61,3 +61,9 @@ class GameManager: ObservableObject {
         }
     }
 }
+
+func startNewGame() {
+    deck = Deck()
+    players = [Player(), Player(), Player(), Player()]
+    dealCards()
+}
