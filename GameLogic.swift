@@ -117,3 +117,11 @@ private func checkStraightFlush(for hand: [Card]) -> Bool {
     return true
 }
 
+// GameLogic.swift
+
+private func determineWinner() {
+    let highestScore = players.max { $0.score < $1.score }
+    
+    if let winner = highestScore {
+        self.winner = winner
+        print("Winner:
