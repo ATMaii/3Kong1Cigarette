@@ -71,3 +71,18 @@ struct Player: Identifiable {
         }
     }
 }
+
+struct Player: Identifiable {
+    let id: Int
+    var hand: [Card] = []
+
+    mutating func sortHand() {
+        hand.sort {
+            if $0.suit.rawValue == $1.suit.rawValue {
+                return $0.rank.rawValue < $1.rank.rawValue
+            } else {
+                return $0.suit.rawValue < $1.suit.rawValue
+            }
+        }
+    }
+}
