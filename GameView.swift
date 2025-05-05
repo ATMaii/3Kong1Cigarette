@@ -104,13 +104,27 @@ struct GameView: View {
 VStack(alignment: .leading, spacing: 4) {
     Text("หัว:                       
 
+@State var players: [Player] = []
+@State var gameManager = GameManager()
+
+var body: some View {
+    VStack {
+        Button("เริ่มเกมใหม่") {
+            gameManager.startNewGame(&players)
+        }
+
+        ForEach(players.indices, id: \.self) { index in
+            PlayerHandView(player: players[index])
+        }
+
+        Text("คะแนนรวม:
 import SwiftUI
 
 struct GameView: View {
     @State var player = Player()
     @State var deck = Deck()
 
-    var body: some View {
+var body: some View {
         VStack {
             HStack {
                 Button("สุ่มไพ่") {
