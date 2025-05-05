@@ -216,3 +216,13 @@ struct GameView: View {
     ForEach(players.indices, id: \.self) { index in
         VStack(alignment: .leading) {
             Text("ผู้เล่น
+
+                 
+struct GameView: View {
+    @ObservedObject var gameManager = GameManager.shared
+
+    var body: some View {
+        VStack {
+            ForEach(gameManager.players.indices, id: \.self) { index in
+                VStack(alignment: .leading) {
+                    Text("ผู้เล่น
