@@ -28,3 +28,55 @@ class GameLogic {
         }
     }
 }
+
+// GameLogic.swift
+
+import Foundation
+
+class GameLogic: ObservableObject {
+    @Published var players: [Player]
+    var deck: Deck
+    
+    init(playerNames: [String]) {
+        self.deck = Deck()
+        self.players = playerNames.map { Player(name: $0) }
+    }
+    
+    func startGame() {
+        deck.shuffle()
+        dealCards()
+        calculateScores()
+    }
+    
+    private func dealCards() {
+        for player in players {
+            var hand: [Card] = []
+            for _ in 0..<13 {
+                if let card = deck.drawCard() {
+                    hand.append(card)
+                }
+            }
+            player.hand = hand
+        }
+    }
+    
+    private func calculateScores() {
+        for player in players {
+            player.score = calculateScore(for: player.hand)
+        }
+    }
+    
+    private func calculateScore(for hand: [Card]) -> Int {
+        // คำนวณคะแนนของมือไพ่ที่ได้รับ
+        // ตัวอย่างการคำนวณ: คะแนนตามลำดับไพ่จากน้อยไปมาก
+        let sortedHand = hand.sorted { $0.rank.rawValue < $1.rank.rawValue }
+        
+        // กรณีตัวอย่าง คำนวณเป็นคะแนนตามลำดับไพ่ (จะต้องปรับตามกติกาจริง)
+        var score = 0
+        for card in sortedHand {
+            score += card.rank.rawValue
+        }
+        
+        return score
+    }
+}
