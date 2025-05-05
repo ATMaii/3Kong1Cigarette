@@ -276,3 +276,13 @@ func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
     let (head, middle, tail) = splitIntoThreePiles()
 
 print("หัว:
+
+func startNewGame() {
+    var deck = Deck()
+    deck.shuffle()
+
+    for i in 0..<players.count {
+        players[i].hand = deck.drawCards(count: 13)
+        players[i].splitHandIntoPiles()
+    }
+      }
