@@ -86,3 +86,18 @@ struct Player: Identifiable {
         }
     }
 }
+
+struct Player {
+    var hand: [Card] = []
+    var head: [Card] = []
+    var middle: [Card] = []
+    var tail: [Card] = []
+
+    mutating func splitHandIntoPiles() {
+        guard hand.count == 13 else { return }
+        tail = Array(hand[0..<5])
+        middle = Array(hand[5..<10])
+        head = Array(hand[10..<13])
+    }
+}
+
