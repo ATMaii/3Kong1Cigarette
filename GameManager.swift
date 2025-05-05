@@ -244,3 +244,12 @@ class GameManager: ObservableObject {
     }
 }
 
+extension GameManager {
+    func splitIntoThreePiles(player: Player) -> (head: [Card], middle: [Card], tail: [Card]) {
+        let hand = player.hand
+        let head = Array(hand.prefix(5))
+        let middle = Array(hand.dropFirst(5).prefix(5))
+        let tail = Array(hand.dropFirst(10).prefix(3))
+        return (head, middle, tail)
+    }
+}
