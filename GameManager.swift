@@ -277,6 +277,8 @@ func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
 
 print("หัว:
 
+import Foundation
+
 func startNewGame() {
     var deck = Deck()
     deck.shuffle()
@@ -287,8 +289,9 @@ func startNewGame() {
     }
       }
 
+import Foundation
 
-      class GameManager: ObservableObject {
+class GameManager: ObservableObject {
     static let shared = GameManager()
 
     @Published var players: [Player] = []
