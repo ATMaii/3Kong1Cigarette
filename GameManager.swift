@@ -117,9 +117,9 @@ class GameManager: ObservableObject {
 
     // เพิ่มฟังก์ชันเพื่อแยกไพ่เป็น 3 กอง (หัว กลาง ท้าย)
     func splitIntoThreePiles(player: Player) -> ([Card], [Card], [Card]) {
-        let head = Array(player.hand.prefix(5))  // หัว 5 ใบ
+        let head = Array(player.hand.prefix(3))  // หัว 3 ใบ
         let middle = Array(player.hand.dropFirst(5).prefix(5))  // กลาง 5 ใบ
-        let tail = Array(player.hand.dropFirst(10).prefix(3))  // ท้าย 3 ใบ
+        let tail = Array(player.hand.dropFirst(10).prefix(5))  // ท้าย 5 ใบ
 
         return (head, middle, tail)
     }
