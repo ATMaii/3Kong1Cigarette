@@ -13,9 +13,9 @@ struct GameView: View {
                 HStack {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
-import SwiftUI
-
-struct GameView: View {
+                             import SwiftUI
+                             
+                             struct GameView: View {
     @StateObject private var gameManager = GameManager()
 
     var body: some View {
@@ -33,11 +33,9 @@ struct GameView: View {
                     for player in gameManager.players {
                         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
                         print("ผู้เล่น
+                              import SwiftUI
                               
-// GameView.swift
-import SwiftUI
-
-struct GameView: View {
+                              struct GameView: View {
     @StateObject private var gameManager = GameManager()
 
     var body: some View {
@@ -131,10 +129,9 @@ struct GameView: View {
             ForEach(gameLogic.players, id: \.name) { player in
                 VStack(alignment: .leading) {
                     Text("
-              
-import SwiftUI
-
-struct GameView: View {
+                         import SwiftUI
+                         
+                         struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
     
@@ -149,10 +146,9 @@ struct GameView: View {
                 ForEach(gameLogic.players, id: \.name) { player in
                     VStack(alignment: .leading) {
                         Text("
-                             
-import SwiftUI
+                             import SwiftUI
 
-struct GameView: View {
+                             struct GameView: View {
     @StateObject private var gameManager = GameManager()
     
     var body: some View {
@@ -178,8 +174,7 @@ struct GameView: View {
                     }
 
                     Text("คะแนน:
-
-VStack(alignment: .leading, spacing: 4) {
+                         VStack(alignment: .leading, spacing: 4) {
     Text("หัว:
 
 @State var players: [Player] = []
@@ -196,10 +191,9 @@ var body: some View {
         }
 
         Text("คะแนนรวม:
+             import SwiftUI
 
-import SwiftUI
-
-struct GameView: View {
+             struct GameView: View {
     @State var player = Player()
     @State var deck = Deck()
 
@@ -233,14 +227,10 @@ struct GameView: View {
                 HStack {
                     ForEach(player.hand, id: \.self) { card in
                         Text("
-                             
-                             }
-
 Button("เริ่มเกมใหม่") { gameManager.startNewGame()     }
-                                   
-import SwiftUI
-
-struct GameView: View {
+                             import SwiftUI
+                            
+                             struct GameView: View {
     @StateObject private var gameManager = GameManager()
 
     var body: some View {
@@ -248,10 +238,9 @@ struct GameView: View {
             ForEach(gameManager.players) { player in
                 HStack {
                     Text("ผู้เล่น
-
-import SwiftUI
-
-struct GameView: View {
+                         import SwiftUI
+                         
+                         struct GameView: View {
     @StateObject private var gameManager = GameManager()
 
     var body: some View {
@@ -259,10 +248,9 @@ struct GameView: View {
             ForEach(gameManager.players) { player in
                 VStack {
                     Text("ผู้เล่น
+                         import SwiftUI
 
-import SwiftUI
-
-struct GameView: View {
+                         struct GameView: View {
     @StateObject private var gameManager = GameManager()
 
     var body: some View {
@@ -270,10 +258,9 @@ struct GameView: View {
             ForEach(gameManager.players) { player in
                 VStack {
                     Text("ผู้เล่น
+                         import SwiftUI
 
-import SwiftUI
-
-struct GameView: View {
+                         struct GameView: View {
     @StateObject private var gameManager = GameManager()
 
     var body: some View {
@@ -282,7 +269,6 @@ struct GameView: View {
             ForEach(gameManager.players) { player in
                 VStack {
                     Text("ผู้เล่น
-
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
@@ -290,11 +276,10 @@ Button("แยกไพ่ 3 กอง") {
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
-        print("ผู้เล่น
-              
-import SwiftUI
+        print("ผู้เล่น 
+              import SwiftUI
 
-struct GameView: View {
+              struct GameView: View {
     @State private var deck = Deck()
     @State private var player = Player()
     
@@ -306,12 +291,9 @@ struct GameView: View {
                 HStack {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
-                  
-// GameView.swift
+                             import SwiftUI
 
-import SwiftUI
-
-struct GameView: View {
+                             struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     
     var body: some View {
@@ -324,12 +306,9 @@ struct GameView: View {
             ForEach(gameLogic.players, id: \.name) { player in
                 VStack(alignment: .leading) {
                     Text("
+                         import SwiftUI
 
-// GameView.swift
-
-import SwiftUI
-
-struct GameView: View {
+                         struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     
     var body: some View {
@@ -342,12 +321,9 @@ struct GameView: View {
             ForEach(gameLogic.players, id: \.name) { player in
                 VStack(alignment: .leading) {
                     Text("
+                         import SwiftUI
 
-// GameView.swift
-
-import SwiftUI
-
-struct GameView: View {
+                         struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
     
@@ -362,12 +338,9 @@ struct GameView: View {
                 ForEach(gameLogic.players, id: \.name) { player in
                     VStack(alignment: .leading) {
                         Text("
-                             
-// GameView.swift
+                             import SwiftUI
 
-import SwiftUI
-
-struct GameView: View {
+                             struct GameView: View {
     @StateObject private var gameManager = GameManager()
     
     var body: some View {
@@ -393,7 +366,6 @@ struct GameView: View {
                     }
 
                     Text("คะแนน:
-
 VStack(alignment: .leading, spacing: 4) {
     Text("หัว:                       
 
@@ -411,10 +383,9 @@ var body: some View {
         }
 
         Text("คะแนนรวม:
-             
-import SwiftUI
+             import SwiftUI
 
-struct GameView: View {
+             struct GameView: View {
     @State var player = Player()
     @State var deck = Deck()
 
@@ -448,7 +419,6 @@ var body: some View {
                 HStack {
                     ForEach(player.hand, id: \.self) { card in
                         Text("
-
 Button("เริ่มเกมใหม่") {
     gameManager.startNewGame()
    }                          
