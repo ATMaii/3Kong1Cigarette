@@ -501,57 +501,6 @@ import SwiftUI
 
 struct GameView: View {
     @State private var player3Cards: [Card] = [] // เก็บไพ่ของผู้เล่น
-    @State private var arrangedCards: [[Card]] = [[], [], []] // แถวหัว, กลาง, ล่าง
-    @State private var timer: Timer? // ตัวจับเวลา
-    @State private var timeLeft = 120 // เวลานับถอยหลัง 120 วินาที
-
-    func startNewGame() {
-        let shuffledDeck = CardDeck.allCards.shuffled() // สุ่มไพ่ทั้งหมด
-        player3Cards = Array(shuffledDeck[0..<13]) // แจกไพ่ 13 ใบให้ผู้เล่น
-        arrangedCards = [[], [], []] // รีเซ็ตการจัดไพ่
-        timeLeft = 120 // รีเซ็ตเวลา
-        startTimer() // เริ่มจับเวลา
-    }
-    
-    // ฟังก์ชั่นจับเวลา
-    func startTimer() {
-        timer?.invalidate() // ยกเลิกการจับเวลาครั้งก่อน
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if timeLeft > 0 {
-                timeLeft -= 1
-            }
-        }
-    }
-
-    // ฟังก์ชั่นสำหรับการลากไพ่
-    func onDrag(card: Card) -> some Gesture {
-        return DragGesture()
-            .onChanged { value in
-                // อัพเดตตำแหน่งขณะลาก
-            }
-            .onEnded { value in
-                // เมื่อไพ่ปล่อย ให้คำนวณตำแหน่งที่วาง
-                if value.location.y < 100 {
-                    self.arrangedCards[0].append(card)  // วางในแถวหัว
-                } else if value.location.y < 200 {
-                    self.arrangedCards[1].append(card)  // วางในแถวกลาง
-                } else {
-                    self.arrangedCards[2].append(card)  // วางในแถวล่าง
-                }
-            }
-    }
-
-    var body: some View {
-        VStack {
-            // แถวหัว (3 ใบ)
-            HStack {
-                ForEach(arrangedCards[0], id: \.id) { card in
-                    Text("
-
-import SwiftUI
-
-struct GameView: View {
-    @State private var player3Cards: [Card] = [] // เก็บไพ่ของผู้เล่น
     @State private var arrangedCards: [[Card]] = [[], [], []] // แถวหัว, กลาง, ท้าย
     @State private var timer: Timer? // ตัวจับเวลา
     @State private var timeLeft = 120 // เวลานับถอยหลัง 120 วินาที
