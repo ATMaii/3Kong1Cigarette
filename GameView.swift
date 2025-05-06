@@ -1,18 +1,49 @@
-
 import SwiftUI
 
 struct GameView: View {
-    @State private var deck = Deck()
-    @State private var player = Player()
-    
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+
     var body: some View {
         VStack {
-            Text("ไพ่ของผู้เล่น").font(.title)
-            
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
-                        Text("
+            Text("Game: 3kong1ciggalate")
+                .font(.largeTitle)
+                .padding()
+
+            // แสดงไพ่ของผู้เล่นแต่ละคน
+            ForEach(gameLogic.players, id: \.name) { player in
+                VStack(alignment: .leading) {
+                    Text(player.name)
+                        .font(.title2)
+                        .padding(.bottom, 4)
+
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(player.hand, id: \.self) { card in
+                                Text(card.description())
+                                    .frame(width: 40)
+                                    .padding(4)
+                                    .background(Color.white)
+                                    .cornerRadius(4)
+                                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))
+                            }
+                        }
+                    }
+                }
+                .padding(.bottom)
+            }
+
+            // ปุ่มเริ่มเกมใหม่
+            Button("เริ่มเกมใหม่") {
+                gameLogic.startNewGame()
+            }
+            .padding()
+
+            // ปุ่มแยกไพ่ 3 กอง
+            Button("แยกไพ่ 3 กอง") {
+                for player in gameLogic.players {
+                    let (head, middle, tail) = gameLogic.splitIntoThreePiles(player: player)
+                    print("ผู้เล่น
+
 import SwiftUI
 
 struct GameView: View {
