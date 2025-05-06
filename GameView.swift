@@ -141,17 +141,25 @@ struct GameView: View {
                     ForEach(player.hand, id: \.self) { card in
                         Text("
                              
-func startNewGame() {
-    gameLogic = GameLogic() // สร้างเกมใหม่
-    playerHand = []
-    headPile = []
-    middlePile = []
-    tailPile = []
                              }
 
 Button("เริ่มเกมใหม่") {
     gameManager.startNewGame()
                              }
+                    
+                             
+        
+                             
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+
+    var body: some View {
+        VStack {
+            ForEach(gameManager.players) { player in
+                HStack {
+                    Text("ผู้เล่น
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
