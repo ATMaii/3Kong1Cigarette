@@ -14,6 +14,7 @@ struct GameView: View {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
 
+ไอเหี้ย มึงเป็นเหี้ยอะไรวะ ส้นตีน 
 import SwiftUI
 
 struct GameView: View {
