@@ -59,3 +59,81 @@ struct ArenaSelectionView: View {
 
             if let selectedArena = selectedArena {
                 Text("คุณเลือกสนาม
+
+import SwiftUI
+
+struct ArenaSelectionView: View {
+    @State private var selectedArena: String? = nil
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Select a Stadium")
+                    .font(.largeTitle)
+                    .padding()
+
+                // ปุ่มเลือกสนามที่มีภาพและชื่อสนาม
+                VStack {
+                    Button(action: { selectedArena = "Allianz Arena" }) {
+                        VStack {
+                            Image("AllianzArena") // รูปภาพสนาม
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 100)
+                            Text("Allianz Arena")
+                        }
+                    }
+                    .padding()
+                    
+                    Button(action: { selectedArena = "Maracana" }) {
+                        VStack {
+                            Image("Maracana") // รูปภาพสนาม
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 100)
+                            Text("Maracana")
+                        }
+                    }
+                    .padding()
+                    
+                    Button(action: { selectedArena = "Wembley" }) {
+                        VStack {
+                            Image("Wembley") // รูปภาพสนาม
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 100)
+                            Text("Wembley")
+                        }
+                    }
+                    .padding()
+
+                    Button(action: { selectedArena = "Santiago Bernabeu" }) {
+                        VStack {
+                            Image("SantiagoBernabeu") // รูปภาพสนาม
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 100)
+                            Text("Santiago Bernabeu")
+                        }
+                    }
+                    .padding()
+                }
+
+                NavigationLink(destination: GameView(arena: selectedArena ?? "Allianz Arena")) {
+                    Text("Enter Arena")
+                        .font(.title)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+        }
+    }
+}
+
+struct ArenaSelectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ArenaSelectionView()
+    }
+}
