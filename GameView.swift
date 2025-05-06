@@ -89,7 +89,22 @@ struct GameView: View {
 VStack(alignment: .leading, spacing: 4) {
     Text("หัว:
 
-                         
+@State var players: [Player] = []
+@State var gameManager = GameManager()
+
+var body: some View {
+    VStack {
+        Button("เริ่มเกมใหม่") {
+            gameManager.startNewGame(&players)
+        }
+
+        ForEach(players.indices, id: \.self) { index in
+            PlayerHandView(player: players[index])
+        }
+
+        Text("คะแนนรวม:
+
+             
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
