@@ -759,3 +759,12 @@ func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
 
     return score
 }
+
+import SwiftUI
+
+struct GameView: View {
+    var arena: String
+
+    var body: some View {
+        VStack {
+            Text("Welcome to
