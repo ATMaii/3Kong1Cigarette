@@ -34,7 +34,7 @@ struct GameView: View {
 
             // ปุ่มเริ่มเกม
             Button("เริ่มเกม") {
-                gameLogic.starGame()
+                gameLogic.startNewGame()
             }
             .padding()
 
@@ -57,7 +57,7 @@ struct GameView: View {
 
             // ปุ่มเพื่อเริ่มเกม
             Button("เริ่มเกม") {
-                gameManager.startGame()
+                gameManager.startNewGame()
             }
             .padding()
 
@@ -82,7 +82,7 @@ struct GameView: View {
 
             HStack {
                 Button("เริ่มเกม") {
-                    gameManager.startGame()
+                    gameManager.startNewGame()
                 }
 
                 Button("แบ่งไพ่ 3 กอง") {
@@ -98,7 +98,7 @@ struct GameView: View {
     var body: some View {
         VStack {
             Button("เริ่มเกม") {
-                gameManager.startGame()
+                gameManager.startNewGame()
             }
             .padding()
 
