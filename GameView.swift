@@ -836,3 +836,9 @@ func isPairOfAces(_ hand: [Card]) -> Bool {
     let aces = hand.filter { $0.rank == .ace }
     return aces.count == 2
 }
+
+enum RowPosition {
+    case head
+    case middle
+    case tail
+      }
