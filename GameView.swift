@@ -771,6 +771,11 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
 
     return score
 }
+      enum RowPosition {
+    case head
+    case middle
+    case tail
+      }
 
 let playerHand = [/* ชุดไพ่ของผู้เล่น */]
 let isMiddleRow = true // หรือ false ขึ้นอยู่กับว่าเป็นแถวไหน
@@ -836,9 +841,3 @@ func isPairOfAces(_ hand: [Card]) -> Bool {
     let aces = hand.filter { $0.rank == .ace }
     return aces.count == 2
 }
-
-enum RowPosition {
-    case head
-    case middle
-    case tail
-      }
