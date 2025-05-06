@@ -137,3 +137,77 @@ struct ArenaSelectionView_Previews: PreviewProvider {
         ArenaSelectionView()
     }
 }
+
+import SwiftUI
+
+struct ArenaSelectionView: View {
+    @State private var selectedArena: String? = nil
+    
+    var body: some View {
+        VStack {
+            Text("Select Your Arena")
+                .font(.largeTitle)
+                .padding()
+            
+            HStack {
+                Button(action: {
+                    selectedArena = "Allianz Arena"
+                    goToGame()
+                }) {
+                    Text("Allianz Arena")
+                        .font(.title)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+                
+                Button(action: {
+                    selectedArena = "Maracana"
+                    goToGame()
+                }) {
+                    Text("Maracana")
+                        .font(.title)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+            }
+            
+            HStack {
+                Button(action: {
+                    selectedArena = "Wembley"
+                    goToGame()
+                }) {
+                    Text("Wembley")
+                        .font(.title)
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+                
+                Button(action: {
+                    selectedArena = "Santiago Bernabeu"
+                    goToGame()
+                }) {
+                    Text("Santiago Bernabeu")
+                        .font(.title)
+                        .padding()
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+            }
+        }
+    }
+    
+    // ฟังก์ชันเมื่อเลือกสนาม
+    func goToGame() {
+        if let arena = selectedArena {
+            print("You selected:
