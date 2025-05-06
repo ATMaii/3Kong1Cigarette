@@ -148,7 +148,10 @@ func startNewGame() {
     middlePile = []
     tailPile = []
                              }
-                             
+
+Button("เริ่มเกมใหม่") {
+    gameManager.startNewGame()
+                             }
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
