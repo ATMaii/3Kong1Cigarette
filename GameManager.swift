@@ -289,38 +289,6 @@ class GameManager {
             players[i].hand = deck.drawCards(count: 13)  // แจกไพ่ให้ผู้เล่น
             let (head, middle, tail) = players[i].splitIntoThreePiles()  // แบ่งไพ่เป็นกอง
             print("หัว:
-extension GameManager {
-    func splitIntoThreePiles(player: Player) -> (head: [Card], middle: [Card], tail: [Card]) {
-        let hand = player.hand
-        let head = Array(hand.prefix(5))
-        let middle = Array(hand.dropFirst(5).prefix(5))
-        let tail = Array(hand.dropFirst(10).prefix(3))
-        return (head, middle, tail)
-    }
-}
-
-func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
-    var head: [Card] = []
-    var middle: [Card] = []
-    var tail: [Card] = []
-    
-    // เรียงไพ่จากท้ายไปหัว
-    for i in 0..<13 {
-        if i < 5 {
-            tail.append(playerHand[i])  // 5 ใบแรกเป็นกองท้าย
-        } else if i < 10 {
-            middle.append(playerHand[i])  // 5 ใบถัดมาเป็นกองกลาง
-        } else {
-            head.append(playerHand[i])  // 3 ใบสุดท้ายเป็นกองหัว
-        }
-    }
-    
-    return (head, middle, tail)
-}
-
-    let (head, middle, tail) = splitIntoThreePiles()
-
-print("หัว:
 
 func startNewGame() {
     var deck = Deck()
