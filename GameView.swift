@@ -13,8 +13,6 @@ struct GameView: View {
                 HStack {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
-                             
-// GameView.swift
 
 import SwiftUI
 
@@ -32,8 +30,6 @@ struct GameView: View {
                 VStack(alignment: .leading) {
                     Text("
 
-// GameView.swift
-
 import SwiftUI
 
 struct GameView: View {
@@ -49,9 +45,7 @@ struct GameView: View {
             ForEach(gameLogic.players, id: \.name) { player in
                 VStack(alignment: .leading) {
                     Text("
-
-// GameView.swift
-
+                         
 import SwiftUI
 
 struct GameView: View {
@@ -69,9 +63,7 @@ struct GameView: View {
                 ForEach(gameLogic.players, id: \.name) { player in
                     VStack(alignment: .leading) {
                         Text("
-
-// GameView.swift
-
+                             
 import SwiftUI
 
 struct GameView: View {
