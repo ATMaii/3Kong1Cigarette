@@ -13,6 +13,28 @@ struct GameView: View {
                 HStack {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
+
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("3kong1ciggalate")
+                .font(.largeTitle)
+                .bold()
+
+            HStack {
+                Button("เริ่มเกมใหม่") {
+                    gameManager.startNewGame()
+                }
+
+                Button("แบ่งไพ่ 3 กอง") {
+                    for player in gameManager.players {
+                        let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
+                        print("ผู้เล่น
+                              
 // GameView.swift
 
 import SwiftUI
