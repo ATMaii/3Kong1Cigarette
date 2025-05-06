@@ -741,6 +741,55 @@ let winningHands = [true, true, true] // สมมุติว่าผู้เ
 let finalScore = calculateScoreForAllHands(playerHands: playerHands, winningHands: winningHands)
 print("Total score:
 
+      
+func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
+    var score = 0
+
+    if isRoyalFlush(hand) {
+        score = 7
+        if row == .middle { score *= 2 }
+    } else if isStraightFlush(hand) {
+        score = 6
+        if row == .middle { score *= 2 }
+    } else if isFourOfAKind(hand) {
+        score = 5
+        if row == .middle { score *= 2 }
+    } else if isFullHouse(hand) {
+        score = 1
+        if row == .middle { score *= 2 }
+    } else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
+        score = 1
+    }
+
+    if row == .head {
+        if isThreeOfAKind(hand) {
+            score = 5 // หัวตอง
+        } else if isPairOfAces(hand) {
+            score = 2 // หัวคู่ A
+        }
+    }
+    return score
+}
+      
+// สร้างไพ่ตัวอย่าง
+let playerHand: [Card] = [/* ใส่ไพ่ที่ต้องการทดสอบ */]
+      
+// ทดสอบแถวต่างๆ
+let headScore = calculateHandScore(hand: playerHand, row: .head)
+let middleScore = calculateHandScore(hand: playerHand, row: .middle)
+let tailScore = calculateHandScore(hand: playerHand, row: .tail)
+
+print("Head Row Score:
+let playerHand = [/* ชุดไพ่ของผู้เล่น */]
+let isMiddleRow = true // หรือ false ขึ้นอยู่กับว่าเป็นแถวไหน
+let score = calculateHandScore(hand: playerHand, isMiddleRow: isMiddleRow)
+
+
+enum RowPosition {
+    case head
+    case middle
+    case tail
+}
 
 func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     var score = 0
@@ -768,17 +817,14 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
             score = 2 // หัวคู่ A
         }
     }
-enum RowPosition {
-    case head
-    case middle
-    case tail
-}
+
     return score
 }
 
+// เรียกใช้งาน
 let playerHand = [/* ชุดไพ่ของผู้เล่น */]
-let isMiddleRow = true // หรือ false ขึ้นอยู่กับว่าเป็นแถวไหน
-let score = calculateHandScore(hand: playerHand, isMiddleRow: isMiddleRow)
+let score = calculateHandScore(hand: playerHand, row: .head)
+
 
 // ฟังก์ชันตรวจสอบว่าเป็นหัวคู่ A หรือไม่
 func isPairOfAces(hand: [Card]) -> Bool {
@@ -840,3 +886,4 @@ func isPairOfAces(_ hand: [Card]) -> Bool {
     let aces = hand.filter { $0.rank == .ace }
     return aces.count == 2
 }
+
