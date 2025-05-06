@@ -145,41 +145,7 @@ struct GameView: View {
 
     var body: some View {
         VStack {
-            Button("เริ่มเกม") {
-                gameManager.startNewGame()
-            }
-            .padding()
 
-            ForEach(gameManager.players) { player in
-                VStack(alignment: .leading) {
-                    Text(player.name)
-                        .font(.headline)
-
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(player.hand, id: \.self) { card in
-                                Text(card.description())
-                                    .frame(width: 30)
-                                    .padding(4)
-                                    .background(Color.white)
-                                    .cornerRadius(4)
-                                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))
-                            }
-                        }
-                    }
-                }
-                .padding(.bottom)
-            }
-        }
-        .padding()
-    }
-}
-
-Button("แยกไพ่ 3 กอง") {
-    for player in gameManager.players {
-        let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
-        print("ผู้เล่น              
-              
 import SwiftUI
 
 struct GameView: View {
@@ -317,65 +283,6 @@ var body: some View {
                     }
                 }
 
-                Button("แบ่ง 3 กอง") {
-                    player.splitIntoPiles()
-                }
-            }
-            .padding()
-
-            Text("ไพ่ของผู้เล่น").font(.title2)
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(player.hand, id: \.self) { card in
-                        Text("
-Button("เริ่มเกมใหม่") {
-    gameManager.startNewGame()
-   }                          
-
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameManager = GameManager()
-
-    var body: some View {
-        VStack {
-            ForEach(gameManager.players) { player in
-                HStack {
-                    Text("ผู้เล่น
-
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameManager = GameManager()
-
-    var body: some View {
-        VStack {
-            ForEach(gameManager.players) { player in
-                VStack {
-                    Text("ผู้เล่น
-
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameManager = GameManager()
-
-    var body: some View {
-        VStack {
-            ForEach(gameManager.players) { player in
-                VStack {
-                    Text("ผู้เล่น
-
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameManager = GameManager()
-
-    var body: some View {
-        VStack {
-            // แสดงไพ่และคะแนนของผู้เล่น
-            ForEach(gameManager.players) { player in
-                VStack {
-                    Text("ผู้เล่น
 
   Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
