@@ -352,12 +352,6 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
 
     return score
 }
-
-enum RowPosition {
-    case head
-    case middle
-    case tail
-      }
       
 // เรียกใช้งาน
 let playerHand = [/* ชุดไพ่ของผู้เล่น */]
