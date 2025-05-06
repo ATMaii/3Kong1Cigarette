@@ -1,5 +1,45 @@
-
 // GameLogic.swift
+
+import Foundation
+
+class GameLogic: ObservableObject {
+    @Published var players: [Player]
+    var deck: Deck
+
+    init(playerNames: [String]) {
+        self.players = playerNames.map { Player(name: $0) }
+        self.deck = Deck()
+    }
+
+    func startNewGame() {
+        deck.shuffle()
+        for i in 0..<players.count {
+            players[i].hand = deck.drawCards(count: 13)
+        }
+    }
+    
+    func splitIntoThreePiles(player: Player) -> ([Card], [Card], [Card]) {
+        var head: [Card] = []
+        var middle: [Card] = []
+        var tail: [Card] = []
+
+        // แบ่งไพ่ 13 ใบให้เป็น 3 กอง
+        let playerHand = player.hand.sorted { $0.rank.rawValue < $1.rank.rawValue }
+
+        for i in 0..<13 {
+            if i < 5 {
+                tail.append(playerHand[i])  // กองท้าย
+            } else if i < 10 {
+                middle.append(playerHand[i])  // กองกลาง
+            } else {
+                head.append(playerHand[i])  // กองหัว
+            }
+        }
+
+        return (head, middle, tail)
+    }
+}
+
 
 import Foundation
 
