@@ -143,13 +143,8 @@ struct GameView: View {
                              
                              }
 
-Button("เริ่มเกมใหม่") {
-    gameManager.startNewGame()
-                             }
-                    
-                             
-        
-                             
+Button("เริ่มเกมใหม่") { gameManager.startNewGame()     }
+                                   
 import SwiftUI
 
 struct GameView: View {
@@ -160,10 +155,51 @@ struct GameView: View {
             ForEach(gameManager.players) { player in
                 HStack {
                     Text("ผู้เล่น
+
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+
+    var body: some View {
+        VStack {
+            ForEach(gameManager.players) { player in
+                VStack {
+                    Text("ผู้เล่น
+
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+
+    var body: some View {
+        VStack {
+            ForEach(gameManager.players) { player in
+                VStack {
+                    Text("ผู้เล่น
+
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+
+    var body: some View {
+        VStack {
+            // แสดงไพ่และคะแนนของผู้เล่น
+            ForEach(gameManager.players) { player in
+                VStack {
+                    Text("ผู้เล่น
+
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
-        print("ผู้เล่นimport SwiftUI
+        print("ผู้เล่น                        
+Button("แยกไพ่ 3 กอง") {
+    for player in gameManager.players {
+        let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
+        print("ผู้เล่น
+              
+import SwiftUI
 
 struct GameView: View {
     @State private var deck = Deck()
@@ -178,7 +214,9 @@ struct GameView: View {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
 
-    // GameView.swift
+
+                             
+// GameView.swift
 
 import SwiftUI
 
@@ -233,7 +271,6 @@ struct GameView: View {
                 ForEach(gameLogic.players, id: \.name) { player in
                     VStack(alignment: .leading) {
                         Text("
-
                              
 // GameView.swift
 
