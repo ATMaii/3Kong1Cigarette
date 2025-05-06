@@ -599,3 +599,78 @@ struct GameView: View {
             HStack {
                 ForEach(arrangedCards[0], id: \.id) { card in
                     Text("
+
+   func evaluateHand(cards: [Card]) -> Int {
+    if isStraightFlush(cards) {
+        return 9 // Straight Flush (สูงสุด)
+    } else if isFourOfAKind(cards) {
+        return 8 // Four of a Kind
+    } else if isFullHouse(cards) {
+        return 7 // Full House
+    } else if isFlush(cards) {
+        return 6 // Flush
+    } else if isStraight(cards) {
+        return 5 // Straight
+    } else if isThreeOfAKind(cards) {
+        return 4 // Three of a Kind
+    } else if isTwoPair(cards) {
+        return 3 // Two Pair
+    } else if isPair(cards) {
+        return 2 // Pair
+    } else {
+        return 1 // High Card
+    }
+   }
+                         
+
+func isStraightFlush(_ cards: [Card]) -> Bool {
+    let sortedCards = cards.sorted { $0.rank.rawValue < $1.rank.rawValue }
+    let sameSuit = Set(cards.map { $0.suit }).count == 1 // ตรวจสอบว่าเป็นดอกเดียวกัน
+    let consecutive = sortedCards.enumerated().allSatisfy { (index, card) in
+        index == 0 || card.rank.rawValue == sortedCards[index - 1].rank.rawValue + 1
+    }
+    return sameSuit && consecutive
+}
+                         
+func isFourOfAKind(_ cards: [Card]) -> Bool {
+    let grouped = Dictionary(grouping: cards, by: { $0.rank })
+    return grouped.values.contains { $0.count == 4 }
+}
+                      
+func isFullHouse(_ cards: [Card]) -> Bool {
+    // ตัวอย่างการตรวจสอบ Full House
+    return false // เพิ่มการตรวจสอบ Full House ที่นี่
+}
+
+func isStraight(_ cards: [Card]) -> Bool {
+    // ตัวอย่างการตรวจสอบ Straight
+    return false // เพิ่มการตรวจสอบ Straight ที่นี่
+}
+
+func isFlush(_ cards: [Card]) -> Bool {
+    // ตัวอย่างการตรวจสอบ Flush
+    return false // เพิ่มการตรวจสอบ Flush ที่นี่
+}
+
+func isThreeOfAKind(_ cards: [Card]) -> Bool {
+    // ตัวอย่างการตรวจสอบ Three of a Kind
+    return false // เพิ่มการตรวจสอบ Three of a Kind ที่นี่
+}
+
+func isPair(_ cards: [Card]) -> Bool {
+    // ตัวอย่างการตรวจสอบ Pair
+    return false // เพิ่มการตรวจสอบ Pair ที่นี่
+}
+
+func checkResult() {
+    // ประเมินแถวต่าง ๆ
+    let topScore = evaluateHand(cards: arrangedCards[0]) // แถวหัว
+    let middleScore = evaluateHand(cards: arrangedCards[1]) // แถวกลาง
+    let bottomScore = evaluateHand(cards: arrangedCards[2]) // แถวท้าย
+
+    let totalScore = topScore + middleScore + bottomScore // รวมคะแนนจากทั้ง 3 แถว
+    
+    // แสดงผลคะแนน
+    print("Top Score:
+
+
