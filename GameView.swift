@@ -842,14 +842,15 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     return score
 }
       
-// สร้างไพ่ตัวอย่าง
+      // สร้างไพ่ตัวอย่าง
 let playerHand: [Card] = [/* ใส่ไพ่ที่ต้องการทดสอบ */]
-      
+
 // ทดสอบแถวต่างๆ
 let headScore = calculateHandScore(hand: playerHand, row: .head)
 let middleScore = calculateHandScore(hand: playerHand, row: .middle)
 let tailScore = calculateHandScore(hand: playerHand, row: .tail)
-      
+
+print("Head Row Score:
 
 enum RowPosition {
     case head
@@ -891,6 +892,15 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
 let playerHand = [/* ชุดไพ่ของผู้เล่น */]
 let score = calculateHandScore(hand: playerHand, row: .head)
 
+// สร้างไพ่ตัวอย่าง
+let playerHand: [Card] = [/* ใส่ไพ่ที่ต้องการทดสอบ */]
+
+// ทดสอบแถวต่างๆ
+let headScore = calculateHandScore(hand: playerHand, row: .head)
+let middleScore = calculateHandScore(hand: playerHand, row: .middle)
+let tailScore = calculateHandScore(hand: playerHand, row: .tail)
+
+print("Head Row Score:
 
 // ฟังก์ชันตรวจสอบว่าเป็นหัวคู่ A หรือไม่
 func isPairOfAces(hand: [Card]) -> Bool {
