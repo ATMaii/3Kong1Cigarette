@@ -841,7 +841,10 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     }
     return score
 }
-
+      
+let playerHand = [/* ชุดไพ่ของผู้เล่น */]
+let score = calculateHandScore(hand: playerHand, row: .head) // หรือ .middle / .tail
+      
 // ฟังก์ชันตรวจสอบว่าเป็นหัวคู่ A หรือไม่
 func isPairOfAces(hand: [Card]) -> Bool {
     // ตรวจสอบว่ามีไพ่ A 2 ใบหรือไม่
