@@ -476,6 +476,9 @@ struct GameView: View {
             HStack {
                 ForEach(arrangedCards[0], id: \.id) { card in }
                     Text("
+
+                         let score = evaluateHand(cards: player.hand)
+print("คะแนนของผู้เล่น:
 func evaluateHand(cards: [Card]) -> Int {
     if isRoyalFlush(cards) {
        print ("Royal Flush")
