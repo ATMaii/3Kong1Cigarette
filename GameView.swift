@@ -1118,13 +1118,6 @@ func isPairOfAces(_ hand: [Card]) -> Bool {
     return aces.count == 2
 }
 
-
-enum RowPosition {
-    case head
-    case middle
-    case tail
-}
-
 func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     var score = 0
 
