@@ -1,7 +1,7 @@
 
 // GameManager.swift
 
-func startNewGame() {
+func startGame() {
     let names = ["ผู้เล่น 1", "ผู้เล่น 2", "ผู้เล่น 3", "ผู้เล่น 4"]
     players = names.map { Player(name: $0) }
     
