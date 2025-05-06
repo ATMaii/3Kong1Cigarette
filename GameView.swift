@@ -849,11 +849,7 @@ let playerHand: [Card] = [/* ใส่ไพ่ที่ต้องการท
 let headScore = calculateHandScore(hand: playerHand, row: .head)
 let middleScore = calculateHandScore(hand: playerHand, row: .middle)
 let tailScore = calculateHandScore(hand: playerHand, row: .tail)
-     
-print("Head Row Score:
-let playerHand = [/* ชุดไพ่ของผู้เล่น */]
-let isMiddleRow = true // หรือ false ขึ้นอยู่กับว่าเป็นแถวไหน
-let score = calculateHandScore(hand: playerHand, isMiddleRow: isMiddleRow)
+      
 
 enum RowPosition {
     case head
