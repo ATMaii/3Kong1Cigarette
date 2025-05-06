@@ -328,7 +328,68 @@ struct GameView: View {
             // แสดงเวลา
             Text("เวลาที่เหลือ:
 
-                 import SwiftUI
+import SwiftUI
+
+struct GameView: View {
+    @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
+    @State private var timerIsActive = false
+    @State private var showTimeUpAlert = false
+    @State private var gameFinished = false
+    @State private var winner: String = ""
+    @State private var scores: [String: Int] = [:]  // สร้าง dictionary เก็บคะแนนของผู้เล่น
+    
+    let gameManager = GameManager()
+
+    // ฟังก์ชั่นเริ่มนับเวลา
+    func startTimer() {
+        if timerIsActive { return }
+        timerIsActive = true
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if self.timeRemaining > 0 {
+                self.timeRemaining -= 1
+            } else {
+                timer.invalidate()
+                self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
+            }
+        }
+    }
+
+    // ฟังก์ชั่นเมื่อเวลาหมด
+    func timeUp() {
+        showTimeUpAlert = true
+        gameFinished = true
+        calculateScores()  // คำนวณคะแนนหลังเวลาหมด
+    }
+
+    // ฟังก์ชั่นเมื่อผู้เล่นกด "จัดเสร็จแล้ว"
+    func finishGame() {
+        timerIsActive = false
+        gameFinished = true
+        calculateScores()  // คำนวณคะแนนหลังจากผู้เล่นกดจัดเสร็จแล้ว
+    }
+
+    // ฟังก์ชั่นคำนวณคะแนน
+    func calculateScores() {
+        // คำนวณคะแนนของผู้เล่น (ตัวอย่างง่าย ๆ)
+        // สมมุติว่าเกมนี้คำนวณคะแนนเป็นการสุ่ม
+        scores = ["Player 1": Int.random(in: 0...100),
+                  "Player 2": Int.random(in: 0...100),
+                  "Player 3": Int.random(in: 0...100),
+                  "Player 4": Int.random(in: 0...100)]
+        
+        // หาผู้ชนะ
+        if let winnerPlayer = scores.max(by: { $0.value < $1.value }) {
+            winner = winnerPlayer.key
+        }
+    }
+
+    var body: some View {
+        VStack {
+            if !gameFinished {
+                // แสดงเวลา
+                Text("เวลาที่เหลือ:
+
+import SwiftUI
 
 struct GameView: View {
     @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
