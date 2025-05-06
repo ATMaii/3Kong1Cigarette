@@ -244,6 +244,51 @@ class GameManager: ObservableObject {
     }
 }
 
+class Player {
+    var name: String
+    var hand: [Card] = [] // การเก็บไพ่ของผู้เล่น
+
+    init(name: String) {
+        self.name = name
+    }
+
+    // ฟังก์ชันเพื่อแบ่งมือของผู้เล่นเป็น 3 กอง (head, middle, tail)
+    func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
+        var head: [Card] = []
+        var middle: [Card] = []
+        var tail: [Card] = []
+
+        // เรียงไพ่จากท้ายไปหัว
+        for i in 0..<13 {
+            if i < 5 {
+                tail.append(hand[i])  // 5 ใบแรกเป็นกองท้าย
+            } else if i < 10 {
+                middle.append(hand[i])  // 5 ใบถัดมาเป็นกองกลาง
+            } else {
+                head.append(hand[i])  // 3 ใบสุดท้ายเป็นกองหัว
+            }
+        }
+
+        return (head, middle, tail)
+    }
+}
+
+class GameManager {
+    var players: [Player]
+    var deck: Deck
+
+    init(players: [Player]) {
+        self.players = players
+        self.deck = Deck()
+    }
+
+    func startNewGame() {
+        deck.shuffle()
+        // แจกไพ่ให้กับผู้เล่นทุกคน
+        for i in 0..<players.count {
+            players[i].hand = deck.drawCards(count: 13)  // แจกไพ่ให้ผู้เล่น
+            let (head, middle, tail) = players[i].splitIntoThreePiles()  // แบ่งไพ่เป็นกอง
+            print("หัว:
 extension GameManager {
     func splitIntoThreePiles(player: Player) -> (head: [Card], middle: [Card], tail: [Card]) {
         let hand = player.hand
