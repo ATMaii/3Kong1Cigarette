@@ -13,7 +13,31 @@ struct GameView: View {
                 HStack {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
-                            
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+    
+    var body: some View {
+        VStack {
+            Text("3kong1ciggalate")
+                .font(.largeTitle)
+                .padding()
+
+            // ปุ่มเพื่อเริ่มเกมใหม่
+            Button("เริ่มเกมใหม่") {
+                gameManager.startNewGame()
+            }
+            .padding()
+
+            // ปุ่มเพื่อแยกไพ่เป็น 3 กอง
+            Button("แยกไพ่ 3 กอง") {
+                // เรียกใช้ฟังก์ชัน splitIntoThreePiles
+                for player in gameManager.players {
+                    let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
+                    // พิมพ์ผลแยกไพ่ออกมาเพื่อเช็ค
+                    print("หัว:
+                             
 import SwiftUI
                              
 struct GameView: View {
