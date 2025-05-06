@@ -574,7 +574,7 @@ func checkResult() {
     let totalScore = topScore + middleScore + bottomScore // รวมคะแนนจากทั้ง 3 แถว
     // แสดงผลคะแนน
     print("Top Score:
-     
+     let score = calculateScore(cards: player.hand)
 // ตัวอย่างการคำนวณคะแนนในกรณีที่ผู้เล่นชนะ
 func calculateScore(hand: [Card], isWinner: Bool) -> Int {
     let handRank = evaluateHand(cards: hand) // ใช้ evaluateHand ที่เราทำไปก่อนหน้านี้
