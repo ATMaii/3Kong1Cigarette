@@ -277,8 +277,6 @@ func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
 
 print("หัว:
 
-import Foundation
-
 func startNewGame() {
     var deck = Deck()
     deck.shuffle()
@@ -290,6 +288,49 @@ func startNewGame() {
       }
 
 import Foundation
+
+class GameManager {
+    var players: [Player]
+    var deck: Deck
+
+    init(players: [Player]) {
+        self.players = players
+        self.deck = Deck()
+    }
+
+    func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
+        var score = 0
+        if let straightRankValue = straightRank(hand) {
+            score = straightRankValue
+        }
+        // คำนวณคะแนนอื่นๆ ถ้ามี
+        return score
+    }
+
+    func straightRank(_ hand: [Card]) -> Int? {
+        let ranks = hand.map { $0.rank.rawValue }.sorted()
+        let straights = [
+            [2, 3, 4, 5, 6],
+            [3, 4, 5, 6, 7],
+            [4, 5, 6, 7, 8],
+            [5, 6, 7, 8, 9],
+            [6, 7, 8, 9, 10],
+            [7, 8, 9, 10, 11],
+            [8, 9, 10, 11, 12],
+            [9, 10, 11, 12, 13],
+            [14, 2, 3, 4, 5],    // A-2-3-4-5
+            [10, 11, 12, 13, 14] // 10-J-Q-K-A
+        ]
+
+        for (index, straight) in straights.enumerated() {
+            if Set(ranks) == Set(straight) {
+                return index + 1
+            }
+        }
+
+        return nil
+    }
+}
 
 class GameManager: ObservableObject {
     static let shared = GameManager()
