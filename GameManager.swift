@@ -43,7 +43,7 @@ class GameManager: ObservableObject {
     @Published var players: [Player] = []
     @Published var deck = Deck()
 
-    func startNewGame() {
+    func startGame() {
         deck = Deck()
         players = [Player(), Player(), Player(), Player()]
         dealCards()
@@ -62,7 +62,7 @@ class GameManager: ObservableObject {
     }
 }
 
-func startNewGame() {
+func startGame() {
     deck = Deck()
     players = [Player(), Player(), Player(), Player()]
     dealCards()
@@ -75,10 +75,10 @@ class GameManager: ObservableObject {
     private var deck = Deck()
 
     init() {
-        startNewGame()
+        startGame()
     }
 
-    func startNewGame() {
+    func startGame() {
         deck = Deck()
         players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
         dealCards()
@@ -98,10 +98,10 @@ class GameManager: ObservableObject {
     private var deck = Deck()
 
     init() {
-        startNewGame()
+        startGame()
     }
 
-    func startNewGame() {
+    func startGame() {
         deck = Deck()
         players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
         dealCards()
@@ -149,10 +149,10 @@ class GameManager: ObservableObject {
     private var deck = Deck()
 
     init() {
-        startNewGame()
+        startGame()
     }
 
-    func startNewGame() {
+    func startGame() {
         deck = Deck()
         players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
         dealCards()
@@ -199,10 +199,10 @@ class GameManager: ObservableObject {
     private var deck = Deck()
 
     init() {
-        startNewGame()
+        startGame()
     }
 
-    func startNewGame() {
+    func startGame() {
         deck = Deck()
         players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
         dealCards()
@@ -282,7 +282,7 @@ class GameManager {
         self.deck = Deck()
     }
 
-    func startNewGame() {
+    func startGame() {
         deck.shuffle()
         // แจกไพ่ให้กับผู้เล่นทุกคน
         for i in 0..<players.count {
@@ -313,7 +313,7 @@ func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
 
 print("หัว:
 
-func startNewGame() {
+func startGame() {
     var deck = Deck()
     deck.shuffle()
 
@@ -373,7 +373,7 @@ class GameManager: ObservableObject {
 
     @Published var players: [Player] = []
 
-    func startNewGame() {
+    func startGame() {
         var deck = Card.allCards.shuffled()
         players = []
 
