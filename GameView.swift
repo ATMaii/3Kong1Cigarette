@@ -96,7 +96,7 @@ var body: some View {
 
         Text("คะแนนรวม:
 
-  import SwiftUI
+import SwiftUI
 
 struct GameView: View {
     @State var player = Player()
@@ -205,9 +205,7 @@ struct GameView: View {
                 HStack {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
-
-
-                             
+                  
 // GameView.swift
 
 import SwiftUI
@@ -312,6 +310,7 @@ var body: some View {
         }
 
         Text("คะแนนรวม:
+             
 import SwiftUI
 
 struct GameView: View {
