@@ -768,14 +768,13 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
             score = 2 // หัวคู่ A
         }
     }
-
-    return score
-}
-      enum RowPosition {
+enum RowPosition {
     case head
     case middle
     case tail
-      }
+}
+    return score
+}
 
 let playerHand = [/* ชุดไพ่ของผู้เล่น */]
 let isMiddleRow = true // หรือ false ขึ้นอยู่กับว่าเป็นแถวไหน
