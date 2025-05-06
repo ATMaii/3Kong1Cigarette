@@ -639,7 +639,8 @@ let winningHands = [true, true, true] // สมมุติว่าผู้เ
 
 let finalScore = calculateScoreForAllHands(playerHands: playerHands, winningHands: winningHands)
 print("Total score:
-     
+      
+let score = evaluateHand(cards: player.hand, playerIndex: 0, playersCount: 3)     
 func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     var score = 0
 
@@ -722,3 +723,41 @@ func isPairOfAces(_ hand: [Card]) -> Bool {
     return aces.count == 2
 }
 
+func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
+    var score = 0
+
+    // ตรวจสอบประเภทของมือไพ่
+    if isRoyalFlush(cards) {
+        score = 10 // Royal Flush
+    } else if isStraightFlush(cards) {
+        score = 9 // Straight Flush
+    } else if isFourOfAKind(cards) {
+        score = 8 // Four of a Kind
+    } else if isFullHouse(cards) {
+        score = 7 // Full House
+    } else if isFlush(cards) {
+        score = 6 // Flush
+    } else if isStraight(cards) {
+        score = 5 // Straight
+    } else if isThreeOfAKind(cards) {
+        score = 4 // Three of a Kind
+    } else if isTwoPair(cards) {
+        score = 3 // Two Pair
+    } else if isPair(cards) {
+        score = 2 // Pair
+    } else {
+        score = 1 // High Card
+    }
+
+    // คูณคะแนนเมื่อชนะ 3 กอง
+    if playerIndex == 0 { // สมมติว่า playerIndex 0 ชนะ 3 กอง
+        score *= 2
+    }
+
+    // คูณคะแนนเมื่อชนะ 3 คน
+    if playersCount == 3 { // สมมติว่า 3 คนชนะ
+        score *= 4
+    }
+
+    return score
+}
