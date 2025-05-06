@@ -141,6 +141,14 @@ struct GameView: View {
                     ForEach(player.hand, id: \.self) { card in
                         Text("
                              
+func startNewGame() {
+    gameLogic = GameLogic() // สร้างเกมใหม่
+    playerHand = []
+    headPile = []
+    middlePile = []
+    tailPile = []
+                             }
+                             
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
