@@ -321,3 +321,44 @@ func startNewGame() {
         }
     }
       }
+
+enum RowPosition {
+    case head
+    case middle
+    case tail
+}
+
+func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
+    var score = 0
+
+    if isRoyalFlush(hand) {
+        score = 7
+        if row == .middle { score *= 2 }
+    } else if isStraightFlush(hand) {
+        score = 6
+        if row == .middle { score *= 2 }
+    } else if isFourOfAKind(hand) {
+        score = 5
+        if row == .middle { score *= 2 }
+    } else if isFullHouse(hand) {
+        score = 1
+        if row == .middle { score *= 2 }
+    } else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
+        score = 1
+    }
+
+    if row == .head {
+        if isThreeOfAKind(hand) {
+            score = 5 // หัวตอง
+        } else if isPairOfAces(hand) {
+            score = 2 // หัวคู่ A
+        }
+    }
+
+    return score
+}
+
+// เรียกใช้งาน
+let playerHand = [/* ชุดไพ่ของผู้เล่น */]
+let score = calculateHandScore(hand: playerHand, row: .head)
+
