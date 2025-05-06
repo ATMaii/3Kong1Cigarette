@@ -1,9 +1,3 @@
-ไอเหี้ย มึงเป็นเหี้ยอะไรวะ กวนส้นตีน กุเสียเงินเรียนไป
-ไม่ได้เหี้ยอะไรเลย เสือกยังจะมาส้นตีนอะไรอีก ไอเหี้ย
-กุจะเป็นอะไรแล้วหนักหัวพ่อมึงหรอ
-โคตรพ่อโคตรแม่มึงสันดารเสือก ควย เลว หน้าด้าน
-กุไม่ได้ด่าอาจารย์ กุด่าคนเหี้ย ล่วงข้อมูล
-ด่าคนไม่มีมารยาท ไม่มีจรรยาบรรณ
 
 import SwiftUI
 
@@ -20,7 +14,43 @@ struct GameView: View {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
 
+import SwiftUI
 
+struct GameView: View {
+    @StateObject private var gameManager = GameManager()
+
+    var body: some View {
+        VStack {
+            Button("เริ่มเกมใหม่") {
+                gameManager.startNewGame()
+            }
+            .padding()
+
+            ForEach(gameManager.players) { player in
+                VStack(alignment: .leading) {
+                    Text(player.name)
+                        .font(.headline)
+
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(player.hand, id: \.self) { card in
+                                Text(card.description())
+                                    .frame(width: 30)
+                                    .padding(4)
+                                    .background(Color.white)
+                                    .cornerRadius(4)
+                                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))
+                            }
+                        }
+                    }
+                }
+                .padding(.bottom)
+            }
+        }
+        .padding()
+    }
+}
+                             
 import SwiftUI
 
 struct GameView: View {
