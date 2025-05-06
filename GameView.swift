@@ -1,4 +1,5 @@
-
+ไอเหี้ย มึงเป็นเหี้ยอะไรวะ กวนส้นตีน กุเสียเงินเรียนไป
+ไม่ได้เหี้ยอะไรเลย เสือกยังจะมาส้นตีนอะไรอีก ไอเหี้ย
 import SwiftUI
 
 struct GameView: View {
@@ -14,7 +15,7 @@ struct GameView: View {
                     ForEach(player.hand.sorted(by: cardSort), id: \.self) { card in
                         Text("
 
-ไอเหี้ย มึงเป็นเหี้ยอะไรวะ ส้นตีน 
+
 import SwiftUI
 
 struct GameView: View {
