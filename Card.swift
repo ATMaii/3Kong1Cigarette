@@ -67,4 +67,6 @@ enum Rank: Int, CaseIterable {
         case .king: return "K"
         default: return "
 
-            
+ extension Card {
+    func description() -> String {
+        return "
