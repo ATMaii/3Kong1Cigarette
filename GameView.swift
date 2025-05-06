@@ -742,37 +742,33 @@ let finalScore = calculateScoreForAllHands(playerHands: playerHands, winningHand
 print("Total score:
 
 
-func calculateHandScore(hand: [Card], isMiddleRow: Bool) -> Int {
+func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     var score = 0
 
     if isRoyalFlush(hand) {
         score = 7
+        if row == .middle { score *= 2 }
     } else if isStraightFlush(hand) {
         score = 6
+        if row == .middle { score *= 2 }
     } else if isFourOfAKind(hand) {
         score = 5
+        if row == .middle { score *= 2 }
     } else if isFullHouse(hand) {
         score = 1
-    } else if isFlush(hand) {
+        if row == .middle { score *= 2 }
+    } else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
         score = 1
-    } else if isStraight(hand) {
-        score = 1
-    } else if isThreeOfAKind(hand) {
-        score = 1
-    // ถ้าเป็นแถวกลาง ให้คูณคะแนน 2
-    if isMiddleRow {
-        score *= 2
     }
-        
-    } else if isTwoPair(hand) {
-        score = 1
-    } else if isPair(hand) {
-        score = 1
-    } else if isThreeOfAKind(hand) && isHeadRow {
-        score = 5  // หัวตอง
-    } else if isPairOfAces(hand) && isHeadRow {
-        score = 2  // หัวคู่ A
-        
+
+    if row == .head {
+        if isThreeOfAKind(hand) {
+            score = 5 // หัวตอง
+        } else if isPairOfAces(hand) {
+            score = 2 // หัวคู่ A
+        }
+    }
+
     return score
 }
 
