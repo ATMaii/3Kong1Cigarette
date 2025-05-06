@@ -476,7 +476,39 @@ struct GameView: View {
             HStack {
                 ForEach(arrangedCards[0], id: \.id) { card in }
                     Text("
-                         
+func evaluateHand(cards: [Card]) -> Int {
+    if isRoyalFlush(cards) {
+       print ("Royal Flush")
+       return 10 //  (ใหญ่สุด)
+    } else if isStraightFlush(cards) {
+        print("Straight Flush")
+        return 9
+    } else if isFourOfAKind(cards) {
+        print("Four of a Kind")
+        return 8
+    } else if isFullHouse(cards) {
+        print("Full House")
+        return 7
+    } else if isFlush(cards) {
+        print("Flush")
+        return 6
+    } else if isStraight(cards) {
+        print("Straight")
+        return 5
+    } else if isThreeOfAKind(cards) {
+        print("Three of a Kind")
+        return 4
+    } else if isTwoPair(cards) {
+        print("Two Pair")
+        return 3
+    } else if isPair(cards) {
+        print("Pair")
+        return 2
+    } else {
+        print("High Card")
+        return 1
+    }
+}
     func evaluateHand(cards: [Card]) -> Int {
     if isStraightFlush(cards) {
         return 9 // Straight Flush (สูงสุด)
@@ -497,7 +529,7 @@ struct GameView: View {
     } else {
         return 1 // High Card
     }
-   }
+}
 func isStraightFlush(_ cards: [Card]) -> Bool {
     let sortedCards = cards.sorted { $0.rank.rawValue < $1.rank.rawValue }
     let sameSuit = Set(cards.map { $0.suit }).count == 1 // ตรวจสอบว่าเป็นดอกเดียวกัน
