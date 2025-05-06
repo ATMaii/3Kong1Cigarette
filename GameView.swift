@@ -673,4 +673,72 @@ func checkResult() {
     // แสดงผลคะแนน
     print("Top Score:
 
+// ตัวอย่างการคำนวณคะแนนในกรณีที่ผู้เล่นชนะ
+func calculateScore(hand: [Card], isWinner: Bool) -> Int {
+    let handRank = evaluateHand(cards: hand) // ใช้ evaluateHand ที่เราทำไปก่อนหน้านี้
+    let baseScore = handRank * 100 // สมมุติว่า 1 คะแนน = 100
+
+    // ถ้าผู้เล่นชนะ
+    if isWinner {
+        return baseScore * 2 // คูณคะแนน 2 เท่าถ้าชนะ
+    } else {
+        return baseScore
+    }
+}
+
+func calculateScore(hand: [Card], isWinner: Bool, isWinnerForAllHands: Bool) -> Int {
+    let handRank = evaluateHand(cards: hand) // ใช้ evaluateHand ที่เราทำไปก่อนหน้านี้
+    let baseScore = handRank * 100 // สมมุติว่า 1 คะแนน = 100
+
+    // ถ้าผู้เล่นชนะทั้ง 3 กอง
+    if isWinnerForAllHands {
+        return baseScore * 4 // คูณคะแนน 4 เท่าถ้าชนะทั้ง 3 กอง
+    } else if isWinner {
+        return baseScore * 2 // คูณคะแนน 2 เท่าถ้าชนะ
+    } else {
+        return baseScore
+    }
+}
+
+          let playerHand: [Card] = ... // มือไพ่ของผู้เล่น
+          let isWinnerForAllHands = true // สมมุติว่าผู้เล่นชนะทั้ง 3 กอง
+          let isWinner = true // สมมุติว่าผู้เล่นชนะในกองของตัวเอง
+
+          let finalScore = calculateScore(hand: playerHand, isWinner: isWinner, isWinnerForAllHands: isWinnerForAllHands)
+
+func calculateScoreForAllHands(playerHands: [[Card]], winningHands: [Bool]) -> Int {
+    var totalScore = 0
+    var totalWins = 0
+    
+    // เปรียบเทียบไพ่ในแต่ละกอง
+    for (index, hand) in playerHands.enumerated() {
+        let handRank = evaluateHand(cards: hand) // ฟังก์ชันที่ใช้ประเมินมือไพ่
+        let baseScore = handRank * 100 // คะแนนพื้นฐาน (สามารถปรับให้เป็นตัวเลขที่ต้องการ)
+        
+        // เช็คว่าชนะในกองนี้หรือไม่
+        if winningHands[index] {
+            totalScore += baseScore
+            totalWins += 1
+        }
+    }
+    
+    // ถ้าชนะทั้ง 3 ขา (หมายถึง totalWins = 3)
+    if totalWins == 3 {
+        return totalScore * 4 // คูณ 4 เมื่อชนะทั้งหมด
+    } else {
+        return totalScore
+    }
+}
+
+          let playerHands = [
+    [Card(rank: .five, suit: .hearts), Card(rank: .three, suit: .spades), Card(rank: .nine, suit: .diamonds)], // ท้าย
+    [Card(rank: .jack, suit: .hearts), Card(rank: .king, suit: .clubs), Card(rank: .ace, suit: .spades)], // กลาง
+    [Card(rank: .queen, suit: .hearts), Card(rank: .seven, suit: .diamonds), Card(rank: .four, suit: .spades)] // หัว
+]
+
+let winningHands = [true, true, true] // สมมุติว่าผู้เล่นชนะทั้ง 3 กอง
+
+let finalScore = calculateScoreForAllHands(playerHands: playerHands, winningHands: winningHands)
+print("Total score:
+
 
