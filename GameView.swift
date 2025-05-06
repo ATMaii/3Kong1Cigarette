@@ -95,6 +95,9 @@ class GameTimer: ObservableObject {
         secondsRemaining = 120 // รีเซ็ตเวลาเป็น 120 วินาที
     }
 }
+                                                       
+import SwiftUI
+
 struct GameView: View {
     @StateObject var gameTimer = GameTimer()
     
@@ -376,6 +379,8 @@ struct GameView: View {
                 Text("เวลาที่เหลือ:
                      
 // เพิ่มปุ่มเมื่อเกมจบ
+import SwiftUI
+                     
 struct GameEndView: View {
     @Binding var isGameOver: Bool
     @Binding var isGameActive: Bool
@@ -469,9 +474,10 @@ struct GameView: View {
         VStack {
             // แถวหัว (3 ใบ)
             HStack {
-                ForEach(arrangedCards[0], id: \.id) { card in
+                ForEach(arrangedCards[0], id: \.id) { card in }
                     Text("
-   func evaluateHand(cards: [Card]) -> Int {
+                         
+    func evaluateHand(cards: [Card]) -> Int {
     if isStraightFlush(cards) {
         return 9 // Straight Flush (สูงสุด)
     } else if isFourOfAKind(cards) {
