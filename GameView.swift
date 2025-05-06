@@ -86,6 +86,9 @@ struct GameView: View {
 
                     Text("คะแนน:
 
+VStack(alignment: .leading, spacing: 4) {
+    Text("หัว:
+
                          
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
