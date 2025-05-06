@@ -104,7 +104,43 @@ var body: some View {
 
         Text("คะแนนรวม:
 
-             
+  import SwiftUI
+
+struct GameView: View {
+    @State var player = Player()
+    @State var deck = Deck()
+
+    var body: some View {
+        VStack {
+            HStack {
+                Button("สุ่มไพ่") {
+                    deck = Deck()
+                    player.hand = []
+                    for _ in 0..<13 {
+                        if let card = deck.drawCard() {
+                            player.hand.append(card)
+                        }
+                    }
+                    player.hand.sort {
+                        if $0.suit.rawValue == $1.suit.rawValue {
+                            return $0.rank.rawValue < $1.rank.rawValue
+                        }
+                        return $0.suit.rawValue < $1.suit.rawValue
+                    }
+                }
+
+                Button("แบ่ง 3 กอง") {
+                    player.splitIntoPiles()
+                }
+            }
+            .padding()
+
+            Text("ไพ่ของผู้เล่น").font(.title2)
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(player.hand, id: \.self) { card in
+                        Text("
+                             
 Button("แยกไพ่ 3 กอง") {
     for player in gameManager.players {
         let (head, middle, tail) = gameManager.splitIntoThreePiles(player: player)
