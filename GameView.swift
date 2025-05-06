@@ -281,3 +281,9 @@ struct GameView: View {
             Text("Time Remaining:
 
                  
+@StateObject var gameTimer = GameTimer()
+
+var body: some View {
+    VStack {
+        // แสดงเวลาที่เหลือ
+        Text("เวลาที่เหลือ:
