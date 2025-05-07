@@ -56,6 +56,7 @@ struct GameView: View {
             ForEach(gameManager.players.indices, id: \.self) { index in
                 VStack(alignment: .leading) {
                     Text("ผู้เล่น
+
 struct DraggableCard: View {
     let card: Card
     var body: some View {
@@ -114,8 +115,9 @@ struct GameView: View {
         VStack {
             // แสดงเวลาที่เหลือ
             Text("เวลาที่เหลือ:
+                 
 import SwiftUI
-
+                 
 struct GameView: View {
     @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
     @State private var timerIsActive = false
@@ -175,21 +177,18 @@ struct GameView: View {
             }
         }
     }
-
     // ฟังก์ชั่นเมื่อเวลาหมด
     func timeUp() {
         showTimeUpAlert = true
         gameFinished = true
         calculateScores()  // คำนวณคะแนนหลังเวลาหมด
     }
-
     // ฟังก์ชั่นเมื่อผู้เล่นกด "จัดเสร็จแล้ว"
     func finishGame() {
         timerIsActive = false
         gameFinished = true
         calculateScores()  // คำนวณคะแนนหลังจากผู้เล่นกดจัดเสร็จแล้ว
     }
-
     // ฟังก์ชั่นคำนวณคะแนน
     func calculateScores() {
         // คำนวณคะแนนของผู้เล่น (ตัวอย่างง่าย ๆ)
@@ -208,6 +207,7 @@ struct GameView: View {
             if !gameFinished {
                 // แสดงเวลา
                 Text("เวลาที่เหลือ:
+                     
 import SwiftUI
 
 struct GameView: View {
