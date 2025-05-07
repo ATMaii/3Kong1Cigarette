@@ -45,18 +45,6 @@ struct GameView: View {
         }
     }
 }
-
-import SwiftUI
-           
-struct GameView: View {
-    @ObservedObject var gameManager = GameManager.shared
-
-    var body: some View {
-        VStack {
-            ForEach(gameManager.players.indices, id: \.self) { index in
-                VStack(alignment: .leading) {
-                    Text("ผู้เล่น
-
 struct DraggableCard: View {
     let card: Card
     var body: some View {
@@ -67,7 +55,17 @@ struct DraggableCard: View {
             .shadow(radius: 2)
             .onDrag {
                 return NSItemProvider(object: NSString(string: "
-                        
+import SwiftUI
+           
+struct GameView: View {
+    @ObservedObject var gameManager = GameManager.shared
+
+    var body: some View {
+        VStack {
+            ForEach(gameManager.players.indices, id: \.self) { index in
+                VStack(alignment: .leading) {
+                    Text("ผู้เล่น
+                         
 import SwiftUI
 
 class GameTimer: ObservableObject {
