@@ -65,7 +65,7 @@ struct GameView: View {
         VStack {
             ForEach(gameManager.players.indices, id: \.self) { index in
                 VStack(alignment: .leading) {
-                    Text("ผู้เล่น:
+                    Text("ผู้เล่น
                          
 import SwiftUI
 
