@@ -1,4 +1,5 @@
- import SwiftUI
+
+import SwiftUI
 
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
@@ -148,6 +149,7 @@ func startTimer() {
         VStack {
             // แสดงเวลา
             Text("เวลาที่เหลือ:
+                 
 import SwiftUI
 
 struct GameView: View {
