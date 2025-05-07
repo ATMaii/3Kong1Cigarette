@@ -226,3 +226,15 @@ func selectStadium(by chips: Int) -> String? {
         return nil // ชิปไม่พอเข้าเล่น
     }
 }
+struct Arena {
+    let stadium: Stadium
+    let roomValue: Int // เช่น 50, 100
+    let playersJoined: Int
+    let maxPlayers: Int
+    
+    var isFull: Bool {
+        playersJoined >= maxPlayers
+    }
+    
+    var roomName: String {
+        "
