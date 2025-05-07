@@ -478,3 +478,4 @@ class GameManager: ObservableObject {
         return Stadium.allCases.reversed().first { playerChips >= $0.minChipsRequired }
     }
 }
+@Published var selectedStadium: Stadium? = nil
