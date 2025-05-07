@@ -55,6 +55,9 @@ struct GameView: View {
             ForEach(gameManager.players.indices, id: \.self) { index in
                 VStack(alignment: .leading) {
                     Text("ผู้เล่น
+              
+import SwiftUI
+
 struct DraggableCard: View {
     let card: Card
     var body: some View {
@@ -64,8 +67,7 @@ struct DraggableCard: View {
             .cornerRadius(8)
             .shadow(radius: 2)
             .onDrag {
-                return NSItemProvider(object: NSString(string: "              
-import SwiftUI
+                return NSItemProvider(object: NSString(string: "
 
 class GameTimer: ObservableObject {
     @Published var secondsRemaining: Int = 120 // เปลี่ยนเป็น 120 วินาที
@@ -93,7 +95,7 @@ class GameTimer: ObservableObject {
         secondsRemaining = 120 // รีเซ็ตเวลาเป็น 120 วินาที
     }
 }
-                                                       
+                         
 import SwiftUI
 
 struct GameView: View {
