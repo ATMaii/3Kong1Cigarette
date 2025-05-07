@@ -55,6 +55,7 @@ struct DraggableCard: View {
             .shadow(radius: 2)
             .onDrag {
                 return NSItemProvider(object: NSString(string: "
+                                                       
 import SwiftUI
            
 struct GameView: View {
@@ -64,7 +65,7 @@ struct GameView: View {
         VStack {
             ForEach(gameManager.players.indices, id: \.self) { index in
                 VStack(alignment: .leading) {
-                    Text("ผู้เล่น
+                    Text("ผู้เล่น:
                          
 import SwiftUI
 
