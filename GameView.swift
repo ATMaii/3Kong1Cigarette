@@ -2,6 +2,15 @@
 import SwiftUI
 
 struct GameView: View {
+    var arena: String
+
+    var body: some View {
+        VStack {
+            Text("Welcome to
+                 
+import SwiftUI
+
+struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
 
@@ -340,21 +349,18 @@ struct GameView: View {
             }
         }
     }
-
     // ฟังก์ชั่นเมื่อเวลาหมด
     func timeUp() {
         showTimeUpAlert = true
         gameFinished = true
         calculateScores()  // คำนวณคะแนนหลังเวลาหมด
     }
-
     // ฟังก์ชั่นเมื่อผู้เล่นกด "จัดเสร็จแล้ว"
     func finishGame() {
         timerIsActive = false
         gameFinished = true
         calculateScores()  // คำนวณคะแนนหลังจากผู้เล่นกดจัดเสร็จแล้ว
     }
-
     // ฟังก์ชั่นคำนวณคะแนน
     func calculateScores() {
         // คำนวณคะแนนของผู้เล่น (ตัวอย่างง่าย ๆ)
@@ -369,7 +375,6 @@ struct GameView: View {
             winner = winnerPlayer.key
         }
     }
-
     var body: some View {
         VStack {
             if !gameFinished {
@@ -411,7 +416,7 @@ struct GameEndView: View {
         }
     }
 }
-
+                     
 @State private var isGameOver = false
 @State private var isGameActive = true
                      
@@ -433,10 +438,9 @@ struct GameView: View {
     @State private var arrangedCards: [[Card]] = [[], [], []] // แถวหัว, กลาง, ท้าย
     @State private var timer: Timer? // ตัวจับเวลา
     @State private var timeLeft = 120 // เวลานับถอยหลัง 120 วินาที
-
-    // ฟังก์ชั่นเริ่มเกมใหม่
-    func startNewGame() {
-        let shuffledDeck = CardDeck.allCards.shuffled() // สุ่มไพ่ทั้งหมด
+// ฟังก์ชั่นเริ่มเกมใหม่
+func startNewGame() {
+    let shuffledDeck = CardDeck.allCards.shuffled() // สุ่มไพ่ทั้งหมด
         player3Cards = Array(shuffledDeck[0..<13]) // แจกไพ่ 13 ใบให้ผู้เล่น
         arrangedCards = [[], [], []] // รีเซ็ตการจัดไพ่
         timeLeft = 120 // รีเซ็ตเวลา
@@ -474,13 +478,12 @@ struct GameView: View {
             HStack {
                 ForEach(arrangedCards[0], id: \.id) { card in }
                     Text("
-
-                         let score = evaluateHand(cards: player.hand)
+let score = evaluateHand(cards: player.hand)
 print("คะแนนของผู้เล่น:
 func evaluateHand(cards: [Card]) -> Int {
     if isRoyalFlush(cards) {
        print ("Royal Flush")
-       return 10 //  (ใหญ่สุด)
+       return 10 //  (สูงสุด)
     } else if isStraightFlush(cards) {
         print("Straight Flush")
         return 9
@@ -510,27 +513,7 @@ func evaluateHand(cards: [Card]) -> Int {
         return 1
     }
 }
-    func evaluateHand(cards: [Card]) -> Int {
-    if isStraightFlush(cards) {
-        return 9 // Straight Flush (สูงสุด)
-    } else if isFourOfAKind(cards) {
-        return 8 // Four of a Kind
-    } else if isFullHouse(cards) {
-        return 7 // Full House
-    } else if isFlush(cards) {
-        return 6 // Flush
-    } else if isStraight(cards) {
-        return 5 // Straight
-    } else if isThreeOfAKind(cards) {
-        return 4 // Three of a Kind
-    } else if isTwoPair(cards) {
-        return 3 // Two Pair
-    } else if isPair(cards) {
-        return 2 // Pair
-    } else {
-        return 1 // High Card
-    }
-}
+        
 func isStraightFlush(_ cards: [Card]) -> Bool {
     let sortedCards = cards.sorted { $0.rank.rawValue < $1.rank.rawValue }
     let sameSuit = Set(cards.map { $0.suit }).count == 1 // ตรวจสอบว่าเป็นดอกเดียวกัน
@@ -580,7 +563,7 @@ func calculateScore(hand: [Card], isWinner: Bool) -> Int {
     let baseScore = handRank * 100 // สมมุติว่า 1 คะแนน = 100
 // ถ้าผู้เล่นชนะ
     if isWinner {
-        return baseScore * 2 // คูณคะแนน 2 เท่าถ้าชนะ
+        return baseScore * 1 // คูณคะแนน 1 เท่าถ้าชนะ
     } else {
         return baseScore
     }
@@ -591,7 +574,7 @@ func calculateScore(hand: [Card], isWinner: Bool, isWinnerForAllHands: Bool) -> 
 
     // ถ้าผู้เล่นชนะทั้ง 3 กอง
     if isWinnerForAllHands {
-        return baseScore * 4 // คูณคะแนน 4 เท่าถ้าชนะทั้ง 3 กอง
+        return baseScore * 2 // คูณคะแนน 2 เท่าถ้าชนะทั้ง 3 กอง
     } else if isWinner {
         return baseScore * 2 // คูณคะแนน 2 เท่าถ้าชนะ
     } else {
@@ -641,13 +624,13 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     var score = 0
 
     if isRoyalFlush(hand) {
-        score = 7
+        score = 8
         if row == .middle { score *= 2 }
     } else if isStraightFlush(hand) {
-        score = 6
+        score = 7
         if row == .middle { score *= 2 }
     } else if isFourOfAKind(hand) {
-        score = 5
+        score = 6
         if row == .middle { score *= 2 }
     } else if isFullHouse(hand) {
         score = 1
@@ -655,7 +638,6 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     } else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
         score = 1
     }
-
     if row == .head {
         if isThreeOfAKind(hand) {
             score = 5 // หัวตอง
@@ -722,7 +704,7 @@ func isPairOfAces(_ hand: [Card]) -> Bool {
 func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
     var score = 0
 
-    // ตรวจสอบประเภทของมือไพ่
+// ตรวจสอบประเภทของมือไพ่
     if isRoyalFlush(cards) {
         score = 10 // Royal Flush
     } else if isStraightFlush(cards) {
@@ -758,11 +740,3 @@ func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
     return score
 }
 
-import SwiftUI
-
-struct GameView: View {
-    var arena: String
-
-    var body: some View {
-        VStack {
-            Text("Welcome to
