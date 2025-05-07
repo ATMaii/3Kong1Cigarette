@@ -58,6 +58,13 @@ struct GameView: View {
               
 import SwiftUI
 
+struct GameView: View {
+    @State var hand: [Card]
+
+    var body: some View {
+        HStack {
+            ForEach(hand, id: \.rank) { card in
+                Text("
 struct DraggableCard: View {
     let card: Card
     var body: some View {
@@ -68,7 +75,8 @@ struct DraggableCard: View {
             .shadow(radius: 2)
             .onDrag {
                 return NSItemProvider(object: NSString(string: "
-
+import SwiftUI
+                            
 class GameTimer: ObservableObject {
     @Published var secondsRemaining: Int = 120 // เปลี่ยนเป็น 120 วินาที
     var timer: Timer?
