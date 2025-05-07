@@ -1,4 +1,4 @@
-import SwiftUI
+ import SwiftUI
 
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
@@ -55,16 +55,6 @@ struct GameView: View {
             ForEach(gameManager.players.indices, id: \.self) { index in
                 VStack(alignment: .leading) {
                     Text("ผู้เล่น
-              
-import SwiftUI
-
-struct GameView: View {
-    @State var hand: [Card]
-
-    var body: some View {
-        HStack {
-            ForEach(hand, id: \.rank) { card in
-                Text("
 struct DraggableCard: View {
     let card: Card
     var body: some View {
@@ -102,8 +92,7 @@ class GameTimer: ObservableObject {
         stop()
         secondsRemaining = 120 // รีเซ็ตเวลาเป็น 120 วินาที
     }
-}
-                         
+}           
 import SwiftUI
 
 struct GameView: View {
