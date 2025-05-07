@@ -211,3 +211,18 @@ struct ArenaSelectionView: View {
     func goToGame() {
         if let arena = selectedArena {
             print("You selected:
+
+func selectStadium(by chips: Int) -> String? {
+    switch chips {
+    case 50_000...:
+        return "Santiago Bernabeu" // Master
+    case 20_000..<50_000:
+        return "Allianz Arena" // Amateur
+    case 10_000..<20_000:
+        return "Brazil" // Beginner
+    case 5_000..<10_000:
+        return "Wemley" // Rookie
+    default:
+        return nil // ชิปไม่พอเข้าเล่น
+    }
+}
