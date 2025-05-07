@@ -18,3 +18,22 @@ struct StadiumSelectionView: View {
         }
     }
 }
+if player.chips < Stadium.Rookie.minChipsRequired {
+    // แสดงข้อความว่าไม่สามารถเข้าได้
+    // หรือ redirect ไปหน้าอื่น
+}
+var body: some View {
+    VStack {
+        Text("เข้าได้เฉพาะสนาม 'Wembley'").font(.headline)
+
+        Button(action: {
+            gameManager.selectedStadium = .Rookie
+        }) {
+            Text("เข้าสนาม Wembley")
+                .padding()
+                .background(Color.green)
+                .cornerRadius(10)
+        }
+    }
+}
+Text("ห้อง: 50 Wemley")
