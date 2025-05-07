@@ -50,8 +50,6 @@ struct Card: Identifiable, Equatable {
 
 // Card.swift
 
-import Foundation
-
 enum Suit: String {
     case hearts = "♥", diamonds = "♦", clubs = "♣", spades = "♠"
 }
@@ -67,6 +65,16 @@ enum Rank: Int, CaseIterable {
         case .king: return "K"
         default: return "
 
- extension Card {
+extension Card {
     func description() -> String {
+        return "
+        import UIKit
+
+// โครงสร้างของไพ่
+struct Card {
+    var rank: String  // ค่าของไพ่ (2, 3, 4, ... , A)
+    var suit: String  // ชุดของไพ่ (Hearts, Spades, Diamonds, Clubs)
+    
+    // ฟังก์ชัน display เพื่อแสดงข้อมูลของไพ่
+    func display() -> String {
         return "
