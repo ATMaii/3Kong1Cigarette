@@ -466,3 +466,15 @@ class GameManager {
       let manager = GameManager()
 if let stadium = manager.stadiumForChips(player.chips) {
     print("ผู้เล่นเข้า
+          
+class GameManager: ObservableObject {
+    var playerChips: Int = 0
+
+    func availableStadiums() -> [Stadium] {
+        return Stadium.allCases.filter { playerChips >= $0.minChipsRequired }
+    }
+
+    func stadiumForChips() -> Stadium? {
+        return Stadium.allCases.reversed().first { playerChips >= $0.minChipsRequired }
+    }
+}
