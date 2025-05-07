@@ -107,3 +107,86 @@ struct Player {
     var middle: [Card] = []
     var head: [Card] = []
 }
+
+struct Player {
+    let id: Int
+    var chips: Int  // ชิปของผู้เล่น
+    var hands: [[Card]] // 3 กองของผู้เล่น
+}
+
+struct Game {
+    var players: [Player]
+    var pot: Int = 0  // หม้อรวมชิป
+}
+func initializePlayers() -> [Player] {
+    let initialChips = 1000  // เริ่มต้นที่ 1000 ชิป
+    let players = [
+        Player(id: 0, chips: initialChips, hands: [[]]),
+        Player(id: 1, chips: initialChips, hands: [[]]),
+        Player(id: 2, chips: initialChips, hands: [[]]),
+        Player(id: 3, chips: initialChips, hands: [[]])
+    ]
+    return players
+}
+func playerBet(player: inout Player, betAmount: Int) {
+    if player.chips >= betAmount {
+        player.chips -= betAmount
+        game.pot += betAmount  // เพิ่มชิปลงในหม้อ
+    } else {
+        print("ไม่มียอดชิปเพียงพอในการวางเดิมพัน")
+    }
+}
+func awardChips(winner: Player) {
+    let winningAmount = game.pot
+    winner.chips += winningAmount
+    game.pot = 0  // หม้อว่าง
+}
+func comparePlayers(p1: inout Player, p2: inout Player) {
+    let result = compareHands(p1.hands, p2.hands)
+    
+    if result == 1 {
+        // P1 ชนะ
+        awardChips(winner: p1)
+    } else if result == -1 {
+        // P2 ชนะ
+        awardChips(winner: p2)
+    } else {
+        // เสมอ
+    }
+}
+struct Player {
+    let id: Int
+    var chips: Int  // ชิปของผู้เล่น
+    var hands: [[Card]] // 3 กองของผู้เล่น (หัว, กลาง, ท้าย)
+    
+    // ฟังก์ชันสำหรับวางเดิมพัน
+    mutating func bet(amount: Int, pot: inout Int) -> Bool {
+        if chips >= amount {
+            chips -= amount
+            pot += amount  // เพิ่มชิปลงในหม้อ
+            return true
+        } else {
+            print("ไม่มียอดชิปเพียงพอในการวางเดิมพัน")
+            return false
+        }
+    }
+    
+    // ฟังก์ชันสำหรับการชนะและรับชิป
+    mutating func win(potAmount: Int) {
+        chips += potAmount
+    }
+}
+func initializePlayers() -> [Player] {
+    let initialChips = 1000  // เริ่มต้นที่ 1000 ชิป
+    let players = [
+        Player(id: 0, chips: initialChips, hands: [[]]),
+        Player(id: 1, chips: initialChips, hands: [[]]),
+        Player(id: 2, chips: initialChips, hands: [[]]),
+        Player(id: 3, chips: initialChips, hands: [[]])
+    ]
+    return players
+}
+func playerBet(player: inout Player, betAmount: Int, pot: inout Int) {
+    if player.bet(amount: betAmount, pot: &pot) {
+        print("ผู้เล่น
+            
