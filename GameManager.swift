@@ -545,3 +545,13 @@ func calculateScore(players: [Player]) -> [String: Int] {
 
     return scores
 }
+          func compareMiddleRow(p1: [Card], p2: [Card], p3: [Card], p4: [Card]) {
+    let allMiddleHands = [p1, p2, p3, p4]
+    let middleRanks = allMiddleHands.map { evaluateHand(cards: $0) }
+
+    // หาค่ามากสุด
+    if let maxRank = middleRanks.max() {
+        for (index, rank) in middleRanks.enumerated() {
+            if rank == maxRank {
+                print("Player
+                      
