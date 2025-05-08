@@ -105,7 +105,10 @@ enum RookieRoom: String, CaseIterable {
         case .arenaIV: return "Arena IV"
         }
     }
-}
+
+    func roomName(for stadium: Stadium) -> String {
+        "
+        
 enum BeginnerRoom: String, CaseIterable {
     case blogI = "Beginner50"
     case blogII = "Beginner100"
