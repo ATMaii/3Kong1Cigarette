@@ -130,7 +130,7 @@ enum BeginnerRoom: String, CaseIterable {
         }
     }
 }
-enum AmateurRoom: CaseIterable { CaseIterable {
+enum AmateurRoom: String, CaseIterable {
     case clubI = "Amateur100"
     case clubII = "Amateur200
     case clubIII = "Amateur500
