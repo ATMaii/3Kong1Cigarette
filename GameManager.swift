@@ -479,3 +479,69 @@ class GameManager: ObservableObject {
     }
 }
 @Published var selectedStadium: Stadium? = nil
+
+
+struct Player {
+    let name: String
+    let head: [Card]
+    let middle: [Card]
+    let tail: [Card]
+}
+
+enum HandRank: Int {
+    case highCard = 1
+    case pair, twoPair, threeOfAKind, straight, flush, fullHouse, fourOfAKind, straightFlush, royalFlush
+}
+
+func evaluateHand(_ hand: [Card]) -> HandRank {
+    // ตรวจสอบลำดับมือ เช่น สเตรท ฟลัช ไพ่สูง ฯลฯ
+    // สำหรับตอนนี้สมมุติใช้แค่ highCard
+    return .highCard
+}
+
+func compareHands(_ hand1: [Card], _ hand2: [Card]) -> Int {
+    let rank1 = evaluateHand(hand1).rawValue
+    let rank2 = evaluateHand(hand2).rawValue
+
+    if rank1 > rank2 {
+        return 1 // hand1 ชนะ
+    } else if rank1 < rank2 {
+        return -1 // hand2 ชนะ
+    } else {
+        // ถ้าเท่ากันเปรียบเทียบไพ่สูง
+        let sorted1 = hand1.sorted(by: >)
+        let sorted2 = hand2.sorted(by: >)
+
+        for i in 0..<min(sorted1.count, sorted2.count) {
+            if sorted1[i].rank.rawValue > sorted2[i].rank.rawValue {
+                return 1
+            } else if sorted1[i].rank.rawValue < sorted2[i].rank.rawValue {
+                return -1
+            }
+        }
+        return 0 // เสมอ
+    }
+}
+
+func calculateScore(players: [Player]) -> [String: Int] {
+    var scores: [String: Int] = [:]
+
+    for player in players {
+        scores[player.name] = 0
+    }
+
+    for i in 0..<players.count {
+        for j in 0..<players.count where i != j {
+            let p1 = players[i]
+            let p2 = players[j]
+
+            let resultHead = compareHands(p1.head, p2.head)
+            let resultMiddle = compareHands(p1.middle, p2.middle)
+            let resultTail = compareHands(p1.tail, p2.tail)
+
+            scores[p1.name, default: 0] += resultHead + resultMiddle + resultTail
+        }
+    }
+
+    return scores
+}
