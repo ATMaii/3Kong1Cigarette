@@ -132,9 +132,9 @@ enum BeginnerRoom: String, CaseIterable {
 }
 enum AmateurRoom: String, CaseIterable {
     case clubI = "Amateur100"
-    case clubII = "Amateur200
-    case clubIII = "Amateur500
-    case clubIV = "Amateur1000
+    case clubII = "Amateur200"
+    case clubIII = "Amateur500"
+    case clubIV = "Amateur1000"
 
     var roomValue: Int {
         switch self {
@@ -153,7 +153,7 @@ enum AmateurRoom: String, CaseIterable {
         case .clubIV: return "Club IV"
         }
     }
-    }
+}
 enum MasterRoom: String, CaseIterable {
     case roomI = "Master100"
     case roomII = "Master200"
