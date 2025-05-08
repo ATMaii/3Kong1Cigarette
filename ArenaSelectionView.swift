@@ -276,4 +276,4 @@ struct ArenaSelectionView: View {
     ...
                      }
     let arena = Arena(stadium: .Rookie, roomValue: 50, playersJoined: 3, maxPlayers: 4)
-print(arena.roomName) // "Wembley Room 50"
+print(arena.roomName) // "Rookie Arena 50"
