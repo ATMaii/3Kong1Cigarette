@@ -42,17 +42,4 @@ struct Arena {
             case 200: return "Arena III"
             default: return "
 
-struct Arena {
-    let stadium: Stadium
-    let roomValue: Int
-    let playersJoined: Int
-    let maxPlayers: Int
 
-    var isFull: Bool {
-        playersJoined >= maxPlayers
-    }
-
-    var roomName: String {
-        // หา index ของ roomValue จาก availableRooms
-        if let index = stadium.availableRooms.firstIndex(of: roomValue) {
-            let arenaName = "Arena
