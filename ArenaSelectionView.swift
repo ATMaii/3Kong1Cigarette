@@ -238,3 +238,42 @@ struct Arena {
     
     var roomName: String {
         "
+import SwiftUI
+
+struct ArenaSelectionView: View {
+    @State private var selectedArena: String? = nil
+    
+    var body: some View {
+        VStack {
+            Text("Select Your Arena")
+                .font(.largeTitle)
+                .padding()
+
+            Button(action: {
+                selectedArena = "Wembley"
+            }) {
+                VStack {
+                    Image("Wembley") // รูปภาพสนาม Wembley
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 100)
+                    Text("Wembley")
+                        .font(.title)
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
+
+            if let selectedArena = selectedArena {
+                Text("คุณเลือกสนาม
+                
+             case Rookie = "Rookie Arena"
+             struct Arena {
+    let             stadium: Stadium
+    ...
+                     }
+    let arena = Arena(stadium: .Rookie, roomValue: 50, playersJoined: 3, maxPlayers: 4)
+print(arena.roomName) // "Wembley Room 50"
