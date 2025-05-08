@@ -10,3 +10,17 @@ var isFull: Bool {
 
 var roomName: String {
     "
+struct Arena {
+    let stadium: Stadium
+    let roomValue: Int
+    let playersJoined: Int
+    let maxPlayers: Int
+
+    var isFull: Bool {
+        playersJoined >= maxPlayers
+    }
+
+    var roomName: String {
+        "Arena I" // ใช้ชื่อห้องแบบกำหนดเอง
+    }
+}
