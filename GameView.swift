@@ -55,6 +55,18 @@ struct GameView: View {
         }
     }
 }
+
+struct DraggableCard: View {
+    let card: Card
+    var body: some View {
+        Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                return NSItemProvider(object: NSString(string: "
+                 
 import SwiftUI
            
 struct GameView: View {
@@ -101,6 +113,7 @@ func startTimer() {
         VStack {
             // แสดงเวลา
             Text("เวลาที่เหลือ:
+                 
 func startNewGame() {
     let shuffledDeck = CardDeck.allCards.shuffled() // สุ่มไพ่ทั้งหมด
         player3Cards = Array(shuffledDeck[0..<13]) // แจกไพ่ 13 ใบให้ผู้เล่น 
@@ -154,16 +167,7 @@ func startNewGame() {
 let score = evaluateHand(cards: player.hand)
 print("คะแนนของผู้เล่น:
       
-struct DraggableCard: View {
-    let card: Card
-    var body: some View {
-        Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                return NSItemProvider(object: NSString(string: "
+
 import SwiftUI
                             
 class GameTimer: ObservableObject {
