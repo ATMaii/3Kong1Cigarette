@@ -66,108 +66,7 @@ struct DraggableCard: View {
             .shadow(radius: 2)
             .onDrag {
                 return NSItemProvider(object: NSString(string: "
-                 
-import SwiftUI
-           
-struct GameView: View {
-    @ObservedObject var gameManager = GameManager.shared
-
-    var body: some View {
-        VStack {
-            ForEach(gameManager.players.indices, id: \.self) { index in
-                VStack(alignment: .leading) {
-                    Text("ผู้เล่น
-// ฟังก์ชั่นเริ่มเกมใหม่import SwiftUI
-                 
-struct GameView: View {
-    @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
-    @State private var timerIsActive = false
-    @State private var showTimeUpAlert = false
-    @State private var gameFinished = false
-    
-    let gameManager = GameManager()
-    
-// สร้างตัวจับเวลา
-func startTimer() {
-        if timerIsActive { return }
-        timerIsActive = true
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
-            } else {
-                timer.invalidate()
-                self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
-            }
-        }
-    }
-    func timeUp() {
-        showTimeUpAlert = true
-        gameFinished = true
-    }
-    func finishGame() {
-        // เมื่อผู้เล่นกด "จัดเสร็จแล้ว" ให้หยุดเวลาและไปขั้นตอนถัดไป
-        timerIsActive = false
-        gameFinished = true
-    }
-    var body: some View {
-        VStack {
-            // แสดงเวลา
-            Text("เวลาที่เหลือ:
-                 
-func startNewGame() {
-    let shuffledDeck = CardDeck.allCards.shuffled() // สุ่มไพ่ทั้งหมด
-        player3Cards = Array(shuffledDeck[0..<13]) // แจกไพ่ 13 ใบให้ผู้เล่น 
-        arrangedCards = [[], [], []] // รีเซ็ตการจัดไพ่
-        timeLeft = 120 // รีเซ็ตเวลา
-        startTimer() // เริ่มจับเวลา
-    }                
-    // ฟังก์ชั่นจับเวลา
-    func startTimer() {
-        timer?.invalidate() // ยกเลิกการจับเวลาครั้งก่อน
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if timeLeft > 0 {
-                timeLeft -= 1
-            }
-        }
-    }
-    // ฟังก์ชั่นสำหรับการลากไพ่
-    struct DraggableCard: View {
-    let card: Card
-    var body: some View {
-        Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                return NSItemProvider(object: NSString(string: "
-    func onDrag(card: Card) -> some Gesture {
-        return DragGesture()
-            .onChanged { value in
-                // อัพเดตตำแหน่งขณะลาก
-            }
-            .onEnded { value in
-                // เมื่อไพ่ปล่อย ให้คำนวณตำแหน่งที่วาง
-                if value.location.y < 100 {
-                    self.arrangedCards[0].append(card)  // วางในแถวหัว
-                } else if value.location.y < 200 {
-                    self.arrangedCards[1].append(card)  // วางในแถวกลาง
-                } else {
-                    self.arrangedCards[2].append(card)  // วางในแถวท้าย
-                }
-            }
-    }
-    var body: some View {
-        VStack {
-            // แถวหัว (3 ใบ)
-            HStack {
-                ForEach(arrangedCards[0], id: \.id) { card in }
-                    Text("
-                         
-let score = evaluateHand(cards: player.hand)
-print("คะแนนของผู้เล่น:
       
-
 import SwiftUI
                             
 class GameTimer: ObservableObject {
@@ -486,6 +385,156 @@ func startNewGame() {
                     Text("
 let score = evaluateHand(cards: player.hand)
 print("คะแนนของผู้เล่น:
+      import SwiftUI
+           
+struct GameView: View {
+    @ObservedObject var gameManager = GameManager.shared
+
+    var body: some View {
+        VStack {
+            ForEach(gameManager.players.indices, id: \.self) { index in
+                VStack(alignment: .leading) {
+                    Text("ผู้เล่น
+// ฟังก์ชั่นเริ่มเกมใหม่import SwiftUI
+                 
+struct GameView: View {
+    @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
+    @State private var timerIsActive = false
+    @State private var showTimeUpAlert = false
+    @State private var gameFinished = false
+    
+    let gameManager = GameManager()
+    
+// สร้างตัวจับเวลา
+func startTimer() {
+        if timerIsActive { return }
+        timerIsActive = true
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if self.timeRemaining > 0 {
+                self.timeRemaining -= 1
+            } else {
+                timer.invalidate()
+                self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
+            }
+        }
+    }
+    func timeUp() {
+        showTimeUpAlert = true
+        gameFinished = true
+    }
+    func finishGame() {
+        // เมื่อผู้เล่นกด "จัดเสร็จแล้ว" ให้หยุดเวลาและไปขั้นตอนถัดไป
+        timerIsActive = false
+        gameFinished = true
+    }
+    var body: some View {
+        VStack {
+            // แสดงเวลา
+            Text("เวลาที่เหลือ:
+                 
+func startNewGame() {
+    let shuffledDeck = CardDeck.allCards.shuffled() // สุ่มไพ่ทั้งหมด
+        player3Cards = Array(shuffledDeck[0..<13]) // แจกไพ่ 13 ใบให้ผู้เล่น 
+        arrangedCards = [[], [], []] // รีเซ็ตการจัดไพ่
+        timeLeft = 120 // รีเซ็ตเวลา
+        startTimer() // เริ่มจับเวลา
+    }                
+    // ฟังก์ชั่นจับเวลา
+    func startTimer() {
+        timer?.invalidate() // ยกเลิกการจับเวลาครั้งก่อน
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if timeLeft > 0 {
+                timeLeft -= 1
+            }
+        }
+    }
+    // ฟังก์ชั่นสำหรับการลากไพ่
+    struct DraggableCard: View {
+    let card: Card
+    var body: some View {
+        Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                return NSItemProvider(object: NSString(string: "
+    func onDrag(card: Card) -> some Gesture {
+        return DragGesture()
+            .onChanged { value in
+                // อัพเดตตำแหน่งขณะลาก
+            }
+            .onEnded { value in
+                // เมื่อไพ่ปล่อย ให้คำนวณตำแหน่งที่วาง
+                if value.location.y < 100 {
+                    self.arrangedCards[0].append(card)  // วางในแถวหัว
+                } else if value.location.y < 200 {
+                    self.arrangedCards[1].append(card)  // วางในแถวกลาง
+                } else {
+                    self.arrangedCards[2].append(card)  // วางในแถวท้าย
+                }
+            }
+    }
+    var body: some View {
+        VStack {
+            // แถวหัว (3 ใบ)
+            HStack {
+                ForEach(arrangedCards[0], id: \.id) { card in }
+                    Text("
+                         
+let score = evaluateHand(cards: player.hand)
+print("คะแนนของผู้เล่น:
+
+// เพิ่มปุ่มเมื่อเกมจบ
+import SwiftUI
+                     
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
+
+    var body: some View {
+        VStack {
+            Text("เกมจบแล้ว!")
+                .font(.title)
+            HStack {
+                Button("เล่นต่อ") {
+                    isGameActive = true
+                    isGameOver = false
+                    // เริ่มเกมใหม่
+                    startNewGame() // ฟังก์ชันเริ่มเกมใหม่
+                }
+                .padding()
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+
+                Button("ออกจากเกม") {
+                    isGameOver = false
+                    // ออกจากเกม
+                }
+                .padding()
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+        }
+    }
+}
+                     
+@State private var isGameOver = false
+@State private var isGameActive = true
+                     
+var body: some View {
+    VStack {
+        if isGameOver {
+            GameEndView(isGameOver: $isGameOver, isGameActive: $isGameActive)
+        } else {
+            // แสดงส่วนของเกม เช่น การเล่น การแจกไพ่
+            // เมื่อเกมจบ ก็จะเปลี่ยน `isGameOver` เป็น true
+        }
+    }
+}
+
 func evaluateHand(cards: [Card]) -> Int {
     if isRoyalFlush(cards) {
        print ("Royal Flush")
@@ -833,52 +882,3 @@ for result in results {
 let player1 = PlayerScore(playerName: "Player 1", rawScore: 11, stadium: .Rookie)
    print("
          
-// เพิ่มปุ่มเมื่อเกมจบ
-import SwiftUI
-                     
-struct GameEndView: View {
-    @Binding var isGameOver: Bool
-    @Binding var isGameActive: Bool
-
-    var body: some View {
-        VStack {
-            Text("เกมจบแล้ว!")
-                .font(.title)
-            HStack {
-                Button("เล่นต่อ") {
-                    isGameActive = true
-                    isGameOver = false
-                    // เริ่มเกมใหม่
-                    startNewGame() // ฟังก์ชันเริ่มเกมใหม่
-                }
-                .padding()
-                .background(Color.green)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-
-                Button("ออกจากเกม") {
-                    isGameOver = false
-                    // ออกจากเกม
-                }
-                .padding()
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-            }
-        }
-    }
-}
-                     
-@State private var isGameOver = false
-@State private var isGameActive = true
-                     
-var body: some View {
-    VStack {
-        if isGameOver {
-            GameEndView(isGameOver: $isGameOver, isGameActive: $isGameActive)
-        } else {
-            // แสดงส่วนของเกม เช่น การเล่น การแจกไพ่
-            // เมื่อเกมจบ ก็จะเปลี่ยน `isGameOver` เป็น true
-        }
-    }
-}
