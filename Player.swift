@@ -207,3 +207,29 @@ func playerBet(player: inout Player, betAmount: Int, pot: inout Int) {
     if player.bet(amount: betAmount, pot: &pot) {
         print("ผู้เล่น
             
+struct Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var lastBonusDate: Date?
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000
+        self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
+    }
+
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return // รับแล้ววันนี้
+        }
+        chips += 5000
+        lastBonusDate = Date()
+        print("
