@@ -99,7 +99,7 @@ enum Rank: Int, CaseIterable, Comparable {
         case .jack: return "J"
         case .queen: return "Q"
         case .king: return "K"
-        default: return "
+        default: return*****"
 
 extension Card {
     func description() -> String {
