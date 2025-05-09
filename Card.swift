@@ -85,6 +85,6 @@ enum Rank: Int, CaseIterable, Comparable {
 
 *******extension Card {
     func description() -> String {
-        return "
+        return " Noturn
 
 
