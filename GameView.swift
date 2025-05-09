@@ -437,56 +437,6 @@ struct GameView: View {
                 // แสดงเวลา
                 Text("เวลาที่เหลือ:
                      
-// เพิ่มปุ่มเมื่อเกมจบ
-import SwiftUI
-                     
-struct GameEndView: View {
-    @Binding var isGameOver: Bool
-    @Binding var isGameActive: Bool
-
-    var body: some View {
-        VStack {
-            Text("เกมจบแล้ว!")
-                .font(.title)
-            HStack {
-                Button("เล่นต่อ") {
-                    isGameActive = true
-                    isGameOver = false
-                    // เริ่มเกมใหม่
-                    startNewGame() // ฟังก์ชันเริ่มเกมใหม่
-                }
-                .padding()
-                .background(Color.green)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-
-                Button("ออกจากเกม") {
-                    isGameOver = false
-                    // ออกจากเกม
-                }
-                .padding()
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-            }
-        }
-    }
-}
-                     
-@State private var isGameOver = false
-@State private var isGameActive = true
-                     
-var body: some View {
-    VStack {
-        if isGameOver {
-            GameEndView(isGameOver: $isGameOver, isGameActive: $isGameActive)
-        } else {
-            // แสดงส่วนของเกม เช่น การเล่น การแจกไพ่
-            // เมื่อเกมจบ ก็จะเปลี่ยน `isGameOver` เป็น true
-        }
-    }
-}
-                     
 import SwiftUI
 
 struct GameView: View {
@@ -883,3 +833,52 @@ for result in results {
 let player1 = PlayerScore(playerName: "Player 1", rawScore: 11, stadium: .Rookie)
    print("
          
+// เพิ่มปุ่มเมื่อเกมจบ
+import SwiftUI
+                     
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
+
+    var body: some View {
+        VStack {
+            Text("เกมจบแล้ว!")
+                .font(.title)
+            HStack {
+                Button("เล่นต่อ") {
+                    isGameActive = true
+                    isGameOver = false
+                    // เริ่มเกมใหม่
+                    startNewGame() // ฟังก์ชันเริ่มเกมใหม่
+                }
+                .padding()
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+
+                Button("ออกจากเกม") {
+                    isGameOver = false
+                    // ออกจากเกม
+                }
+                .padding()
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+        }
+    }
+}
+                     
+@State private var isGameOver = false
+@State private var isGameActive = true
+                     
+var body: some View {
+    VStack {
+        if isGameOver {
+            GameEndView(isGameOver: $isGameOver, isGameActive: $isGameActive)
+        } else {
+            // แสดงส่วนของเกม เช่น การเล่น การแจกไพ่
+            // เมื่อเกมจบ ก็จะเปลี่ยน `isGameOver` เป็น true
+        }
+    }
+}
