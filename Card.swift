@@ -84,7 +84,7 @@ enum Rank: Int, CaseIterable, Comparable {
 
 // Card.swift
 
-Stop*enum Suit: String {
+*/Stop/*enum Suit: String {
     case hearts = "♥", diamonds = "♦", clubs = "♣", spades = "♠"
 }
 
