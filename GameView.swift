@@ -51,6 +51,133 @@ struct Card: Identifiable, Equatable {
     var description: String {
         return "
 
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+
+    var body: some View {
+        VStack {
+            Text("Game: 3กอง")
+                .font(.largeTitle)
+                .padding()
+
+            if !gameStarted {
+                Button("เริ่มเกม") {
+                    gameLogic.startNewGame()
+                    gameStarted = true
+                    startTimer()
+                }
+                .padding()
+            }
+
+            if gameStarted && isGameActive {
+                Text("เวลาที่เหลือ: \(timeRemaining) วินาที")
+                    .font(.headline)
+
+                ForEach(gameLogic.players, id: \.\u0000name) { player in
+                    VStack(alignment: .leading) {
+                        Text(player.name)
+                            .font(.title2)
+                            .padding(.bottom, 4)
+
+                        ScrollView(.horizontal) {
+                            HStack {
+                                ForEach(player.hand, id: \.self) { card in
+                                    DraggableCard(card: card)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.bottom)
+                }
+
+                Button("Done") {
+                    finishGame()
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+
+            if isGameOver {
+                GameEndView(isGameOver: $isGameOver, isGameActive: $isGameActive)
+            }
+        }
+        .onDisappear {
+            timer?.invalidate()
+        }
+    }
+
+    func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            } else {
+                timer?.invalidate()
+                finishGame()
+            }
+        }
+    }
+
+    func finishGame() {
+        timer?.invalidate()
+        isGameOver = true
+        isGameActive = false
+    }
+}
+
+struct DraggableCard: View {
+    let card: Card
+    var body: some View {
+        Text(card.display)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                return NSItemProvider(object: NSString(string: card.display))
+            }
+    }
+}
+
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
+
+    var body: some View {
+        VStack {
+            Text("เกมจบแล้ว!")
+                .font(.title)
+            HStack {
+                Button("เล่นต่อ") {
+                    isGameActive = true
+                    isGameOver = false
+                }
+                .padding()
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+
+                Button("ออกจากเกม") {
+                    isGameOver = false
+                }
+                .padding()
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+        }
+    }
+}
+
 import Foundation
 
 enum RowPosition {
