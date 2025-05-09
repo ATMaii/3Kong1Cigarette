@@ -67,6 +67,13 @@ struct DraggableCard: View {
             .onDrag {
                 return NSItemProvider(object: NSString(string: "
       
+@StateObject var gameTimer = GameTimer()
+                 
+    var body: some View {
+        VStack {
+            // แสดงเวลาที่เหลือ
+            Text("เวลาที่เหลือ:
+
 import SwiftUI
                             
 class GameTimer: ObservableObject {
@@ -109,12 +116,7 @@ struct GameView: View {
             // แสดงเวลาที่เหลือ
             Text("Time Remaining:
 
-    @StateObject var gameTimer = GameTimer()
-                 
-    var body: some View {
-        VStack {
-            // แสดงเวลาที่เหลือ
-            Text("เวลาที่เหลือ:
+    
                  
 import SwiftUI
 
