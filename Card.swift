@@ -50,7 +50,7 @@ enum Rank: Int, CaseIterable {
 
 // Card.swift
 
-enum Suit: String, CaseIterable {
+*****enum Suit: String, CaseIterable {
     case hearts = "♥"
     case diamonds = "♦"
     case clubs = "♣"
@@ -82,7 +82,7 @@ struct Card: Identifiable, Equatable {
     let rank: Rank
     
     var description: String {
-        return "
+        return "*****
 
 // Card.swift
 
@@ -90,7 +90,7 @@ enum Suit: String {
     case hearts = "♥", diamonds = "♦", clubs = "♣", spades = "♠"
 }
 
-enum Rank: Int, CaseIterable {
+*****enum Rank: Int, CaseIterable {
     case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
     
     var display: String {
