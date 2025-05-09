@@ -320,3 +320,59 @@ struct ContentView: View {
         VStack {
             Text("Player 1 Score:
                  
+struct GameLogic {
+    
+    static func isRoyalFlush(_ hand: [Card]) -> Bool {
+        return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
+    }
+
+    static func isStraightFlush(_ hand: [Card]) -> Bool {
+        return isFlush(hand) && isStraight(hand)
+    }
+
+    static func isFourOfAKind(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(4)
+    }
+
+    static func isFullHouse(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(3) && rankCounts.values.contains(2)
+    }
+
+    static func isFullHouseOfAces(_ hand: [Card]) -> Bool {
+        let grouped = Dictionary(grouping: hand, by: { $0.rank })
+        return grouped[.ace]?.count == 3 && grouped.values.contains { $0.count == 2 }
+    }
+
+    static func isFlush(_ hand: [Card]) -> Bool {
+        return Set(hand.map { $0.suit }).count == 1
+    }
+
+    static func isStraight(_ hand: [Card]) -> Bool {
+        let sortedRanks = hand.map { $0.rank.rawValue }.sorted()
+        let lowAce = [2, 3, 4, 5, 14]
+        let highStraight = Array(sortedRanks.first!...sortedRanks.first! + hand.count - 1)
+        return sortedRanks == lowAce || sortedRanks == highStraight
+    }
+
+    static func isThreeOfAKind(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(3)
+    }
+
+    static func isTwoPair(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.filter { $0 == 2 }.count == 2
+    }
+
+    static func isPair(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(2)
+    }
+
+    static func isPairOfAces(_ hand: [Card]) -> Bool {
+        let aces = hand.filter { $0.rank == .ace }
+        return aces.count == 2
+    }
+}
