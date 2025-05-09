@@ -90,7 +90,7 @@ enum Rank: Int, CaseIterable, Comparable {
     case hearts = "♥", diamonds = "♦", clubs = "♣", spades = "♠"
 }
 
-******enum Rank: Int, CaseIterable {
+    enum Rank: Int, CaseIterable {
     case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
     
     ประกาศvar display: String {
