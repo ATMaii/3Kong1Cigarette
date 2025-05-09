@@ -24,9 +24,10 @@ enum Stadium: String, CaseIterable {
 
     var rooms: [Int] {
         switch self {
-        case .Rookie, .Beginner: return [50, 100, 200]
-        case .Amature: return [50, 100, 200, 500]
-        case .Master: return [100, 200, 500, 1_000]
+        case .Rookie, return [20, 50, 100, 200]
+        case .Beginner: return [50, 100, 200, 500]
+        case .Amature: return [100, 200, 500, 1000]
+        case .Master: return [100, 200, 500, 1000]
         }
     }
 
@@ -64,8 +65,9 @@ var multiplier: Double {
 
 var availableRooms: [Int] {
     switch self {
-    case .Rookie, .Beginner: return [50, 100, 200]
-    case .Amature: return [50, 100, 200, 500]
+    case .Rookie, return [20, 50, 100, 500]
+    case .Beginner: return [50, 100, 200, 500]
+    case .Amature: return [100, 200, 500, 1000]
     case .Master: return [100, 200, 500, 1000]
     }
 }
@@ -182,3 +184,18 @@ enum MasterRoom: String, CaseIterable {
         }
     }
 }
+
+enum Stadium: String, CaseIterable {
+    case Rookie = "Wembley"
+    case Beginner = "Maracana"
+    case Amature = "Allianz"
+    case Master = "Santiago"
+
+    var availableBets: [Int] {
+        switch self {
+        case .Rookie: return [20, 50, 100, 200]
+        case .Beginner: return [50, 100, 200, 500]
+        case .Amature, .Master: return [100, 200, 500, 1000]
+        }
+    }
+    }
