@@ -2,6 +2,37 @@ struct Player {
     var id: Int
     var name: String
     var chips: Int
+    var lastBonusDate: Date?
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    // Initializer สำหรับผู้เล่นใหม่
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
+        self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
+    }
+
+    // ฟังก์ชันสำหรับการเช็คโบนัสรายวัน
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return // ถ้ารับแล้ววันนี้ไม่ให้รับอีก
+        }
+        
+        // ถ้ายังไม่รับโบนัสในวันนี้ ให้เพิ่มโบนัส 5,000
+        chips += 5000
+        lastBonusDate = Date()
+        print("
+
+struct Player {
+    var id: Int
+    var name: String
+    var chips: Int
     var isActive: Bool {
         return chips > 0
     }
@@ -14,6 +45,7 @@ struct Player {
 }
 
 let newPlayer = Player(id: 101, name: "Newbie")
+
 
 struct Player {
     var hand: [Card] = []
