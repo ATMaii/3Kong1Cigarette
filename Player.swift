@@ -232,4 +232,4 @@ struct Player {
         }
         chips += 5000
         lastBonusDate = Date()
-        print("
+        print("ผู้เล่น
