@@ -35,7 +35,7 @@ struct Card: Identifiable, Equatable {
         return "
 
 
-*****struct Card {
+*struct Card {
     let suit: Suit   // ดอก (เช่น โพธิ์ดำ โพธิ์แดง ข้าวหลามตัด ดอกจิก)
     let rank: Rank   // แต้ม (เช่น 2–10, J, Q, K, A)
 }
@@ -43,14 +43,14 @@ enum Suit: String, CaseIterable {
     case hearts = "♥", diamonds = "♦", clubs = "♣", spades = "♠"
 }
 
-enum Rank: Int, CaseIterable {
+**enum Rank: Int, CaseIterable {
     case two = 2, three, four, five, six, seven, eight, nine, ten
     case jack = 11, queen, king, ace
 }
 
 // Card.swift
 
-*****enum Suit: String, CaseIterable {
+***enum Suit: String, CaseIterable {
     case hearts = "♥"
     case diamonds = "♦"
     case clubs = "♣"
@@ -76,13 +76,13 @@ enum Rank: Int, CaseIterable, Comparable {
     }
 }
 
-struct Card: Identifiable, Equatable {
+****struct Card: Identifiable, Equatable {
     let id = UUID()
     let suit: Suit
     let rank: Rank
     
     var description: String {
-        return "*****
+        return "
 
 // Card.swift
 
@@ -93,7 +93,7 @@ enum Suit: String {
 *****enum Rank: Int, CaseIterable {
     case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
     
-    var display: String {
+    *****var display: String {
         switch self {
         case .ace: return "A"
         case .jack: return "J"
@@ -107,10 +107,10 @@ extension Card {
         import UIKit
 
 // โครงสร้างของไพ่
-struct Card {
+*****struct Card {
     var rank: String  // ค่าของไพ่ (2, 3, 4, ... , A)
     var suit: String  // ชุดของไพ่ (Hearts, Spades, Diamonds, Clubs)
     
     // ฟังก์ชัน display เพื่อแสดงข้อมูลของไพ่
     func display() -> String {
-        return "*****
+        return*****"
