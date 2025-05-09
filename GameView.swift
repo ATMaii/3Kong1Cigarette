@@ -885,3 +885,6 @@ struct PlayerScore {
         rawScore * stadium.betAmount
     }
           }
+   let player1 = PlayerScore(playerName: "Player 1", rawScore: 11, stadium: .Rookie)
+   print("
+         
