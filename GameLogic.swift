@@ -166,45 +166,85 @@ private func determineWinner() {
         self.winner = winner
         print("Winner:
 
-import SwiftUI
+import Foundation
 
-struct ContentView: View {
-    @State private var player1Score = 0
-    @State private var player2Score = 0
-    @State private var player3Score = 0
-    @State private var player4Score = 0
+struct Card {
+    let rank: String  // เช่น "A", "K", "Q", "2", ...
+    let suit: String  // เช่น "♠", "♥", ...
+}
+
+struct PlayerHand {
+    let top: [Card]    // 3 ใบ
+    let middle: [Card] // 5 ใบ
+    let bottom: [Card] // 5 ใบ
+}
+
+class GameLogic {
+    var players: [PlayerHand]
     
-    // เปรียบเทียบแต่ละชั้น
-    func compareHands(_ hand1: [Card], _ hand2: [Card]) -> Int {
-        // ตัวอย่างการเปรียบเทียบไพ่
-        // แค่เปรียบเทียบจำนวนไพ่ในชุด ถ้ามีจำนวนมากกว่าชนะ
-        return (hand1.count > hand2.count) ? 1 : (hand1.count < hand2.count ? -1 : 0)
+    init(players: [PlayerHand]) {
+        self.players = players
     }
-    
-    func calculateScore(player1Top: [Card], player1Middle: [Card], player1Bottom: [Card],
-                        player2Top: [Card], player2Middle: [Card], player2Bottom: [Card],
-                        player3Top: [Card], player3Middle: [Card], player3Bottom: [Card],
-                        player4Top: [Card], player4Middle: [Card], player4Bottom: [Card]) {
+
+    func calculateScores() -> [Int] {
+        var scores = [Int](repeating: 0, count: players.count)
         
-        let score1 = compareHands(player1Top, player2Top) + compareHands(player1Middle, player2Middle) + compareHands(player1Bottom, player2Bottom)
-        let score2 = compareHands(player1Top, player3Top) + compareHands(player1Middle, player3Middle) + compareHands(player1Bottom, player3Bottom)
-        let score3 = compareHands(player1Top, player4Top) + compareHands(player1Middle, player4Middle) + compareHands(player1Bottom, player4Bottom)
+        for i in 0..<players.count {
+            for j in 0..<players.count where i != j {
+                let result = compare(players[i], players[j])
+                scores[i] += result
+            }
+        }
         
-        player1Score = score1 + score2 + score3
-        
-        let score4 = compareHands(player2Top, player3Top) + compareHands(player2Middle, player3Middle) + compareHands(player2Bottom, player3Bottom)
-        let score5 = compareHands(player2Top, player4Top) + compareHands(player2Middle, player4Middle) + compareHands(player2Bottom, player4Bottom)
-        
-        player2Score = score4 + score5
-        
-        let score6 = compareHands(player3Top, player4Top) + compareHands(player3Middle, player4Middle) + compareHands(player3Bottom, player4Bottom)
-        
-        player3Score = score6
-        
-        // คะแนนสุดท้ายของ Player 4
-        player4Score = score1 + score2 + score3 + score4 + score5 + score6
+        return scores
     }
-    
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
+
+    private func compare(_ a: PlayerHand, _ b: PlayerHand) -> Int {
+        var score = 0
+        score += compareLayer(a.top, b.top, isTop: true)
+        score += compareLayer(a.middle, b.middle, isTop: false)
+        score += compareLayer(a.bottom, b.bottom, isTop: false)
+        
+        // ตัวอย่างโบนัส: เห่า A (Full House JJJAA หรือ AAAJJ ที่ล่าง)
+        if isFullHouseWithThreeAces(a.bottom) { score += 2 }
+        if isFullHouseWithThreeAces(b.bottom) { score -= 2 }
+        
+        return score
+    }
+
+    private func compareLayer(_ a: [Card], _ b: [Card], isTop: Bool) -> Int {
+        // TODO: เปรียบเทียบมือจริงจัง เช่น คู่ vs ตอง vs high card
+        // เบื้องต้น: วัดแค่จำนวนคู่
+        let aRank = rankPower(cards: a)
+        let bRank = rankPower(cards: b)
+        return aRank == bRank ? 0 : (aRank > bRank ? 1 : -1)
+    }
+
+    private func isFullHouseWithThreeAces(_ cards: [Card]) -> Bool {
+        let ranks = cards.map { $0.rank }
+        return ranks.filter { $0 == "A" }.count >= 3
+    }
+
+    private func rankPower(cards: [Card]) -> Int {
+        // ตัวอย่าง logic ง่ายๆ ให้แต้มตามคู่/ตอง
+        var rankCount = [String: Int]()
+        for card in cards {
+            rankCount[card.rank, default: 0] += 1
+        }
+
+        let counts = rankCount.values.sorted(by: >)
+
+        switch counts {
+        case [3, 2]:
+            return 7 // Full House
+        case [3]:
+            return 6 // ตอง
+        case [2, 2]:
+            return 5 // 2 คู่
+        case [2]:
+            return 4 // 1 คู่
+        default:
+            return 1 // high card
+        }
+    }
+}
