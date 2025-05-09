@@ -755,7 +755,6 @@ func isPairOfAces(_ hand: [Card]) -> Bool {
 
 func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
     var score = 0
-
 // ตรวจสอบประเภทของมือไพ่
     if isRoyalFlush(cards) {
         score = 8 // Royal Flush
@@ -778,20 +777,21 @@ func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
     } else {
         score = 1 // High Card
     }
-
     // คูณคะแนนเมื่อชนะ 3 กอง
     if playerIndex == 0 { // สมมติว่า playerIndex 0 ชนะ 3 กอง
         score *= 2
     }
-
     // คูณคะแนนเมื่อชนะ 3 คน
     if playersCount == 3 { // สมมติว่า 3 คนชนะ
         score *= 4
     }
-
     return score
 }
-
+      
+let gameLogic = GameLogic(players: [player1, player2, player3, player4])
+let scores = gameLogic.calculateScores()
+// ใช้ scores ใน UI ต่อได้เลย เช่น แสดงผล
+      
 // ฟังก์ชันสำหรับจัดไพ่
 func shuffleAndDealCards() -> [[String]] {
     let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
@@ -866,5 +866,4 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Player 1 Score:
-
                  
