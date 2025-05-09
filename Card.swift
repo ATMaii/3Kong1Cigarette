@@ -82,35 +82,9 @@ enum Rank: Int, CaseIterable, Comparable {
     var description: String {
         return "
 
-// Card.swift
-
-*/Stop/*enum Suit: String {
-    case hearts = "♥", diamonds = "♦", clubs = "♣", spades = "♠"
-}
-
-    **enum Rank: Int, CaseIterable {
-    case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
-    
-    ***var display: String {
-        switch self {
-        case .ace: return "A"
-        case .jack: return "J"
-        case .queen: return "Q"
-        case .king: return "K"
-        default: return****"
 
 *******extension Card {
     func description() -> String {
         return "
 
-import UIKit
 
-// โครงสร้างของไพ่
-
-    *struct Card {
-    ประกาศvar rank: String  // ค่าของไพ่ (2, 3, 4, ... , A)
-    **var suit: String  // ชุดของไพ่ (Hearts, Spades, Diamonds, Clubs)
-    
-    // ฟังก์ชัน display เพื่อแสดงข้อมูลของไพ่
-    ***func display() -> String {
-        return "
