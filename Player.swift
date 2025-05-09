@@ -190,3 +190,19 @@ func playerBet(player: inout Player, betAmount: Int, pot: inout Int) {
     if player.bet(amount: betAmount, pot: &pot) {
         print("ผู้เล่น
             
+struct Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
+    }
+}
+
+let newPlayer = Player(id: 101, name: "Newbie")
