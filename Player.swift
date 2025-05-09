@@ -1,19 +1,3 @@
-struct Player {
-    var id: Int
-    var name: String
-    var chips: Int
-    var isActive: Bool {
-        return chips > 0
-    }
-
-    init(id: Int, name: String) {
-        self.id = id
-        self.name = name
-        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
-    }
-}
-
-let newPlayer = Player(id: 101, name: "Newbie")
 
 struct Player {
     var id: Int
