@@ -2,6 +2,139 @@
 
 import Foundation
 
+enum HandType: Int {
+    case highCard = 0
+    case pair = 1
+    case twoPair = 2
+    case threeOfAKind = 3
+    case straight = 4
+    case flush = 5
+    case fullHouse = 6
+    case fourOfAKind = 7
+    case straightFlush = 8
+    case royalFlush = 9
+}
+
+class ScoreCalculator {
+    
+    static func evaluateHand(hand: [Card]) -> HandType {
+        if HandEvaluator.isRoyalFlush(hand) {
+            return .royalFlush
+        } else if HandEvaluator.isStraightFlush(hand) {
+            return .straightFlush
+        } else if HandEvaluator.isFourOfAKind(hand) {
+            return .fourOfAKind
+        } else if HandEvaluator.isFullHouse(hand) {
+            return .fullHouse
+        } else if HandEvaluator.isFlush(hand) {
+            return .flush
+        } else if HandEvaluator.isStraight(hand) {
+            return .straight
+        } else if HandEvaluator.isThreeOfAKind(hand) {
+            return .threeOfAKind
+        } else if HandEvaluator.isTwoPair(hand) {
+            return .twoPair
+        } else if HandEvaluator.isPair(hand) {
+            return .pair
+        } else {
+            return .highCard
+        }
+    }
+
+    static func calculateScore(for hand: [Card]) -> Int {
+        let handType = evaluateHand(hand: hand)
+        return handType.rawValue
+    }
+}
+
+import Foundation
+
+class HandEvaluator {
+    
+    static func isRoyalFlush(_ hand: [Card]) -> Bool {
+        return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
+    }
+
+    static func isStraightFlush(_ hand: [Card]) -> Bool {
+        return isFlush(hand) && isStraight(hand)
+    }
+
+    static func isFourOfAKind(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(4)
+    }
+
+    static func isFullHouse(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(3) && rankCounts.values.contains(2)
+    }
+
+    static func isFlush(_ hand: [Card]) -> Bool {
+        return Set(hand.map { $0.suit }).count == 1
+    }
+
+    static func isStraight(_ hand: [Card]) -> Bool {
+        let sortedRanks = hand.map { $0.rank.rawValue }.sorted()
+        let lowAce = [2, 3, 4, 5, 14]
+        let highStraight = Array(sortedRanks.first!...sortedRanks.first! + hand.count - 1)
+        return sortedRanks == lowAce || sortedRanks == highStraight
+    }
+
+    static func isThreeOfAKind(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(3)
+    }
+
+    static func isTwoPair(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.filter { $0 == 2 }.count == 2
+    }
+
+    static func isPair(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(2)
+    }
+}
+
+import Foundation
+
+class GameLogic {
+    var players: [Player]
+    var deck: Deck
+
+    init(playerNames: [String]) {
+        self.players = playerNames.map { Player(name: $0) }
+        self.deck = Deck()
+    }
+
+    func startGame() {
+        deck.shuffle()
+        dealCards()
+    }
+
+    private func dealCards() {
+        for player in players {
+            player.hand = deck.drawCards(count: 13)
+            player.hand.sort {
+                if $0.rank.rawValue == $1.rank.rawValue {
+                    return $0.suit.rawValue < $1.suit.rawValue
+                }
+                return $0.rank.rawValue < $1.rank.rawValue
+            }
+        }
+    }
+
+    func determineWinner() -> Player? {
+        let highestScorePlayer = players.max { (player1, player2) -> Bool in
+            return ScoreCalculator.calculateScore(for: player1.hand) < ScoreCalculator.calculateScore(for: player2.hand)
+        }
+        return highestScorePlayer
+    }
+}
+
+
+import Foundation
+
 class GameLogic: ObservableObject {
     @Published var players: [Player]
     var deck: Deck
