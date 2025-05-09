@@ -93,18 +93,19 @@ enum Rank: Int, CaseIterable, Comparable {
 *****enum Rank: Int, CaseIterable {
     case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
     
-    *****var display: String {
+    var display: String {
         switch self {
         case .ace: return "A"
         case .jack: return "J"
         case .queen: return "Q"
         case .king: return "K"
-        default: return*****"
+        default: return "
 
-extension Card {
+****extension Card {
     func description() -> String {
         return "
-        import UIKit
+
+import UIKit
 
 // โครงสร้างของไพ่
 *****struct Card {
