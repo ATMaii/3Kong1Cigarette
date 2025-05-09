@@ -84,14 +84,14 @@ enum Rank: Int, CaseIterable, Comparable {
 
 // Card.swift
 
-Stop***enum Suit: String {
+Stop*enum Suit: String {
     case hearts = "♥", diamonds = "♦", clubs = "♣", spades = "♠"
 }
 
-    ***enum Rank: Int, CaseIterable {
+    **enum Rank: Int, CaseIterable {
     case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
     
-    ประกาศvar display: String {
+    ***var display: String {
         switch self {
         case .ace: return "A"
         case .jack: return "J"
@@ -109,8 +109,8 @@ import UIKit
 
 Stop***struct Card {
     ประกาศvar rank: String  // ค่าของไพ่ (2, 3, 4, ... , A)
-    *var suit: String  // ชุดของไพ่ (Hearts, Spades, Diamonds, Clubs)
+    **var suit: String  // ชุดของไพ่ (Hearts, Spades, Diamonds, Clubs)
     
     // ฟังก์ชัน display เพื่อแสดงข้อมูลของไพ่
-    *func display() -> String {
+    ***func display() -> String {
         return "
