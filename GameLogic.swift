@@ -248,3 +248,75 @@ class GameLogic {
         }
     }
 }
+
+func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
+    var score = 0
+// ตรวจสอบประเภทของมือไพ่
+    if isRoyalFlush(cards) {
+        score = 8 // Royal Flush
+    } else if isStraightFlush(cards) {
+        score = 7 // Straight Flush
+    } else if isFourOfAKind(cards) {
+        score = 6 // Four of a Kind
+    } else if isFullHouse(cards) {
+        score = 1 // Full House
+    } else if isFlush(cards) {
+        score = 1 // Flush
+    } else if isStraight(cards) {
+        score = 1 // Straight
+    } else if isThreeOfAKind(cards) {
+        score = 1 // Three of a Kind
+    } else if isTwoPair(cards) {
+        score = 1 // Two Pair
+    } else if isPair(cards) {
+        score = 1 // Pair
+    } else {
+        score = 1 // High Card
+    }
+    // คูณคะแนนเมื่อชนะ 3 กอง
+    if playerIndex == 0 { // สมมติว่า playerIndex 0 ชนะ 3 กอง
+        score *= 2
+    }
+    // คูณคะแนนเมื่อชนะ 3 คน
+    if playersCount == 3 { // สมมติว่า 3 คนชนะ
+        score *= 4
+    }
+    return score
+}
+      
+let gameLogic = GameLogic(players: [player1, player2, player3, player4])
+let scores = gameLogic.calculateScores()
+// ใช้ scores ใน UI ต่อได้เลย เช่น แสดงผล
+      
+// ฟังก์ชันสำหรับจัดไพ่
+func shuffleAndDealCards() -> [[String]] {
+    let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+    
+    // สุ่มไพ่
+    let shuffledCards = cards.shuffled()
+    
+    // จัดไพ่เป็นรูปแบบ 5-5-3
+    let firstRow = Array(shuffledCards[0..<3])   // แถวที่ 1
+    let secondRow = Array(shuffledCards[3..<8]) // แถวที่ 2
+    let thirdRow = Array(shuffledCards[8..<13]) // แถวที่ 3
+    
+    return [firstRow, secondRow, thirdRow]
+}
+
+// ทดสอบการจัดไพ่
+let dealtCards = shuffleAndDealCards()
+
+// แสดงผลลัพธ์
+for (index, row) in dealtCards.enumerated() {
+    print("Row
+
+import SwiftUI
+
+struct ContentView: View {
+    @State private var player1Score = 0
+    @State private var player2Score = 0
+
+    var body: some View {
+        VStack {
+            Text("Player 1 Score:
+                 
