@@ -94,10 +94,12 @@ class GameTimer: ObservableObject {
         stop()
         secondsRemaining = 120 // รีเซ็ตเวลาเป็น 120 วินาที
     }
-}           
+}
+                                                       
 import SwiftUI
 
 struct GameView: View {
+    
     @StateObject var gameTimer = GameTimer()
     
     @State private var isGameStarted = false
@@ -385,7 +387,8 @@ func startNewGame() {
                     Text("
 let score = evaluateHand(cards: player.hand)
 print("คะแนนของผู้เล่น:
-      import SwiftUI
+
+import SwiftUI
            
 struct GameView: View {
     @ObservedObject var gameManager = GameManager.shared
@@ -395,7 +398,8 @@ struct GameView: View {
             ForEach(gameManager.players.indices, id: \.self) { index in
                 VStack(alignment: .leading) {
                     Text("ผู้เล่น
-// ฟังก์ชั่นเริ่มเกมใหม่import SwiftUI
+// ฟังก์ชั่นเริ่มเกมใหม่
+import SwiftUI
                  
 struct GameView: View {
     @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
@@ -449,16 +453,6 @@ func startNewGame() {
         }
     }
     // ฟังก์ชั่นสำหรับการลากไพ่
-    struct DraggableCard: View {
-    let card: Card
-    var body: some View {
-        Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                return NSItemProvider(object: NSString(string: "
     func onDrag(card: Card) -> some Gesture {
         return DragGesture()
             .onChanged { value in
@@ -481,9 +475,6 @@ func startNewGame() {
             HStack {
                 ForEach(arrangedCards[0], id: \.id) { card in }
                     Text("
-                         
-let score = evaluateHand(cards: player.hand)
-print("คะแนนของผู้เล่น:
 
 // เพิ่มปุ่มเมื่อเกมจบ
 import SwiftUI
@@ -519,8 +510,7 @@ struct GameEndView: View {
             }
         }
     }
-}
-                     
+}                
 @State private var isGameOver = false
 @State private var isGameActive = true
                      
@@ -534,7 +524,9 @@ var body: some View {
         }
     }
 }
-
+                         
+let score = evaluateHand(cards: player.hand)
+print("คะแนนของผู้เล่น:
 func evaluateHand(cards: [Card]) -> Int {
     if isRoyalFlush(cards) {
        print ("Royal Flush")
