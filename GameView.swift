@@ -875,16 +875,7 @@ let results = ScoreManager.calculateMoneyScores(from: rawScores, stadium: stadiu
                  
 for result in results {
     print("Player
-
-struct PlayerScore {
-    let playerName: String
-    let rawScore: Int
-    let stadium: Stadium
-
-    var totalWinnings: Int {
-        rawScore * stadium.betAmount
-    }
-          }
-   let player1 = PlayerScore(playerName: "Player 1", rawScore: 11, stadium: .Rookie)
+          
+let player1 = PlayerScore(playerName: "Player 1", rawScore: 11, stadium: .Rookie)
    print("
          
