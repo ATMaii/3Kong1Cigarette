@@ -1,3 +1,56 @@
+// MARK: - Models
+
+enum Suit: String, CaseIterable { ... }
+
+enum Rank: Int, CaseIterable, Comparable { ... }
+
+struct Card: Identifiable, Equatable { ... }
+
+// MARK: - GameView
+
+struct GameView: View {
+    ...
+}
+
+import SwiftUI
+import Foundation
+
+// MARK: - Card Model
+
+enum Suit: String, CaseIterable {
+    case hearts = "♥"
+    case diamonds = "♦"
+    case clubs = "♣"
+    case spades = "♠"
+}
+
+enum Rank: Int, CaseIterable, Comparable {
+    case two = 2, three, four, five, six, seven, eight, nine, ten
+    case jack = 11, queen, king, ace = 14
+
+    var display: String {
+        switch self {
+        case .jack: return "J"
+        case .queen: return "Q"
+        case .king: return "K"
+        case .ace: return "A"
+        default: return String(self.rawValue)
+        }
+    }
+
+    static func < (lhs: Rank, rhs: Rank) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
+
+struct Card: Identifiable, Equatable {
+    let id = UUID()
+    let suit: Suit
+    let rank: Rank
+
+    var description: String {
+        return "
+
 import Foundation
 
 enum RowPosition {
@@ -135,313 +188,6 @@ let results = ScoreManager.calculateMoneyScores(from: rawScores, stadium: stadiu
 
 
 
--Stopimport SwiftUI
-
-struct GameView: View {
-    var arena: String
-
-    var body: some View {
-        VStack {
-            Text("Welcome to
-                 
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-
-            // ปุ่มเริ่มเกม
-            Button("เริ่มเกม") {
-                gameLogic.startNewGame()
-                gameStarted = true
-            }
-            .padding()
-
-            // ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น
-            if gameStarted {
-                // Loop ผ่านผู้เล่นแต่ละคนเพื่อแสดงมือไพ่
-                ForEach(gameLogic.players, id: \.name) { player in
-                    VStack(alignment: .leading) {
-                        Text(player.name)
-                            .font(.title2)
-                            .padding(.bottom, 4)
-
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(player.hand, id: \.self) { card in
-                                    Text(card.description())
-                                        .frame(width: 40)
-                                        .padding(4)
-                                        .background(Color.white)
-                                        .cornerRadius(4)
-                                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))
-                                }
-                            }
-                        }
-                    }
-                    .padding(.bottom)
-                }
-            }
-        }
-    }
-}
-
-struct DraggableCard: View {
-    let card: Card
-    var body: some View {
-        Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                return NSItemProvider(object: NSString(string: "
-      
-@StateObject var gameTimer = GameTimer()
-                 
-    var body: some View {
-        VStack {
-            // แสดงเวลาที่เหลือ
-            Text("เวลาที่เหลือ:
-
-import SwiftUI
-                            
-class GameTimer: ObservableObject {
-    @Published var secondsRemaining: Int = 120 // เปลี่ยนเป็น 120 วินาที
-    var timer: Timer?
-    var isRunning = false
-
-    func start() {
-        if isRunning { return } // ห้ามเริ่มใหม่ถ้ากำลังจับเวลาอยู่
-        isRunning = true
-        secondsRemaining = 120 // รีเซ็ตเวลาให้กลับไปที่ 120 วินาที
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if self.secondsRemaining > 0 {
-                self.secondsRemaining -= 1
-            } else {
-                self.stop() // หยุดเวลาเมื่อหมดเวลา
-            }
-        }
-    }
-    func stop() {
-        timer?.invalidate() // หยุดจับเวลา
-        isRunning = false
-    }
-    func reset() {
-        stop()
-        secondsRemaining = 120 // รีเซ็ตเวลาเป็น 120 วินาที
-    }
-}
-                                                       
-import SwiftUI
-
-struct GameView: View {
-    
-    @StateObject var gameTimer = GameTimer()
-    
-    @State private var isGameStarted = false
-    
-    var body: some View {
-        VStack {
-            // แสดงเวลาที่เหลือ
-            Text("Time Remaining:
-
-    
-                 
-import SwiftUI
-
-struct GameView: View {
-    @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
-    @State private var timerIsActive = false
-    @State private var showTimeUpAlert = false
-    @State private var gameFinished = false
-    @State private var winner: String = ""
-    @State private var scores: [String: Int] = [:]  // สร้าง dictionary เก็บคะแนนของผู้เล่น
-    
-    let gameManager = GameManager()
-
-    // ฟังก์ชั่นเริ่มนับเวลา
-    func startTimer() {
-        if timerIsActive { return }
-        timerIsActive = true
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
-            } else {
-                timer.invalidate()
-                self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
-            }
-        }
-    }
-    // ฟังก์ชั่นเมื่อเวลาหมด
-    func timeUp() {
-        showTimeUpAlert = true
-        gameFinished = true
-        calculateScores()  // คำนวณคะแนนหลังเวลาหมด
-    }
-    // ฟังก์ชั่นเมื่อผู้เล่นกด "จัดเสร็จแล้ว"
-    func finishGame() {
-        timerIsActive = false
-        gameFinished = true
-        calculateScores()  // คำนวณคะแนนหลังจากผู้เล่นกดจัดเสร็จแล้ว
-    }
-    // ฟังก์ชั่นคำนวณคะแนน
-    func calculateScores() {
-        // คำนวณคะแนนของผู้เล่น (ตัวอย่างง่าย ๆ)
-        // สมมุติว่าเกมนี้คำนวณคะแนนเป็นการสุ่ม
-        scores = ["Player 1": Int.random(in: 0...100),
-                  "Player 2": Int.random(in: 0...100),
-                  "Player 3": Int.random(in: 0...100),
-                  "Player 4": Int.random(in: 0...100)]
-        // หาผู้ชนะ
-        if let winnerPlayer = scores.max(by: { $0.value < $1.value }) {
-            winner = winnerPlayer.key
-        }
-    }
-    var body: some View {
-        VStack {
-            if !gameFinished {
-                // แสดงเวลา
-                Text("เวลาที่เหลือ:
-                     
-import SwiftUI
-
-struct GameView: View {
-    @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
-    @State private var timerIsActive = false
-    @State private var showTimeUpAlert = false
-    @State private var gameFinished = false
-    @State private var winner: String = ""
-    @State private var scores: [String: Int] = [:]  // สร้าง dictionary เก็บคะแนนของผู้เล่น
-    
-let gameManager = GameManager()
-
-    // ฟังก์ชั่นเริ่มนับเวลา
-    func startTimer() {
-        if timerIsActive { return }
-        timerIsActive = true
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
-            } else {
-                timer.invalidate()
-                self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
-            }
-        }
-    }
-    // ฟังก์ชั่นเมื่อเวลาหมด
-    func timeUp() {
-        showTimeUpAlert = true
-        gameFinished = true
-        calculateScores()  // คำนวณคะแนนหลังเวลาหมด
-    }
-    // ฟังก์ชั่นเมื่อผู้เล่นกด "จัดเสร็จแล้ว"
-    func finishGame() {
-        timerIsActive = false
-        gameFinished = true
-        calculateScores()  // คำนวณคะแนนหลังจากผู้เล่นกดจัดเสร็จแล้ว
-    }
-    // ฟังก์ชั่นคำนวณคะแนน
-    func calculateScores() {
-        // คำนวณคะแนนของผู้เล่น (ตัวอย่างง่าย ๆ)
-        // สมมุติว่าเกมนี้คำนวณคะแนนเป็นการสุ่ม
-        scores = ["Player 1": Int.random(in: 0...100),
-                  "Player 2": Int.random(in: 0...100),
-                  "Player 3": Int.random(in: 0...100),
-                  "Player 4": Int.random(in: 0...100)]
-        // หาผู้ชนะ
-        if let winnerPlayer = scores.max(by: { $0.value < $1.value }) {
-            winner = winnerPlayer.key
-        }
-    }
-    var body: some View {
-        VStack {
-            if !gameFinished {
-                // แสดงเวลา
-                Text("เวลาที่เหลือ:
-import SwiftUI
-
-struct GameView: View {
-    @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
-    @State private var timerIsActive = false
-    @State private var showTimeUpAlert = false
-    @State private var gameFinished = false
-    @State private var winner: String = ""
-    @State private var scores: [String: Int] = [:]  // สร้าง dictionary เก็บคะแนนของผู้เล่น
-    
-    let gameManager = GameManager()
-    
-    // สร้างตัวจับเวลา
-    func startTimer() {
-        if timerIsActive { return }
-        timerIsActive = true
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
-            } else {
-                timer.invalidate()
-                self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
-            }
-        }
-    }
-    func timeUp() {
-        showTimeUpAlert = true
-        gameFinished = true
-        calculateScores()  // คำนวณคะแนนหลังเวลาหมด
-    }
-    func finishGame() {
-        // เมื่อผู้เล่นกด "จัดเสร็จแล้ว" ให้หยุดเวลาและไปขั้นตอนถัดไป
-        timerIsActive = false
-        gameFinished = true
-        calculateScores()  // คำนวณคะแนนหลังจากผู้เล่นกดจัดเสร็จแล้ว
-    }
-    // ฟังก์ชั่นคำนวณคะแนน
-    func calculateScores() {
-        // คำนวณคะแนนของผู้เล่น (ตัวอย่างง่าย ๆ)
-        // สมมุติว่าเกมนี้คำนวณคะแนนเป็นการสุ่ม
-        scores = ["Player 1": Int.random(in: 0...100),
-                  "Player 2": Int.random(in: 0...100),
-                  "Player 3": Int.random(in: 0...100),
-                  "Player 4": Int.random(in: 0...100)]
-        // หาผู้ชนะ
-        if let winnerPlayer = scores.max(by: { $0.value < $1.value }) {
-            winner = winnerPlayer.key
-        }
-    }
-    var body: some View {
-        VStack {
-            // แสดงเวลา
-            Text("เวลาที่เหลือ:
-
-import SwiftUI
-
-struct GameView: View {
-    @State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
-    @State private var timerIsActive = false
-    @State private var showTimeUpAlert = false
-    @State private var gameFinished = false
-    @State private var winner: String = ""
-    @State private var scores: [String: Int] = [:]  // สร้าง dictionary เก็บคะแนนของผู้เล่น
-    
-    let gameManager = GameManager()
-
-    // ฟังก์ชั่นเริ่มนับเวลา
-    func startTimer() {
-        if timerIsActive { return }
-        timerIsActive = true
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
-            } else {
-                timer.invalidate()
-                self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
-            }
         }
     }
     // ฟังก์ชั่นเมื่อเวลาหมด
@@ -741,274 +487,4 @@ func checkResult() {
     // แสดงผลคะแนน
     print("Top Score:
 
-// ตัวอย่างการคำนวณคะแนนในกรณีที่ผู้เล่นชนะ
-let score = calculateScore(cards: player.hand)
-func calculateScore(hand: [Card], isWinner: Bool) -> Int {
-    let handRank = evaluateHand(cards: hand) // ใช้ evaluateHand ที่เราทำไปก่อนหน้านี้
-    let baseScore = handRank * 100 // สมมุติว่า 1 คะแนน = 100
-// ถ้าผู้เล่นชนะ
-    if isWinner {
-        return baseScore * 1 // คูณคะแนน 1 เท่าถ้าชนะ
-    } else {
-        return baseScore
-    }
-}
-func calculateScore(hand: [Card], isWinner: Bool, isWinnerForAllHands: Bool) -> Int {
-    let handRank = evaluateHand(cards: hand) // ใช้ evaluateHand ที่เราทำไปก่อนหน้านี้
-    let baseScore = handRank * 100 // สมมุติว่า 1 คะแนน = 100
 
-    // ถ้าผู้เล่นชนะทั้ง 3 กอง
-    if isWinnerForAllHands {
-        return baseScore * 2 // คูณคะแนน 2 เท่าถ้าชนะทั้ง 3 กอง
-    } else if isWinner {
-        return baseScore * 2 // คูณคะแนน 2 เท่าถ้าชนะ
-    } else {
-        return baseScore
-    }
-}
-          let playerHand: [Card] = ... // มือไพ่ของผู้เล่น
-          let isWinnerForAllHands = true // สมมุติว่าผู้เล่นชนะทั้ง 3 กอง
-          let isWinner = true // สมมุติว่าผู้เล่นชนะในกองของตัวเอง
-
-          let finalScore = calculateScore(hand: playerHand, isWinner: isWinner, isWinnerForAllHands: isWinnerForAllHands)
-
-func calculateScoreForAllHands(playerHands: [[Card]], winningHands: [Bool]) -> Int {
-    var totalScore = 0
-    var totalWins = 0
-    
-    // เปรียบเทียบไพ่ในแต่ละกอง
-    for (index, hand) in playerHands.enumerated() {
-        let handRank = evaluateHand(cards: hand) // ฟังก์ชันที่ใช้ประเมินมือไพ่
-        let baseScore = handRank * 100 // คะแนนพื้นฐาน (สามารถปรับให้เป็นตัวเลขที่ต้องการ)
-        
-        // เช็คว่าชนะในกองนี้หรือไม่
-        if winningHands[index] {
-            totalScore += baseScore
-            totalWins += 1
-        }
-    }
-    
-    // ถ้าชนะทั้ง 3 ขา (หมายถึง totalWins = 3)
-    if totalWins == 3 {
-        return totalScore * 4 // คูณ 4 เมื่อชนะทั้งหมด
-    } else {
-        return totalScore
-    }
-}
-let playerHands = [
-    [Card(rank: .five, suit: .hearts), Card(rank: .three, suit: .spades), Card(rank: .nine, suit: .diamonds)], // ท้าย
-    [Card(rank: .jack, suit: .hearts), Card(rank: .king, suit: .clubs), Card(rank: .ace, suit: .spades)], // กลาง
-    [Card(rank: .queen, suit: .hearts), Card(rank: .seven, suit: .diamonds), Card(rank: .four, suit: .spades)] // หัว
-]
-let winningHands = [true, true, true] // สมมุติว่าผู้เล่นชนะทั้ง 3 กอง
-let finalScore = calculateScoreForAllHands(playerHands: playerHands, winningHands: winningHands)
-print("Total score:
-
-let score = evaluateHand(cards: player.hand, playerIndex: 0, playersCount: 3)     
-func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
-    var score = 0
-
-    if isRoyalFlush(hand) {
-        score = 8
-        if row == .middle { score *= 2 }
-    } else if isStraightFlush(hand) {
-        score = 7
-        if row == .middle { score *= 2 }
-    } else if isFourOfAKind(hand) {
-        score = 6
-        if row == .middle { score *= 2 }
-    } else if isFullHouse(hand) {
-        score = 1
-        if row == .middle { score *= 2 }
-    } else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
-        score = 1
-    }
-    if row == .head {
-        if isThreeOfAKind(hand) {
-            score = 5 // หัวตอง
-        } else if isPairOfAces(hand) {
-            score = 2 // หัวคู่ A
-        }
-    }
-    return score
-}
-let playerHand = [/* ชุดไพ่ของผู้เล่น */]
-let score = calculateHandScore(hand: playerHand, row: .head) // หรือ .middle / .tail
-let playerHand = [/* ชุดไพ่ของผู้เล่น */]
-let isHeadRow = true // หรือ false ขึ้นอยู่กับว่าเป็นแถวไหน
-let score = calculateHandScore(hand: playerHand, isHeadRow: isHeadRow)   
-
-// ฟังก์ชันตรวจสอบว่าเป็นหัวคู่ A หรือไม่
-func isPairOfAces(hand: [Card]) -> Bool {
-    // ตรวจสอบว่ามีไพ่ A 2 ใบหรือไม่
-    let aceCards = hand.filter { $0.rank == .ace }
-    return aceCards.count == 2
-}
-// ฟังก์ชันตรวจสอบว่าเป็นหัวตองหรือไม่
-func isThreeOfAKind(hand: [Card]) -> Bool {
-    let groupedByRank = Dictionary(grouping: hand, by: { $0.rank })
-    return groupedByRank.values.contains { $0.count == 3 }
-}
-func isRoyalFlush(_ hand: [Card]) -> Bool {
-    return isStraightFlush(hand) && hand.contains(where: { $0.rank == .ace })
-}
-func isStraightFlush(_ hand: [Card]) -> Bool {
-    return isFlush(hand) && isStraight(hand)
-}
-func isFourOfAKind(_ hand: [Card]) -> Bool {
-    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-    return rankCounts.values.contains(4)
-}
-func isFullHouse(_ hand: [Card]) -> Bool {
-    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-    return rankCounts.values.contains(3) && rankCounts.values.contains(2)
-}
-func isFlush(_ hand: [Card]) -> Bool {
-    return Set(hand.map { $0.suit }).count == 1
-}
-func isStraight(_ hand: [Card]) -> Bool {
-    let sortedRanks = hand.map { $0.rank.rawValue }.sorted()
-    let lowAce = [1, 2, 3, 4, 5]
-    let highStraight = Array(sortedRanks.first!...sortedRanks.first! + hand.count - 1)
-    return sortedRanks == lowAce || sortedRanks == highStraight
-}
-func isThreeOfAKind(_ hand: [Card]) -> Bool {
-    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-    return rankCounts.values.contains(3)
-}
-func isPair(_ hand: [Card]) -> Bool {
-    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-    return rankCounts.values.contains(2)
-}
-
-func isPairOfAces(_ hand: [Card]) -> Bool {
-    let aces = hand.filter { $0.rank == .ace }
-    return aces.count == 2
-}
-
-func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
-    var score = 0
-// ตรวจสอบประเภทของมือไพ่
-    if isRoyalFlush(cards) {
-        score = 8 // Royal Flush
-    } else if isStraightFlush(cards) {
-        score = 7 // Straight Flush
-    } else if isFourOfAKind(cards) {
-        score = 6 // Four of a Kind
-    } else if isFullHouse(cards) {
-        score = 1 // Full House
-    } else if isFlush(cards) {
-        score = 1 // Flush
-    } else if isStraight(cards) {
-        score = 1 // Straight
-    } else if isThreeOfAKind(cards) {
-        score = 1 // Three of a Kind
-    } else if isTwoPair(cards) {
-        score = 1 // Two Pair
-    } else if isPair(cards) {
-        score = 1 // Pair
-    } else {
-        score = 1 // High Card
-    }
-    // คูณคะแนนเมื่อชนะ 3 กอง
-    if playerIndex == 0 { // สมมติว่า playerIndex 0 ชนะ 3 กอง
-        score *= 2
-    }
-    // คูณคะแนนเมื่อชนะ 3 คน
-    if playersCount == 3 { // สมมติว่า 3 คนชนะ
-        score *= 4
-    }
-    return score
-}
-      
-let gameLogic = GameLogic(players: [player1, player2, player3, player4])
-let scores = gameLogic.calculateScores()
-// ใช้ scores ใน UI ต่อได้เลย เช่น แสดงผล
-      
-// ฟังก์ชันสำหรับจัดไพ่
-func shuffleAndDealCards() -> [[String]] {
-    let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-    
-    // สุ่มไพ่
-    let shuffledCards = cards.shuffled()
-    
-    // จัดไพ่เป็นรูปแบบ 5-5-3
-    let firstRow = Array(shuffledCards[0..<3])   // แถวที่ 1
-    let secondRow = Array(shuffledCards[3..<8]) // แถวที่ 2
-    let thirdRow = Array(shuffledCards[8..<13]) // แถวที่ 3
-    
-    return [firstRow, secondRow, thirdRow]
-}
-
-// ทดสอบการจัดไพ่
-let dealtCards = shuffleAndDealCards()
-
-// แสดงผลลัพธ์
-for (index, row) in dealtCards.enumerated() {
-    print("Row
-
-import SwiftUI
-
-struct ContentView: View {
-    @State private var player1Score = 0
-    @State private var player2Score = 0
-
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
-                 
-import SwiftUI
-
-struct ContentView: View {
-    @State private var player1Score = 0
-    @State private var player2Score = 0
-    @State private var player3Score = 0
-    @State private var player4Score = 0
-    
-    // เปรียบเทียบแต่ละชั้น
-    func compareHands(_ hand1: [Card], _ hand2: [Card]) -> Int {
-        // ตัวอย่างการเปรียบเทียบไพ่
-        // แค่เปรียบเทียบจำนวนไพ่ในชุด ถ้ามีจำนวนมากกว่าชนะ
-        return (hand1.count > hand2.count) ? 1 : (hand1.count < hand2.count ? -1 : 0)
-    }
-    
-    func calculateScore(player1Top: [Card], player1Middle: [Card], player1Bottom: [Card],
-                        player2Top: [Card], player2Middle: [Card], player2Bottom: [Card],
-                        player3Top: [Card], player3Middle: [Card], player3Bottom: [Card],
-                        player4Top: [Card], player4Middle: [Card], player4Bottom: [Card]) {
-        
-        let score1 = compareHands(player1Top, player2Top) + compareHands(player1Middle, player2Middle) + compareHands(player1Bottom, player2Bottom)
-        let score2 = compareHands(player1Top, player3Top) + compareHands(player1Middle, player3Middle) + compareHands(player1Bottom, player3Bottom)
-        let score3 = compareHands(player1Top, player4Top) + compareHands(player1Middle, player4Middle) + compareHands(player1Bottom, player4Bottom)
-        
-        player1Score = score1 + score2 + score3
-        
-        let score4 = compareHands(player2Top, player3Top) + compareHands(player2Middle, player3Middle) + compareHands(player2Bottom, player3Bottom)
-        let score5 = compareHands(player2Top, player4Top) + compareHands(player2Middle, player4Middle) + compareHands(player2Bottom, player4Bottom)
-        
-        player2Score = score4 + score5
-        
-        let score6 = compareHands(player3Top, player4Top) + compareHands(player3Middle, player4Middle) + compareHands(player3Bottom, player4Bottom)
-        
-        player3Score = score6
-        
-        // คะแนนสุดท้ายของ Player 4
-        player4Score = score1 + score2 + score3 + score4 + score5 + score6
-    }
-    
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
-                 
-let rawScores = [11, -7, -15, 11]
-let stadium: Stadium = .Rookie
-let selectedBet = 50
-
-let results = ScoreManager.calculateMoneyScores(from: rawScores, stadium: stadium, selectedBet: selectedBet)
-                 
-for result in results {
-    print("Player
-          
-let player1 = PlayerScore(playerName: "Player 1", rawScore: 11, stadium: .Rookie)
-   print("
-         
