@@ -867,9 +867,6 @@ struct ContentView: View {
         VStack {
             Text("Player 1 Score:
                  
-let gameLogic = GameLogic(players: [player1, player2, player3, player4])
-let scores = gameLogic.calculateScores()
-                 
 let rawScores = [11, -7, -15, 11]
 let stadium: Stadium = .Rookie
 let selectedBet = 50
