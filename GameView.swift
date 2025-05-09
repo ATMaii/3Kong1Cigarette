@@ -403,3 +403,36 @@ func totalScore(for player: Player) -> Int {
     return topScore + middleScore + bottomScore
 }
 
+struct Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var isActive: Bool {
+        return chips > 0
+    }
+}
+
+class GameSession {
+    var players: [Player]
+    var minimumChipsToPlay: Int
+
+    init(players: [Player], minimumChipsToPlay: Int = 10) {
+        self.players = players
+        self.minimumChipsToPlay = minimumChipsToPlay
+    }
+
+    func prepareNextRound() {
+        // ตรวจสอบสถานะผู้เล่น
+        for (index, player) in players.enumerated() {
+            if player.chips < minimumChipsToPlay {
+                print("Player
+
+func prepareNextRound() {
+    // ตรวจสอบสถานะผู้เล่น
+    players = players.filter { $0.isActive }
+
+    if players.count < 2 {
+        print("Not enough players to continue.")
+        // อาจแสดงผล Game Over หรือรอเพิ่มผู้เล่น
+    } else {
+        print("Starting next round with
