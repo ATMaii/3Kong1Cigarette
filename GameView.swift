@@ -758,23 +758,23 @@ func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
 
 // ตรวจสอบประเภทของมือไพ่
     if isRoyalFlush(cards) {
-        score = 10 // Royal Flush
+        score = 8 // Royal Flush
     } else if isStraightFlush(cards) {
-        score = 9 // Straight Flush
+        score = 7 // Straight Flush
     } else if isFourOfAKind(cards) {
-        score = 8 // Four of a Kind
+        score = 6 // Four of a Kind
     } else if isFullHouse(cards) {
-        score = 7 // Full House
+        score = 1 // Full House
     } else if isFlush(cards) {
-        score = 6 // Flush
+        score = 1 // Flush
     } else if isStraight(cards) {
-        score = 5 // Straight
+        score = 1 // Straight
     } else if isThreeOfAKind(cards) {
-        score = 4 // Three of a Kind
+        score = 1 // Three of a Kind
     } else if isTwoPair(cards) {
-        score = 3 // Two Pair
+        score = 1 // Two Pair
     } else if isPair(cards) {
-        score = 2 // Pair
+        score = 1 // Pair
     } else {
         score = 1 // High Card
     }
