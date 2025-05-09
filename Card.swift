@@ -97,7 +97,7 @@ Stop*enum Suit: String {
         case .jack: return "J"
         case .queen: return "Q"
         case .king: return "K"
-        default: return "
+        default: return****"
 
 *******extension Card {
     func description() -> String {
@@ -107,7 +107,7 @@ import UIKit
 
 // โครงสร้างของไพ่
 
-Stop***struct Card {
+    *struct Card {
     ประกาศvar rank: String  // ค่าของไพ่ (2, 3, 4, ... , A)
     **var suit: String  // ชุดของไพ่ (Hearts, Spades, Diamonds, Clubs)
     
