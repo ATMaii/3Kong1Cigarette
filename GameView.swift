@@ -792,3 +792,24 @@ func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
     return score
 }
 
+// ฟังก์ชันสำหรับจัดไพ่
+func shuffleAndDealCards() -> [[String]] {
+    let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+    
+    // สุ่มไพ่
+    let shuffledCards = cards.shuffled()
+    
+    // จัดไพ่เป็นรูปแบบ 5-5-3
+    let firstRow = Array(shuffledCards[0..<3])   // แถวที่ 1
+    let secondRow = Array(shuffledCards[3..<8]) // แถวที่ 2
+    let thirdRow = Array(shuffledCards[8..<13]) // แถวที่ 3
+    
+    return [firstRow, secondRow, thirdRow]
+}
+
+// ทดสอบการจัดไพ่
+let dealtCards = shuffleAndDealCards()
+
+// แสดงผลลัพธ์
+for (index, row) in dealtCards.enumerated() {
+    print("Row
