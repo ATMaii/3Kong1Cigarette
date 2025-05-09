@@ -220,7 +220,7 @@ struct Player {
     init(id: Int, name: String) {
         self.id = id
         self.name = name
-        self.chips = 5000
+        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
         self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
     }
 
@@ -228,8 +228,8 @@ struct Player {
         let calendar = Calendar.current
         if let lastDate = lastBonusDate,
            calendar.isDateInToday(lastDate) {
-            return // รับแล้ววันนี้
+            return // ถ้ารับแล้ววันนี้ไม่ให้รับโบนัสอีก
         }
-        chips += 5000
-        lastBonusDate = Date()
-        print("ผู้เล่น
+        chips += 5000 // เพิ่มชิป 5,000
+        lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
+        print("
