@@ -48,9 +48,7 @@ enum Suit: String, CaseIterable {
     case jack = 11, queen, king, ace
 }
 
-// Card.swift
-
-***enum Suit: String, CaseIterable {
+// Card.swift***enum Suit: String, CaseIterable {
     case hearts = "♥"
     case diamonds = "♦"
     case clubs = "♣"
@@ -86,7 +84,7 @@ enum Rank: Int, CaseIterable, Comparable {
 
 // Card.swift
 
-***enum Suit: String {
+Stop***enum Suit: String {
     case hearts = "♥", diamonds = "♦", clubs = "♣", spades = "♠"
 }
 
@@ -108,7 +106,8 @@ enum Rank: Int, CaseIterable, Comparable {
 import UIKit
 
 // โครงสร้างของไพ่
-***struct Card {
+
+Stop***struct Card {
     ประกาศvar rank: String  // ค่าของไพ่ (2, 3, 4, ... , A)
     *var suit: String  // ชุดของไพ่ (Hearts, Spades, Diamonds, Clubs)
     
