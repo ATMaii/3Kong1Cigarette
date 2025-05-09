@@ -358,4 +358,48 @@ func totalChipsEarned(rawScore: Int, chipMultiplier: Int) -> Int {
     return rawScore * chipMultiplier
 }
     
+// MARK: - Score Result & Chip Settlement
+
+func checkResult(for players: inout [Player]) {
+    for index in players.indices {
+        let topScore = calculateHandScore(hand: players[index].arrangedCards[0], row: .head)
+        let middleScore = calculateHandScore(hand: players[index].arrangedCards[1], row: .middle)
+        let bottomScore = calculateHandScore(hand: players[index].arrangedCards[2], row: .tail)
+        let totalScore = topScore + middleScore + bottomScore
+
+        print("Player \(players[index].id) Scores")
+        print("Top Score: \(topScore)")
+        print("Middle Score: \(middleScore)")
+        print("Bottom Score: \(bottomScore)")
+        print("Total Score: \(totalScore)\n")
+    }
+}
+
+func settleChips(players: inout [Player]) {
+    for i in 0..<players.count {
+        for j in (i+1)..<players.count {
+            let scoreI = totalScore(for: players[i])
+            let scoreJ = totalScore(for: players[j])
+
+            if scoreI > scoreJ {
+                players[i].chips += 1
+                players[j].chips -= 1
+            } else if scoreI < scoreJ {
+                players[i].chips -= 1
+                players[j].chips += 1
+            }
+        }
+    }
+
+    for player in players {
+        print("Player \(player.id) - Chips: \(player.chips)")
+    }
+}
+
+func totalScore(for player: Player) -> Int {
+    let topScore = calculateHandScore(hand: player.arrangedCards[0], row: .head)
+    let middleScore = calculateHandScore(hand: player.arrangedCards[1], row: .middle)
+    let bottomScore = calculateHandScore(hand: player.arrangedCards[2], row: .tail)
+    return topScore + middleScore + bottomScore
+}
 
