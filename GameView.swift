@@ -819,6 +819,16 @@ import SwiftUI
 struct ContentView: View {
     @State private var player1Score = 0
     @State private var player2Score = 0
+
+    var body: some View {
+        VStack {
+            Text("Player 1 Score:
+                 
+import SwiftUI
+
+struct ContentView: View {
+    @State private var player1Score = 0
+    @State private var player2Score = 0
     @State private var player3Score = 0
     @State private var player4Score = 0
     
