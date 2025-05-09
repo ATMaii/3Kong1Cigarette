@@ -866,4 +866,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Player 1 Score:
+
+let rawScores = [11, -7, -15, 11]
+let stadium: Stadium = .Rookie
+let selectedBet = 50
+
+let results = ScoreManager.calculateMoneyScores(from: rawScores, stadium: stadium, selectedBet: selectedBet)
+
+for result in results {
+    print("Player
                  
