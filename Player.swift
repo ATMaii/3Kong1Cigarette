@@ -45,7 +45,7 @@ struct Player {
         }
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("
+        print("game.pot"
 
 // Player.swift
 
