@@ -27,3 +27,8 @@ struct LoginView: View {
             switch result {
             case .success(_, _, let token):
                 print("Logged in with token:
+
+let request = GraphRequest(graphPath: "me", parameters: ["fields": "name"], tokenString: tokenString, version: nil, httpMethod: .get)
+request.start { _, result, error in
+    if let error = error {
+        print("Graph Request Failed:
