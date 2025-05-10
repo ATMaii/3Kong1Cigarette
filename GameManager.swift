@@ -55,8 +55,8 @@ class GameManager: ObservableObject {
     }
 
     func startGame() {
-        // สร้างผู้เล่นใหม่
-        let names = ["ผู้เล่น 1", "ผู้เล่น 2", "ผู้เล่น 3", "ผู้เล่น 4"]
+        // สร้างNewPlayer
+        let names = ["player1", "player2", "player3", "player4"]
         players = names.enumerated().map { index, name in Player(id: index + 1, name: name) }
 
         // สร้างและสับไพ่
