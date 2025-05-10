@@ -111,12 +111,11 @@ var body: some View {
                     ScrollView(.horizontal) {  
                         HStack {  
                             ForEach(player.hand, id: \.self) { card in  
-                                Text(card.description())  
-                                    .frame(width: 40)  
-                                    .padding(4)  
-                                    .background(Color.white)  
-                                    .cornerRadius(4)  
-                                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))  
+                                Text(card.description())
+.frame(width: 40)  
+.padding(4)  
+                   .background(Color.white)  
+                                    .cornerRadius(4)  .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))  
                             }  
                         }  
                     }  
@@ -139,10 +138,13 @@ var body: some View {
             VStack(alignment: .leading) {  
                 Text("ผู้เล่น
 
-// ฟังก์ชั่นเริ่มเกมใหม่import SwiftUI
+// ฟังก์ชั่นเริ่มเกมใหม่
+
+import SwiftUI
 
 struct GameView: View {
-@State private var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
+@State private
+var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
 @State private var timerIsActive = false
 @State private var showTimeUpAlert = false
 @State private var gameFinished = false
@@ -150,6 +152,7 @@ struct GameView: View {
 let gameManager = GameManager()
 
 // สร้างตัวจับเวลา
+
 func startTimer() {
 if timerIsActive { return }
 timerIsActive = true
@@ -161,12 +164,14 @@ timer.invalidate()
 self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
 }
 }
-}
+             }
+
 func timeUp() {
 showTimeUpAlert = true
 gameFinished = true
 }
 func finishGame() {
+
 // เมื่อผู้เล่นกด "จัดเสร็จแล้ว" ให้หยุดเวลาและไปขั้นตอนถัดไป
 timerIsActive = false
 gameFinished = true
@@ -175,6 +180,7 @@ var body: some View {
 VStack {
 // แสดงเวลา
 Text("เวลาที่เหลือ:
+
 func startNewGame() {
 let shuffledDeck = CardDeck.allCards.shuffled() // สุ่มไพ่ทั้งหมด
 player3Cards = Array(shuffledDeck[0..<13]) // แจกไพ่ 13 ใบให้ผู้เล่น
@@ -191,7 +197,9 @@ timeLeft -= 1
 }
 }
 }
+
 // ฟังก์ชั่นสำหรับการลากไพ่
+
 struct DraggableCard: View {
 let card: Card
 var body: some View {
@@ -201,7 +209,9 @@ Text(card.display) // สมมุติว่าคุณมี display สำ�
 .cornerRadius(8)
 .shadow(radius: 2)
 .onDrag {
-return NSItemProvider(object: NSString(string: "
+
+return NSItemProvider(object: NSString
+(string: "
 func onDrag(card: Card) -> some Gesture {
 return DragGesture()
 .onChanged { value in
@@ -209,6 +219,7 @@ return DragGesture()
 }
 .onEnded { value in
 // เมื่อไพ่ปล่อย ให้คำนวณตำแหน่งที่วาง
+
 if value.location.y < 100 {
 self.arrangedCards[0].append(card)  // วางในแถวหัว
 } else if value.location.y < 200 {
@@ -218,6 +229,7 @@ self.arrangedCards[2].append(card)  // วางในแถวท้าย
 }
 }
 }
+
 var body: some View {
 VStack {
 // แถวหัว (3 ใบ)
@@ -231,13 +243,16 @@ print("คะแนนของผู้เล่น:
 struct DraggableCard: View {
 let card: Card
 var body: some View {
-Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
+Text(card.display) 
+
+// สมมุติว่าคุณมี display สำหรับ Card
 .padding()
 .background(Color.white)
 .cornerRadius(8)
 .shadow(radius: 2)
 .onDrag {
-return NSItemProvider(object: NSString(string: "
+return NSItemProvider(object: NSString
+(string: "
 
 
 import SwiftUI
