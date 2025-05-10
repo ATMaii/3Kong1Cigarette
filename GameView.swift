@@ -220,7 +220,45 @@ struct DraggableCard: View {
             .shadow(radius: 2)
     }
 }
+import SwiftUI
 
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack {
+            Text("Game: 3กอง")
+                .font(.largeTitle)
+                .padding()
+
+            if !gameStarted {
+                Button("เริ่มเกม") {
+                    gameLogic.startNewGame()
+                    gameStarted = true
+                    startTimer()
+                }
+                .padding()
+            }
+
+            if gameStarted && isGameActive {
+                let player3 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
+
+                VStack {
+                    // Top bar
+                    HStack {
+                        Button("Exit") {
+                            // ออกจากเกม
+                        }
+                        Spacer()
+                        Text("Player 1")
+                        Spacer()
+                        Text("Time:
+                             
 import SwiftUI
 
 struct GameView: View {
@@ -347,6 +385,43 @@ struct GameEndView: View {
         }
     }
 }
+                             import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack {
+            // Top Bar
+            HStack {
+                Button("Exit") {
+                    // ออกเกม
+                }
+                Spacer()
+                Text("Player 1")
+                Spacer()
+                Text("Time:
+
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
+    let onPlayAgain: () -> Void
+    let onExit: () -> Void
+
+    @State private var autoStartCountdown = 10
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("เกมจบแล้ว!")
+                .font(.title)
+
+            Text("เริ่มเกมใหม่ใน
 
 import Foundation
 
