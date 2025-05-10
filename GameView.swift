@@ -58,6 +58,25 @@ struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
     @State private var timeRemaining = 120
+    @State private var timerIsActive = false
+    @State private var showTimeUpAlert = false
+
+    var body: some View {
+        VStack {
+            Text("Game: ไพ่ 13 ใบ - 3 กอง")
+                .font(.largeTitle)
+                .padding()
+
+            // แสดงเวลา
+            if gameStarted {
+                Text("เวลาที่เหลือ:
+
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var timeRemaining = 120
     @State private var timer: Timer?
     @State private var isGameOver = false
     @State private var isGameActive = true
