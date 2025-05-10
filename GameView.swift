@@ -341,7 +341,43 @@ struct GameView: View {
         isGameActive = false
     }
 }
+import SwiftUI
 
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack {
+            // Top Bar
+            HStack {
+                Button("Exit") {
+                    // ออกเกม
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
+    let onPlayAgain: () -> Void
+    let onExit: () -> Void
+
+    @State private var autoStartCountdown = 10
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("เกมจบแล้ว!")
+                .font(.title)
+
+            Text("เริ่มเกมใหม่ใน
+                 
+                }
+                Spacer()
+                Text("Player 1")
+                Spacer()
+                Text("Time:
                              
 struct DraggableCard: View {
     let card: Card
@@ -386,44 +422,6 @@ struct GameEndView: View {
         }
     }
 }
-
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            // Top Bar
-            HStack {
-                Button("Exit") {
-                    // ออกเกม
-struct GameEndView: View {
-    @Binding var isGameOver: Bool
-    @Binding var isGameActive: Bool
-    let onPlayAgain: () -> Void
-    let onExit: () -> Void
-
-    @State private var autoStartCountdown = 10
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("เกมจบแล้ว!")
-                .font(.title)
-
-            Text("เริ่มเกมใหม่ใน
-                 
-                }
-                Spacer()
-                Text("Player 1")
-                Spacer()
-                Text("Time:
 
 
                  
