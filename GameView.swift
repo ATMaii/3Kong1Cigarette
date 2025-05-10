@@ -385,7 +385,8 @@ struct GameEndView: View {
         }
     }
 }
-                             import SwiftUI
+
+import SwiftUI
 
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
