@@ -184,8 +184,8 @@ private func determineWinner() {
 
 import Foundation
 
-struct Card {
-    let rank: Inti  // เช่น "A", "K", "Q", "2", ...
+struct Card { 
+    let rank: String  // เช่น "A", "K", "Q", "2", ...
     let suit: String  // เช่น "♠", "♥", ...
 }
 
