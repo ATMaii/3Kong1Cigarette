@@ -200,18 +200,23 @@ timeLeft -= 1
 
 // ฟังก์ชั่นสำหรับการลากไพ่
 
-struct DraggableCard: View {
-let card: Card
-var body: some View {
-Text(card.display) // สมมุติว่าคุณมี display สำหรับ Card
-.padding()
-.background(Color.white)
-.cornerRadius(8)
-.shadow(radius: 2)
-.onDrag {
+import SwiftUI
 
-return NSItemProvider(object: NSString
-(string: "
+struct DraggableCard: View {
+    let card: Card
+
+    var body: some View {
+        Text(card.display) // display คือ String แสดงหน้าไพ่ เช่น "A♠️"
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                return NSItemProvider(object: NSString(string: card.display))
+            }
+    }
+}
+
 func onDrag(card: Card) -> some Gesture {
 return DragGesture()
 .onChanged { value in
