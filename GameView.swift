@@ -220,6 +220,22 @@ struct DraggableCard: View {
             .shadow(radius: 2)
     }
 }
+
+struct DraggableCard: View {
+    let card: Card
+    
+    var body: some View {
+        Text(card.display)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                return NSItemProvider(object: NSString(string: card.display))
+            }
+    }
+                     }
+                     
 import SwiftUI
 
 struct GameView: View {
@@ -357,6 +373,7 @@ struct GameView: View {
             HStack {
                 Button("Exit") {
                     // ออกเกม
+                    
 struct GameEndView: View {
     @Binding var isGameOver: Bool
     @Binding var isGameActive: Bool
@@ -378,20 +395,6 @@ struct GameEndView: View {
                 Text("Player 1")
                 Spacer()
                 Text("Time:
-                             
-struct DraggableCard: View {
-    let card: Card
-    var body: some View {
-        Text(card.display)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                return NSItemProvider(object: NSString(string: card.display))
-            }
-    }
-}
 
 struct GameEndView: View {
     @Binding var isGameOver: Bool
