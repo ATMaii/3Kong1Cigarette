@@ -1,6 +1,4 @@
 
-
-
 // MARK: - Models
 
 enum Suit: String, CaseIterable { ... }
@@ -439,3 +437,257 @@ func prepareNextRound() {
         // อาจแสดงผล Game Over หรือรอเพิ่มผู้เล่น
     } else {
         print("Starting next round with
+
+import Foundation
+
+enum RowPosition {
+    case head, middle, tail
+}
+
+struct Card: Equatable {
+    enum Suit: String, CaseIterable {
+        case hearts, diamonds, clubs, spades
+    }
+
+    enum Rank: Int, Comparable, CaseIterable {
+        case two = 2, three, four, five, six, seven, eight, nine, ten
+        case jack = 11, queen, king, ace = 14
+
+        static func < (lhs: Rank, rhs: Rank) -> Bool {
+            return lhs.rawValue < rhs.rawValue
+        }
+    }
+
+    let rank: Rank
+    let suit: Suit
+}
+
+struct Player {
+    let id: Int
+    var arrangedCards: [[Card]]
+    var chips: Int = 0
+}
+
+// MARK: - Evaluation Functions
+
+func isRoyalFlush(_ hand: [Card]) -> Bool {
+    return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
+}
+
+func isStraightFlush(_ hand: [Card]) -> Bool {
+    return isFlush(hand) && isStraight(hand)
+}
+
+func isFourOfAKind(_ hand: [Card]) -> Bool {
+    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+    return rankCounts.values.contains(4)
+}
+
+func isFullHouse(_ hand: [Card]) -> Bool {
+    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+    return rankCounts.values.contains(3) && rankCounts.values.contains(2)
+}
+
+func isFullHouseOfAces(_ hand: [Card]) -> Bool {
+    let grouped = Dictionary(grouping: hand, by: { $0.rank })
+    return grouped[.ace]?.count == 3 && grouped.values.contains { $0.count == 2 }
+}
+
+func isFlush(_ hand: [Card]) -> Bool {
+    return Set(hand.map { $0.suit }).count == 1
+}
+
+func isStraight(_ hand: [Card]) -> Bool {
+    let sortedRanks = hand.map { $0.rank.rawValue }.sorted()
+    let lowAce = [2, 3, 4, 5, 14] // Ace low straight
+    let highStraight = Array(sortedRanks.first!...sortedRanks.first! + hand.count - 1)
+    return sortedRanks == lowAce || sortedRanks == highStraight
+}
+
+func isThreeOfAKind(_ hand: [Card]) -> Bool {
+    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+    return rankCounts.values.contains(3)
+}
+
+func isTwoPair(_ hand: [Card]) -> Bool {
+    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+    return rankCounts.values.filter { $0 == 2 }.count == 2
+}
+
+func isPair(_ hand: [Card]) -> Bool {
+    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+    return rankCounts.values.contains(2)
+}
+
+func isPairOfAces(_ hand: [Card]) -> Bool {
+    let aces = hand.filter { $0.rank == .ace }
+    return aces.count == 2
+}
+
+// MARK: - Score Calculation
+
+func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
+    var score = 0
+
+    if isRoyalFlush(hand) {
+        score = 8
+        if row == .middle { score *= 2 }
+    } else if isStraightFlush(hand) {
+        score = 7
+        if row == .middle { score *= 2 }
+    } else if isFourOfAKind(hand) {
+        score = 6
+        if row == .middle { score *= 2 }
+    } else if isFullHouseOfAces(hand) {
+        score = 2
+        if row == .middle { score *= 2 }
+    } else if isFullHouse(hand) {
+        score = 1
+        if row == .middle { score *= 2 }
+    } else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
+        score = 1
+    }
+
+    if row == .head {
+        if isThreeOfAKind(hand) {
+            score = 5 // หัวตอง
+        } else if isPairOfAces(hand) {
+            score = 2 // หัวคู่ A
+        }
+    }
+
+    return score
+}
+
+// MARK: - Score Result & Chip Settlement
+
+func checkResult(for players: inout [Player]) {
+    for index in players.indices {
+        let topScore = calculateHandScore(hand: players[index].arrangedCards[0], row: .head)
+        let middleScore = calculateHandScore(hand: players[index].arrangedCards[1], row: .middle)
+        let bottomScore = calculateHandScore(hand: players[index].arrangedCards[2], row: .tail)
+        let totalScore = topScore + middleScore + bottomScore
+
+        print("Player \(players[index].id) Scores")
+        print("Top Score: \(topScore)")
+        print("Middle Score: \(middleScore)")
+        print("Bottom Score: \(bottomScore)")
+        print("Total Score: \(totalScore)\n")
+    }
+}
+
+func settleChips(players: inout [Player]) {
+    for i in 0..<players.count {
+        for j in (i+1)..<players.count {
+            let scoreI = totalScore(for: players[i])
+            let scoreJ = totalScore(for: players[j])
+
+            if scoreI > scoreJ {
+                players[i].chips += 1
+                players[j].chips -= 1
+            } else if scoreI < scoreJ {
+                players[i].chips -= 1
+                players[j].chips += 1
+            }
+        }
+    }
+
+    for player in players {
+        print("Player \(player.id) - Chips: \(player.chips)")
+    }
+}
+
+func totalScore(for player: Player) -> Int {
+    let topScore = calculateHandScore(hand: player.arrangedCards[0], row: .head)
+    let middleScore = calculateHandScore(hand: player.arrangedCards[1], row: .middle)
+    let bottomScore = calculateHandScore(hand: player.arrangedCards[2], row: .tail)
+    return topScore + middleScore + bottomScore
+}
+
+import Foundation
+
+enum RowPosition { case head, middle, tail }
+
+struct Card: Equatable { enum Suit: String, CaseIterable { case hearts, diamonds, clubs, spades }
+
+enum Rank: Int, Comparable, CaseIterable {
+    case two = 2, three, four, five, six, seven, eight, nine, ten
+    case jack = 11, queen, king, ace = 14
+
+    static func < (lhs: Rank, rhs: Rank) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
+
+let rank: Rank
+let suit: Suit
+
+}
+
+struct Player { let id: Int var arrangedCards: [[Card]] var chips: Int = 0 }
+
+// MARK: - Evaluation Functions
+
+func isRoyalFlush(_ hand: [Card]) -> Bool { return isStraightFlush(hand) && hand.contains { $0.rank == .ace } }
+
+func isStraightFlush(_ hand: [Card]) -> Bool { return isFlush(hand) && isStraight(hand) }
+
+func isFourOfAKind(_ hand: [Card]) -> Bool { let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count } return rankCounts.values.contains(4) }
+
+func isFullHouse(_ hand: [Card]) -> Bool { let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count } return rankCounts.values.contains(3) && rankCounts.values.contains(2) }
+
+func isFullHouseOfAces(_ hand: [Card]) -> Bool { let grouped = Dictionary(grouping: hand, by: { $0.rank }) return grouped[.ace]?.count == 3 && grouped.values.contains { $0.count == 2 } }
+
+func isFlush(_ hand: [Card]) -> Bool { return Set(hand.map { $0.suit }).count == 1 }
+
+func isStraight(_ hand: [Card]) -> Bool { let sortedRanks = hand.map { $0.rank.rawValue }.sorted() let lowAce = [2, 3, 4, 5, 14] // Ace low straight let highStraight = Array(sortedRanks.first!...sortedRanks.first! + hand.count - 1) return sortedRanks == lowAce || sortedRanks == highStraight }
+
+func isThreeOfAKind(_ hand: [Card]) -> Bool { let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count } return rankCounts.values.contains(3) }
+
+func isTwoPair(_ hand: [Card]) -> Bool { let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count } return rankCounts.values.filter { $0 == 2 }.count == 2 }
+
+func isPair(_ hand: [Card]) -> Bool { let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count } return rankCounts.values.contains(2) }
+
+func isPairOfAces(_ hand: [Card]) -> Bool { let aces = hand.filter { $0.rank == .ace } return aces.count == 2 }
+
+// MARK: - Score Calculation
+
+func calculateHandScore(hand: [Card], row: RowPosition) -> Int { var score = 0
+
+if isRoyalFlush(hand) {
+    score = 8
+    if row == .middle { score *= 2 }
+} else if isStraightFlush(hand) {
+    score = 7
+    if row == .middle { score *= 2 }
+} else if isFourOfAKind(hand) {
+    score = 6
+    if row == .middle { score *= 2 }
+} else if isFullHouseOfAces(hand) {
+    score = 2
+    if row == .middle { score *= 2 }
+} else if isFullHouse(hand) {
+    score = 1
+    if row == .middle { score *= 2 }
+} else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
+    score = 1
+}
+
+if row == .head {
+    if isThreeOfAKind(hand) {
+        score = 5 // หัวตอง
+    } else if isPairOfAces(hand) {
+        score = 2 // หัวคู่ A
+    }
+}
+
+return score
+
+}
+
+// MARK: - Score Result & Chip Settlement
+
+func checkResult(for players: inout [Player]) { for index in players.indices { let topScore = calculateHandScore(hand: players[index].arrangedCards[0], row: .head) let middleScore = calculateHandScore(hand: players[index].arrangedCards[1], row: .middle) let bottomScore = calculateHandScore(hand: players[index].arrangedCards[2], row: .tail) let totalScore = topScore + middleScore + bottomScore
+
+print("Player
+
