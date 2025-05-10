@@ -908,3 +908,13 @@ func evaluateHand(cards: [Card]) -> Int {
     // ใช้เงื่อนไขต่างๆ ในการประเมินมือไพ่
     return 0 // เปลี่ยนค่ากลับตามการเปรียบเทียบ
 }
+
+func prepareNextRound() {
+    // ตรวจสอบสถานะผู้เล่น
+    players = players.filter { $0.isActive }
+
+    if players.count < 2 {
+        print("Not enough players to continue.")
+        // อาจแสดงผล Game Over หรือรอเพิ่มผู้เล่น
+    } else {
+        print("Starting next round with
