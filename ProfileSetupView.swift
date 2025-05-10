@@ -12,12 +12,7 @@ struct ProfileSetupView: View {
                 .font(.title2)
                 .bold()
 
-let request = GraphRequest(graphPath: "me", parameters: ["fields": "name"], tokenString: tokenString, version: nil, httpMethod: .get)
-request.start { _, result, error in
-    if let error = error {
-        print("Graph Request Failed:
-
-            TextField("ชื่อเล่น", text: $nickname)
+       TextField("ชื่อเล่น", text: $nickname)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
 
@@ -28,6 +23,11 @@ request.start { _, result, error in
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal)
+
+let request = GraphRequest(graphPath: "me", parameters: ["fields": "name"], tokenString: tokenString, version: nil, httpMethod: .get)
+request.start { _, result, error in
+    if let error = error {
+        print("Graph Request Failed:
 
             Button("บันทึก") {
                 // คุณสามารถส่ง nickname และ gender ไปบันทึกได้ที่นี่
