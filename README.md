@@ -40,7 +40,6 @@ func settleChips(players: inout [Player]) {
     }
 }
 
-
 let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
     return rankCounts.values.contains(4)
 }
@@ -115,15 +114,4 @@ struct ContentView: View {
         VStack {
             Text("Player 1 Score:
                  
-let rawScores = [11, -7, -15, 11]
-let stadium: Stadium = .Rookie
-let selectedBet = 50
-
-let results = ScoreManager.calculateMoneyScores(from: rawScores, stadium: stadium, selectedBet: selectedBet)
-                 
-for result in results {
-    print("Player
-          
-let player1 = PlayerScore(playerName: "Player 1", rawScore: 11, stadium: .Rookie)
-   print("
          
