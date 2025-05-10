@@ -138,127 +138,92 @@ var body: some View {
             VStack(alignment: .leading) {  
                 Text("ผู้เล่น
 
-// ฟังก์ชั่นเริ่มเกมใหม่
-
 import SwiftUI
 
 struct GameView: View {
-@State private
-var timeRemaining = 120 // ตั้งเวลาเริ่มต้นเป็น 120 วินาที
-@State private var timerIsActive = false
-@State private var showTimeUpAlert = false
-@State private var gameFinished = false
-
-let gameManager = GameManager()
-
-// สร้างตัวจับเวลา
-
-func startTimer() {
-if timerIsActive { return }
-timerIsActive = true
-Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-if self.timeRemaining > 0 {
-self.timeRemaining -= 1
-} else {
-timer.invalidate()
-self.timeUp() // เรียกฟังก์ชั่นเมื่อเวลาหมด
-}
-}
-             }
-
-func timeUp() {
-showTimeUpAlert = true
-gameFinished = true
-}
-func finishGame() {
-
-// เมื่อผู้เล่นกด "จัดเสร็จแล้ว" ให้หยุดเวลาและไปขั้นตอนถัดไป
-timerIsActive = false
-gameFinished = true
-}
-var body: some View {
-VStack {
-// แสดงเวลา
-Text("เวลาที่เหลือ:
-
-func startNewGame() {
-let shuffledDeck = CardDeck.allCards.shuffled() // สุ่มไพ่ทั้งหมด
-player3Cards = Array(shuffledDeck[0..<13]) // แจกไพ่ 13 ใบให้ผู้เล่น
-arrangedCards = [[], [], []] // รีเซ็ตการจัดไพ่
-timeLeft = 120 // รีเซ็ตเวลา
-startTimer() // เริ่มจับเวลา
-}
-// ฟังก์ชั่นจับเวลา
-func startTimer() {
-timer?.invalidate() // ยกเลิกการจับเวลาครั้งก่อน
-timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-if timeLeft > 0 {
-timeLeft -= 1
-}
-}
-}
-
-// ฟังก์ชั่นสำหรับการลากไพ่
-
-import SwiftUI
-
-struct DraggableCard: View {
-    let card: Card
+    @State private var playerCards: [Card] = Card.sample13Cards()
+    @State private var arrangedCards: [[Card]] = [[], [], []] // หัว, กลาง, ท้าย
 
     var body: some View {
-        Text(card.display) // display คือ String แสดงหน้าไพ่ เช่น "A♠️"
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                return NSItemProvider(object: NSString(string: card.display))
+        VStack(spacing: 40) {
+            // แถวหัว
+            CardRowView(title: "หัว", cards: arrangedCards[0])
+
+            // แถวกลาง
+            CardRowView(title: "กลาง", cards: arrangedCards[1])
+
+            // แถวท้าย
+            CardRowView(title: "ท้าย", cards: arrangedCards[2])
+
+            Divider()
+
+            // ไพ่ในมือ (ลากได้)
+            Text("ไพ่ของคุณ")
+                .font(.headline)
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(playerCards, id: \.id) { card in
+                        DraggableCard(card: card)
+                            .gesture(dragGesture(for: card))
+                    }
+                }
+                .padding()
+            }
+        }
+        .padding()
+    }
+
+    private func dragGesture(for card: Card) -> some Gesture {
+        DragGesture()
+            .onEnded { value in
+                let y = value.location.y
+                if y < 200 {
+                    arrangedCards[0].append(card) // หัว
+                } else if y < 400 {
+                    arrangedCards[1].append(card) // กลาง
+                } else {
+                    arrangedCards[2].append(card) // ท้าย
+                }
+                // ลบออกจากมือ
+                playerCards.removeAll { $0.id == card.id }
             }
     }
 }
 
-func onDrag(card: Card) -> some Gesture {
-return DragGesture()
-.onChanged { value in
-// อัพเดตตำแหน่งขณะลาก
-}
-.onEnded { value in
-// เมื่อไพ่ปล่อย ให้คำนวณตำแหน่งที่วาง
+// View ย่อย: แถวไพ่
+struct CardRowView: View {
+    let title: String
+    let cards: [Card]
 
-if value.location.y < 100 {
-self.arrangedCards[0].append(card)  // วางในแถวหัว
-} else if value.location.y < 200 {
-self.arrangedCards[1].append(card)  // วางในแถวกลาง
-} else {
-self.arrangedCards[2].append(card)  // วางในแถวท้าย
-}
-}
+    var body: some View {
+        VStack {
+            Text(title)
+                .font(.title2)
+            HStack {
+                ForEach(cards, id: \.id) { card in
+                    Text(card.display)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                }
+            }
+        }
+    }
 }
 
-var body: some View {
-VStack {
-// แถวหัว (3 ใบ)
-HStack {
-ForEach(arrangedCards[0], id: .id) { card in }
-Text("
-
-let score = evaluateHand(cards: player.hand)
-print("คะแนนของผู้เล่น:
-
+// View ย่อย: ไพ่ที่ลากได้
 struct DraggableCard: View {
-let card: Card
-var body: some View {
-Text(card.display) 
+    let card: Card
 
-// สมมุติว่าคุณมี display สำหรับ Card
-.padding()
-.background(Color.white)
-.cornerRadius(8)
-.shadow(radius: 2)
-.onDrag {
-return NSItemProvider(object: NSString
-(string: "
-
+    var body: some View {
+        Text(card.display)
+            .padding()
+            .background(Color.yellow)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+    }
+}
 
 import SwiftUI
 
