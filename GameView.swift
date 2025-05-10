@@ -138,6 +138,7 @@ var body: some View {
             VStack(alignment: .leading) {  
                 Text("ผู้เล่น
 
+import SwiftUI
 
 struct GameView: View {
     @State private var playerCards: [Card] = Card.sample13Cards()
