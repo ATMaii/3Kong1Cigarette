@@ -28,6 +28,21 @@ struct LoginView: View {
             case .success(_, _, let token):
                 print("Logged in with token:
 
+import SwiftUI
+import FacebookLogin
+import FacebookCore
+
+struct LoginView: View {
+    @State private var facebookName: String = ""
+
+    var body: some View {
+        VStack {
+            Button("Login with Facebook") {
+                LoginManager().logIn(permissions: ["public_profile"], from: nil) { result, error in
+                    if let error = error {
+                        print("Login failed:
+
+
 let request = GraphRequest(graphPath: "me", parameters: ["fields": "name"], tokenString: tokenString, version: nil, httpMethod: .get)
 request.start { _, result, error in
     if let error = error {
