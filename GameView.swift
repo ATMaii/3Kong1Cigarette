@@ -424,6 +424,10 @@ struct GameEndView: View {
 
             Text("เริ่มเกมใหม่ใน
 
+// ระหว่างเกม
+if gameStarted && isGameActive {
+    VStack {
+        Text("เวลาที่เหลือ:
                  
 import Foundation
 
