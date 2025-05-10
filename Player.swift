@@ -136,7 +136,7 @@ struct Game {
     var pot: Int = 0  // หม้อรวมชิป
 }
 func initializePlayers() -> [Player] {
-    let initialChips = 1000  // เริ่มต้นที่ 1000 ชิป
+    let initialChips = 5000  // เริ่มต้นที่ 5000 ชิป
     let players = [
         Player(id: 0, chips: initialChips, hands: [[]]),
         Player(id: 1, chips: initialChips, hands: [[]]),
@@ -194,7 +194,7 @@ struct Player {
     }
 }
 func initializePlayers() -> [Player] {
-    let initialChips = 1000  // เริ่มต้นที่ 1000 ชิป
+    let initialChips = 5000  // เริ่มต้นที่ 5000 ชิป
     let players = [
         Player(id: 0, chips: initialChips, hands: [[]]),
         Player(id: 1, chips: initialChips, hands: [[]]),
