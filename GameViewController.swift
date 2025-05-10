@@ -8,10 +8,10 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // เพิ่มตัวอย่างผู้เล่น
-        let player1 = Player(id: 1, name: "Left Player", chips: 10)
-        let player2 = Player(id: 2, name: "Top Player", chips: 10)
-        let player3 = Player(id: 3, name: "Right Player", chips: 10)
-        let player4 = Player(id: 4, name: "Bottom Player", chips: 10)
+        let player1 = Player(id: 1, name: "Bottom Player", chips: 10)
+        let player2 = Player(id: 2, name: "Left Player", chips: 10)
+        let player3 = Player(id: 3, name: "Top Player", chips: 10)
+        let player4 = Player(id: 4, name: "Right Player", chips: 10)
         players = [player1, player2, player3, player4]
         
         // แสดงโต๊ะ
