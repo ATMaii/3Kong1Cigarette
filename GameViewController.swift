@@ -25,21 +25,6 @@ class GameViewController: UIViewController {
         table.backgroundColor = .gray
         self.view.addSubview(table)
         
-        // เพิ่มแถว
-        let row1 = UIView()
-        row1.frame = CGRect(x: 50, y: 50, width: 300, height: 50)
-        row1.backgroundColor = .lightGray
-        table.addSubview(row1)
-        
-        let row2 = UIView()
-        row2.frame = CGRect(x: 50, y: 100, width: 300, height: 50)
-        row2.backgroundColor = .lightGray
-        table.addSubview(row2)
-        
-        let row3 = UIView()
-        row3.frame = CGRect(x: 50, y: 150, width: 300, height: 50)
-        row3.backgroundColor = .lightGray
-        table.addSubview(row3)
         
         // ตำแหน่งผู้เล่น
         let leftPlayerPosition = CGRect(x: 0, y: 150, width: 50, height: 50)
