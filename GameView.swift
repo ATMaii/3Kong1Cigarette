@@ -362,6 +362,28 @@ struct GameView: View {
 struct GameEndView: View {
     @Binding var isGameOver: Bool
     @Binding var isGameActive: Bool
+    let onPlayAgain: () -> Void
+    let onExit: () -> Void
+
+    @State private var autoStartCountdown = 10
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("เกมจบแล้ว!")
+                .font(.title)
+
+            Text("เริ่มเกมใหม่ใน
+                 
+                }
+                Spacer()
+                Text("Player 1")
+                Spacer()
+                Text("Time:
+                     
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
 
     var body: some View {
         VStack {
@@ -388,27 +410,6 @@ struct GameEndView: View {
         }
     }
 }
-                    struct GameEndView: View {
-    @Binding var isGameOver: Bool
-    @Binding var isGameActive: Bool
-    let onPlayAgain: () -> Void
-    let onExit: () -> Void
-
-    @State private var autoStartCountdown = 10
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("เกมจบแล้ว!")
-                .font(.title)
-
-            Text("เริ่มเกมใหม่ใน
-                 
-                }
-                Spacer()
-                Text("Player 1")
-                Spacer()
-                Text("Time:
                      
 struct DraggableCard: View {
     let card: Card
