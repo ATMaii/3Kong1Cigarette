@@ -20,6 +20,33 @@ struct Player {
     var hand: [Card] = []
 }
 
+struct Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var lastBonusDate: Date?
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
+        self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
+    }
+
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return // ถ้ารับแล้ววันนี้ไม่ให้รับโบนัสอีก
+        }
+        chips += 5000 // เพิ่มชิป 5,000
+        lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
+        print("
+
 // Player.swift
 
 import Foundation
