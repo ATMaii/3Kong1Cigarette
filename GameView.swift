@@ -424,6 +424,7 @@ struct GameEndView: View {
 
             Text("เริ่มเกมใหม่ใน
 
+                 
 import Foundation
 
 enum RowPosition {
