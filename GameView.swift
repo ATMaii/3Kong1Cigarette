@@ -71,51 +71,45 @@ struct GameView: View {
             if gameStarted {
                 Text("เวลาที่เหลือ:
 
-import SwiftUI
-
-struct GameView: View {
-var arena: String
-
-var body: some View {  
-    VStack {  
-        Text("Welcome to
 
 import SwiftUI
 
 struct GameView: View {
-@StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-@State private var gameStarted = false
+     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+     @State private var gameStarted = false
 
-var body: some View {  
-    VStack {  
-        Text("Game: 3กอง")  
-            .font(.largeTitle)  
-            .padding()  
+     var body: some View {  
+         VStack {  
+            Text("Game: 3กอง")  
+                .font(.largeTitle)  
+                   .padding()  
 
-        // ปุ่มเริ่มเกม  
+            // ปุ่มเริ่มเกม  
         Button("เริ่มเกม") {  
             gameLogic.startNewGame()  
             gameStarted = true  
         }  
         .padding()  
 
-        // ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น  
-        if gameStarted {  
-            // Loop ผ่านผู้เล่นแต่ละคนเพื่อแสดงมือไพ่  
-            ForEach(gameLogic.players, id: \.name) { player in  
-                VStack(alignment: .leading) {  
-                    Text(player.name)  
-                        .font(.title2)  
-                        .padding(.bottom, 4)  
+ // ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น  
+        
+if gameStarted {// Loop ผ่านผู้เล่นแต่ละคนเพื่อแสดงมือไพ่  
+ForEach(gameLogic.players, id: \.name) { player in  
+         VStack(alignment: .leading) {  
+            Text(player.name)  
+                 .font(.title2)  
+                 .padding(.bottom, 4)  
 
-                    ScrollView(.horizontal) {  
+       ScrollView(.horizontal) {  
                         HStack {  
-                            ForEach(player.hand, id: \.self) { card in  
-                                Text(card.description())
-.frame(width: 40)  
-.padding(4)  
-                   .background(Color.white)  
-                                    .cornerRadius(4)  .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))  
+                    
+       ForEach(player.hand, id: \.self) { card in  
+                   Text(card.description())
+                   .frame(width: 40)  
+          .padding(4)  
+         .background(Color.white)  
+         .cornerRadius(4)
+         .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))  
                             }  
                         }  
                     }  
@@ -127,10 +121,12 @@ var body: some View {
 }
 
 }
+
 import SwiftUI
 
-struct GameView: View {
-@ObservedObject var gameManager = GameManager.shared
+    struct GameView: View {
+@ObservedObject 
+var gameManager = GameManager.shared
 
 var body: some View {  
     VStack {  
