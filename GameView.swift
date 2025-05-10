@@ -342,6 +342,7 @@ struct GameView: View {
     }
 }
 
+                             
 struct DraggableCard: View {
     let card: Card
     var body: some View {
@@ -402,12 +403,6 @@ struct GameView: View {
             HStack {
                 Button("Exit") {
                     // ออกเกม
-                }
-                Spacer()
-                Text("Player 1")
-                Spacer()
-                Text("Time:
-
 struct GameEndView: View {
     @Binding var isGameOver: Bool
     @Binding var isGameActive: Bool
@@ -423,11 +418,14 @@ struct GameEndView: View {
                 .font(.title)
 
             Text("เริ่มเกมใหม่ใน
+                 
+                }
+                Spacer()
+                Text("Player 1")
+                Spacer()
+                Text("Time:
 
-// ระหว่างเกม
-if gameStarted && isGameActive {
-    VStack {
-        Text("เวลาที่เหลือ:
+
                  
 import Foundation
 
