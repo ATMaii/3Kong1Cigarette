@@ -21,13 +21,6 @@ struct LoginView: View {
         }
     }
 
-    func loginWithFacebook() {
-        let manager = LoginManager()
-        manager.logIn(permissions: [.publicProfile, .email], viewController: UIApplication.shared.windows.first?.rootViewController) { result in
-            switch result {
-            case .success(_, _, let token):
-                print("Logged in with token:
-
 import SwiftUI
 import FacebookLogin
 import FacebookCore
