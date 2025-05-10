@@ -43,6 +43,59 @@ class GameManager: ObservableObject {
     }
 }
 
+enum Stadium: String {
+    case wemley = "Wemley"
+    case brazil = "Brazil"
+    case allianzArena = "Allianz Arena"
+    case santiagoBernabeu = "Santiago Bernabeu"
+}
+
+class GameManager {
+    func stadiumForChips(_ chips: Int) -> Stadium? {
+        switch chips {
+        case 50_000...:
+            return .santiagoBernabeu
+        case 20_000..<50_000:
+            return .allianzArena
+        case 10_000..<20_000:
+            return .brazil
+        case 5_000..<10_000:
+            return .wemley
+        default:
+            return nil
+        }
+    }
+}
+        }
+        return nil
+    }
+}
+      let manager = GameManager()
+if let stadium = manager.stadiumForChips(player.chips) {
+    print("ผู้เล่นเข้า
+          
+class GameManager: ObservableObject {
+    var playerChips: Int = 0
+
+    func availableStadiums() -> [Stadium] {
+        return Stadium.allCases.filter { playerChips >= $0.minChipsRequired }
+    }
+
+    func stadiumForChips() -> Stadium? {
+        return Stadium.allCases.reversed().first { playerChips >= $0.minChipsRequired }
+    }
+}
+@Published var selectedStadium: Stadium? = nil
+
+
+struct Player {
+    let name: String
+    let head: [Card]
+    let middle: [Card]
+    let tail: [Card]
+}
+
+
 import Foundation
 
 class GameManager: ObservableObject {
@@ -140,13 +193,7 @@ class GameManager: ObservableObject {
         let head = Array(player.hand.suffix(3))
         return (head, middle, tail)
     }
-
-    func calculateScore(player: Player) -> Int {
-        let headScore = evaluateHand(player.head)
-        let middleScore = evaluateHand(player.middle) * 2
-        let tailScore = evaluateHand(player.tail) * 3
-        return headScore + middleScore + tailScore
-    }
+    
 
     private func evaluateHand(_ hand: [Card]) -> Int {
         // ตัวอย่าง logic เริ่มต้น: ให้แต้มตามจำนวนไพ่ (สามารถปรับให้ซับซ้อนขึ้นภายหลัง)
@@ -706,57 +753,7 @@ class GameManager {
                 return index + 1
             }
 
-enum Stadium: String {
-    case wemley = "Wemley"
-    case brazil = "Brazil"
-    case allianzArena = "Allianz Arena"
-    case santiagoBernabeu = "Santiago Bernabeu"
-}
 
-class GameManager {
-    func stadiumForChips(_ chips: Int) -> Stadium? {
-        switch chips {
-        case 50_000...:
-            return .santiagoBernabeu
-        case 20_000..<50_000:
-            return .allianzArena
-        case 10_000..<20_000:
-            return .brazil
-        case 5_000..<10_000:
-            return .wemley
-        default:
-            return nil
-        }
-    }
-}
-        }
-        return nil
-    }
-}
-      let manager = GameManager()
-if let stadium = manager.stadiumForChips(player.chips) {
-    print("ผู้เล่นเข้า
-          
-class GameManager: ObservableObject {
-    var playerChips: Int = 0
-
-    func availableStadiums() -> [Stadium] {
-        return Stadium.allCases.filter { playerChips >= $0.minChipsRequired }
-    }
-
-    func stadiumForChips() -> Stadium? {
-        return Stadium.allCases.reversed().first { playerChips >= $0.minChipsRequired }
-    }
-}
-@Published var selectedStadium: Stadium? = nil
-
-
-struct Player {
-    let name: String
-    let head: [Card]
-    let middle: [Card]
-    let tail: [Card]
-}
 
 enum HandRank: Int {
     case highCard = 1
