@@ -412,12 +412,8 @@ for (index, row) in dealtCards.enumerated() {
 
                  
 struct GameLogic {
+    
     static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
-        // เปรียบเทียบสองมือ ใครชนะ
-        // return 1 if A ชนะ, -1 if B ชนะ
-        return 0
-    }
-    }
     
     static func isRoyalFlush(_ hand: [Card]) -> Bool {
         return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
@@ -490,6 +486,10 @@ struct GameLogic {
     static func isPairOfAces(_ hand: [Card]) -> Bool {
         let aces = hand.filter { $0.rank == .ace }
         return aces.count == 2
+    }
+        // เปรียบเทียบสองมือ ใครชนะ
+        // return 1 if A ชนะ, -1 if B ชนะ
+        return 0
     }
 
     class GameLogic {
