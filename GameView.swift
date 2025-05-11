@@ -430,7 +430,36 @@ struct DraggableCard: View {
             if gameStarted && isGameActive {
                 Text("เวลาที่เหลือ:
 
+func startTimer() {
+    timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+        if timeRemaining > 0 {
+            timeRemaining -= 1
+        } else {
+            timer?.invalidate()
+            isGameActive = false
+            autoArrangeCardsIfNeeded()
+        }
+    }
+}
 
+func autoArrangeCardsIfNeeded() {
+    let player = gameLogic.players[2] // Player 3 คือตัวเรา
+    guard player.headCards.isEmpty && player.middleCards.isEmpty && player.tailCards.isEmpty else {
+        return // ผู้เล่นจัดไพ่แล้ว
+    }
+
+    // แบ่งไพ่แบบอัตโนมัติ: 5-5-3 (หัว-กลาง-ท้าย)
+    let hand = player.unarrangedCards
+    let head = Array(hand.prefix(5))
+    let middle = Array(hand.dropFirst(5).prefix(5))
+    let tail = Array(hand.suffix(from: 10))
+
+    gameLogic.players[2].headCards = head
+    gameLogic.players[2].middleCards = middle
+    gameLogic.players[2].tailCards = tail
+    gameLogic.players[2].unarrangedCards = []
+}
+                     
 import SwiftUI
 
 struct GameView: View {
