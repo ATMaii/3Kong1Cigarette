@@ -554,10 +554,9 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
             score = 2 // หัวคู่ A
         }
     }
-
     return score
 }
-
+                     
 // MARK: - Result Evaluation
 
 func checkResult() {
@@ -576,6 +575,7 @@ func checkResult() {
     print("Total Score: \(totalScore)")
 }
 
+                     
 // MARK: - Result Evaluation
 
 func checkResult(for players: inout [Player]) {
@@ -614,7 +614,6 @@ func settleChips(players: inout [Player]) {
         print("\(player.name): \(player.chips) chips")
     }
 }
-
 
 let results = ScoreManager.calculateMoneyScores(from: rawScores, stadium: stadium, selectedBet: selectedBet)
 
@@ -692,15 +691,14 @@ class GameSession {
             if player.chips < minimumChipsToPlay {
                 print("Player
 
-func prepareNextRound() {
+    func prepareNextRound() {
     // ตรวจสอบสถานะผู้เล่น
     players = players.filter { $0.isActive }
-
-    if players.count < 2 {
+           if players.count < 2 {
         print("Not enough players to continue.")
         // อาจแสดงผล Game Over หรือรอเพิ่มผู้เล่น
     } else {
-        print("Starting next round with
+        print("Starting next round with")
 
 import Foundation
 
