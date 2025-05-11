@@ -288,12 +288,6 @@ class GameLogic: ObservableObject {
 
 private func determineWinner() {
     let highestScore = players.max { $0.score < $1.score }
-    
-    if let winner = highestScore {
-        self.winner = winner
-        print("Winner:
-
-import Foundation
 
 struct Card { 
     let rank: String  // เช่น "A", "K", "Q", "2", ...
@@ -367,19 +361,17 @@ class GameLogic {
 
         switch counts {
         case [3, 2]:
-            return 7 // Full House
+            return 5 // Full House
         case [3]:
-            return 6 // ตอง
+            return 4 // ตอง
         case [2, 2]:
-            return 5 // 2 คู่
+            return 3 // 2 คู่
         case [2]:
-            return 4 // 1 คู่
+            return 2 // 1 คู่
         default:
             return 1 // high card
         }
     }
-}
-
       
 let gameLogic = GameLogic(players: [player1, player2, player3, player4])
 let scores = gameLogic.calculateScores()
@@ -387,7 +379,7 @@ let scores = gameLogic.calculateScores()
       
 // ฟังก์ชันสำหรับจัดไพ่
 func shuffleAndDealCards() -> [[String]] {
-    let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+    let cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
     
     // สุ่มไพ่
     let shuffledCards = cards.shuffled()
@@ -412,7 +404,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var player1Score = 0
     @State private var player2Score = 0
-
+    @State private var player3Score = 0
+    @State private var player4Score = 0
     var body: some View {
         VStack {
             Text("Player 1 Score:
