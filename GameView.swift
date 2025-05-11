@@ -71,9 +71,6 @@ struct GameView: View {
               if gameStarted {
                 Text("เวลาที่เหลือ:
 
-
-import SwiftUI
-
 struct GameView: View {
      @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
      @State private var gameStarted = false
@@ -152,9 +149,7 @@ ForEach(gameLogic.players, id: \.name) { player in
 
 }
 
-import SwiftUI
-
-    struct GameView: View {
+struct GameView: View {
 @ObservedObject 
 var gameManager = GameManager.shared
 
@@ -163,8 +158,6 @@ var body: some View {
         ForEach(gameManager.players.indices, id: \.self) { index in  
             VStack(alignment: .leading) {  
                 Text("ผู้เล่น
-
-import SwiftUI
 
 struct GameView: View {
     @State private var playerCards: [Card] = Card.sample13Cards()
@@ -215,7 +208,6 @@ struct GameView: View {
             }
     }
 }
-
 // View ย่อย: แถวไพ่
 struct CardRowView: View {
     let title: String
@@ -289,8 +281,6 @@ struct GameView: View {
                         Text("Player 1")
                         Spacer()
                         Text("Time:
-                             
-import SwiftUI
 
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
