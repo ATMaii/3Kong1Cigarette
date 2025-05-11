@@ -491,6 +491,75 @@ let dealtCards = shuffleAndDealCards()
 for (index, row) in dealtCards.enumerated() {
     print("Row
 
+struct GameLogic {
+
+    class GameLogic {
+    var players: [Player]
+    init(players: [Player]) {
+        self.players = players
+        }
+    }
+    // เปรียบเทียบคะแนนของผู้เล่น
+    func calculateScores() -> [Int] {
+        var scores: [Int] = []
+        for player in players {
+            let playerScore = evaluatePlayerScore(player: player)
+            scores.append(playerScore)
+        }
+        return scores
+    }
+    // คำนวณคะแนนของผู้เล่น
+    func evaluatePlayerScore(player: Player) -> Int {
+        var totalScore = 0
+        // เปรียบเทียบแต่ละกองของผู้เล่น
+        for row in RowPosition.allCases {
+            let hand = player.handForRow(row)
+            let handRank = evaluateHand(cards: hand)
+            totalScore += handRank // ปรับตามค่าที่ต้องการ เช่น คะแนนของมือ
+        }
+        return totalScore
+    }
+    // เปรียบเทียบการชนะของผู้เล่น
+    func comparePlayers() -> [Int] {
+        var scores = calculateScores()
+        var results: [Int] = []
+        for i in 0..<players.count {
+            var playerResult = 0
+            for j in 0..<players.count {
+                if i != j {
+                    let result = compareHands(player1: players[i], player2: players[j])
+                    playerResult += result
+                }
+            }
+            results.append(playerResult)
+        }
+        return results
+    }
+    // เปรียบเทียบไพ่ระหว่าง 2 ผู้เล่น
+    func compareHands(player1: Player, player2: Player) -> Int {
+        // เปรียบเทียบทุกกองที่จัดไว้
+        var result = 0
+        for row in RowPosition.allCases {
+            let hand1 = player1.handForRow(row)
+            let hand2 = player2.handForRow(row)
+            if evaluateHand(cards: hand1) > evaluateHand(cards: hand2) {
+                result += 1
+            } else if evaluateHand(cards: hand1) < evaluateHand(cards: hand2) {
+                result -= 1
+            }
+        }
+        return result
+    }
+}
+// เปลี่ยนไปใช้ RowPosition ที่แยกการจัดการมือ
+enum RowPosition: CaseIterable {
+    case head, middle, tail
+}
+// ฟังก์ชันประเมินมือไพ่
+func evaluateHand(cards: [Card]) -> Int {
+    // แสดงให้เห็นวิธีการคำนวณมือไพ่ตามประเภท เช่น Royal Flush, Straight, Pair ฯลฯ
+    // ใช้เงื่อนไขต่างๆ ในการประเมินมือไพ่
+    return 0 // เปลี่ยนค่ากลับตามการเปรียบเทียบ
 
 import Foundastruct GameLogic {
     
