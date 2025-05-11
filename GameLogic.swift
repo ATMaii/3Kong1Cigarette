@@ -484,6 +484,49 @@ func shuffleAndDealCards() -> [[String]] {
     return [firstRow, secondRow, thirdRow]
 }
 
+import SwiftUI
+
+struct ContentView: View {
+    @State private var player1Score = 0
+    @State private var player2Score = 0
+    @State private var player3Score = 0
+    @State private var player4Score = 0
+    
+    // เปรียบเทียบแต่ละชั้น
+    func compareHands(_ hand1: [Card], _ hand2: [Card]) -> Int {
+        // ตัวอย่างการเปรียบเทียบไพ่
+        // แค่เปรียบเทียบจำนวนไพ่ในชุด ถ้ามีจำนวนมากกว่าชนะ
+        return (hand1.count > hand2.count) ? 1 : (hand1.count < hand2.count ? -1 : 0)
+    }
+    
+    func calculateScore(player1Top: [Card], player1Middle: [Card], player1Bottom: [Card],
+                        player2Top: [Card], player2Middle: [Card], player2Bottom: [Card],
+                        player3Top: [Card], player3Middle: [Card], player3Bottom: [Card],
+                        player4Top: [Card], player4Middle: [Card], player4Bottom: [Card]) {
+        
+        let score1 = compareHands(player1Top, player2Top) + compareHands(player1Middle, player2Middle) + compareHands(player1Bottom, player2Bottom)
+        let score2 = compareHands(player1Top, player3Top) + compareHands(player1Middle, player3Middle) + compareHands(player1Bottom, player3Bottom)
+        let score3 = compareHands(player1Top, player4Top) + compareHands(player1Middle, player4Middle) + compareHands(player1Bottom, player4Bottom)
+        
+        player1Score = score1 + score2 + score3
+        
+        let score4 = compareHands(player2Top, player3Top) + compareHands(player2Middle, player3Middle) + compareHands(player2Bottom, player3Bottom)
+        let score5 = compareHands(player2Top, player4Top) + compareHands(player2Middle, player4Middle) + compareHands(player2Bottom, player4Bottom)
+        
+        player2Score = score4 + score5
+        
+        let score6 = compareHands(player3Top, player4Top) + compareHands(player3Middle, player4Middle) + compareHands(player3Bottom, player4Bottom)
+        
+        player3Score = score6
+        
+        // คะแนนสุดท้ายของ Player 4
+        player4Score = score1 + score2 + score3 + score4 + score5 + score6
+    }
+    
+    var body: some View {
+        VStack {
+            Text("Player 1 Score:
+
 struct GameLogic {
 
     class GameLogic {
@@ -717,46 +760,4 @@ func evaluateHand(cards: [Card]) -> Int {
     return 0 // เปลี่ยนค่ากลับตามการเปรียบเทียบ
 }
 
-import SwiftUI
-
-struct ContentView: View {
-    @State private var player1Score = 0
-    @State private var player2Score = 0
-    @State private var player3Score = 0
-    @State private var player4Score = 0
-    
-    // เปรียบเทียบแต่ละชั้น
-    func compareHands(_ hand1: [Card], _ hand2: [Card]) -> Int {
-        // ตัวอย่างการเปรียบเทียบไพ่
-        // แค่เปรียบเทียบจำนวนไพ่ในชุด ถ้ามีจำนวนมากกว่าชนะ
-        return (hand1.count > hand2.count) ? 1 : (hand1.count < hand2.count ? -1 : 0)
-    }
-    
-    func calculateScore(player1Top: [Card], player1Middle: [Card], player1Bottom: [Card],
-                        player2Top: [Card], player2Middle: [Card], player2Bottom: [Card],
-                        player3Top: [Card], player3Middle: [Card], player3Bottom: [Card],
-                        player4Top: [Card], player4Middle: [Card], player4Bottom: [Card]) {
-        
-        let score1 = compareHands(player1Top, player2Top) + compareHands(player1Middle, player2Middle) + compareHands(player1Bottom, player2Bottom)
-        let score2 = compareHands(player1Top, player3Top) + compareHands(player1Middle, player3Middle) + compareHands(player1Bottom, player3Bottom)
-        let score3 = compareHands(player1Top, player4Top) + compareHands(player1Middle, player4Middle) + compareHands(player1Bottom, player4Bottom)
-        
-        player1Score = score1 + score2 + score3
-        
-        let score4 = compareHands(player2Top, player3Top) + compareHands(player2Middle, player3Middle) + compareHands(player2Bottom, player3Bottom)
-        let score5 = compareHands(player2Top, player4Top) + compareHands(player2Middle, player4Middle) + compareHands(player2Bottom, player4Bottom)
-        
-        player2Score = score4 + score5
-        
-        let score6 = compareHands(player3Top, player4Top) + compareHands(player3Middle, player4Middle) + compareHands(player3Bottom, player4Bottom)
-        
-        player3Score = score6
-        
-        // คะแนนสุดท้ายของ Player 4
-        player4Score = score1 + score2 + score3 + score4 + score5 + score6
-    }
-    
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
                  
