@@ -468,6 +468,7 @@ struct GameLogic {
 }
 
     class GameLogic {
+        
     var players: [Player]
 
     init(players: [Player]) {
@@ -519,7 +520,7 @@ struct GameLogic {
 
         return results
     }
-
+    }
     // เปรียบเทียบไพ่ระหว่าง 2 ผู้เล่น
     func compareHands(player1: Player, player2: Player) -> Int {
         // เปรียบเทียบทุกกองที่จัดไว้
