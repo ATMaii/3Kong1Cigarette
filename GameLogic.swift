@@ -38,6 +38,34 @@ func straightRank(_ hand: [Card]) -> Int? {
     return nil
 }
 
+func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
+    var score = 0
+// ตรวจสอบประเภทของมือไพ่
+    if isRoyalFlush(cards) {
+        score = 8 // Royal Flush
+    } else if isStraightFlush(cards) {
+        score = 7 // Straight Flush
+    } else if isFourOfAKind(cards) {
+        score = 6 // Four of a Kind
+    } else if isFullHouse(cards) {
+        score = 1 // Full House
+    } else if isFlush(cards) {
+        score = 1 // Flush
+    } else if isStraight(cards) {
+        score = 1 // Straight
+    } else if isThreeOfAKind(cards) {
+        score = 1 // Three of a Kind
+    } else if isTwoPair(cards) {
+        score = 1 // Two Pair
+    } else if isPair(cards) {
+        score = 1 // Pair
+    } else {
+        score = 1 // High Card
+    }
+    
+    return score
+}
+
 func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     var score = 0
 
@@ -59,16 +87,23 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     } else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
         score = 1
     }
-
     if row == .head {
         if isThreeOfAKind(hand) {
             score = 5 // หัวตอง
         } else if isPairOfAces(hand) {
             score = 2 // หัวคู่ A
-        }
+    }
+    }
+    // คูณคะแนนเมื่อได้ทะลุ
+    if didWinAllThreeHands {
+    score *= 2
+    } 
+    // คูณคะแนนเมื่อชนะ 3 คน ดาร์บี้
+    if defeatedPlayers.count == 3 {
+    score *= 4
     }
     return score
-}
+    }
 
 // GameLogic.swift
 
@@ -345,40 +380,6 @@ class GameLogic {
     }
 }
 
-func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
-    var score = 0
-// ตรวจสอบประเภทของมือไพ่
-    if isRoyalFlush(cards) {
-        score = 8 // Royal Flush
-    } else if isStraightFlush(cards) {
-        score = 7 // Straight Flush
-    } else if isFourOfAKind(cards) {
-        score = 6 // Four of a Kind
-    } else if isFullHouse(cards) {
-        score = 1 // Full House
-    } else if isFlush(cards) {
-        score = 1 // Flush
-    } else if isStraight(cards) {
-        score = 1 // Straight
-    } else if isThreeOfAKind(cards) {
-        score = 1 // Three of a Kind
-    } else if isTwoPair(cards) {
-        score = 1 // Two Pair
-    } else if isPair(cards) {
-        score = 1 // Pair
-    } else {
-        score = 1 // High Card
-    }
-    // คูณคะแนนเมื่อชนะ 3 กอง
-    if playerIndex == 0 { // สมมติว่า playerIndex 0 ชนะ 3 กอง
-        score *= 2
-    }
-    // คูณคะแนนเมื่อชนะ 3 คน
-    if playersCount == 3 { // สมมติว่า 3 คนชนะ
-        score *= 4
-    }
-    return score
-}
       
 let gameLogic = GameLogic(players: [player1, player2, player3, player4])
 let scores = gameLogic.calculateScores()
