@@ -242,28 +242,7 @@ struct GameLogic {
     static func isFlush(_ hand: [Card]) -> Bool {
         return Set(hand.map { $0.suit }).count == 1
     }
-
-    static func straightRank(_ hand: [Card]) -> Int? {
-        let ranks = hand.map { $0.rank.rawValue }.sorted()
-        let straights = [
-            [2, 3, 4, 5, 6],
-            [3, 4, 5, 6, 7],
-            [4, 5, 6, 7, 8],
-            [5, 6, 7, 8, 9],
-            [6, 7, 8, 9, 10],
-            [7, 8, 9, 10, 11],
-            [8, 9, 10, 11, 12],
-            [9, 10, 11, 12, 13],
-            [14, 2, 3, 4, 5],    // A-2-3-4-5 (รองใหญ่สุด)
-            [10, 11, 12, 13, 14] // 10-J-Q-K-A (ใหญ่สุด)
-        ]
-        for (index, straight) in straights.enumerated() {
-            if Set(ranks) == Set(straight) {
-                return index + 1
-            }
-        }
-        return nil
-    }
+    
     static func isStraight(_ hand: [Card]) -> Bool {
         let ranks = hand.map { $0.rank.rawValue }.sorted()
         let straights = [
