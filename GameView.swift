@@ -71,24 +71,32 @@ struct GameView: View {
               if gameStarted {
                 Text("เวลาที่เหลือ:
 
+import SwiftUI
+
 struct GameView: View {
-     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-     @State private var gameStarted = false
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
 
-     var body: some View {  
-         VStack {  
-            Text("Game: 3กอง")  
-                .font(.largeTitle)  
-                   .padding()  
+    var body: some View {
+        VStack {
+            Text("Game: 3กอง")
+                .font(.largeTitle)
+                .padding()
 
-            // ปุ่มเริ่มเกม  
-        Button("เริ่มเกม") {  
-            gameLogic.startNewGame()  
-            gameStarted = true  
-        }  
-        .padding()  
-
- // ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น  
+            // เริ่มเกม
+            if !gameStarted {
+                Button("เริ่มเกม") {
+                    gameLogic.startNewGame()
+                    gameStarted = true
+                    startTimer()
+                }
+                .padding()
+            }
+// ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น  
 VStack {
     Text("Player 3 (คุณ)")
         .font(.headline)
@@ -242,7 +250,11 @@ struct DraggableCard: View {
             .shadow(radius: 2)
     }
 }
-                     
+    // ระหว่างเกม
+            if gameStarted && isGameActive {
+                Text("เวลาที่เหลือ:
+
+
 import SwiftUI
 
 struct GameView: View {
