@@ -1,19 +1,51 @@
-// GameLogic.swift
-
 import Foundation
 
 enum HandType: Int {
-    case highCard = 0
-    case pair = 1
-    case twoPair = 2
-    case threeOfAKind = 3
-    case straight = 4
-    case flush = 5
-    case fullHouse = 6
-    case fourOfAKind = 7
-    case straightFlush = 8
-    case royalFlush = 9
+    case royalFlush = 10
+    case straightFlush = 9
+    case fourOfAKind = 8
+    case fullHouse = 7
+    case flush = 6
+    case straight = 5
+    case threeOfAKind = 4
+    case twoPair = 3
+    case pair = 2
+    case highCard = 1
 }
+
+func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
+    var score = 0
+
+    if isRoyalFlush(hand) {
+        score = 8
+        if row == .middle { score *= 2 }
+    } else if isStraightFlush(hand) {
+        score = 7
+        if row == .middle { score *= 2 }
+    } else if isFourOfAKind(hand) {
+        score = 6
+        if row == .middle { score *= 2 }
+    } else if isFullHouseOfAces(hand) {
+        score = 2
+        if row == .middle { score *= 2 }
+    } else if isFullHouse(hand) {
+        score = 1
+        if row == .middle { score *= 2 }
+    } else if isFlush(hand) || isStraight(hand) || isThreeOfAKind(hand) || isTwoPair(hand) || isPair(hand) {
+        score = 1
+    }
+
+    if row == .head {
+        if isThreeOfAKind(hand) {
+            score = 5 // หัวตอง
+        } else if isPairOfAces(hand) {
+            score = 2 // หัวคู่ A
+        }
+    }
+    return score
+}
+
+// GameLogic.swift
 
 class ScoreCalculator {
     
