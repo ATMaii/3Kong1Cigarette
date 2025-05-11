@@ -303,7 +303,17 @@ struct PlayerHand {
     if let winner = highestScore {
         self.winner = winner
         print("Winner:
-              
+
+import SwiftUI
+
+struct ContentView: View {
+    @State private var player1Score = 0
+    @State private var player2Score = 0
+    @State private var player3Score = 0
+    @State private var player4Score = 0
+    var body: some View {
+        VStack {
+            Text("Player 1 Score:             
 class GameLogic {
     var players: [PlayerHand]
     
@@ -399,16 +409,6 @@ let dealtCards = shuffleAndDealCards()
 for (index, row) in dealtCards.enumerated() {
     print("Row
 
-import SwiftUI
-
-struct ContentView: View {
-    @State private var player1Score = 0
-    @State private var player2Score = 0
-    @State private var player3Score = 0
-    @State private var player4Score = 0
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
                  
 struct GameLogic {
     
