@@ -57,35 +57,6 @@ import SwiftUI
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-
-            // เริ่มเกม
-            if !gameStarted {
-                Button("เริ่มเกม") {
-                    gameLogic.startNewGame()
-                    gameStarted = true
-                    startTimer()
-                }
-                .padding()
-            }
-            // แสดงเวลา
-              if gameStarted {
-                Text("เวลาที่เหลือ:
-                     
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
     @State private var timeRemaining = 120
     @State private var timerIsActive = false
     @State private var showTimeUpAlert = false
@@ -95,11 +66,13 @@ struct GameView: View {
             Text("Game: 3กอง")
                 .font(.largeTitle)
                 .padding()
-
+        }
+    }
+}
             // แสดงเวลา
               if gameStarted {
                 Text("เวลาที่เหลือ:
-
+                    
 import SwiftUI
 
 struct GameView: View {
@@ -125,6 +98,41 @@ struct GameView: View {
                 }
                 .padding()
             }
+        }
+    }
+}
+            // แสดงเวลา
+              if gameStarted {
+                Text("เวลาที่เหลือ:
+                    
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack {
+            Text("Game: 3กอง")
+                .font(.largeTitle)
+                .padding()
+
+            // เริ่มเกม
+            if !gameStarted {
+                Button("เริ่มเกม") {
+                    gameLogic.startNewGame()
+                    gameStarted = true
+                    startTimer()
+                }
+                .padding()
+            }
+        }
+    }
+}
 import SwiftUI
 
 struct GameView: View {
@@ -149,9 +157,11 @@ struct GameView: View {
                 }
                 .padding()
             }
-
+        }
+    }
+}
             if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
+                let player1 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
 
                 VStack {
                     // Top bar
@@ -350,9 +360,10 @@ struct CardRowView: View {
             }
     }
 }
+                    }
 if gameStarted && isGameActive {
                 Text("เวลาที่เหลือ:
-
+                    
 // View ย่อย: ไพ่ที่ลากได้
 struct DraggableCard: View {
     let card: Card
