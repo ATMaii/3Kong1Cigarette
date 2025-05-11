@@ -221,7 +221,7 @@ class GameLogic {
         score += compareLayer(a.middle, b.middle, isTop: false)
         score += compareLayer(a.bottom, b.bottom, isTop: false)
         
-        // ตัวอย่างโบนัส: เห่า A (Full House JJJAA หรือ AAAJJ ที่ล่าง)
+        // ตัวอย่างโบนัส: เห่า A (Full House AAAJJ ที่ล่าง)
         if isFullHouseWithThreeAces(a.bottom) { score += 2 }
         if isFullHouseWithThreeAces(b.bottom) { score -= 2 }
         
