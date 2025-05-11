@@ -490,7 +490,8 @@ let dealtCards = shuffleAndDealCards()
 // แสดงผลลัพธ์
 for (index, row) in dealtCards.enumerated() {
     print("Row
-          
+
+
 import Foundastruct GameLogic {
     
     static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
