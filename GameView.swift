@@ -124,27 +124,47 @@ struct GameView: View {
                 }
                 .padding()
             }
-// ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น  
-VStack {
-    Text("Player 3 (คุณ)")
+// ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+
+    var body: some View {
+    VStack {
+    // Top Bar
+            HStack {
+                Button("Exit") {
+                    // ออกเกม
+                }
+                Spacer()
+         Text("Player 1 (คุณ)")
+                Spacer()
+                Text("Time:
+                     
         .font(.headline)
 
     HStack(alignment: .top, spacing: 16) {
         // แถวหัว
-        DropArea(row: .head, cards: $player3.headCards)
+        DropArea(row: .head, cards: $player1.headCards)
 
         // แถวกลาง
-        DropArea(row: .middle, cards: $player3.middleCards)
+        DropArea(row: .middle, cards: $player1.middleCards)
 
         // แถวท้าย
-        DropArea(row: .tail, cards: $player3.tailCards)
+        DropArea(row: .tail, cards: $player1.tailCards)
     }
     .padding()
 
     // ไพ่ที่ยังไม่ได้จัด
     ScrollView(.horizontal) {
         HStack {
-            ForEach(player3.unarrangedCards, id: \.self) { card in
+            ForEach(player1.unarrangedCards, id: \.self) { card in
                 DraggableCard(card: card)
             }
         }
@@ -265,6 +285,22 @@ struct CardRowView: View {
         }
     }
 }
+                     struct DraggableCard: View {
+    let card: Card
+    
+    var body: some View {
+        Text(card.display)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+            return NSItemProvider(object: NSString(string: card.display))
+            }
+    }
+}
+if gameStarted && isGameActive {
+                Text("เวลาที่เหลือ:
 
 // View ย่อย: ไพ่ที่ลากได้
 struct DraggableCard: View {
@@ -292,8 +328,7 @@ struct DraggableCard: View {
                 return NSItemProvider(object: NSString(string: card.display))
             }
     }
-}
-            // ระหว่างเกม
+}           // ระหว่างเกม
             if gameStarted && isGameActive {
                 Text("เวลาที่เหลือ:
 
@@ -324,7 +359,7 @@ struct GameView: View {
             }
 
             if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
+                let player1 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
 
                 VStack {
                     // Top bar
@@ -485,23 +520,6 @@ struct GameEndView: View {
         }
     }
 }
-                     
-struct DraggableCard: View {
-    let card: Card
-    
-    var body: some View {
-        Text(card.display)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                return NSItemProvider(object: NSString(string: card.display))
-            }
-    }
-}
-if gameStarted && isGameActive {
-                Text("เวลาที่เหลือ:
 
                      
 import Foundation
