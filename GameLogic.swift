@@ -414,7 +414,7 @@ for (index, row) in dealtCards.enumerated() {
 struct GameLogic {
     static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
         // เปรียบเทียบสองมือ ใครชนะ
-        // return 1 if A ชนะ, -1 if B ชนะ, 0 if เสมอ
+        // return 1 if A ชนะ, -1 if B ชนะ
         return 0
     }
     }
@@ -448,11 +448,30 @@ struct GameLogic {
 
     static func isStraight(_ hand: [Card]) -> Bool {
         let sortedRanks = hand.map { $0.rank.rawValue }.sorted()
-        let lowAce = [2, 3, 4, 5, 14]
-        let highStraight = Array(sortedRanks.first!...sortedRanks.first! + hand.count - 1)
-        return sortedRanks == lowAce || sortedRanks == highStraight
     }
 
+    static func straightRank(_ hand: [Card]) -> Int? {
+        let ranks = hand.map { $0.rank.rawValue }.sorted()
+        let straights = [
+            [2, 3, 4, 5, 6],
+            [3, 4, 5, 6, 7],
+            [4, 5, 6, 7, 8],
+            [5, 6, 7, 8, 9],
+            [6, 7, 8, 9, 10],
+            [7, 8, 9, 10, 11],
+            [8, 9, 10, 11, 12],
+            [9, 10, 11, 12, 13],
+            [14, 2, 3, 4, 5],    // A-2-3-4-5 (รองใหญ่สุด)
+            [10, 11, 12, 13, 14] // 10-J-Q-K-A (ใหญ่สุด)
+        ]
+        for (index, straight) in straights.enumerated() {
+            if Set(ranks) == Set(straight) {
+                return index + 1
+            }
+        }
+        return nil
+    }
+          
     static func isThreeOfAKind(_ hand: [Card]) -> Bool {
         let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
         return rankCounts.values.contains(3)
@@ -472,7 +491,6 @@ struct GameLogic {
         let aces = hand.filter { $0.rank == .ace }
         return aces.count == 2
     }
-}
 
     class GameLogic {
 
