@@ -59,7 +59,7 @@ func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
         score = 1 // Two Pair
     } else if isPair(cards) {
         score = 1 // Pair
-    } else {
+    } else if isHighCard(Card) {
         score = 1 // High Card
     }
     
