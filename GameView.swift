@@ -113,9 +113,12 @@ struct GameView: View {
 
                 Text("เวลาที่เหลือ:\(timeRemaining)")
             }
-        }
-    }
 
+        }
+        .alert(isPresented: $showScorePopup) {
+            Alert(title: Text("ผลคะแนน"), message: Text(scoreSummary()), dismissButton: .default(Text("ตกลง")))
+        }
+}
     private func dragGesture(for card: Card) -> some Gesture {
         DragGesture()
             .onEnded { value in
@@ -155,6 +158,22 @@ struct GameView: View {
         player.unarrangedCards = []
 
         gameLogic.players[2] = player
+    }
+   private func calculateScores() {
+        var scores: [String: Int] = [:]
+        let players = gameLogic.players
+        for i in 0..<players.count {
+            var score = 0
+            for j in 0..<players.count where i != j {
+                score += gameLogic.compareHands(player1: players[i], player2: players[j])
+            }
+            scores[players[i].name] = score
+        }
+        finalScores = scores
+    }
+
+    private func scoreSummary() -> String {
+        finalScores.map { "\($0.key): \($0.value) แต้ม" }.joined(separator: "\n")
     }
 }
 
@@ -196,690 +215,30 @@ struct DraggableCard: View {
     }
 }
 
-// MARK: - Views
+func finishGame() {
+    timer?.invalidate()
+    isGameActive = false
 
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
+    gameLogic.calculateScores() // <- ฟังก์ชันนี้คุณควรสร้างใน GameLogic.swift
 
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-
-            if !gameStarted {
-                Button("เริ่มเกม") {
-                    gameLogic.startNewGame()
-                    gameStarted = true
-                    startTimer()
-                }
-                .padding()
-            }
-
-            if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // ผู้เล่นหลัก
-
-                VStack(spacing: 40) {
-                    // แถวหัว กลาง ท้ายพร้อม DropArea
-                    CardRowView(title: "หัว", cards: player3.headCards)
-                        .dropDestination(for: Card.self) { items, location in
-                            for item in items {
-                                gameLogic.players[2].headCards.append(item)
-                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
-                            }
-                            return true
-                        }
-
-                    CardRowView(title: "กลาง", cards: player3.middleCards)
-                        .dropDestination(for: Card.self) { items, location in
-                            for item in items {
-                                gameLogic.players[2].middleCards.append(item)
-                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
-                            }
-                            return true
-                        }
-
-                    CardRowView(title: "ท้าย", cards: player3.tailCards)
-                        .dropDestination(for: Card.self) { items, location in
-                            for item in items {
-                                gameLogic.players[2].tailCards.append(item)
-                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
-                            }
-                            return true
-                        }
-
-                    Divider()
-
-                    // ไพ่ที่ยังไม่ได้จัด
-                    Text("ไพ่ของคุณ")
-                        .font(.headline)
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(player3.unarrangedCards, id: \ .id) { card in
-                                DraggableCard(card: card)
-                                    .gesture(dragGesture(for: card))
-                            }
-                        }
-                        .padding()
-                    }
-
-                    Button("Done") {
-                        // บันทึกการจัดไพ่
-                        isGameActive = false
-                        isGameOver = true
-                        timer?.invalidate()
-                    }
-                    .padding(.top)
-                }
-                .padding()
-
-                Text("เวลาที่เหลือ:
-                     
-// เพิ่ม DropArea สำหรับแถว
-struct DropArea: View {
-    let title: String
-    @Binding var cards: [Card]
-
-    var body: some View {
-        VStack {
-            Text(title)
-                .font(.title2)
-                .padding(.bottom, 8)
-            ZStack {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(height: 100)
-                    .border(Color.black, width: 1)
-                VStack {
-                    ForEach(cards, id: \.id) { card in
-                        Text(card.display)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(8)
-                            .shadow(radius: 2)
-                    }
-                }
-            }
-        }
-        .onDrop(of: [.text], isTargeted: nil) { providers in
-            // ดึงข้อมูลเมื่อไพ่ถูกวาง
-            if let item = providers.first {
-                item.loadObject(ofClass: NSString.self) { (string, error) in
-                    if let cardString = string as? String {
-                        // สร้างไพ่จาก string
-                        if let card = createCard(from: cardString) {
-                            cards.append(card)
-                        }
-                    }
-                }
-            }
-            return true
-        }
-    }
-
-    private func createCard(from string: String) -> Card? {
-        // ทำการแยก suit และ rank จาก string เพื่อสร้างไพ่
-        if let rank = Rank.allCases.first(where: { $0.display == String(string.prefix(1)) }),
-           let suit = Suit.allCases.first(where: { string.contains($0.rawValue) }) {
-            return Card(suit: suit, rank: rank)
-        }
-        return nil
-    }
+    isGameOver = true
 }
 
-// ใน GameView: แสดง DropArea แทนที่ Dragging
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
+    var results: [PlayerResult] // สมมุติ struct ที่เก็บคะแนนแต่ละคน
 
     var body: some View {
         VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
+            Text("ผลคะแนน")
+                .font(.title)
 
-            if !gameStarted {
-                Button("เริ่มเกม") {
-                    gameLogic.startNewGame()
-                    gameStarted = true
-                    startTimer()
-                }
-                .padding()
-            }
-
-            if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // ผู้เล่นหลัก
-
-                VStack(spacing: 40) {
-                    // ใช้ DropArea แทนที่ CardRowView
-                    DropArea(title: "หัว", cards: $gameLogic.players[2].headCards)
-                    DropArea(title: "กลาง", cards: $gameLogic.players[2].middleCards)
-                    DropArea(title: "ท้าย", cards: $gameLogic.players[2].tailCards)
-
-                    Divider()
-
-                    // ไพ่ที่ยังไม่ได้จัด
-                    Text("ไพ่ของคุณ")
-                        .font(.headline)
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(player3.unarrangedCards, id: \.id) { card in
-                                DraggableCard(card: card)
-                                    .gesture(dragGesture(for: card))
-                            }
-                        }
-                        .padding()
-                    }
-
-                    Button("เสร็จแล้ว") {
-                        // บันทึกการจัดไพ่
-                        isGameActive = false
-                        isGameOver = true
-                        timer?.invalidate()
-                    }
-                    .padding(.top)
-                }
-                .padding()
-
-                Text("เวลาที่เหลือ:
-
-// MARK: - Views
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-
-            if !gameStarted {
-                Button("เริ่มเกม") {
-                    gameLogic.startNewGame()
-                    gameStarted = true
-                    startTimer()
-                }
-                .padding()
-            }
-
-            if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // ผู้เล่นหลัก
-
-                VStack(spacing: 40) {
-                    // แถวหัว (3 ช่อง)
-                    CardRowView(title: "หัว", cards: player3.headCards)
-                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
-                            handleDrop(providers: providers, target: .head)
-                        }
-
-                    // แถวกลาง (5 ช่อง)
-                    CardRowView(title: "กลาง", cards: player3.middleCards)
-                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
-                            handleDrop(providers: providers, target: .middle)
-                        }
-
-                    // แถวท้าย (5 ช่อง)
-                    CardRowView(title: "ท้าย", cards: player3.tailCards)
-                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
-                            handleDrop(providers: providers, target: .tail)
-                        }
-
-                    Divider()
-
-                    // ไพ่ที่ยังไม่ได้จัด
-                    Text("ไพ่ของคุณ")
-                        .font(.headline)
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(player3.unarrangedCards, id: \.id) { card in
-                                DraggableCard(card: card)
-                                    .gesture(dragGesture(for: card))
-                            }
-                        }
-                        .padding()
-                    }
-
-                    Button("เสร็จแล้ว") {
-                        // บันทึกการจัดไพ่
-                        isGameActive = false
-                        isGameOver = true
-                        timer?.invalidate()
-                    }
-                    .padding(.top)
-                }
-                .padding()
-
-                Text("เวลาที่เหลือ:
-                     
-                     
-// MARK: - Models
-
-enum Suit: String, CaseIterable { ... }
-
-enum Rank: Int, CaseIterable, Comparable { ... }
-
-struct Card: Identifiable, Equatable { ... }
-
-// MARK: - GameView
-
-struct GameView: View {
-    ...
-}
-
-import SwiftUI
-import Foundation
-
-// MARK: - Card Model
-
-enum Suit: String, CaseIterable {
-    case hearts = "♥"
-    case diamonds = "♦"
-    case clubs = "♣"
-    case spades = "♠"
-}
-
-enum Rank: Int, CaseIterable, Comparable {
-    case two = 2, three, four, five, six, seven, eight, nine, ten
-    case jack = 11, queen, king, ace = 14
-
-    var display: String {
-        switch self {
-        case .jack: return "J"
-        case .queen: return "Q"
-        case .king: return "K"
-        case .ace: return "A"
-        default: return String(self.rawValue)
-        }
-    }
-
-    static func < (lhs: Rank, rhs: Rank) -> Bool {
-        return lhs.rawValue < rhs.rawValue
-    }
-}
-
-struct Card: Identifiable, Equatable {
-    let id = UUID()
-    let suit: Suit
-    let rank: Rank
-
-    var description: String {
-        return "
-
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-
-            if !gameStarted {
-                Button("เริ่มเกม") {
-                    gameLogic.startNewGame()
-                    gameStarted = true
-                    startTimer()
-                }
-                .padding()
-            }
-
-            if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
-
-                VStack {
-                    // Top bar
-                    HStack {
-                        Button("Exit") {
-                            // ออกจากเกม
-                        }
-                        Spacer()
-                        Text("Player 1")
-                        Spacer()
-                        Text("Time:
-                             
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var timeRemaining = 120
-    @State private var timerIsActive = false
-    @State private var showTimeUpAlert = false
-
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-                 // แสดงเวลา
-              if gameStarted {
-                Text("เวลาที่เหลือ:
-                    
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-
-            // เริ่มเกม
-            if !gameStarted {
-                Button("เริ่มเกม") {
-                    gameLogic.startNewGame()
-                    gameStarted = true
-                    startTimer()
-                }
-                .padding()
-            }
-        }
-    }
-}
-            // แสดงเวลา
-              if gameStarted {
-                Text("เวลาที่เหลือ:
-                    
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-
-            // เริ่มเกม
-            if !gameStarted {
-                Button("เริ่มเกม") {
-                    gameLogic.startNewGame()
-                    gameStarted = true
-                    startTimer()
-                }
-                .padding()
-            }
-        }
-    }
-}
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            Text("Game: 3กอง")
-                .font(.largeTitle)
-                .padding()
-
-            if !gameStarted {
-                Button("เริ่มเกม") {
-                    gameLogic.startNewGame()
-                    gameStarted = true
-                    startTimer()
-                }
-                .padding()
-            }
-        }
-    }
-}
-            if gameStarted && isGameActive {
-                let player1 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
-
-                VStack {
-                    // Top bar
-                    HStack {
-                        Button("Exit") {
-                            // ออกจากเกม
-                        }
-                        Spacer()
-                        Text("Player 1")
-                        Spacer()
-                        Text("Time:
-// ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            // Top Bar
-            HStack {
-                Button("Exit") {
-                    // ออกเกม
-                }
-                Spacer()
-                Text("Player 1")
-                Spacer()
-                Text("Time:
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-    VStack {
-         Text("Player 1 (คุณ)")
-                     .font(.headline)
-
-    HStack(alignment: .top, spacing: 16) {
-        // แถวหัว
-        DropArea(row: .head, cards: $player1.headCards)
-
-        // แถวกลาง
-        DropArea(row: .middle, cards: $player1.middleCards)
-
-        // แถวท้าย
-        DropArea(row: .tail, cards: $player1.tailCards)
-    }
-    .padding()
-
-    // ไพ่ที่ยังไม่ได้จัด
-    ScrollView(.horizontal) {
-        HStack {
-            ForEach(player1.unarrangedCards, id: \.self) { card in
-                DraggableCard(card: card)
-            }
-        }
-    }
-
-    Button("Done") {
-        // บันทึกการจัดไพ่
-    }
-    .padding(.top)
-        }
-             
-if gameStarted {// Loop ผ่านผู้เล่นแต่ละคนเพื่อแสดงมือไพ่  
-ForEach(gameLogic.players, id: \.name) { player in  
-         VStack(alignment: .leading) {  
-            Text(player.name)  
-                 .font(.title2)  
-                 .padding(.bottom, 4)  
-
-       ScrollView(.horizontal) {  
-                        HStack {  
-                    
-       ForEach(player.hand, id: \.self) { card in  
-                   Text(card.description())
-                   .frame(width: 40)  
-          .padding(4)  
-         .background(Color.white)  
-         .cornerRadius(4)
-         .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.black))  
-                            }  
-                        }  
-                    }  
-                }  
-                .padding(.bottom)  
-            }  
-        }  
-    }  
-}
-
-}
-
-struct GameView: View {
-@ObservedObject 
-var gameManager = GameManager.shared
-
-var body: some View {  
-    VStack {  
-        ForEach(gameManager.players.indices, id: \.self) { index in  
-            VStack(alignment: .leading) {  
-                Text("ผู้เล่น
-
-struct GameView: View {
-    @State private var playerCards: [Card] = Card.sample13Cards()
-    @State private var arrangedCards: [[Card]] = [[], [], []] // หัว, กลาง, ท้าย
-
-    var body: some View {
-        VStack(spacing: 40) {
-            // แถวหัว
-            CardRowView(title: "หัว", cards: arrangedCards[0])
-
-            // แถวกลาง
-            CardRowView(title: "กลาง", cards: arrangedCards[1])
-
-            // แถวท้าย
-            CardRowView(title: "ท้าย", cards: arrangedCards[2])
-
-            Divider()
-
-            // ไพ่ในมือ (ลากได้)
-            Text("ไพ่ของคุณ")
-                .font(.headline)
-            ScrollView(.horizontal) {
+            ForEach(results, id: \.name) { result in
                 HStack {
-                    ForEach(playerCards, id: \.id) { card in
-                        DraggableCard(card: card)
-                            .gesture(dragGesture(for: card))
-                    }
-                }
-                .padding()
-            }
-        }
-        .padding()
-    }
-
-    private func dragGesture(for card: Card) -> some Gesture {
-        DragGesture()
-            .onEnded { value in
-                let y = value.location.y
-                if y < 200 {
-                    arrangedCards[0].append(card) // หัว
-                } else if y < 400 {
-                    arrangedCards[1].append(card) // กลาง
-                } else {
-                    arrangedCards[2].append(card) // ท้าย
-                }
-                // ลบออกจากมือ
-                playerCards.removeAll { $0.id == card.id }
-            }
-    }
-}
-// View ย่อย: แถวไพ่
-struct CardRowView: View {
-    let title: String
-    let cards: [Card]
-
-    var body: some View {
-        VStack {
-            Text(title)
-                .font(.title2)
-            HStack {
-                ForEach(cards, id: \.id) { card in
-                    Text(card.display)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(8)
-                        .shadow(radius: 2)
-                }
-            }
-        }
-    }
-}
-                     struct DraggableCard: View {
-    let card: Card
-    
-    var body: some View {
-        Text(card.display)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-            return NSItemProvider(object: NSString(string: card.display))
-            }
-    }
-}
-                    }
-if gameStarted && isGameActive {
-                Text("เวลาที่เหลือ:
-                    
-// View ย่อย: ไพ่ที่ลากได้
-struct DraggableCard: View {
-    let card: Card
-
-    var body: some View {
-        Text(card.display)
-            .padding()
-            .background(Color.yellow)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-    }
-}
+                    Text(result.name)
+                    Spacer()
+                    Text("
                          
 struct DraggableCard: View {
     let card: Card
@@ -894,40 +253,8 @@ struct DraggableCard: View {
                 return NSItemProvider(object: NSString(string: card.display))
             }
     }
-}           // ระหว่างเกม
-            if gameStarted && isGameActive {
-                Text("เวลาที่เหลือ:
-
-func startTimer() {
-    timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-        if timeRemaining > 0 {
-            timeRemaining -= 1
-        } else {
-            timer?.invalidate()
-            isGameActive = false
-            autoArrangeCardsIfNeeded()
-        }
-    }
 }
-
-func autoArrangeCardsIfNeeded() {
-    let player = gameLogic.players[2] // Player 3 คือตัวเรา
-    guard player.headCards.isEmpty && player.middleCards.isEmpty && player.tailCards.isEmpty else {
-        return // ผู้เล่นจัดไพ่แล้ว
-    }
-
-    // แบ่งไพ่แบบอัตโนมัติ: 5-5-3 (หัว-กลาง-ท้าย)
-    let hand = player.unarrangedCards
-    let head = Array(hand.prefix(5))
-    let middle = Array(hand.dropFirst(5).prefix(5))
-    let tail = Array(hand.suffix(from: 10))
-
-    gameLogic.players[2].headCards = head
-    gameLogic.players[2].middleCards = middle
-    gameLogic.players[2].tailCards = tail
-    gameLogic.players[2].unarrangedCards = []
-}
-                     
+            
 import SwiftUI
 
 struct GameView: View {
@@ -1077,7 +404,7 @@ struct GameEndView: View {
         VStack(spacing: 20) {
             Text("เกมจบแล้ว!")
                 .font(.title)
-
+            
             Text("เริ่มเกมใหม่ใน
                  
                 }
@@ -1115,7 +442,6 @@ struct GameEndView: View {
         }
     }
 }
-
                      
 import Foundation
 
