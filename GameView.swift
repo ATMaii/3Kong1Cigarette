@@ -278,7 +278,22 @@ struct DraggableCard: View {
             .shadow(radius: 2)
     }
 }
-    // ระหว่างเกม
+                         
+struct DraggableCard: View {
+    let card: Card
+    
+    var body: some View {
+        Text(card.display)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                return NSItemProvider(object: NSString(string: card.display))
+            }
+    }
+}
+            // ระหว่างเกม
             if gameStarted && isGameActive {
                 Text("เวลาที่เหลือ:
 
