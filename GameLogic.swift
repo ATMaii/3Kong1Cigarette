@@ -243,7 +243,6 @@ class GameLogic {
     }
 }
 
-
 import Foundation
 
 class GameLogic: ObservableObject {
@@ -286,6 +285,16 @@ class GameLogic: ObservableObject {
 
 // GameLogic.swift
 
+import SwiftUI
+
+struct ContentView: View {
+    @State private var player1Score = 0
+    @State private var player2Score = 0
+    @State private var player3Score = 0
+    @State private var player4Score = 0
+    var body: some View {
+        VStack {
+            Text("Player 1 Score:
 private func determineWinner() {
     let highestScore = players.max { $0.score < $1.score }
 
@@ -459,21 +468,13 @@ struct GameLogic {
 }
 
     class GameLogic {
-        
-    
-    }
-import SwiftUI
 
-struct ContentView: View {
-    @State private var player1Score = 0
-    @State private var player2Score = 0
-    @State private var player3Score = 0
-    @State private var player4Score = 0
     var players: [Player]
 
     init(players: [Player]) {
         self.players = players
-    
+      }
+    }
     // เปรียบเทียบคะแนนของผู้เล่น
     func calculateScores() -> [Int] {
         var scores: [Int] = []
@@ -537,9 +538,7 @@ struct ContentView: View {
         return result
     }
 }
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
+    
                  
 // เปลี่ยนไปใช้ RowPosition ที่แยกการจัดการมือ
 enum RowPosition: CaseIterable {
