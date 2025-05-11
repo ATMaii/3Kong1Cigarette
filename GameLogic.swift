@@ -290,14 +290,10 @@ import SwiftUI
 struct ContentView: View {
     @State private var player1Score = 0
     @State private var player2Score = 0
-    @State private var player3Score = 0
-    @State private var player4Score = 0
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
+
 private func determineWinner() {
     let highestScore = players.max { $0.score < $1.score }
-
+}
 struct Card { 
     let rank: String  // เช่น "A", "K", "Q", "2", ...
     let suit: String  // เช่น "♠", "♥", ...
@@ -312,7 +308,12 @@ struct PlayerHand {
     if let winner = highestScore {
         self.winner = winner
         print("Winner:
-
+             }
+    }
+}
+    var body: some View {
+        VStack {
+            Text("Player 1 Score:
              
 class GameLogic {
     var players: [PlayerHand]
