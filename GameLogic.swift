@@ -303,8 +303,6 @@ struct PlayerHand {
     if let winner = highestScore {
         self.winner = winner
         print("Winner:
-
-import Foundation
               
 class GameLogic {
     var players: [PlayerHand]
