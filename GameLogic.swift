@@ -512,7 +512,9 @@ let dealtCards = shuffleAndDealCards()
 // แสดงผลลัพธ์
 for (index, row) in dealtCards.enumerated() {
     print("Row
-
+          
+import Foundation
+          
     class GameLogic {
 
     var players: [Player]
