@@ -68,32 +68,22 @@ struct GameView: View {
                 let player3 = gameLogic.players[2] // ผู้เล่นหลัก
 
                 VStack(spacing: 40) {
-                    // แถวหัว กลาง ท้ายพร้อม DropArea
+                    // แถวหัว (3 ช่อง)
                     CardRowView(title: "หัว", cards: player3.headCards)
-                        .dropDestination(for: Card.self) { items, location in
-                            for item in items {
-                                gameLogic.players[2].headCards.append(item)
-                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
-                            }
-                            return true
+                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                            handleDrop(providers: providers, target: .head)
                         }
 
+                    // แถวกลาง (5 ช่อง)
                     CardRowView(title: "กลาง", cards: player3.middleCards)
-                        .dropDestination(for: Card.self) { items, location in
-                            for item in items {
-                                gameLogic.players[2].middleCards.append(item)
-                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
-                            }
-                            return true
+                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                            handleDrop(providers: providers, target: .middle)
                         }
 
+                    // แถวท้าย (5 ช่อง)
                     CardRowView(title: "ท้าย", cards: player3.tailCards)
-                        .dropDestination(for: Card.self) { items, location in
-                            for item in items {
-                                gameLogic.players[2].tailCards.append(item)
-                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
-                            }
-                            return true
+                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                            handleDrop(providers: providers, target: .tail)
                         }
 
                     Divider()
@@ -103,7 +93,7 @@ struct GameView: View {
                         .font(.headline)
                     ScrollView(.horizontal) {
                         HStack {
-                            ForEach(player3.unarrangedCards, id: \ .id) { card in
+                            ForEach(player3.unarrangedCards, id: \.id) { card in
                                 DraggableCard(card: card)
                                     .gesture(dragGesture(for: card))
                             }
@@ -121,7 +111,7 @@ struct GameView: View {
                 }
                 .padding()
 
-                Text("เวลาที่เหลือ: \(timeRemaining)")
+                Text("เวลาที่เหลือ:\(timeRemaining)")
             }
         }
     }
@@ -170,8 +160,6 @@ struct GameView: View {
 
 // MARK: - Components
 
-
-
 struct CardRowView: View {
     let title: String
     let cards: [Card]
@@ -207,6 +195,91 @@ struct DraggableCard: View {
             }
     }
 }
+
+// MARK: - Views
+
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack {
+            Text("Game: 3กอง")
+                .font(.largeTitle)
+                .padding()
+
+            if !gameStarted {
+                Button("เริ่มเกม") {
+                    gameLogic.startNewGame()
+                    gameStarted = true
+                    startTimer()
+                }
+                .padding()
+            }
+
+            if gameStarted && isGameActive {
+                let player3 = gameLogic.players[2] // ผู้เล่นหลัก
+
+                VStack(spacing: 40) {
+                    // แถวหัว กลาง ท้ายพร้อม DropArea
+                    CardRowView(title: "หัว", cards: player3.headCards)
+                        .dropDestination(for: Card.self) { items, location in
+                            for item in items {
+                                gameLogic.players[2].headCards.append(item)
+                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
+                            }
+                            return true
+                        }
+
+                    CardRowView(title: "กลาง", cards: player3.middleCards)
+                        .dropDestination(for: Card.self) { items, location in
+                            for item in items {
+                                gameLogic.players[2].middleCards.append(item)
+                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
+                            }
+                            return true
+                        }
+
+                    CardRowView(title: "ท้าย", cards: player3.tailCards)
+                        .dropDestination(for: Card.self) { items, location in
+                            for item in items {
+                                gameLogic.players[2].tailCards.append(item)
+                                gameLogic.players[2].unarrangedCards.removeAll { $0.id == item.id }
+                            }
+                            return true
+                        }
+
+                    Divider()
+
+                    // ไพ่ที่ยังไม่ได้จัด
+                    Text("ไพ่ของคุณ")
+                        .font(.headline)
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(player3.unarrangedCards, id: \ .id) { card in
+                                DraggableCard(card: card)
+                                    .gesture(dragGesture(for: card))
+                            }
+                        }
+                        .padding()
+                    }
+
+                    Button("Done") {
+                        // บันทึกการจัดไพ่
+                        isGameActive = false
+                        isGameOver = true
+                        timer?.invalidate()
+                    }
+                    .padding(.top)
+                }
+                .padding()
+
+                Text("เวลาที่เหลือ:
+                     
 // เพิ่ม DropArea สำหรับแถว
 struct DropArea: View {
     let title: String
