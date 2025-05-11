@@ -63,12 +63,12 @@ struct GameView: View {
 
     var body: some View {
         VStack {
-            Text("Game: ไพ่ 13 ใบ - 3 กอง")
+            Text("Game: 3กอง")
                 .font(.largeTitle)
                 .padding()
 
             // แสดงเวลา
-            if gameStarted {
+              if gameStarted {
                 Text("เวลาที่เหลือ:
 
 
@@ -92,7 +92,37 @@ struct GameView: View {
         .padding()  
 
  // ถ้าเกมเริ่มแล้ว ให้แสดงมือไพ่ของผู้เล่น  
-        
+VStack {
+    Text("Player 3 (คุณ)")
+        .font(.headline)
+
+    HStack(alignment: .top, spacing: 16) {
+        // แถวหัว
+        DropArea(row: .head, cards: $player3.headCards)
+
+        // แถวกลาง
+        DropArea(row: .middle, cards: $player3.middleCards)
+
+        // แถวท้าย
+        DropArea(row: .tail, cards: $player3.tailCards)
+    }
+    .padding()
+
+    // ไพ่ที่ยังไม่ได้จัด
+    ScrollView(.horizontal) {
+        HStack {
+            ForEach(player3.unarrangedCards, id: \.self) { card in
+                DraggableCard(card: card)
+            }
+        }
+    }
+
+    Button("Done") {
+        // บันทึกการจัดไพ่
+    }
+    .padding(.top)
+        }
+             
 if gameStarted {// Loop ผ่านผู้เล่นแต่ละคนเพื่อแสดงมือไพ่  
 ForEach(gameLogic.players, id: \.name) { player in  
          VStack(alignment: .leading) {  
