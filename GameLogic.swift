@@ -304,6 +304,8 @@ struct PlayerHand {
         self.winner = winner
         print("Winner:
 
+import Foundation
+              
 class GameLogic {
     var players: [PlayerHand]
     
