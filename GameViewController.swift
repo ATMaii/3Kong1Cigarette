@@ -54,3 +54,36 @@ struct Player {
     var name: String
     var chips: Int
 }
+
+func addCardsForBottomPlayer(in table: UIView) {
+    // สร้างสำรับไพ่
+    var deck = createDeck()
+    deck.shuffle()
+    let hand = Array(deck.prefix(13)) // สุ่มเลือก 13 ใบ
+
+    let cardWidth: CGFloat = 24
+    let cardHeight: CGFloat = 36
+    let spacing: CGFloat = 6
+    let totalWidth = CGFloat(hand.count) * (cardWidth + spacing) - spacing
+
+    let startX = (table.frame.width - totalWidth) / 2
+    let yPosition = table.frame.height - cardHeight - 10
+
+    for (i, card) in hand.enumerated() {
+        let cardView = UIView()
+        let xPosition = startX + CGFloat(i) * (cardWidth + spacing)
+        cardView.frame = CGRect(x: xPosition, y: yPosition, width: cardWidth, height: cardHeight)
+        cardView.backgroundColor = .white
+        cardView.layer.cornerRadius = 4
+        cardView.layer.borderWidth = 1
+        cardView.layer.borderColor = UIColor.black.cgColor
+
+        let label = UILabel(frame: cardView.bounds)
+        label.text = card.description // ใช้ .description แสดงไพ่ เช่น "A♠"
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textAlignment = .center
+        cardView.addSubview(label)
+
+        table.addSubview(cardView)
+    }
+}
