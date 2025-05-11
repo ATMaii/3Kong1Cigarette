@@ -226,6 +226,10 @@ struct PlayerHand {
     let middle: [Card] // 5 ใบ
     let bottom: [Card] // 5 ใบ
 }
+    
+    if let winner = highestScore {
+        self.winner = winner
+        print("Winner:
 
 class GameLogic {
     var players: [PlayerHand]
