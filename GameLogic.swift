@@ -463,28 +463,6 @@ class GameLogic {
         let ranks = cards.map { $0.rank }
         return ranks.filter { $0 == "A" }.count >= 3
     }
-
-    private func rankPower(cards: [Card]) -> Int {
-        // ตัวอย่าง logic ง่ายๆ ให้แต้มตามคู่/ตอง
-        var rankCount = [String: Int]()
-        for card in cards {
-            rankCount[card.rank, default: 0] += 1
-        }
-
-        let counts = rankCount.values.sorted(by: >)
-
-        switch counts {
-        case [3, 2]:
-            return 5 // Full House
-        case [3]:
-            return 4 // ตอง
-        case [2, 2]:
-            return 3 // 2 คู่
-        case [2]:
-            return 2 // 1 คู่
-        default:
-            return 1 // high card
-        }
     }
       
 let gameLogic = GameLogic(players: [player1, player2, player3, player4])
@@ -513,8 +491,85 @@ let dealtCards = shuffleAndDealCards()
 for (index, row) in dealtCards.enumerated() {
     print("Row
           
-import Foundation
-          
+import Foundastruct GameLogic {
+    
+    static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
+        // เปรียบเทียบสองมือ ใครชนะ
+        // return 1 if A ชนะ, -1 if B ชนะ
+        return 0
+    }
+
+    static func isRoyalFlush(_ hand: [Card]) -> Bool {
+        return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
+    }
+
+    static func isStraightFlush(_ hand: [Card]) -> Bool {
+        return isFlush(hand) && isStraight(hand)
+    }
+
+    static func isFourOfAKind(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(4)
+    }
+
+    static func isFullHouse(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(3) && rankCounts.values.contains(2)
+    }
+
+    static func isFullHouseOfAces(_ hand: [Card]) -> Bool {
+        let grouped = Dictionary(grouping: hand, by: { $0.rank })
+        return grouped[.ace]?.count == 3 && grouped.values.contains { $0.count == 2 }
+    }
+
+    static func isFlush(_ hand: [Card]) -> Bool {
+        return Set(hand.map { $0.suit }).count == 1
+    }
+
+    func straightRank(_ hand: [Card]) -> Int? {
+    let ranks = hand.map { $0.rank.rawValue }.sorted()
+
+    let straights = [
+        [2, 3, 4, 5, 6],
+        [3, 4, 5, 6, 7],
+        [4, 5, 6, 7, 8],
+        [5, 6, 7, 8, 9],
+        [6, 7, 8, 9, 10],
+        [7, 8, 9, 10, 11],
+        [8, 9, 10, 11, 12],
+        [9, 10, 11, 12, 13],
+        [14, 2, 3, 4, 5],    // A-2-3-4-5
+        [10, 11, 12, 13, 14] // 10-J-Q-K-A
+    ]
+
+    for (index, straight) in straights.enumerated() {
+        if Set(ranks) == Set(straight) {
+            return index + 1
+        }
+    }
+    return nil
+    }
+
+    static func isThreeOfAKind(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(3)
+    }
+
+    static func isTwoPair(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.filter { $0 == 2 }.count == 2
+    }
+
+    static func isPair(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(2)
+    }
+
+    static func isPairOfAces(_ hand: [Card]) -> Bool {
+        let aces = hand.filter { $0.rank == .ace }
+        return aces.count == 2
+    }
+
     class GameLogic {
 
     var players: [Player]
@@ -586,7 +641,6 @@ import Foundation
         return result
     }
 }
-    
                  
 // เปลี่ยนไปใช้ RowPosition ที่แยกการจัดการมือ
 enum RowPosition: CaseIterable {
