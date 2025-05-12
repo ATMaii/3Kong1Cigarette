@@ -1,3 +1,5 @@
+import Foundation
+
 enum HandType: Int {
     case highCard = 1
     case pair
@@ -36,16 +38,16 @@ func isFoul(head: [Card], middle: [Card], tail: [Card]) -> Bool {
 import Foundation
 
 enum HandType: Int {
-    case highCard = 1          
-    case pair                  
-    case twoPair                
-    case threeOfAKind           
-    case straight               
-    case flush                 
-    case fullHouse            
-    case fourOfAKind           
-    case straightFlush          
-    case royalFlush             
+    case HighCard = 1          
+    case Pair                  
+    case TwoPair                
+    case ThreeOfAKind           
+    case Straight               
+    case Flush                 
+    case FullHouse            
+    case FourOfAKind           
+    case StraightFlush          
+    case RoyalFlush             
 }
 
 func getHeadHandTypestraightRank(for cards: [Card]) -> HandType {
