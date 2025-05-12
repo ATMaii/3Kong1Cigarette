@@ -1,17 +1,18 @@
 import Foundation
 
 enum HandType: Int {
-    case royalFlush = 10
-    case straightFlush = 9
-    case fourOfAKind = 8
-    case fullHouse = 7
-    case flush = 6
-    case straight = 5
-    case threeOfAKind = 4
-    case twoPair = 3
-    case pair = 2
-    case highCard = 1
+    case highCard = 1           // ไพ่สูง
+    case pair                   // หนึ่งคู่
+    case twoPair                // สองคู่
+    case threeOfAKind           // ตอง
+    case straight               // สเตรท
+    case flush                  // ฟลัช
+    case fullHouse              // ฟูลเฮ้าส์
+    case fourOfAKind            // โฟร์การ์ด
+    case straightFlush          // สเตรทฟลัช
+    case royalFlush             // รอยัลฟลัช
 }
+
 
 func getHeadHandType(for cards: [Card]) -> HandType {
     if isThreeOfAKind(cards) {
@@ -45,7 +46,6 @@ func getHandType(for cards: [Card]) -> HandType {
         return .highCard
     }
 }
-
 func isFoul(head: [Card], middle: [Card], tail: [Card]) -> Bool {
     let headRank = getHandType(head).rawValue
     let middleRank = getHandType(middle).rawValue
@@ -55,6 +55,7 @@ func isFoul(head: [Card], middle: [Card], tail: [Card]) -> Bool {
     return !(tailRank >= middleRank && middleRank >= headRank)
 }
 
+func getHeadHandTypestraightRank(for cards: [Card]) -> HandType {
 func straightRank(_ hand: [Card]) -> Int? {
     let ranks = hand.map { $0.rank.rawValue }.sorted()
 
@@ -76,14 +77,52 @@ func straightRank(_ hand: [Card]) -> Int? {
             return index + 1
         }
     }
-
     return nil
 }
+    
+static func HandEvaluator(hand: [Card])->HandType {
+        var score = 0
+    
+        if HandEvaluator.isRoyalFlush(hand) {
+            return .royalFlush
+        } else if HandEvaluator.isStraightFlush(hand) {
+            return .straightFlush
+        } else if HandEvaluator.isFourOfAKind(hand) {
+            return .fourOfAKind
+        } else if HandEvaluator.isFullHouse(hand) {
+            return .fullHouse
+        } else if HandEvaluator.isFlush(hand) {
+            return .flush
+        } else if HandEvaluator.isStraight(hand) {
+            return .straight
+        } else if HandEvaluator.isThreeOfAKind(hand) {
+            return .threeOfAKind
+        } else if HandEvaluator.isTwoPair(hand) {
+            return .twoPair
+        } else if HandEvaluator.isPair(hand) {
+            return .pair
+        } else {
+            return .highCard
+        }
+    }
 
-func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
-    var score = 0
-// ตรวจสอบประเภทของมือไพ่
-    if isRoyalFlush(cards) {
+    enum HandTypeScore : Int {
+    case RoyalFlush = 8
+    case StraightFlush = 7
+    case FourOfAKind = 6
+    case FullHouse = 1
+    case Flush = 1
+    case Straight = 1
+    case ThreeOfAKind = 1
+    case TwoPair = 1
+    case Pair = 1
+    case HighCard = 1
+    }
+    
+func calculatorScore(hand: [Card], row: RowPosition) -> Int {
+      var score = 0
+    
+      if isRoyalFlush(cards) {
         score = 8 // Royal Flush
     } else if isStraightFlush(cards) {
         score = 7 // Straight Flush
@@ -104,11 +143,10 @@ func evaluateHand(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
     } else if isHighCard(Card) {
         score = 1 // High Card
     }
-    
     return score
 }
 
-func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
+func calculateScore(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
     var score = 0
 
     if isRoyalFlush(hand) {
@@ -134,7 +172,7 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
             score = 5 // หัวตอง
         } else if isPairOfAces(hand) {
             score = 2 // หัวคู่ A
-    }
+        }
     }
     // คูณคะแนนเมื่อได้ทะลุ
     if didWinAllThreeHands {
@@ -145,39 +183,6 @@ func calculateHandScore(hand: [Card], row: RowPosition) -> Int {
     score *= 4
     }
     return score
-    }
-
-// GameLogic.swift
-
-class ScoreCalculator {
-    
-    static func evaluateHand(hand: [Card]) -> HandType {
-        if HandEvaluator.isRoyalFlush(hand) {
-            return .royalFlush
-        } else if HandEvaluator.isStraightFlush(hand) {
-            return .straightFlush
-        } else if HandEvaluator.isFourOfAKind(hand) {
-            return .fourOfAKind
-        } else if HandEvaluator.isFullHouse(hand) {
-            return .fullHouse
-        } else if HandEvaluator.isFlush(hand) {
-            return .flush
-        } else if HandEvaluator.isStraight(hand) {
-            return .straight
-        } else if HandEvaluator.isThreeOfAKind(hand) {
-            return .threeOfAKind
-        } else if HandEvaluator.isTwoPair(hand) {
-            return .twoPair
-        } else if HandEvaluator.isPair(hand) {
-            return .pair
-        } else {
-            return .highCard
-        }
-    }
-
-    static func calculateScore(for hand: [Card]) -> Int {
-        let handType = evaluateHand(hand: hand)
-        return handType.rawValue
     }
 }
 
@@ -550,94 +555,6 @@ class GameLogic {
     }
     }
       
-let gameLogic = GameLogic(players: [player1, player2, player3, player4])
-let scores = gameLogic.calculateScores()
-// ใช้ scores ใน UI ต่อได้เลย เช่น แสดงผล
-      
-// ฟังก์ชันสำหรับจัดไพ่
-func shuffleAndDealCards() -> [[String]] {
-    let cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-    
-    // สุ่มไพ่
-    let shuffledCards = cards.shuffled()
-    
-    // จัดไพ่เป็นรูปแบบ 5-5-3
-    let firstRow = Array(shuffledCards[0..<3])   // แถวที่ 1
-    let secondRow = Array(shuffledCards[3..<8]) // แถวที่ 2
-    let thirdRow = Array(shuffledCards[8..<13]) // แถวที่ 3
-    
-    return [firstRow, secondRow, thirdRow]
-}
-
-struct GameLogic {
-
-    class GameLogic {
-    var players: [Player]
-    init(players: [Player]) {
-        self.players = players
-        }
-    }
-    // เปรียบเทียบคะแนนของผู้เล่น
-    func calculateScores() -> [Int] {
-        var scores: [Int] = []
-        for player in players {
-            let playerScore = evaluatePlayerScore(player: player)
-            scores.append(playerScore)
-        }
-        return scores
-    }
-    // คำนวณคะแนนของผู้เล่น
-    func evaluatePlayerScore(player: Player) -> Int {
-        var totalScore = 0
-        // เปรียบเทียบแต่ละกองของผู้เล่น
-        for row in RowPosition.allCases {
-            let hand = player.handForRow(row)
-            let handRank = evaluateHand(cards: hand)
-            totalScore += handRank // ปรับตามค่าที่ต้องการ เช่น คะแนนของมือ
-        }
-        return totalScore
-    }
-    // เปรียบเทียบการชนะของผู้เล่น
-    func comparePlayers() -> [Int] {
-        var scores = calculateScores()
-        var results: [Int] = []
-        for i in 0..<players.count {
-            var playerResult = 0
-            for j in 0..<players.count {
-                if i != j {
-                    let result = compareHands(player1: players[i], player2: players[j])
-                    playerResult += result
-                }
-            }
-            results.append(playerResult)
-        }
-        return results
-    }
-    // เปรียบเทียบไพ่ระหว่าง 2 ผู้เล่น
-    func compareHands(player1: Player, player2: Player) -> Int {
-        // เปรียบเทียบทุกกองที่จัดไว้
-        var result = 0
-        for row in RowPosition.allCases {
-            let hand1 = player1.handForRow(row)
-            let hand2 = player2.handForRow(row)
-            if evaluateHand(cards: hand1) > evaluateHand(cards: hand2) {
-                result += 1
-            } else if evaluateHand(cards: hand1) < evaluateHand(cards: hand2) {
-                result -= 1
-            }
-        }
-        return result
-    }
-}
-// เปลี่ยนไปใช้ RowPosition ที่แยกการจัดการมือ
-enum RowPosition: CaseIterable {
-    case head, middle, tail
-}
-// ฟังก์ชันประเมินมือไพ่
-func evaluateHand(cards: [Card]) -> Int {
-    // แสดงให้เห็นวิธีการคำนวณมือไพ่ตามประเภท เช่น Royal Flush, Straight, Pair ฯลฯ
-    // ใช้เงื่อนไขต่างๆ ในการประเมินมือไพ่
-    return 0 // เปลี่ยนค่ากลับตามการเปรียบเทียบ
 
 import Foundastruct GameLogic {
     
@@ -674,28 +591,8 @@ import Foundastruct GameLogic {
         return Set(hand.map { $0.suit }).count == 1
     }
 
-    func straightRank(_ hand: [Card]) -> Int? {
+    static func idstraight(_ hand: [Card]) -> Bool {
     let ranks = hand.map { $0.rank.rawValue }.sorted()
-
-    let straights = [
-        [2, 3, 4, 5, 6],
-        [3, 4, 5, 6, 7],
-        [4, 5, 6, 7, 8],
-        [5, 6, 7, 8, 9],
-        [6, 7, 8, 9, 10],
-        [7, 8, 9, 10, 11],
-        [8, 9, 10, 11, 12],
-        [9, 10, 11, 12, 13],
-        [14, 2, 3, 4, 5],    // A-2-3-4-5
-        [10, 11, 12, 13, 14] // 10-J-Q-K-A
-    ]
-
-    for (index, straight) in straights.enumerated() {
-        if Set(ranks) == Set(straight) {
-            return index + 1
-        }
-    }
-    return nil
     }
 
     static func isThreeOfAKind(_ hand: [Card]) -> Bool {
@@ -718,26 +615,25 @@ import Foundastruct GameLogic {
         return aces.count == 2
     }
 
-    class GameLogic {
-
+class GameLogic {
     var players: [Player]
 
     init(players: [Player]) {
         self.players = players
-      }
     }
+
     // เปรียบเทียบคะแนนของผู้เล่น
     func calculateScores() -> [Int] {
         var scores: [Int] = []
-
+        
         for player in players {
             let playerScore = evaluatePlayerScore(player: player)
             scores.append(playerScore)
         }
-
+        
         return scores
     }
-
+    
     // คำนวณคะแนนของผู้เล่น
     func evaluatePlayerScore(player: Player) -> Int {
         var totalScore = 0
@@ -746,10 +642,10 @@ import Foundastruct GameLogic {
         for row in RowPosition.allCases {
             let hand = player.handForRow(row)
             let handRank = evaluateHand(cards: hand)
-
+            
             totalScore += handRank // ปรับตามค่าที่ต้องการ เช่น คะแนนของมือ
         }
-
+        
         return totalScore
     }
 
@@ -771,7 +667,7 @@ import Foundastruct GameLogic {
 
         return results
     }
-    }
+
     // เปรียบเทียบไพ่ระหว่าง 2 ผู้เล่น
     func compareHands(player1: Player, player2: Player) -> Int {
         // เปรียบเทียบทุกกองที่จัดไว้
@@ -779,7 +675,7 @@ import Foundastruct GameLogic {
         for row in RowPosition.allCases {
             let hand1 = player1.handForRow(row)
             let hand2 = player2.handForRow(row)
-
+            
             if evaluateHand(cards: hand1) > evaluateHand(cards: hand2) {
                 result += 1
             } else if evaluateHand(cards: hand1) < evaluateHand(cards: hand2) {
@@ -789,7 +685,7 @@ import Foundastruct GameLogic {
         return result
     }
 }
-                 
+
 // เปลี่ยนไปใช้ RowPosition ที่แยกการจัดการมือ
 enum RowPosition: CaseIterable {
     case head, middle, tail
@@ -802,4 +698,13 @@ func evaluateHand(cards: [Card]) -> Int {
     return 0 // เปลี่ยนค่ากลับตามการเปรียบเทียบ
 }
 
+func prepareNextRound() {
+    // ตรวจสอบสถานะผู้เล่น
+    players = players.filter { $0.isActive }
+
+    if players.count < 2 {
+        print("Not enough players to continue.")
+        // อาจแสดงผล Game Over หรือรอเพิ่มผู้เล่น
+    } else {
+        print("Starting next round with
                  
