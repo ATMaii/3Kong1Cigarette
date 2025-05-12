@@ -602,7 +602,7 @@ import Foundastruct GameLogic {
     }
 }
 
-struct GameLogic {
+class GameLogic {
     var players: [Player]
 
     init(players: [Player]) {
