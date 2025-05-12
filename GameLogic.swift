@@ -175,7 +175,7 @@ func calculateScore(hand : [Card], playerIndex: Int, playersCount: Int) -> Int {
 
 import Foundation
 
-struct HandEvaluator {
+class HandEvaluator {
 
     static func isRoyalFlush(_ hand: [Card]) -> Bool {
         return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
@@ -346,7 +346,7 @@ struct GameLogic {
 
 import Foundation
 
-struct GameLogic {
+class GameLogic {
     var players: [Player]
     var deck: Deck
 
@@ -382,7 +382,7 @@ struct GameLogic {
 
 import Foundation
 
-struct GameLogic: ObservableObject {
+class GameLogic: ObservableObject {
     @Published var players: [Player]
     var deck: Deck
 
