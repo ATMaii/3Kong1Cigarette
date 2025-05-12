@@ -1,3 +1,38 @@
+enum HandType: Int {
+    case highCard = 1
+    case pair
+    case twoPair
+    case threeOfAKind
+    case straight
+    case flush
+    case fullHouse
+    case fourOfAKind
+    case straightFlush
+    case royalFlush
+}
+
+func getHandType(_ cards: [Card]) -> HandType {
+    if isRoyalFlush(cards) { return .royalFlush }
+    if isStraightFlush(cards) { return .straightFlush }
+    if isFourOfAKind(cards) { return .fourOfAKind }
+    if isFullHouse(cards) { return .fullHouse }
+    if isFlush(cards) { return .flush }
+    if isStraight(cards) { return .straight }
+    if isThreeOfAKind(cards) { return .threeOfAKind }
+    if isTwoPair(cards) { return .twoPair }
+    if isPair(cards) { return .pair }
+    return .highCard
+}
+
+func isFoul(head: [Card], middle: [Card], tail: [Card]) -> Bool {
+    let headRank = getHandType(head).rawValue
+    let middleRank = getHandType(middle).rawValue
+    let tailRank = getHandType(tail).rawValue
+
+    // ตรวจสอบลำดับต้องเป็น: tail > middle > head
+    return !(tailRank >= middleRank && middleRank >= headRank)
+}
+
 import Foundation
 
 enum HandType: Int {
@@ -11,47 +46,6 @@ enum HandType: Int {
     case fourOfAKind           
     case straightFlush          
     case royalFlush             
-}
-
-func getHeadHandType(for cards: [Card]) -> HandType {
-    if isThreeOfAKind(cards) {
-        return .threeOfAKind
-    } else if isPair(cards) {
-        return .pair
-    } else {
-        return .highCard
-    }
-}
-func getHandType(for cards: [Card]) -> HandType {
-    if isRoyalFlush(cards) {
-        return .royalFlush
-    } else if isStraightFlush(cards) {
-        return .straightFlush
-    } else if isFourOfAKind(cards) {
-        return .fourOfAKind
-    } else if isFullHouse(cards) {
-        return .fullHouse
-    } else if isFlush(cards) {
-        return .flush
-    } else if isStraight(cards) {
-        return .straight
-    } else if isThreeOfAKind(cards) {
-        return .threeOfAKind
-    } else if isTwoPair(cards) {
-        return .twoPair
-    } else if isPair(cards) {
-        return .pair
-    } else {
-        return .highCard
-    }
-}
-func isFoul(head: [Card], middle: [Card], tail: [Card]) -> Bool {
-    let headRank = getHandType(head).rawValue
-    let middleRank = getHandType(middle).rawValue
-    let tailRank = getHandType(tail).rawValue
-
-    // ตรวจสอบลำดับต้องเป็น: tail > middle > head
-    return !(tailRank >= middleRank && middleRank >= headRank)
 }
 
 func getHeadHandTypestraightRank(for cards: [Card]) -> HandType {
