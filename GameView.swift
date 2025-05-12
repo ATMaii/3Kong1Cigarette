@@ -41,6 +41,65 @@ struct Card: Identifiable, Equatable {
 
 // MARK: - Views
 
+import SwiftUI
+
+struct GameView: View {
+    @StateObject var viewModel = GameViewModel()
+
+    var body: some View {
+        ZStack {
+            Color.green.ignoresSafeArea()
+            
+            VStack {
+                Spacer()
+                
+                // มงกุฎกลางโต๊ะ
+                Image(systemName: "crown.fill")
+                    .resizable()
+                    .frame(width: 80, height: 60)
+                    .foregroundColor(.yellow)
+                    .padding(.bottom, 100)
+
+                Spacer()
+                
+                // ไพ่ของผู้เล่นด้านล่าง
+                VStack(spacing: 8) {
+                    ForEach(HandType.allCases, id: \.self) { type in
+                        HStack(spacing: -20) {
+                            ForEach(viewModel.handByType[type] ?? []) { card in
+                                CardView(card: card)
+                            }
+                        }
+                    }
+                }
+                .padding(.bottom, 16)
+            }
+            
+            // ปุ่ม 《 》 ขวาล่าง
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        viewModel.toggleSort()
+                    }) {
+                        Text("《 》")
+                            .font(.title)
+                            .padding(10)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    .padding(.trailing, 16)
+                }
+            }
+        }
+        .onAppear {
+            viewModel.startGame()
+        }
+    }
+}
+
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
@@ -68,7 +127,7 @@ struct GameView: View {
                 let player3 = gameLogic.players[2] // ผู้เล่นหลัก
 
                 VStack(spacing: 40) {
-                    // แถวหัว (3 ช่อง)
+     // แถวหัว (3 ช่อง)
                     CardRowView(title: "หัว", cards: player3.headCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .head)
