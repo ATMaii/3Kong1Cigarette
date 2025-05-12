@@ -106,6 +106,65 @@ VStack {
         .padding(.trailing, 16)
     }
 }
+            struct GameView: View {
+    @StateObject var viewModel = GameViewModel()
+    @State private var showMenu = false
+
+    var body: some View {
+        ZStack {
+            Color.green.ignoresSafeArea()
+
+            // ... (ไพ่, มงกุฎ, ปุ่ม 《 》 ∞ เหมือนเดิม)
+
+            // Hamburger Menu + Popup Menu
+            VStack {
+                HStack {
+                    // ปุ่มสามขีด
+                    Button(action: {
+                        showMenu.toggle()
+                    }) {
+                        Image(systemName: "line.horizontal.3")
+                            .font(.title2)
+                            .padding(10)
+                            .background(Color.black.opacity(0.6))
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                    }
+
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+
+                Spacer()
+            }
+
+            // เมนูป็อปอัป
+            if showMenu {
+                VStack(alignment: .leading, spacing: 12) {
+                    Button(action: {
+                        // ออกจากเกม
+                        // ตัวอย่าง: viewModel.exitGame()
+                    }) {
+                        Text("《 Exit")
+                            .foregroundColor(.white)
+                            .padding(8)
+                            .background(Color.red)
+                            .cornerRadius(8)
+                    }
+                }
+                .padding()
+                .background(Color.black.opacity(0.8))
+                .cornerRadius(12)
+                .frame(maxWidth: 150)
+                .position(x: 100, y: 80) // ปรับตำแหน่งเมนู
+            }
+        }
+        .onAppear {
+            viewModel.startGame()
+        }
+    }
+            }
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
@@ -116,12 +175,12 @@ struct GameView: View {
 
     var body: some View {
         VStack {
-            Text("Game: 3กอง")
+            Text("Game:3กอง")
                 .font(.largeTitle)
                 .padding()
 
             if !gameStarted {
-                Button("เริ่มเกม") {
+                Button("Start") {
                     gameLogic.startNewGame()
                     gameStarted = true
                     startTimer()
@@ -134,19 +193,19 @@ struct GameView: View {
 
                 VStack(spacing: 40) {
      // แถวหัว (3 ช่อง)
-                    CardRowView(title: "หัว", cards: player3.headCards)
+                    CardRowView(title: " ", cards: player3.headCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .head)
                         }
 
                     // แถวกลาง (5 ช่อง)
-                    CardRowView(title: "กลาง", cards: player3.middleCards)
+                    CardRowView(title: " ", cards: player3.middleCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .middle)
                         }
 
                     // แถวท้าย (5 ช่อง)
-                    CardRowView(title: "ท้าย", cards: player3.tailCards)
+                    CardRowView(title: " ", cards: player3.tailCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .tail)
                         }
@@ -154,7 +213,7 @@ struct GameView: View {
                     Divider()
 
                     // ไพ่ที่ยังไม่ได้จัด
-                    Text("ไพ่ของคุณ")
+                    Text(" ")
                         .font(.headline)
                     ScrollView(.horizontal) {
                         HStack {
@@ -166,7 +225,7 @@ struct GameView: View {
                         .padding()
                     }
 
-                    Button("เสร็จแล้ว") {
+                    Button("Done") {
                         // บันทึกการจัดไพ่
                         isGameActive = false
                         isGameOver = true
@@ -181,7 +240,7 @@ struct GameView: View {
 
         }
         .alert(isPresented: $showScorePopup) {
-            Alert(title: Text("ผลคะแนน"), message: Text(scoreSummary()), dismissButton: .default(Text("ตกลง")))
+            Alert(title: Text("Score"), message: Text(scoreSummary()), dismissButton: .default(Text("Ok")))
         }
 }
     private func dragGesture(for card: Card) -> some Gesture {
@@ -332,12 +391,12 @@ struct GameView: View {
 
     var body: some View {
         VStack {
-            Text("Game: 3กอง")
+            Text("Game:3กอง")
                 .font(.largeTitle)
                 .padding()
 
             if !gameStarted {
-                Button("เริ่มเกม") {
+                Button("Start") {
                     gameLogic.startNewGame()
                     gameStarted = true
                     startTimer()
@@ -365,12 +424,12 @@ struct GameView: View {
 
     var body: some View {
         VStack {
-            Text("Game: 3กอง")
+            Text("Game:3กอง")
                 .font(.largeTitle)
                 .padding()
 
             if !gameStarted {
-                Button("เริ่มเกม") {
+                Button("Start") {
                     gameLogic.startNewGame()
                     gameStarted = true
                     startTimer()
@@ -500,7 +559,7 @@ struct GameView: View {
         VStack {
             // Top Bar
             HStack {
-                Button("Exit") {
+                Button("《 Exit") {
                     // ออกเกม
                      
 import Foundation
