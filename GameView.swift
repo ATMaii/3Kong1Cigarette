@@ -190,8 +190,13 @@ struct GameView: View {
         }
         .onAppear {
             viewModel.startGame()
+            viewModel.loadPlayers()
             updateTime()
+         {
+    
+    }
         }
+        
     }
 
     func updateTime() {
