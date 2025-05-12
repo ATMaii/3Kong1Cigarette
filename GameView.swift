@@ -87,8 +87,6 @@ import SwiftUI
 
 struct GameView: View {
     @StateObject var viewModel = GameViewModel()
-    @State private var currentTime = ""
-    @State private var isMenuOpen = false
 
     var body: some View {
         ZStack {
@@ -105,100 +103,117 @@ struct GameView: View {
                     .padding(.bottom, 100)
 
                 Spacer()
-                
+   
                 if viewModel.hasStarted {
-    VStack(spacing: 8) {
-        Spacer() // เพิ่มตัวนี้ถ้าอยากให้ไพ่ไม่แนบล่าง
-
-        ForEach(HandType.allCases, id: \.self) { type in
-            HStack(spacing: -20) {
-                ForEach(viewModel.handByType[type] ?? []) { card in
-                    CardView(card: card)
-                }
-            }
-        }
-        .padding(.bottom, 16)
-    }
-                }
-                
-            // ปุ่ม 《 》 และ ∞ ขวาบน
-            VStack {
-                HStack {
-                    Spacer()
-
-                    VStack(spacing: 8) {
-                        Button(action: {
-                            viewModel.autoArrangeHand()
-                        }) {
-                            Text("∞")
-                                .font(.title)
-                                .padding(10)
-                                .background(Color.purple)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
+            // ไพ่ของผู้เล่นด้านล่าง + ปุ่ม 《》
+            VStack(spacing: 8) {
+                ForEach(HandType.allCases, id: \.self) { type in
+                    HStack(spacing: -20) {
+                        ForEach(viewModel.handByType[type] ?? []) { card in
+                            CardView(card: card)
                         }
-
-                        Button(action: {
-                            viewModel.toggleSort()
-                        }) {
-                            Text("《 》")
-                                .font(.title)
-                                .padding(10)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
+                        // ปุ่ม 《》 อยู่ในแนวเดียวกับไพ่
+                        if type == .back {
+                            Button(action: {
+                                viewModel.toggleSort()
+                            }) {
+                                Text("《》")
+                                    .font(.title)
+                                    .padding(10)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(8)
+                            }
+                            .padding(.leading, 8)
                         }
                     }
-                    .padding(.top, 16)
-                    .padding(.trailing, 16)
                 }
-
-                Spacer()
             }
+            .padding(.bottom, 16)
+        }
+    }
 
-            // เมนู 3 ขีด + เวลา
+    // ปุ่ม ∞ แยกออกมาด้านล่างขวา แนวตั้ง
+    VStack {
+        Spacer()
+        HStack {
+            Spacer()
+            Button(action: {
+                viewModel.autoArrange()
+            }) {
+                Text("∞")
+                    .font(.largeTitle)
+                    .padding()
+                    .background(Color.purple)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+            }
+            .padding(.trailing, 16)
+            .padding(.bottom, 100) // ให้สูงกว่าไพ่หน่อย
+        }
+            .onAppear {
+    viewModel.loadPlayers()
+    viewModel.startGame()
+            }
+     .onChange(of: viewModel.players.count) { count in
+    if count == 4 {
+        viewModel.startGame()                         
+        }
+    }
+        
+    struct GameView: View {
+    @State private var isMenuOpen = false
+    @State private var currentTime: String = ""
+
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            GameContentView()
+            // ปุ่ม 3 ขีด + เวลา
             VStack(alignment: .leading, spacing: 4) {
+                // ปุ่ม 3 ขีด
                 Button(action: {
                     isMenuOpen.toggle()
                 }) {
-                    Image(systemName: "line.horizontal.3")
-                        .font(.title2)
-                        .padding(10)
-                        .background(Color.black.opacity(0.6))
+                    Text("≡")
+                        .font(.largeTitle)
+                        .padding(8)
+                        .background(Color.black.opacity(0.7))
                         .foregroundColor(.white)
-                        .clipShape(Circle())
+                        .cornerRadius(8)
                 }
-
-                if isMenuOpen {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Button("《 Exit") {
-                            // ดำเนินการออก
-                        }
-                        .foregroundColor(.white)
-                        .padding(.top, 4)
-                    }
-                }
-
                 // เวลา
-                Text(currentTime)
-                    .foregroundColor(.white)
+                Text(Self.formatter.string(from: currentTime))
                     .font(.caption)
-                    .padding(.top, 4)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.black.opacity(0.5))
+                    .cornerRadius(6)
             }
-            .padding(.leading, 16)
-            .padding(.top, 16)
+            .padding(.leading, 12)
+            .padding(.top, 20)
+
+            // เมนู overlay เมื่อกดปุ่ม 3 ขีด
+            if isMenuOpen {
+                VStack(alignment: .leading, spacing: 12) {
+                    Button("《 ออกจากเกมส์") {
+                        // ทำสิ่งที่ต้องการเมื่อกด Exit
+                    }
+                    // เพิ่มเมนูอื่น ๆ ได้ที่นี่
+                }
+                .padding()
+                .background(Color.black.opacity(0.8))
+                .cornerRadius(12)
+                .frame(maxWidth: 150)
+                .position(x: 100, y: 100) // อยู่ข้างใต้ปุ่ม ≡
+            }
         }
         .onAppear {
-            viewModel.startGame()
-            viewModel.loadPlayers()
-            updateTime()
-         {
-    
+    updateTime()
+    Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+        updateTime()
     }
         }
-        
-    }
-
     func updateTime() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             let formatter = DateFormatter()
