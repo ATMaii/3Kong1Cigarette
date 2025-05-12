@@ -236,7 +236,83 @@ class HandEvaluator {
     }
 }
 
-                 
+enum RowPosition {
+    case head, middle, tail
+}
+
+struct Player {
+    var id: Int
+    var hand: [Card] // 13 cards (รวมทุกแถว)
+    var score: Int = 0
+    var chips: Int = 5000 // เริ่มต้นชิป
+}
+
+// ฟังก์ชันเพื่อแยกไพ่เป็น 3 แถว (Head, Middle, Tail)
+func splitHandIntoRows(hand: [Card]) -> (head: [Card], middle: [Card], tail: [Card]) {
+    let head = Array(hand.prefix(3))       // 3 ใบแรก (หัว)
+    let middle = Array(hand[3..<8])        // 5 ใบถัดมา (กลาง)
+    let tail = Array(hand[8..<13])         // 5 ใบสุดท้าย (ท้าย)
+    return (head, middle, tail)
+}
+
+// ฟังก์ชันเปรียบเทียบมือไพ่
+func compareHands(hand1: [Card], hand2: [Card]) -> Int {
+    // เรียกใช้ฟังก์ชันตรวจสอบมือไพ่ต่างๆ (Full House, Flush, ฯลฯ)
+    let score1 = evaluateHand(cards: hand1)
+    let score2 = evaluateHand(cards: hand2)
+    
+    if score1 > score2 {
+        return 1 // hand1 ชนะ
+    } else if score1 < score2 {
+        return -1 // hand2 ชนะ
+    } else {
+        return 0 // เสมอ
+    }
+}
+
+// ฟังก์ชันคำนวณคะแนนของแต่ละผู้เล่น
+func calculateScores(players: [Player]) {
+    for i in 0..<players.count {
+        var totalScore = 0
+        
+        // แยกไพ่เป็น 3 แถว (Head, Middle, Tail)
+        let (head, middle, tail) = splitHandIntoRows(hand: players[i].hand)
+        
+        // เปรียบเทียบ Head กับ Head ของทุกคน
+        for j in 0..<players.count {
+            if i != j {
+                let opponent = players[j]
+                totalScore += compareHands(hand1: head, hand2: opponent.hand.prefix(3)) // เปรียบเทียบ Head
+            }
+        }
+        
+        // เปรียบเทียบ Middle กับ Middle ของทุกคน
+        for j in 0..<players.count {
+            if i != j {
+                let opponent = players[j]
+                totalScore += compareHands(hand1: middle, hand2: opponent.hand[3..<8]) // เปรียบเทียบ Middle
+            }
+        }
+        
+        // เปรียบเทียบ Tail กับ Tail ของทุกคน
+        for j in 0..<players.count {
+            if i != j {
+                let opponent = players[j]
+                totalScore += compareHands(hand1: tail, hand2: opponent.hand[8..<13]) // เปรียบเทียบ Tail
+            }
+        }
+        
+        // เก็บคะแนน
+        players[i].score = totalScore
+    }
+}
+
+// ฟังก์ชันคำนวณ Chips
+func calculateChips(players: [Player]) {
+    for player in players {
+        let finalChips = player.chips + player.score * 100  // คูณกับ 100 เพื่อแปลงคะแนนเป็น Chips
+        print("Player
+              
 struct GameLogic {
     
     static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
