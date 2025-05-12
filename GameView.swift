@@ -74,32 +74,38 @@ struct GameView: View {
                 }
                 .padding(.bottom, 16)
             }
-            
-            // ปุ่ม 《 》 ขวาล่าง
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        viewModel.toggleSort()
-                    }) {
-                        Text("《 》")
-                            .font(.title)
-                            .padding(10)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
-                    .padding(.trailing, 16)
-                }
+
+// ปุ่ม 《 》 ขวาล่าง พร้อมปุ่ม ∞ ด้านบน
+VStack {
+    Spacer()
+    HStack {
+        Spacer()
+        VStack(spacing: 12) {
+            Button(action: {
+                viewModel.autoArrange()
+            }) {
+                Text("∞")
+                    .font(.title)
+                    .frame(width: 44, height: 44)
+                    .background(Color.purple)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+
+            Button(action: {
+                viewModel.toggleSort()
+            }) {
+                Text("《 》")
+                    .font(.title)
+                    .frame(width: 44, height: 44)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
             }
         }
-        .onAppear {
-            viewModel.startGame()
-        }
+        .padding(.trailing, 16)
     }
 }
-
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
