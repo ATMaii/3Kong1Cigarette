@@ -17,25 +17,44 @@ class GameViewController: UIViewController {
         // แสดงโต๊ะ
         drawTable()
     }
-    
+
     func drawTable() {
-        // วาดกลางโต๊ะที่เป็นตาราง
-        let table = UIView()
-        table.frame = CGRect(x: 50, y: 50, width: 300, height: 300)
-        table.backgroundColor = .gray
-        self.view.addSubview(table)
+    let tableSize: CGFloat = 300
+    let tableOrigin = CGPoint(x: 50, y: 50)
+
+    let table = UIView()
+    table.frame = CGRect(origin: tableOrigin, size: CGSize(width: tableSize, height: tableSize))
+    table.backgroundColor = .clear
+    self.view.addSubview(table)
+    self.tableView = table
+
+    // วาดมงกุฏตรงกลาง
+    let crownImageView = UIImageView(image: UIImage(named: "crown"))
+    crownImageView.contentMode = .scaleAspectFit
+    crownImageView.frame = CGRect(x: (tableSize - 100) / 2, y: (tableSize - 100) / 2, width: 100, height: 100)
+    table.addSubview(crownImageView)
+
+    // เพิ่มตำแหน่งผู้เล่นเหมือนเดิม
+    let leftPlayerPosition = CGRect(x: 0, y: 150, width: 50, height: 50)
+    let topPlayerPosition = CGRect(x: 150, y: 0, width: 50, height: 50)
+    let rightPlayerPosition = CGRect(x: 300, y: 150, width: 50, height: 50)
+    let bottomPlayerPosition = CGRect(x: 150, y: 300, width: 50, height: 50)
+
+    addPlayerMarker(at: leftPlayerPosition, name: "Left")
+    addPlayerMarker(at: topPlayerPosition, name: "Top")
+    addPlayerMarker(at: rightPlayerPosition, name: "Right")
+    addPlayerMarker(at: bottomPlayerPosition, name: "Bottom")
+    
+   // เพิ่มปุ่ม toggleSortButton ที่มุมขวาล่าง
+    toggleSortButton = UIButton(type: .system)
+    toggleSortButton.setTitle("《》", for: .normal)
+    toggleSortButton.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+    let buttonWidth: CGFloat = 40
+    let buttonHeight: CGFloat = 40
+    toggleSortButton.frame = CGRect(x: view.frame.width - buttonWidth - 20, y: table.frame.maxY + 20, width: buttonWidth, height: buttonHeight)
+    toggleSortButton.addTarget(self, action: #selector(toggleSort), for: .touchUpInside)
+    view.addSubview(toggleSortButton)
         
-        
-        // ตำแหน่งผู้เล่น
-        let leftPlayerPosition = CGRect(x: 0, y: 150, width: 50, height: 50)
-        let topPlayerPosition = CGRect(x: 150, y: 0, width: 50, height: 50)
-        let rightPlayerPosition = CGRect(x: 300, y: 150, width: 50, height: 50)
-        let bottomPlayerPosition = CGRect(x: 150, y: 300, width: 50, height: 50)
-        
-        addPlayerMarker(at: leftPlayerPosition, name: "Left")
-        addPlayerMarker(at: topPlayerPosition, name: "Top")
-        addPlayerMarker(at: rightPlayerPosition, name: "Right")
-        addPlayerMarker(at: bottomPlayerPosition, name: "Bottom")
     }
     
     func addPlayerMarker(at position: CGRect, name: String) {
@@ -86,4 +105,59 @@ func addCardsForBottomPlayer(in table: UIView) {
 
         table.addSubview(cardView)
     }
+}
+
+enum SortType {
+    case rank
+    case suit
+
+    mutating func toggle() {
+        self = (self == .rank) ? .suit : .rank
+    }
+}
+
+func sortHand(_ hand: [Card], by sortType: SortType) -> [Card] {
+    switch sortType {
+    case .rank:
+        return hand.sorted {
+            if $0.rank.rawValue == $1.rank.rawValue {
+                return $0.suit.rawValue < $1.suit.rawValue
+            } else {
+                return $0.rank.rawValue < $1.rank.rawValue
+            }
+        }
+    case .suit:
+        return hand.sorted {
+            if $0.suit.rawValue == $1.suit.rawValue {
+                return $0.rank.rawValue < $1.rank.rawValue
+            } else {
+                return $0.suit.rawValue < $1.suit.rawValue
+            }
+        }
+    }
+}
+
+// เรียกใช้
+let hand = Deck().draw(count: 13)
+let sortedHand = sortHand(hand, by: .rank)
+addCards(sortedHand, toBottomOf: table)
+toggleSortButton.setTitle("《》", for: .normal)
+
+@objc func sortByRank() {
+    clearBottomCards()
+    let sorted = sortHand(bottomHand, by: .rank)
+    addCards(sorted, toBottomOf: table)
+}
+
+@objc func sortBySuit() {
+    clearBottomCards()
+    let sorted = sortHand(bottomHand, by: .suit)
+    addCards(sorted, toBottomOf: table)
+}
+
+func clearBottomCards() {
+    for cardView in bottomCardViews {
+        cardView.removeFromSuperview()
+    }
+    bottomCardViews.removeAll()
 }
