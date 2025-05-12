@@ -490,7 +490,7 @@ struct PlayerHand {
         VStack {
             Text("Player 1 Score:
    
-struct GameLogic : {
+class GameLogic : {
     
     var players: [PlayerHand]
     
