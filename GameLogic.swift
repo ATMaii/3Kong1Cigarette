@@ -1,18 +1,17 @@
 import Foundation
 
 enum HandType: Int {
-    case highCard = 1           // ไพ่สูง
-    case pair                   // หนึ่งคู่
-    case twoPair                // สองคู่
-    case threeOfAKind           // ตอง
-    case straight               // สเตรท
-    case flush                  // ฟลัช
-    case fullHouse              // ฟูลเฮ้าส์
-    case fourOfAKind            // โฟร์การ์ด
-    case straightFlush          // สเตรทฟลัช
-    case royalFlush             // รอยัลฟลัช
+    case highCard = 1          
+    case pair                  
+    case twoPair                
+    case threeOfAKind           
+    case straight               
+    case flush                 
+    case fullHouse            
+    case fourOfAKind           
+    case straightFlush          
+    case royalFlush             
 }
-
 
 func getHeadHandType(for cards: [Card]) -> HandType {
     if isThreeOfAKind(cards) {
@@ -399,24 +398,24 @@ class GameLogic: ObservableObject {
     }
     
     func splitIntoThreePiles(player: Player) -> ([Card], [Card], [Card]) {
-        var Top: [Card] = []
-        var Middle: [Card] = []
-        var Buttom: [Card] = []
+        var head: [Card] = []
+        var middle: [Card] = []
+        var tail: [Card] = []
 
         // แบ่งไพ่ 13 ใบให้เป็น 3 กอง
         let playerHand = player.hand.sorted { $0.rank.rawValue < $1.rank.rawValue }
 
         for i in 0..<13 {
             if i < 3 {
-                Top.append(playerHand[i])  // กองท้าย
+                head.append(playerHand[i])  // กองท้าย
             } else if i < 8 {
-                Middle.append(playerHand[i])  // กองกลาง
+                middle.append(playerHand[i])  // กองกลาง
             } else {
-                Buttom.append(playerHand[i])  // กองหัว
+                tail.append(playerHand[i])  // กองหัว
             }
         }
 
-        return (Top, Middle, Buttom)
+        return (head, middle, tail)
     }
 }
 
@@ -435,10 +434,10 @@ struct ContentView : View {
         return (hand1.count > hand2.count) ? 1 : (hand1.count < hand2.count ? -1 : 0)
     }
     
-    func calculateScore(player1Top: [Card], player1Middle: [Card], player1Bottom: [Card],
-                        player2Top: [Card], player2Middle: [Card], player2Bottom: [Card],
-                        player3Top: [Card], player3Middle: [Card], player3Bottom: [Card],
-                        player4Top: [Card], player4Middle: [Card], player4Bottom: [Card]) {
+    func calculateScore(player1head: [Card], player1middle: [Card], player1tail: [Card],
+                        player2head: [Card], player2middle: [Card], player2tail: [Card],
+                        player3head: [Card], player3middle: [Card], player3tail: [Card],
+                        player4head: [Card], player4middle: [Card], player4tail: [Card]) {
         
         let score1 = compareHands(player1Top, player2Top) + compareHands(player1Middle, player2Middle) + compareHands(player1Bottom, player2Bottom)
         let score2 = compareHands(player1Top, player3Top) + compareHands(player1Middle, player3Middle) + compareHands(player1Bottom, player3Bottom)
