@@ -41,18 +41,62 @@ struct Card: Identifiable, Equatable {
 
 // MARK: - Views
 
+
+import SwiftUI
+import Foundation
+
+enum Suit: String, CaseIterable {
+    case hearts = "♥"
+    case diamonds = "♦"
+    case clubs = "♣"
+    case spades = "♠"
+}
+
+enum Rank: Int, CaseIterable, Comparable {
+    case two = 2, three, four, five, six, seven, eight, nine, ten
+    case jack = 11, queen, king, ace = 14
+
+    var display: String {
+        switch self {
+        case .jack: return "J"
+        case .queen: return "Q"
+        case .king: return "K"
+        case .ace: return "A"
+        default: return String(self.rawValue)
+        }
+    }
+
+    static func < (lhs: Rank, rhs: Rank) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
+
+struct Card: Identifiable, Equatable {
+    let id = UUID()
+    let suit: Suit
+    let rank: Rank
+
+    var display: String {
+        return "\(rank.display)\(suit.rawValue)"
+    }
+}
+
+// MARK: - Views
+
 import SwiftUI
 
 struct GameView: View {
     @StateObject var viewModel = GameViewModel()
+    @State private var currentTime = ""
+    @State private var isMenuOpen = false
 
     var body: some View {
         ZStack {
             Color.green.ignoresSafeArea()
-            
+
             VStack {
                 Spacer()
-                
+
                 // มงกุฎกลางโต๊ะ
                 Image(systemName: "crown.fill")
                     .resizable()
@@ -62,109 +106,101 @@ struct GameView: View {
 
                 Spacer()
                 
-                // ไพ่ของผู้เล่นด้านล่าง
-                VStack(spacing: 8) {
-                    ForEach(HandType.allCases, id: \.self) { type in
-                        HStack(spacing: -20) {
-                            ForEach(viewModel.handByType[type] ?? []) { card in
-                                CardView(card: card)
-                            }
-                        }
-                    }
+                if viewModel.hasStarted {
+    VStack(spacing: 8) {
+        Spacer() // เพิ่มตัวนี้ถ้าอยากให้ไพ่ไม่แนบล่าง
+
+        ForEach(HandType.allCases, id: \.self) { type in
+            HStack(spacing: -20) {
+                ForEach(viewModel.handByType[type] ?? []) { card in
+                    CardView(card: card)
                 }
-                .padding(.bottom, 16)
-            }
-
-// ปุ่ม 《 》 ขวาล่าง พร้อมปุ่ม ∞ ด้านบน
-VStack {
-    Spacer()
-    HStack {
-        Spacer()
-        VStack(spacing: 12) {
-            Button(action: {
-                viewModel.autoArrange()
-            }) {
-                Text("∞")
-                    .font(.title)
-                    .frame(width: 44, height: 44)
-                    .background(Color.purple)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-            }
-
-            Button(action: {
-                viewModel.toggleSort()
-            }) {
-                Text("《 》")
-                    .font(.title)
-                    .frame(width: 44, height: 44)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
             }
         }
-        .padding(.trailing, 16)
+        .padding(.bottom, 16)
     }
-}
-            struct GameView: View {
-    @StateObject var viewModel = GameViewModel()
-    @State private var showMenu = false
-
-    var body: some View {
-        ZStack {
-            Color.green.ignoresSafeArea()
-
-            // ... (ไพ่, มงกุฎ, ปุ่ม 《 》 ∞ เหมือนเดิม)
-
-            // Hamburger Menu + Popup Menu
+                }
+                
+            // ปุ่ม 《 》 และ ∞ ขวาบน
             VStack {
                 HStack {
-                    // ปุ่มสามขีด
-                    Button(action: {
-                        showMenu.toggle()
-                    }) {
-                        Image(systemName: "line.horizontal.3")
-                            .font(.title2)
-                            .padding(10)
-                            .background(Color.black.opacity(0.6))
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                    }
-
                     Spacer()
+
+                    VStack(spacing: 8) {
+                        Button(action: {
+                            viewModel.autoArrangeHand()
+                        }) {
+                            Text("∞")
+                                .font(.title)
+                                .padding(10)
+                                .background(Color.purple)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+
+                        Button(action: {
+                            viewModel.toggleSort()
+                        }) {
+                            Text("《 》")
+                                .font(.title)
+                                .padding(10)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                    }
+                    .padding(.top, 16)
+                    .padding(.trailing, 16)
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, 16)
 
                 Spacer()
             }
 
-            // เมนูป็อปอัป
-            if showMenu {
-                VStack(alignment: .leading, spacing: 12) {
-                    Button(action: {
-                        // ออกจากเกม
-                        // ตัวอย่าง: viewModel.exitGame()
-                    }) {
-                        Text("《 Exit")
-                            .foregroundColor(.white)
-                            .padding(8)
-                            .background(Color.red)
-                            .cornerRadius(8)
+            // เมนู 3 ขีด + เวลา
+            VStack(alignment: .leading, spacing: 4) {
+                Button(action: {
+                    isMenuOpen.toggle()
+                }) {
+                    Image(systemName: "line.horizontal.3")
+                        .font(.title2)
+                        .padding(10)
+                        .background(Color.black.opacity(0.6))
+                        .foregroundColor(.white)
+                        .clipShape(Circle())
+                }
+
+                if isMenuOpen {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Button("《 Exit") {
+                            // ดำเนินการออก
+                        }
+                        .foregroundColor(.white)
+                        .padding(.top, 4)
                     }
                 }
-                .padding()
-                .background(Color.black.opacity(0.8))
-                .cornerRadius(12)
-                .frame(maxWidth: 150)
-                .position(x: 100, y: 80) // ปรับตำแหน่งเมนู
+
+                // เวลา
+                Text(currentTime)
+                    .foregroundColor(.white)
+                    .font(.caption)
+                    .padding(.top, 4)
             }
+            .padding(.leading, 16)
+            .padding(.top, 16)
         }
         .onAppear {
             viewModel.startGame()
+            updateTime()
         }
     }
-            }
+
+    func updateTime() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            self.currentTime = formatter.string(from: Date())
+                                                                 }
+    }
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
