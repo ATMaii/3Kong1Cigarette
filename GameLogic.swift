@@ -435,7 +435,7 @@ class GameLogic: ObservableObject {
 
 import SwiftUI
 
-struct GameLogic : View {
+class GameLogic : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
     @State private var player3Score = 0
@@ -480,7 +480,7 @@ struct GameLogic : View {
 
 import SwiftUI
 
-struct ContentView: View {
+class GameLogic : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
 
@@ -508,7 +508,8 @@ struct PlayerHand {
         VStack {
             Text("Player 1 Score:
    
-class GameLogic {
+class GameLogic : {
+    
     var players: [PlayerHand]
     
     init(players: [PlayerHand]) {
@@ -527,7 +528,6 @@ class GameLogic {
         
         return scores
     }
-
     private func compare(_ a: PlayerHand, _ b: PlayerHand) -> Int {
         var score = 0
         score += compareLayer(a.top, b.top, isTop: true)
@@ -553,9 +553,8 @@ class GameLogic {
         let ranks = cards.map { $0.rank }
         return ranks.filter { $0 == "A" }.count >= 3
     }
-    }
+}
       
-
 import Foundastruct GameLogic {
     
     static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
@@ -614,6 +613,7 @@ import Foundastruct GameLogic {
         let aces = hand.filter { $0.rank == .ace }
         return aces.count == 2
     }
+}
 
 class GameLogic {
     var players: [Player]
