@@ -1,4 +1,12 @@
 class GameViewModel: ObservableObject {
+    @Published var hasStarted = false
+
+func startGame() {
+    hasStarted = true
+    // แจกไพ่ที่นี่
+    let newHand = Deck().draw(count: 13)
+    assignHandToTypes(newHand) // หรือวิธีที่คุณใช้แยกเป็นหัว กลาง ท้าย
+}
     @Published var hands: [HandType: [Card]] = [
         .front: [],
         .middle: [],
