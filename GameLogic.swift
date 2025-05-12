@@ -422,7 +422,7 @@ class GameLogic: ObservableObject {
 
 import SwiftUI
 
-struct GameLogic : View {
+struct ContentView : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
     @State private var player3Score = 0
@@ -467,7 +467,7 @@ struct GameLogic : View {
 
 import SwiftUI
 
-struct GameLogic : View {
+struct ContentView : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
 
