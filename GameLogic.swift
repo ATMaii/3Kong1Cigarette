@@ -80,7 +80,7 @@ func straightRank(_ hand: [Card]) -> Int? {
     return nil
 }
     
-static func HandEvaluator(hand: [Card])->HandType {
+func HandEvaluator(hand: [Card])->HandType {
         var score = 0
     
         if HandEvaluator.isRoyalFlush(hand) {
@@ -105,21 +105,8 @@ static func HandEvaluator(hand: [Card])->HandType {
             return .highCard
         }
     }
-
-    enum HandTypeScore : Int {
-    case RoyalFlush = 8
-    case StraightFlush = 7
-    case FourOfAKind = 6
-    case FullHouse = 1
-    case Flush = 1
-    case Straight = 1
-    case ThreeOfAKind = 1
-    case TwoPair = 1
-    case Pair = 1
-    case HighCard = 1
-    }
     
-func calculatorScore(hand: [Card], row: RowPosition) -> Int {
+func calculatorScore(cards : [Card], row: RowPosition) -> Int {
       var score = 0
     
       if isRoyalFlush(cards) {
@@ -146,7 +133,7 @@ func calculatorScore(hand: [Card], row: RowPosition) -> Int {
     return score
 }
 
-func calculateScore(cards: [Card], playerIndex: Int, playersCount: Int) -> Int {
+func calculateScore(hand : [Card], playerIndex: Int, playersCount: Int) -> Int {
     var score = 0
 
     if isRoyalFlush(hand) {
@@ -412,24 +399,24 @@ class GameLogic: ObservableObject {
     }
     
     func splitIntoThreePiles(player: Player) -> ([Card], [Card], [Card]) {
-        var head: [Card] = []
-        var middle: [Card] = []
-        var tail: [Card] = []
+        var Top: [Card] = []
+        var Middle: [Card] = []
+        var Buttom: [Card] = []
 
         // แบ่งไพ่ 13 ใบให้เป็น 3 กอง
         let playerHand = player.hand.sorted { $0.rank.rawValue < $1.rank.rawValue }
 
         for i in 0..<13 {
-            if i < 5 {
-                tail.append(playerHand[i])  // กองท้าย
-            } else if i < 10 {
-                middle.append(playerHand[i])  // กองกลาง
+            if i < 3 {
+                Top.append(playerHand[i])  // กองท้าย
+            } else if i < 8 {
+                Middle.append(playerHand[i])  // กองกลาง
             } else {
-                head.append(playerHand[i])  // กองหัว
+                Buttom.append(playerHand[i])  // กองหัว
             }
         }
 
-        return (head, middle, tail)
+        return (Top, Middle, Buttom)
     }
 }
 
@@ -480,7 +467,7 @@ class GameLogic : View {
 
 import SwiftUI
 
-class GameLogic : View {
+struct GameLogic : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
 
@@ -501,14 +488,14 @@ struct PlayerHand {
     if let winner = highestScore {
         self.winner = winner
         print("Winner:
-             }
+             
     }
 }
     var body: some View {
         VStack {
             Text("Player 1 Score:
    
-class GameLogic : {
+struct GameLogic : {
     
     var players: [PlayerHand]
     
@@ -615,7 +602,7 @@ import Foundastruct GameLogic {
     }
 }
 
-class GameLogic {
+struct GameLogic {
     var players: [Player]
 
     init(players: [Player]) {
