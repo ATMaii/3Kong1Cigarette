@@ -175,7 +175,7 @@ func calculateScore(hand : [Card], playerIndex: Int, playersCount: Int) -> Int {
 
 import Foundation
 
-class HandEvaluator {
+struct HandEvaluator {
 
     static func isRoyalFlush(_ hand: [Card]) -> Bool {
         return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
@@ -346,7 +346,7 @@ struct GameLogic {
 
 import Foundation
 
-class GameLogic {
+struct GameLogic {
     var players: [Player]
     var deck: Deck
 
@@ -382,7 +382,7 @@ class GameLogic {
 
 import Foundation
 
-class GameLogic: ObservableObject {
+struct GameLogic: ObservableObject {
     @Published var players: [Player]
     var deck: Deck
 
@@ -422,7 +422,7 @@ class GameLogic: ObservableObject {
 
 import SwiftUI
 
-class GameLogic : View {
+struct GameLogic : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
     @State private var player3Score = 0
