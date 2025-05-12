@@ -539,7 +539,7 @@ struct GameLogic : {
       
 import Foundastruct GameLogic {
     
-    static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
+struct func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
         // เปรียบเทียบสองมือ ใครชนะ
         // return 1 if A ชนะ, -1 if B ชนะ
         return 0
