@@ -435,7 +435,7 @@ class GameLogic: ObservableObject {
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameLogic : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
     @State private var player3Score = 0
