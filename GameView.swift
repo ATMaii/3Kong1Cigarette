@@ -289,10 +289,6 @@ struct GameView: View {
                         Button("Exit") {
                             // ออกจากเกม
                         }
-                        Spacer()
-                        Text("Player 1")
-                        Spacer()
-                        Text("Time:
 
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
@@ -356,7 +352,7 @@ struct GameView: View {
         }
     }
 
-    func startTimer() {
+func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if timeRemaining > 0 {
@@ -368,51 +364,13 @@ struct GameView: View {
         }
     }
 
-    func finishGame() {
+func finishGame() {
         timer?.invalidate()
         isGameOver = true
         isGameActive = false
     }
 }
-import SwiftUI
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack {
-            // Top Bar
-            HStack {
-                Button("Exit") {
-                    // ออกเกม
-                    
-struct GameEndView: View {
-    @Binding var isGameOver: Bool
-    @Binding var isGameActive: Bool
-    let onPlayAgain: () -> Void
-    let onExit: () -> Void
-
-    @State private var autoStartCountdown = 10
-    @State private var timer: Timer?
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("เกมจบแล้ว!")
-                .font(.title)
-            
-            Text("เริ่มเกมใหม่ใน
-                 
-                }
-                Spacer()
-                Text("Player 1")
-                Spacer()
-                Text("Time:
-                     
+                       
 struct GameEndView: View {
     @Binding var isGameOver: Bool
     @Binding var isGameActive: Bool
@@ -441,7 +399,44 @@ struct GameEndView: View {
             }
         }
     }
-}
+}                           
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
+    let onPlayAgain: () -> Void
+    let onExit: () -> Void
+
+    @State private var autoStartCountdown = 10
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("เกมจบแล้ว!")
+                .font(.title)
+            Text("เริ่มเกมใหม่ใน
+            Button("Exit") {
+            }  // ออกจากเกม         
+            Spacer()
+            Text("Player 1")
+            Spacer()
+            Text("Time:
+
+import SwiftUI
+
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack {
+            // Top Bar
+            HStack {
+                Button("Exit") {
+                    // ออกเกม
                      
 import Foundation
 
