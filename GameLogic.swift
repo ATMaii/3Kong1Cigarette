@@ -236,6 +236,75 @@ class HandEvaluator {
     }
 }
 
+struct GameLogic {
+    
+    static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
+        // เปรียบเทียบสองมือ ใครชนะ
+        // return 1 if A ชนะ, -1 if B ชนะ
+        return 0
+    }
+
+    static func isRoyalFlush(_ hand: [Card]) -> Bool {
+        return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
+    }
+
+    static func isStraightFlush(_ hand: [Card]) -> Bool {
+        return isFlush(hand) && isStraight(hand)
+    }
+
+    static func isFourOfAKind(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(4)
+    }
+
+    static func isFullHouse(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(3) && rankCounts.values.contains(2)
+    }
+
+    static func isFullHouseOfAces(_ hand: [Card]) -> Bool {
+        let grouped = Dictionary(grouping: hand, by: { $0.rank })
+        return grouped[.ace]?.count == 3 && grouped.values.contains { $0.count == 2 }
+    }
+
+    static func isFlush(_ hand: [Card]) -> Bool {
+        return Set(hand.map { $0.suit }).count == 1
+    }
+    
+    static func isStraight(_ hand: [Card]) -> Bool {
+        let ranks = hand.map { $0.rank.rawValue }.sorted()
+        return straights.contains { Set($0) == Set(ranks) }
+    }
+
+    static func isThreeOfAKind(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(3)
+    }
+
+    static func isTwoPair(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.filter { $0 == 2 }.count == 2
+    }
+
+    static func isPair(_ hand: [Card]) -> Bool {
+        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        return rankCounts.values.contains(2)
+    }
+    static func isPairOfAces(_ hand: [Card]) -> Bool {
+    let aces = hand.filter { $0.rank == .ace }
+    return aces.count == 2
+    }
+    static func isHighCard(_ hand: [Card]) -> Bool {
+    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+    let hasPairOrBetter = rankCounts.values.contains { $0 >= 2 }
+    return !hasPairOrBetter
+    }
+    static func isPairOfAces(_ hand: [Card]) -> Bool {
+        let aces = hand.filter { $0.rank == .ace }
+        return aces.count == 2
+    }
+}
+
 enum RowPosition {
     case head, middle, tail
 }
@@ -313,107 +382,6 @@ func calculateChips(players: [Player]) {
         let finalChips = player.chips + player.score * 100  // คูณกับ 100 เพื่อแปลงคะแนนเป็น Chips
         print("Player
               
-struct GameLogic {
-    
-    static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
-        // เปรียบเทียบสองมือ ใครชนะ
-        // return 1 if A ชนะ, -1 if B ชนะ
-        return 0
-    }
-
-    static func isRoyalFlush(_ hand: [Card]) -> Bool {
-        return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
-    }
-
-    static func isStraightFlush(_ hand: [Card]) -> Bool {
-        return isFlush(hand) && isStraight(hand)
-    }
-
-    static func isFourOfAKind(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-        return rankCounts.values.contains(4)
-    }
-
-    static func isFullHouse(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-        return rankCounts.values.contains(3) && rankCounts.values.contains(2)
-    }
-
-    static func isFullHouseOfAces(_ hand: [Card]) -> Bool {
-        let grouped = Dictionary(grouping: hand, by: { $0.rank })
-        return grouped[.ace]?.count == 3 && grouped.values.contains { $0.count == 2 }
-    }
-
-    static func isFlush(_ hand: [Card]) -> Bool {
-        return Set(hand.map { $0.suit }).count == 1
-    }
-    
-    static func isStraight(_ hand: [Card]) -> Bool {
-        let ranks = hand.map { $0.rank.rawValue }.sorted()
-        let straights = [
-            [2, 3, 4, 5, 6],
-            [3, 4, 5, 6, 7],
-            [4, 5, 6, 7, 8],
-            [5, 6, 7, 8, 9],
-            [6, 7, 8, 9, 10],
-            [7, 8, 9, 10, 11],
-            [8, 9, 10, 11, 12],
-            [9, 10, 11, 12, 13],
-            [14, 2, 3, 4, 5],
-            [10, 11, 12, 13, 14]
-        ]
-        return straights.contains { Set($0) == Set(ranks) }
-    }
-    static func straightRank(_ hand: [Card]) -> Int? {
-        let ranks = hand.map { $0.rank.rawValue }.sorted()
-        let straights = [
-            [2, 3, 4, 5, 6],
-            [3, 4, 5, 6, 7],
-            [4, 5, 6, 7, 8],
-            [5, 6, 7, 8, 9],
-            [6, 7, 8, 9, 10],
-            [7, 8, 9, 10, 11],
-            [8, 9, 10, 11, 12],
-            [9, 10, 11, 12, 13],
-            [14, 2, 3, 4, 5],
-            [10, 11, 12, 13, 14]
-        ]
-        for (index, straight) in straights.enumerated() {
-            if Set(ranks) == Set(straight) {
-                return index + 1
-            }
-        }
-        return nil
-    }
-
-    static func isThreeOfAKind(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-        return rankCounts.values.contains(3)
-    }
-
-    static func isTwoPair(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-        return rankCounts.values.filter { $0 == 2 }.count == 2
-    }
-
-    static func isPair(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-        return rankCounts.values.contains(2)
-    }
-    static func isPairOfAces(_ hand: [Card]) -> Bool {
-    let aces = hand.filter { $0.rank == .ace }
-    return aces.count == 2
-    }
-    static func isHighCard(_ hand: [Card]) -> Bool {
-    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-    let hasPairOrBetter = rankCounts.values.contains { $0 >= 2 }
-    return !hasPairOrBetter
-    }
-    static func isPairOfAces(_ hand: [Card]) -> Bool {
-        let aces = hand.filter { $0.rank == .ace }
-        return aces.count == 2
-    }
-}
 
 import Foundation
 
