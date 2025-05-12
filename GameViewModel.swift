@@ -1,4 +1,37 @@
 class GameViewModel: ObservableObject {
+    @Published var players: [Player] = []
+    @Published var hasStarted = false
+    @Published var handByType: [HandType: [Card]] = [:]
+    @Published var sortType: SortType = .rank
+
+    func startGame() {
+        if players.count == 4 && !hasStarted {
+            hasStarted = true
+            let hand = Deck().draw(count: 13)
+            handByType = splitHand(hand)
+        }
+    }
+
+    func loadPlayers() {
+        players = [
+            Player(id: 1, name: "Left", chips: 1000),
+            Player(id: 2, name: "Top", chips: 1000),
+            Player(id: 3, name: "Right", chips: 1000),
+            Player(id: 4, name: "You", chips: 1000)
+        ]
+        startGame() // แจกไพ่หลังจากเพิ่มครบ 4 คน
+    }
+
+    func toggleSort() {
+        sortType.toggle()
+        if hasStarted {
+            let flatHand = handByType.flatMap { $0.value }
+            let sorted = sortHand(flatHand, by: sortType)
+            handByType = splitHand(sorted)
+        }
+    }
+}
+class GameViewModel: ObservableObject {
     @Published var hasStarted = false
 
 func startGame() {
