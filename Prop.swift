@@ -423,3 +423,1289 @@ Prop(name: "FourOfAKind"
     ]
        )   point: 6 
 }
+
+struct Prop {
+    let name: String // ชื่อของ Prop เช่น RoyalFlush, FullHouse
+    let props: [Card] // การเก็บไพ่ใน Prop นี้
+}
+
+let fullHouses: [[Card]] = [
+    // AAAKK
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // AAAQQ
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // AAAJJ
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // AAA10
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // AAA99
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // AAA88
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // AAA77
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // AAA66
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // AAA55
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // AAA44
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // AAA33
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // AAA22
+    [
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ],
+            point: 2
+    ]
+
+    // KKKAA
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // KKKQQ
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // KKKJJ
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // KKK10
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // KKK9
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // KKK8
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // KKK7
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // KKK6
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // KKK5
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // KKK4
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // KKK3
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // KKK2
+    [
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ],
+]// ต่อจาก fullHouses
+let moreFullHouses: [[Card]] = [
+    // QQQAA
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // QQQKK
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // QQQJJ
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // QQQ10
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // QQQ9
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // QQQ8
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // QQQ7
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // QQQ6
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // QQQ5
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // QQQ4
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // QQQ3
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // QQQ2
+    [
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+let jjjFullHouses: [[Card]] = [
+    // JJJAA
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // JJJKK
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // JJJQQ
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // JJJ10
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // JJJ9
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // JJJ8
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // JJJ7
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // JJJ6
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // JJJ5
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // JJJ4
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // JJJ3
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // JJJ2
+    [
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+let fullHouses: [[Card]] = [
+    // 10-10-10 AA
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 10-10-10 KK
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 10-10-10 QQ
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 10-10-10 JJ
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 10-10-10 99
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // 10-10-10 88
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // 10-10-10 77
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // 10-10-10 66
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // 10-10-10 55
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // 10-10-10 44
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // 10-10-10 33
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // 10-10-10 22
+    [
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+
+let fullHouses999: [[Card]] = [
+    // 999AA
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 999KK
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 999QQ
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 999JJ
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 99910
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // 99988
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // 99977
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // 99966
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // 99955
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // 99944
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // 99933
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // 99922
+    [
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+let fullHouses888: [[Card]] = [
+    // 888AA
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 888KK
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 888QQ
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 888JJ
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 88810
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // 8889
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // 8887
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // 8886
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // 8885
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // 8884
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // 8883
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // 8882
+    [
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]let fullHouses777: [[Card]] = [
+    // 777AA
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 777KK
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 777QQ
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 777JJ
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 77710
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // 7779
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // 7778
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // 7776
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // 7775
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // 7774
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // 7773
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // 7772
+    [
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+let fullHouses666: [[Card]] = [
+    // 666AA
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 666KK
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 666QQ
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 666JJ
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 66610-10
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ]
+]
+let fullHouses666_2: [[Card]] = [
+    // 66699
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // 66688
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // 66677
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // 66655
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // 66644
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // 66633
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // 66622
+    [
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+let fullHouses555_2: [[Card]] = [
+    // 555AA
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 555KK
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 555QQ
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 555JJ
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 55510
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // 55599
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // 55588
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // 55577
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // 55566
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // 55544
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // 55533
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // 55522
+    [
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+let fullHouses444_2: [[Card]] = [
+    // 444AA
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 444KK
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 444QQ
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 444JJ
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 44410
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // 44499
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // 44488
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // 44477
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // 44466
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // 44455
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // 44433
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ],
+    // 44422
+    [
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+let fullHouses333_2: [[Card]] = [
+    // 333AA
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 333KK
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 333QQ
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 333JJ
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 33310
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // 33399
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // 33388
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // 33377
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // 33366
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // 33355
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // 33344
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // 33322
+    [
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil)
+    ]
+]
+let fullHouses222_3: [[Card]] = [
+    // 222AA
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .ace, suit: nil),
+        Card(rank: .ace, suit: nil)
+    ],
+    // 222KK
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .king, suit: nil),
+        Card(rank: .king, suit: nil)
+    ],
+    // 222QQ
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .queen, suit: nil),
+        Card(rank: .queen, suit: nil)
+    ],
+    // 222JJ
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .jack, suit: nil),
+        Card(rank: .jack, suit: nil)
+    ],
+    // 22210
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .ten, suit: nil),
+        Card(rank: .ten, suit: nil)
+    ],
+    // 22299
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .nine, suit: nil),
+        Card(rank: .nine, suit: nil)
+    ],
+    // 22288
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .eight, suit: nil),
+        Card(rank: .eight, suit: nil)
+    ],
+    // 22277
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .seven, suit: nil),
+        Card(rank: .seven, suit: nil)
+    ],
+    // 22266
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .six, suit: nil),
+        Card(rank: .six, suit: nil)
+    ],
+    // 22255
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .five, suit: nil),
+        Card(rank: .five, suit: nil)
+    ],
+    // 22244
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .four, suit: nil),
+        Card(rank: .four, suit: nil)
+    ],
+    // 22233
+    [
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .two, suit: nil),
+        Card(rank: .three, suit: nil),
+        Card(rank: .three, suit: nil)
+    ]
+             point: 1
+]
+
+}
