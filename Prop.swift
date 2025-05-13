@@ -1,4 +1,4 @@
-let Prop = ([
+let Prop = [
 Prop(name: "RoyalFlush")
 props: [
         Card(rank: .ace, suit: .spades),
@@ -30,7 +30,7 @@ props: [
     Card(rank: .queen, suit: .clubs),
     Card(rank: .jack, suit: .clubs),
     Card(rank: .ten, suit: .clubs),
-       ])
+       ]
             
 
 let Prop = [
