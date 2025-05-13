@@ -1,5 +1,5 @@
 struct Prop {
-        let name = ""
+        let name = String
         let Props = [Card]
      }
 
