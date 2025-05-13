@@ -6,7 +6,7 @@ props: [
         Card(rank: .queen, suit: .spades),
         Card(rank: .jack, suit: .spades),
         Card(rank: .ten, suit: .spades)
-    ]),
+    ]
 Prop(name: "RoyalFlush")
 props: [
         Card(rank: .ace, suit: .hearts),
@@ -14,7 +14,7 @@ props: [
         Card(rank: .queen, suit: .hearts),
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts)
-     ]),
+     ]
 Prop(name: "RoyalFlush")
 props: [
         Card(rank: .ace, suit: .diamonds),
@@ -22,7 +22,7 @@ props: [
         Card(rank: .queen, suit: .diamonds),
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds)
-    ]),
+    ]
 Prop(name: "RoyalFlush")
 props: [
     Card(rank: .ace, suit: .clubs),
@@ -30,7 +30,7 @@ props: [
     Card(rank: .queen, suit: .clubs),
     Card(rank: .jack, suit: .clubs),
     Card(rank: .ten, suit: .clubs),
-       ]),
+       ])
             
 
 let Prop = [
