@@ -1,4 +1,6 @@
 struct Prop {
+
+        let = Prop = [Card]
 let allProps = [
 Prop(name: "RoyalFlush")
 props: [
