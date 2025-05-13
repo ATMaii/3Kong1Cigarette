@@ -3,8 +3,10 @@ struct Prop {
         let Props = [Card]
      }
 
-let RoyalFlushProps: [Prop] = [
-    Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
+let RoyalFlushProps: [Prop]
+let straightFlushProps : [Prop]
+
+=[ Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
     .seven, .six, .five, .four, .three, .two
 ].map { rank in
 Prop(name: "RoyalFlush"
@@ -41,6 +43,11 @@ props: [
        ]),
           point: 8
 }
+
+let straightFlushProps : [Prop]
+=[ Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
+    .seven, .six, .five, .four, .three, .two
+].map { rank in
 Prop(name: "straightFlush"
 props: [
         Card(rank: .ace, suit: .spades),
@@ -283,8 +290,10 @@ props: [
         Card(rank: .four, suit: .diamonds),
         Card(rank: .three, suit: .diamonds),
         Card(rank: .two, suit: .diamonds)
-        ])
-             
+        ]),
+             point: 7
+     
+}
 
 let fourOfAKindProps: [Prop] = [
     Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
