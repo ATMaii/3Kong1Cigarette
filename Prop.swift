@@ -1,4 +1,4 @@
-let Prop = [
+var Prop = [
 Prop(name: "RoyalFlush")
 props: [
         Card(rank: .ace, suit: .spades),
@@ -33,7 +33,7 @@ props: [
        ]
             
 
-let Prop = [
+var Prop = [
 Prop(name: "straightFlush")
 props: [
         Card(rank: .ace, suit: .spades),
