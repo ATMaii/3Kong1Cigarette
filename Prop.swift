@@ -1,5 +1,5 @@
 let royalFlush = Prop(
-    name: "KingFlush",
+    name: "RoyalFlush",
     cards: [
         Card(rank: .ace, suit: .spades),
         Card(rank: .king, suit: .spades),
