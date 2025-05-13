@@ -328,10 +328,6 @@ struct GameView: View {
         .onAppear {
     gameLogic.startNewGame()
         }
-        .onChange(of: gameLogic.players.count) { count in
-    if count == 4 {
-        gameLogic.startNewGame()
-    }
                                                }
     private func dragGesture(for card: Card) -> some Gesture {
         DragGesture()
