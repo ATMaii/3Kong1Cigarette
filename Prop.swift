@@ -1,39 +1,39 @@
-var Prop = [
-Prop(name: "RoyalFlush")
+let Prop = [
+Prop(name: "RoyalFlush"
 props: [
         Card(rank: .ace, suit: .spades),
         Card(rank: .king, suit: .spades),
         Card(rank: .queen, suit: .spades),
         Card(rank: .jack, suit: .spades),
         Card(rank: .ten, suit: .spades)
-    ]
-Prop(name: "RoyalFlush") 
+    ]),
+Prop(name: "RoyalFlush"
 props: [
         Card(rank: .ace, suit: .hearts),
         Card(rank: .king, suit: .hearts),
         Card(rank: .queen, suit: .hearts),
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts)
-     ]
-Prop(name: "RoyalFlush") 
+     ]),
+Prop(name: "RoyalFlush"
 props: [
         Card(rank: .ace, suit: .diamonds),
         Card(rank: .king, suit: .diamonds),
         Card(rank: .queen, suit: .diamonds),
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds)
-    ]
-Prop(name: "RoyalFlush")
+    ]),
+Prop(name: "RoyalFlush"
 props: [
     Card(rank: .ace, suit: .clubs),
     Card(rank: .king, suit: .clubs),
     Card(rank: .queen, suit: .clubs),
     Card(rank: .jack, suit: .clubs),
     Card(rank: .ten, suit: .clubs),
-       ]
+       ]),
             
 
-var Prop = [
+let Prop = [
 Prop(name: "straightFlush")
 props: [
         Card(rank: .ace, suit: .spades),
