@@ -1,4 +1,5 @@
-let Prop = [
+struct Prop {
+let allProps = [
 Prop(name: "RoyalFlush")
 props: [
         Card(rank: .ace, suit: .spades),
