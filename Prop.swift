@@ -304,7 +304,7 @@ props: [
 
 let fourOfAKindProps: [Prop]
 
-Prop(name: "FourOfAKind")
+Prop(name: "FourOfAKind"
 
 props: [
     Card(rank: .ace, suit: .spades),
@@ -312,10 +312,10 @@ props: [
     Card(rank: .ace, suit: .clubs),
     Card(rank: .ace, suit: .diamonds),
     Card(rank: .two, suit: .hearts)
-]
+    ],
 
     // Four Kings + 3
-    [props: 
+  props: [
         Card(rank: .king, suit: .spades),
         Card(rank: .king, suit: .hearts),
         Card(rank: .king, suit: .clubs),
@@ -410,4 +410,5 @@ props: [
         Card(rank: .two, suit: .diamonds),
         Card(rank: .nine, suit: .diamonds)
     ]
-          point: 6 
+       )   point: 6 
+}
