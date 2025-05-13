@@ -455,6 +455,9 @@ class GameLogic: ObservableObject {
         return (head, middle, tail)
     }
 }
+    var body: some View {
+        VStack {
+            Text("Player 1 Score:
 
 
 // GameLogic.swift
@@ -485,9 +488,6 @@ struct PlayerHand {
              
     }
 }
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
 
 import Foundation
 
