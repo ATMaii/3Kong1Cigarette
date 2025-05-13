@@ -260,7 +260,7 @@ props: [
         Card(rank: .four, suit: .diamonds)
         ]
 
-Prop(name: ""straightFlush")
+Prop(name: "straightFlush")
 props: [
         Card(rank: .seven, suit: .diamonds),
         Card(rank: .six, suit: .diamonds),
