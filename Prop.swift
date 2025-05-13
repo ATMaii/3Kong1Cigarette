@@ -311,10 +311,9 @@ props: [
     Card(rank: .ace, suit: .hearts),
     Card(rank: .ace, suit: .clubs),
     Card(rank: .ace, suit: .diamonds),
-    Card(rank: .two, suit: .hearts) // 
+    Card(rank: .two, suit: .hearts)
 ]
 
-let fourOfAKindHands: [[Card]] = [
     // Four Kings + 3
     [props: 
         Card(rank: .king, suit: .spades),
