@@ -1,6 +1,6 @@
 let Prop = [
 Prop(name: "RoyalFlush")
-prop: [
+props: [
         Card(rank: .ace, suit: .spades),
         Card(rank: .king, suit: .spades),
         Card(rank: .queen, suit: .spades),
@@ -8,7 +8,7 @@ prop: [
         Card(rank: .ten, suit: .spades)
     ]
 Prop(name: "RoyalFlush") 
-prop: [
+props: [
         Card(rank: .ace, suit: .hearts),
         Card(rank: .king, suit: .hearts),
         Card(rank: .queen, suit: .hearts),
@@ -16,7 +16,7 @@ prop: [
         Card(rank: .ten, suit: .hearts)
      ]
 Prop(name: "Royal Flush") 
-prop: [
+props: [
         Card(rank: .ace, suit: .diamonds),
         Card(rank: .king, suit: .diamonds),
         Card(rank: .queen, suit: .diamonds),
@@ -24,29 +24,25 @@ prop: [
         Card(rank: .ten, suit: .diamonds)
     ]
 Prop(name: "Royal Flush")
-prop: [
+props: [
     Card(rank: .ace, suit: .clubs),
     Card(rank: .king, suit: .clubs),
     Card(rank: .queen, suit: .clubs),
     Card(rank: .jack, suit: .clubs),
     Card(rank: .ten, suit: .clubs),
        ]
-]
 
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .ace, suit: .spades),
         Card(rank: .two, suit: .spades),
         Card(rank: .three, suit: .spades),
         Card(rank: .four, suit: .spades),
         Card(rank: .five, suit: .spades)
     ]
-]
 
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .king, suit: .spades),
         Card(rank: .queen, suit: .spades),
         Card(rank: .jack, suit: .spades),
@@ -54,9 +50,9 @@ prop: [
         Card(rank: .nine, suit: .spades)
     ]
                  
-let Prop = [
+
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .queen, suit: .spades),
         Card(rank: .jack, suit: .spades),
         Card(rank: .ten, suit: .spades),
@@ -64,9 +60,8 @@ prop: [
         Card(rank: .eight, suit: .spades)
     ]
                          
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .jack, suit: .spades),
         Card(rank: .ten, suit: .spades),
         Card(rank: .nine, suit: .spades),
@@ -74,9 +69,8 @@ prop: [
         Card(rank: .seven, suit: .spades)
     ]
                            
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .ten, suit: .spades),
         Card(rank: .nine, suit: .spades),
         Card(rank: .eight, suit: .spades),
@@ -84,9 +78,8 @@ prop: [
         Card(rank: .six, suit: .spades)
     ]
 
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .nine, suit: .spades),
         Card(rank: .eight, suit: .spades),
         Card(rank: .seven, suit: .spades),
@@ -94,11 +87,8 @@ prop: [
         Card(rank: .five, suit: .spades)
     ]
 
-                          
-
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .eight, suit: .spades),
         Card(rank: .seven, suit: .spades),
         Card(rank: .six, suit: .spades),
@@ -106,10 +96,8 @@ prop: [
         Card(rank: .four, suit: .spades)
     ]
            
-
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .seven, suit: .spades),
         Card(rank: .six, suit: .spades),
         Card(rank: .five, suit: .spades),
@@ -117,10 +105,8 @@ prop: [
         Card(rank: .three, suit: .spades)
     ]
          
-
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+props: [
         Card(rank: .six, suit: .spades),
         Card(rank: .five, suit: .spades),
         Card(rank: .four, suit: .spades),
@@ -128,137 +114,165 @@ prop: [
         Card(rank: .two, suit: .spades)
     ]
 
-                           
-let Prop = [
 Prop(name: "straightFlush)"
-prop: [
+propa: [
         Card(rank: .ace, suit: .hearts),
         Card(rank: .two, suit: .hearts),
         Card(rank: .three, suit: .hearts),
         Card(rank: .four, suit: .hearts),
         Card(rank: .five, suit: .hearts)
     ]
-prop: [
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .king, suit: .hearts),
         Card(rank: .queen, suit: .hearts),
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts),
         Card(rank: .nine, suit: .hearts)
-    ]),
-    Prop(name: "Q-J-10-9-8 (Hearts)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .queen, suit: .hearts),
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts),
         Card(rank: .nine, suit: .hearts),
         Card(rank: .eight, suit: .hearts)
-    ]),
-    Prop(name: "J-10-9-8-7 (Hearts)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts),
         Card(rank: .nine, suit: .hearts),
         Card(rank: .eight, suit: .hearts),
         Card(rank: .seven, suit: .hearts)
-    ]),
-    Prop(name: "10-9-8-7-6 (Hearts)", cards: [
+    ]
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .ten, suit: .hearts),
         Card(rank: .nine, suit: .hearts),
         Card(rank: .eight, suit: .hearts),
         Card(rank: .seven, suit: .hearts),
         Card(rank: .six, suit: .hearts)
-    ]),
-    Prop(name: "9-8-7-6-5 (Hearts)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props:  [
         Card(rank: .nine, suit: .hearts),
         Card(rank: .eight, suit: .hearts),
         Card(rank: .seven, suit: .hearts),
         Card(rank: .six, suit: .hearts),
         Card(rank: .five, suit: .hearts)
-    ]),
-    Prop(name: "8-7-6-5-4 (Hearts)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .eight, suit: .hearts),
         Card(rank: .seven, suit: .hearts),
         Card(rank: .six, suit: .hearts),
         Card(rank: .five, suit: .hearts),
         Card(rank: .four, suit: .hearts)
-    ]),
-    Prop(name: "7-6-5-4-3 (Hearts)", cards: [
+   ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .seven, suit: .hearts),
         Card(rank: .six, suit: .hearts),
         Card(rank: .five, suit: .hearts),
         Card(rank: .four, suit: .hearts),
         Card(rank: .three, suit: .hearts)
-    ]),
-    Prop(name: "6-5-4-3-2 (Hearts)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .six, suit: .hearts),
         Card(rank: .five, suit: .hearts),
         Card(rank: .four, suit: .hearts),
         Card(rank: .three, suit: .hearts),
         Card(rank: .two, suit: .hearts)
-    ])
-]
-    let straightFlushesDiamonds: [Prop] = [
-    
-    Prop(name: "A-2-3-4-5 (Diamonds)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .ace, suit: .diamonds),
         Card(rank: .two, suit: .diamonds),
         Card(rank: .three, suit: .diamonds),
         Card(rank: .four, suit: .diamonds),
         Card(rank: .five, suit: .diamonds)
-    ]),
-    Prop(name: "K-Q-J-10-9 (Diamonds)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .king, suit: .diamonds),
         Card(rank: .queen, suit: .diamonds),
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds),
         Card(rank: .nine, suit: .diamonds)
-    ]),
-    Prop(name: "Q-J-10-9-8 (Diamonds)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .queen, suit: .diamonds),
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds),
         Card(rank: .nine, suit: .diamonds),
         Card(rank: .eight, suit: .diamonds)
-    ]),
-    Prop(name: "J-10-9-8-7 (Diamonds)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds),
         Card(rank: .nine, suit: .diamonds),
         Card(rank: .eight, suit: .diamonds),
         Card(rank: .seven, suit: .diamonds)
-    ]),
-    Prop(name: "10-9-8-7-6 (Diamonds)", cards: [
+    ]
+
+Prop(name: ""straightFlush)"
+props: [
         Card(rank: .ten, suit: .diamonds),
         Card(rank: .nine, suit: .diamonds),
         Card(rank: .eight, suit: .diamonds),
         Card(rank: .seven, suit: .diamonds),
         Card(rank: .six, suit: .diamonds)
-    ]),
-    Prop(name: "9-8-7-6-5 (Diamonds)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+props: [
         Card(rank: .nine, suit: .diamonds),
         Card(rank: .eight, suit: .diamonds),
         Card(rank: .seven, suit: .diamonds),
         Card(rank: .six, suit: .diamonds),
         Card(rank: .five, suit: .diamonds)
-    ]),
-    Prop(name: "8-7-6-5-4 (Diamonds)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+propss: [
         Card(rank: .eight, suit: .diamonds),
         Card(rank: .seven, suit: .diamonds),
         Card(rank: .six, suit: .diamonds),
         Card(rank: .five, suit: .diamonds),
         Card(rank: .four, suit: .diamonds)
-    ]),
-    Prop(name: "7-6-5-4-3 (Diamonds)", cards: [
+    ]
+
+Prop(name: ""straightFlush)"
+props: [
         Card(rank: .seven, suit: .diamonds),
         Card(rank: .six, suit: .diamonds),
         Card(rank: .five, suit: .diamonds),
         Card(rank: .four, suit: .diamonds),
         Card(rank: .three, suit: .diamonds)
-    ]),
-    Prop(name: "6-5-4-3-2 (Diamonds)", cards: [
+    ]
+
+Prop(name: "straightFlush)"
+propss: [
         Card(rank: .six, suit: .diamonds),
         Card(rank: .five, suit: .diamonds),
         Card(rank: .four, suit: .diamonds),
         Card(rank: .three, suit: .diamonds),
         Card(rank: .two, suit: .diamonds)
-    ])
+    ]
     ]
 
