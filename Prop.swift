@@ -8,7 +8,8 @@ cards: [
         Card(rank: .ten, suit: .spades)
     ]
 
-        name: "RoyalFlush", cards: [
+        name: "RoyalFlush", 
+cards: [
         Card(rank: .ace, suit: .hearts),
         Card(rank: .king, suit: .hearts),
         Card(rank: .queen, suit: .hearts),
@@ -27,7 +28,7 @@ let straightFlush : Prop = [Prop
     ]
 )
 
-let straightFlush : Prop = [Prop]
+let straightFlush : Prop(
     name: "K-Q-J-10-9 (Spades)",
     cards: [
         Card(rank: .king, suit: .spades),
@@ -38,7 +39,7 @@ let straightFlush : Prop = [Prop]
     ]
 )
 
-let straightFlush : Prop = [Prop]
+let straightFlush : Prop(
     name: "Q-J-10-9-8 (Spades)",
     cards: [
         Card(rank: .queen, suit: .spades),
@@ -49,7 +50,7 @@ let straightFlush : Prop = [Prop]
     ]
 )
 
-let straightFlush : Prop = [Prop]
+let straightFlush : Prop(
     name: "J-10-9-8-7 (Spades)",
     cards: [
         Card(rank: .jack, suit: .spades),
@@ -60,7 +61,7 @@ let straightFlush : Prop = [Prop]
     ]
 )
 
-let straightFlush : Prop = [Prop]
+let straightFlush : Prop(
     name: "10-9-8-7-6 (Spades)",
     cards: [
         Card(rank: .ten, suit: .spades),
@@ -71,7 +72,7 @@ let straightFlush : Prop = [Prop]
     ]
 )
 
-let straightFlush : Prop = [Prop]
+let straightFlush : Prop(
     name: "9-8-7-6-5 (Spades)",
     cards: [
         Card(rank: .nine, suit: .spades),
