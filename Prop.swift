@@ -3,7 +3,10 @@ struct Prop {
         let Props = [Card]
      }
 
-let allProps = [
+let RoyalFlushProps: [Prop] = [
+    Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
+    .seven, .six, .five, .four, .three, .two
+].map { rank in
 Prop(name: "RoyalFlush"
 props: [
         Card(rank: .ace, suit: .spades),
@@ -36,8 +39,8 @@ props: [
     Card(rank: .jack, suit: .clubs),
     Card(rank: .ten, suit: .clubs),
        ]),
-            
-
+          point: 8
+}
 Prop(name: "straightFlush"
 props: [
         Card(rank: .ace, suit: .spades),
@@ -283,3 +286,19 @@ props: [
         ])
              
 
+let fourOfAKindProps: [Prop] = [
+    Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
+    .seven, .six, .five, .four, .three, .two
+].map { rank in
+    Prop(
+        name: "FourOfAKind",
+        props: [
+            Card(rank: rank, suit: .spades),
+            Card(rank: rank, suit: .hearts),
+            Card(rank: rank, suit: .clubs),
+            Card(rank: rank, suit: .diamonds),
+            Card(rank: .two, suit: .hearts)
+        ],
+        point: 6  // ทุกชุดสี่ใบเหมือนกัน ได้ 4 คะแนน
+    )
+}
