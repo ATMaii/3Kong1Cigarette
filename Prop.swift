@@ -1,5 +1,5 @@
-let Prop = [
-Prop(name: "RoyalFlush"
+let Prop = ([
+Prop(name: "RoyalFlush")
 props: [
         Card(rank: .ace, suit: .spades),
         Card(rank: .king, suit: .spades),
@@ -7,7 +7,7 @@ props: [
         Card(rank: .jack, suit: .spades),
         Card(rank: .ten, suit: .spades)
     ]),
-Prop(name: "RoyalFlush"
+Prop(name: "RoyalFlush")
 props: [
         Card(rank: .ace, suit: .hearts),
         Card(rank: .king, suit: .hearts),
@@ -15,7 +15,7 @@ props: [
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts)
      ]),
-Prop(name: "RoyalFlush"
+Prop(name: "RoyalFlush")
 props: [
         Card(rank: .ace, suit: .diamonds),
         Card(rank: .king, suit: .diamonds),
@@ -23,7 +23,7 @@ props: [
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds)
     ]),
-Prop(name: "RoyalFlush"
+Prop(name: "RoyalFlush")
 props: [
     Card(rank: .ace, suit: .clubs),
     Card(rank: .king, suit: .clubs),
