@@ -54,9 +54,7 @@ props: [
 }
 
 let straightFlushProps : [Prop]
-=[ Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
-    .seven, .six, .five, .four, .three, .two
-].map { rank in
+
 Prop(name: "straightFlush"
 props: [
         Card(rank: .ace, suit: .spades),
