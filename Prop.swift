@@ -7,6 +7,7 @@ prop: [
         Card(rank: .jack, suit: .spades),
         Card(rank: .ten, suit: .spades)
     ]
+let Prop = [
 Prop(name: "RoyalFlush"), 
 prop: [
         Card(rank: .ace, suit: .hearts),
@@ -15,6 +16,7 @@ prop: [
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts)
     ]
+let Prop = [
 Prop(name: "Royal Flush"), 
 prop: [
         Card(rank: .ace, suit: .diamonds),
@@ -23,7 +25,8 @@ prop: [
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds)
     ]
-Prop(name: "Royal Flish")
+let Prop = [
+Prop(name: "Royal Flush")
 prop: [
     Card(rank: .ace, suit: .clubs),
     Card(rank: .king, suit: .clubs),
