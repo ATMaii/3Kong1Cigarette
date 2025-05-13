@@ -302,19 +302,113 @@ props: [
      
 }
 
-let fourOfAKindProps: [Prop] = [
-    Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
-    .seven, .six, .five, .four, .three, .two
-].map { rank in
-    Prop(
-        name: "FourOfAKind",
-        props: [
-            Card(rank: rank, suit: .spades),
-            Card(rank: rank, suit: .hearts),
-            Card(rank: rank, suit: .clubs),
-            Card(rank: rank, suit: .diamonds),
-            Card(rank: .two, suit: .hearts)
-        ],
-        point: 6  // ทุกชุดสี่ใบเหมือนกัน ได้ 4 คะแนน
-    )
-}
+let fourOfAKindProps: [Prop]
+
+Prop(name: "FourOfAKind")
+
+props: [
+    Card(rank: .ace, suit: .spades),
+    Card(rank: .ace, suit: .hearts),
+    Card(rank: .ace, suit: .clubs),
+    Card(rank: .ace, suit: .diamonds),
+    Card(rank: .two, suit: .hearts) // 
+]
+
+let fourOfAKindHands: [[Card]] = [
+    // Four Kings + 3
+    [props: 
+        Card(rank: .king, suit: .spades),
+        Card(rank: .king, suit: .hearts),
+        Card(rank: .king, suit: .clubs),
+        Card(rank: .king, suit: .diamonds),
+        Card(rank: .three, suit: .spades)
+    ],
+    // Four Queens + 4
+  props: [  
+        Card(rank: .queen, suit: .spades),
+        Card(rank: .queen, suit: .hearts),
+        Card(rank: .queen, suit: .clubs),
+        Card(rank: .queen, suit: .diamonds),
+        Card(rank: .four, suit: .hearts)
+    ],
+    // Four Jacks + 5
+   props: [ 
+        Card(rank: .jack, suit: .spades),
+        Card(rank: .jack, suit: .hearts),
+        Card(rank: .jack, suit: .clubs),
+        Card(rank: .jack, suit: .diamonds),
+        Card(rank: .five, suit: .clubs)
+    ],
+    // Four Tens + 6
+   props: [ 
+        Card(rank: .ten, suit: .spades),
+        Card(rank: .ten, suit: .hearts),
+        Card(rank: .ten, suit: .clubs),
+        Card(rank: .ten, suit: .diamonds),
+        Card(rank: .six, suit: .diamonds)
+    ],
+    // Four Nines + 7
+   props: [ 
+        Card(rank: .nine, suit: .spades),
+        Card(rank: .nine, suit: .hearts),
+        Card(rank: .nine, suit: .clubs),
+        Card(rank: .nine, suit: .diamonds),
+        Card(rank: .seven, suit: .spades)
+    ],
+    // Four Eights + 8
+  props: [  
+        Card(rank: .eight, suit: .spades),
+        Card(rank: .eight, suit: .hearts),
+        Card(rank: .eight, suit: .clubs),
+        Card(rank: .eight, suit: .diamonds),
+        Card(rank: .nine, suit: .hearts)
+    ],
+    // Four Sevens + 10
+   props: [ 
+        Card(rank: .seven, suit: .spades),
+        Card(rank: .seven, suit: .hearts),
+        Card(rank: .seven, suit: .clubs),
+        Card(rank: .seven, suit: .diamonds),
+        Card(rank: .ten, suit: .clubs)
+    ],
+    // Four Sixes + J
+   props: [ 
+        Card(rank: .six, suit: .spades),
+        Card(rank: .six, suit: .hearts),
+        Card(rank: .six, suit: .clubs),
+        Card(rank: .six, suit: .diamonds),
+        Card(rank: .jack, suit: .diamonds)
+    ],
+    // Four Fives + Q
+    props: [
+        Card(rank: .five, suit: .spades),
+        Card(rank: .five, suit: .hearts),
+        Card(rank: .five, suit: .clubs),
+        Card(rank: .five, suit: .diamonds),
+        Card(rank: .queen, suit: .spades)
+    ],
+    // Four Fours + K
+   props: [ 
+        Card(rank: .four, suit: .spades),
+        Card(rank: .four, suit: .hearts),
+        Card(rank: .four, suit: .clubs),
+        Card(rank: .four, suit: .diamonds),
+        Card(rank: .king, suit: .hearts)
+    ],
+    // Four Threes + A
+    props: [
+        Card(rank: .three, suit: .spades),
+        Card(rank: .three, suit: .hearts),
+        Card(rank: .three, suit: .clubs),
+        Card(rank: .three, suit: .diamonds),
+        Card(rank: .ace, suit: .clubs)
+    ],
+    // Four Twos + 9
+    props: [
+        Card(rank: .two, suit: .spades),
+        Card(rank: .two, suit: .hearts),
+        Card(rank: .two, suit: .clubs),
+        Card(rank: .two, suit: .diamonds),
+        Card(rank: .nine, suit: .diamonds)
+    ]
+          point: 6 
