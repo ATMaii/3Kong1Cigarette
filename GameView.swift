@@ -305,6 +305,117 @@ struct GameView: View {
                             }
                             .padding()
                         }
+import SwiftUI
+
+struct GameView: View {
+    @ObservedObject var viewModel: GameViewModel
+
+    var body: some View {
+        ZStack {
+            // พื้นหลังโต๊ะ
+            Color.green.ignoresSafeArea()
+
+            VStack {
+                Spacer()
+                
+                // TOP (Player 2)
+                if let topPlayer = viewModel.getPlayer(at: 2) {
+                    PlayerCompareView(player: topPlayer, result: viewModel.getCompareResult(opponentID: 2))
+                        .transition(.move(edge: .top))
+                }
+
+                Spacer()
+
+                HStack {
+                    // LEFT (Player 1)
+                    if let leftPlayer = viewModel.getPlayer(at: 1) {
+                        PlayerCompareView(player: leftPlayer, result: viewModel.getCompareResult(opponentID: 1))
+                            .transition(.move(edge: .leading))
+                    }
+
+                    Spacer()
+
+                    // RIGHT (Player 0)
+                    if let rightPlayer = viewModel.getPlayer(at: 0) {
+                        PlayerCompareView(player: rightPlayer, result: viewModel.getCompareResult(opponentID: 0))
+                            .transition(.move(edge: .trailing))
+                    }
+                }
+                
+                Spacer()
+
+                // BOTTOM (Player 3 - คุณ)
+                YourHandView(cards: viewModel.playerHand)
+            }
+
+            // แสดง overlay ช่วง Compare
+            if viewModel.isComparing {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .transition(.opacity)
+                    .animation(.easeInOut, value: viewModel.isComparing)
+            }
+        }
+    }
+}
+
+struct PlayerCompareView: View {
+    let player: Player
+    let result: CompareResult // +1 / 0 / -1 หรือ enum
+
+    var body: some View {
+        VStack {
+            Text(player.name)
+                .font(.headline)
+
+            HStack {
+                ForEach(player.hand, id: \.self) { card in
+                    CardView(card: card)
+                }
+            }
+
+            Text(resultText)
+                .font(.subheadline)
+                .foregroundColor(resultColor)
+        }
+        .padding()
+        .background(Color.white.opacity(0.85))
+        .cornerRadius(12)
+    }
+
+    private var resultText: String {
+        switch result {
+        case .win: return "Win"
+        case .draw: return "Draw"
+        case .lose: return "Lose"
+        }
+    }
+
+    private var resultColor: Color {
+        switch result {
+        case .win: return .green
+        case .draw: return .gray
+        case .lose: return .red
+        }
+    }
+}
+
+struct YourHandView: View {
+    let cards: [Card]
+
+    var body: some View {
+        HStack {
+            ForEach(0..<3) { i in
+    let score = viewModel.compareResults[i]
+    PlayerCompareView(player: viewModel.players[i], result: score)
+}
+      
+            }
+        }
+        .padding()
+    }
+}
+
 
                         Button("Done") {
                             isGameActive = false
