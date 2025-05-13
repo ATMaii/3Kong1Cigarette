@@ -31,7 +31,7 @@ props: [
     Card(rank: .jack, suit: .clubs),
     Card(rank: .ten, suit: .clubs),
        ]
-            ]
+            
 
 let Prop = [
 Prop(name: "straightFlush")
@@ -277,5 +277,5 @@ props: [
         Card(rank: .three, suit: .diamonds),
         Card(rank: .two, suit: .diamonds)
         ]
-             ]
+             
 
