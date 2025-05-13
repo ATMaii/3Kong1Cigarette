@@ -226,7 +226,7 @@ struct GameView: View {
 
         
     struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    
     @State private var gameStarted = false
     @State private var isGameOver = false
     @State private var isGameActive = true
