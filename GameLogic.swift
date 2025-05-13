@@ -385,7 +385,7 @@ func calculateChips(players: [Player]) {
 
 import Foundation
 
-struct GameLogic {
+class GameLogic {
     var players: [Player]
     var deck: Deck
 
@@ -421,7 +421,7 @@ struct GameLogic {
 
 import Foundation
 
-struct GameLogic: ObservableObject {
+class GameLogic: ObservableObject {
     @Published var players: [Player]
     var deck: Deck
 
@@ -464,7 +464,7 @@ struct GameLogic: ObservableObject {
 
 import SwiftUI
 
-struct ContentView : View {
+class ContentView : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
 
@@ -541,7 +541,7 @@ class GameLogic : {
       
 import Foundastruct GameLogic {
     
-struct func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
+class func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
         // เปรียบเทียบสองมือ ใครชนะ
         // return 1 if A ชนะ, -1 if B ชนะ
         return 0
