@@ -41,6 +41,98 @@ class GameManager: ObservableObject {
     func winner() -> Player? {
         return scoreManager.highestScorePlayer()
     }
+
+    // Stadium for Chips logic
+    func stadiumForChips(_ chips: Int) -> Stadium? {
+        switch chips {
+        case 50_000...:
+            return .santiagoBernabeu
+        case 20_000..<50_000:
+            return .allianzArena
+        case 10_000..<20_000:
+            return .brazil
+        case 5_000..<10_000:
+            return .wemley
+        default:
+            return nil
+        }
+    }
+}
+
+enum Stadium: String {
+    case wemley = "Wemley"
+    case brazil = "Brazil"
+    case allianzArena = "Allianz Arena"
+    case santiagoBernabeu = "Santiago Bernabeu"
+}
+
+class Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var lastBonusDate: Date?
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
+        self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
+    }
+
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return // ถ้ารับแล้ววันนี้ไม่ให้รับโบนัสอีก
+        }
+        chips += 5000 // เพิ่มชิป 5,000
+        lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
+        print("
+
+import Foundation
+
+class GameManager: ObservableObject {
+    @Published var players: [Player] = []
+    @Published var currentRound: Int = 1
+    @Published var isGameOver: Bool = false
+
+    private var gameLogic: GameLogic
+    private var scoreManager: ScoreManager
+
+    init(playerNames: [String]) {
+        self.players = playerNames.map { Player(name: $0) }
+        self.gameLogic = GameLogic(players: self.players)
+        self.scoreManager = ScoreManager(players: self.players)
+    }
+
+    func startNewGame() {
+        currentRound = 1
+        isGameOver = false
+        for player in players {
+            player.reset()
+        }
+        gameLogic.startGame()
+    }
+
+    func playRound() {
+        gameLogic.startGame()
+
+        let roundScores = gameLogic.calculateRoundScores()
+        scoreManager.updateScores(with: roundScores)
+
+        currentRound += 1
+        if currentRound > 5 {
+            isGameOver = true
+        }
+    }
+
+    func winner() -> Player? {
+        return scoreManager.highestScorePlayer()
+    }
 }
 
 enum Stadium: String {
