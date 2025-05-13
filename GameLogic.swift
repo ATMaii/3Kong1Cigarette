@@ -382,7 +382,6 @@ func calculateChips(players: [Player]) {
         let finalChips = player.chips + player.score * 100  // คูณกับ 100 เพื่อแปลงคะแนนเป็น Chips
         print("Player
               
-
 import Foundation
 
 class GameLogic {
@@ -400,9 +399,9 @@ class GameLogic {
     }
 
     private func dealCards() {
-        for player in players {
-            player.hand = deck.drawCards(count: 13)
-            player.hand.sort {
+        for index in players.indices {
+            players[index].hand = deck.drawCards(count: 13)
+            players[index].hand.sort {
                 if $0.rank.rawValue == $1.rank.rawValue {
                     return $0.suit.rawValue < $1.suit.rawValue
                 }
@@ -412,13 +411,11 @@ class GameLogic {
     }
 
     func determineWinner() -> Player? {
-        let highestScorePlayer = players.max { (player1, player2) -> Bool in
-            return ScoreCalculator.calculateScore(for: player1.hand) < ScoreCalculator.calculateScore(for: player2.hand)
-        }
-        return highestScorePlayer
+        players.max { p1, p2 in
+            ScoreCalculator.calculateScore(for: p1.hand) < ScoreCalculator.calculateScore(for: p2.hand)
+                    }
+            }
     }
-}
-
 import Foundation
 
 class GameLogic: ObservableObject {
