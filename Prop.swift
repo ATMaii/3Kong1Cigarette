@@ -1,6 +1,6 @@
-let royalFlush : Prop = [
+let Prop = [
 Prop(name: "RoyalFlush"), 
-cards: [
+prop: [
         Card(rank: .ace, suit: .spades),
         Card(rank: .king, suit: .spades),
         Card(rank: .queen, suit: .spades),
