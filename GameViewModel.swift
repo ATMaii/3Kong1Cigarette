@@ -1,5 +1,61 @@
 class GameViewModel: ObservableObject {
     @Published var players: [Player] = []
+    @Published var hasStarted: Bool = false
+    @Published var handByType: [HandType: [Card]] = [:]
+    @State private var currentTime: String = ""
+
+    // เริ่มเกม
+    func startGame() {
+        resetGame()   // รีเซ็ตสถานะเกม
+        loadPlayers() // โหลดข้อมูลผู้เล่น
+        dealCards()   // แจกไพ่
+        updateTime()  // เริ่มการอัปเดตเวลา
+    }
+
+    // รีเซ็ตสถานะของเกม
+    func resetGame() {
+        players.removeAll() // ลบผู้เล่นทั้งหมด
+        hasStarted = false  // เปลี่ยนสถานะเกม
+        handByType = [:]    // ล้างข้อมูลไพ่ที่เกี่ยวข้อง
+    }
+
+    // โหลดผู้เล่น
+    func loadPlayers() {
+        players.append(Player(name: "Player 1", handByType: [:])) 
+        players.append(Player(name: "Player 2", handByType: [:]))
+        players.append(Player(name: "Player 3", handByType: [:]))
+        players.append(Player(name: "Player 4", handByType: [:]))
+    }
+
+    // แจกไพ่
+    func dealCards() {
+        // แจกไพ่ให้กับผู้เล่นแต่ละคน
+        for i in 0..<players.count {
+            players[i].handByType = CardDeck.generateHand() // ใช้ฟังก์ชันสมมุติที่สร้างไพ่
+        }
+        hasStarted = true
+    }
+
+    // ฟังก์ชันอัปเดตเวลา
+    func updateTime() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            self.currentTime = formatter.string(from: Date())
+        }
+    }
+
+    // เปรียบเทียบมือของ Bottom กับผู้เล่นอื่นๆ
+    func compareBottomWithOthers() {
+        let bottom = players[3] // player 3 (Bottom)
+        for i in 0..<3 { // เปรียบเทียบกับ 3 ขาอื่น
+            let opponent = players[i]
+            let result = compareHands(bottom.handByType, opponent.handByType)
+            print("Bottom vs
+
+
+class GameViewModel: ObservableObject {
+    @Published var players: [Player] = []
     @Published var hasStarted = false
     @Published var handByType: [HandType: [Card]] = [:]
     @Published var sortType: SortType = .rank
