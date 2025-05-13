@@ -451,8 +451,7 @@ struct GameEndView: View {
                     Text(result.name)
                     Spacer()
                     Text("
-                        
-import SwiftUI
+                    
 
 struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
