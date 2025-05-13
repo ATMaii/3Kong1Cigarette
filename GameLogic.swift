@@ -381,8 +381,13 @@ func calculateChips(players: [Player]) {
     for player in players {
         let finalChips = player.chips + player.score * 100  // คูณกับ 100 เพื่อแปลงคะแนนเป็น Chips
         print("Player
-              
-import Foundation
+
+            Text("Player 1 Score:
+                 
+import Foundation    
+class GameLogic: ObservableObject {
+    @Published var players: [Player]
+    var deck: Deckimport Foundation
 
 class GameLogic {
     var players: [Player]
@@ -391,7 +396,7 @@ class GameLogic {
     init(playerNames: [String]) {
         self.players = playerNames.map { Player(name: $0) }
         self.deck = Deck()
-    }
+    }           
 
     func startGame() {
         deck.shuffle()
