@@ -451,22 +451,7 @@ struct GameEndView: View {
                     Text(result.name)
                     Spacer()
                     Text("
-                         
-struct DraggableCard: View {
-    let card: Card
-    
-    var body: some View {
-        Text(card.display)
-            .padding()
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                return NSItemProvider(object: NSString(string: card.display))
-            }
-    }
-}
-            
+                        
 import SwiftUI
 
 struct GameView: View {
