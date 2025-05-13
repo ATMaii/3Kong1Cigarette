@@ -422,13 +422,6 @@ class GameLogic {
             }
     }
 
-              // ส่วนนี้อยู่ใน GameView.swift
-struct GameView: View {
-    @ObservedObject var gameLogic: GameLogic
-
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
 import Foundation    
 class GameLogic: ObservableObject {
     @Published var players: [Player]
