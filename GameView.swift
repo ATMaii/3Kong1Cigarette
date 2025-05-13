@@ -223,7 +223,7 @@ struct GameView: View {
                                                                  }
     }
 
-import SwiftUI
+
         
     struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
@@ -256,6 +256,8 @@ import SwiftUI
             Button("Start Game") {
                 gameLogic.startNewGame()
             }
+   import SwiftUI
+             
    struct ContentView: View {
     @StateObject var gameLogic = GameLogic(playerNames: ["P1", "P2", "P3", "P4"])
 
