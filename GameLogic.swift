@@ -464,7 +464,7 @@ class GameLogic: ObservableObject {
 
 import SwiftUI
 
-class ContentView : View {
+struct ContentView : View {
     @State private var player1Score = 0
     @State private var player2Score = 0
 
@@ -491,27 +491,23 @@ struct PlayerHand {
     var body: some View {
         VStack {
             Text("Player 1 Score:
-   
-class GameLogic : {
-    
+
+import Foundation
+
+class GameLogic {
     var players: [PlayerHand]
-    
+
+    // Initializer เพื่อกำหนดค่าเริ่มต้นของผู้เล่น
     init(players: [PlayerHand]) {
         self.players = players
     }
 
-    func calculateScores() -> [Int] {
-        var scores = [Int](repeating: 0, count: players.count)
-        
-        for i in 0..<players.count {
-            for j in 0..<players.count where i != j {
-                let result = compare(players[i], players[j])
-                scores[i] += result
-            }
-        }
-        
-        return scores
+    // ฟังก์ชันเปรียบเทียบไพ่
+    func compareHands(player1: PlayerHand, player2: PlayerHand) -> Int {
+        // ตัวอย่างการเปรียบเทียบไพ่และคืนค่าผลลัพธ์ (คุณสามารถแก้ไขให้ตรงตามตรรกะของคุณ)
+        return 0 // ตัวอย่างการคืนค่า
     }
+}
     private func compare(_ a: PlayerHand, _ b: PlayerHand) -> Int {
         var score = 0
         score += compareLayer(a.top, b.top, isTop: true)
@@ -538,15 +534,22 @@ class GameLogic : {
         return ranks.filter { $0 == "A" }.count >= 3
     }
 }
-      
-import Foundastruct GameLogic {
-    
-class func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
-        // เปรียบเทียบสองมือ ใครชนะ
-        // return 1 if A ชนะ, -1 if B ชนะ
-        return 0
+                 
+import Foundation
+
+class GameLogic {
+    var players: [Player]
+
+    init(players: [Player]) {
+        self.players = players
     }
 
+    func compareHands(player1: Player, player2: Player) -> Int {
+        // Logic เพื่อเปรียบเทียบไพ่ของทั้งสองผู้เล่น
+        // คืนค่าเป็นผลลัพธ์จากการเปรียบเทียบ
+        return 0 // ตัวอย่างการคืนค่า
+    }
+}
     static func isRoyalFlush(_ hand: [Card]) -> Bool {
         return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
     }
