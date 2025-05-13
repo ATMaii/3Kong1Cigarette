@@ -1,14 +1,23 @@
+struct Card {
+    let rank: Rank
+    let suit: Suit
+}
+
+enum Rank: Int {
+    case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
+}
+
+enum Suit: String {
+    case spades = "♠", hearts = "♥", diamonds = "♦", clubs = "♣"
+}
+
 struct Prop {
-        let name = String
-        let Props = [Card]
-     }
+    let name: String
+    let cards: [Card]
+}
 
 let RoyalFlushProps: [Prop]
-let straightFlushProps : [Prop]
 
-=[ Rank.ace, .king, .queen, .jack, .ten, .nine, .eight,
-    .seven, .six, .five, .four, .three, .two
-].map { rank in
 Prop(name: "RoyalFlush"
 props: [
         Card(rank: .ace, suit: .spades),
