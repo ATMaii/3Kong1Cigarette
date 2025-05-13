@@ -226,15 +226,13 @@ struct GameView: View {
 
         
     struct GameView: View {
-    
+        
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
     @State private var isGameOver = false
     @State private var isGameActive = true
     @State private var timeRemaining = 120
     @State private var timer: Timer?
-
-    struct GameView: View {
-    @ObservedObject var gameLogic: GameLogic  // เชื่อมกับ GameLogic
 
     var body: some View {
         VStack {
@@ -250,6 +248,10 @@ struct GameView: View {
                 }
                 .padding()
             }
+    
+    struct GameView: View {
+    @ObservedObject var gameLogic: GameLogic  // เชื่อมกับ GameLogic
+
     var body: some View {
          VStack {
             // ปุ่มเริ่มเกม
