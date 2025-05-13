@@ -324,6 +324,19 @@ func splitHandIntoRows(hand: [Card]) -> (head: [Card], middle: [Card], tail: [Ca
     return (head, middle, tail)
 }
 
+func compareAllAgainstPlayer3() -> [Int] {
+    var scores: [Int] = []
+    let player3 = players[3]
+    
+    for i in 0..<3 {
+        let opponent = players[i]
+        let score = compare(player3, opponent)
+        scores.append(score)
+    }
+    
+    return scores // ตัวอย่าง: [1, -1, 0]
+}
+
 // ฟังก์ชันเปรียบเทียบมือไพ่
 func compareHands(hand1: [Card], hand2: [Card]) -> Int {
     // เรียกใช้ฟังก์ชันตรวจสอบมือไพ่ต่างๆ (Full House, Flush, ฯลฯ)
