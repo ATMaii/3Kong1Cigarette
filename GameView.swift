@@ -256,7 +256,13 @@ import SwiftUI
             Button("Start Game") {
                 gameLogic.startNewGame()
             }
-   
+   struct ContentView: View {
+    @StateObject var gameLogic = GameLogic(playerNames: ["P1", "P2", "P3", "P4"])
+
+    var body: some View {
+        GameView(gameLogic: gameLogic)
+    }
+   }
             Divider()
 
             // แสดงไพ่ของ Player 3 (index 2)
@@ -284,13 +290,7 @@ import SwiftUI
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .tail)
                         }
-struct ContentView: View {
-    @StateObject var gameLogic = GameLogic(playerNames: ["P1", "P2", "P3", "P4"])
 
-    var body: some View {
-        GameView(gameLogic: gameLogic)
-    }
-}
                     Divider()
 
                     // ไพ่ที่ยังไม่ได้จัด
@@ -324,6 +324,14 @@ struct ContentView: View {
             Alert(title: Text("Score"), message: Text(scoreSummary()), dismissButton: .default(Text("Ok")))
         }
 }
+        .onAppear {
+    gameLogic.startNewGame()
+        }
+        .onChange(of: gameLogic.players.count) { count in
+    if count == 4 {
+        gameLogic.startNewGame()
+    }
+                                               }
     private func dragGesture(for card: Card) -> some Gesture {
         DragGesture()
             .onEnded { value in
