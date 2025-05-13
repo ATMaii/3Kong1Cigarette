@@ -162,6 +162,7 @@ struct GameView: View {
     }
         
     struct GameView: View {
+        @StateObject var viewModel = GameViewModel()
     @State private var isMenuOpen = false
     @State private var currentTime: String = ""
 
