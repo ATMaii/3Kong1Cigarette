@@ -223,20 +223,22 @@ struct GameView: View {
                                                                  }
     }
 
+import SwiftUI
+import UniformTypeIdentifiers
 
-        
-    struct GameView: View {
-        
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+struct GameView: View {
+    @ObservedObject var gameLogic: GameLogic
     @State private var gameStarted = false
     @State private var isGameOver = false
     @State private var isGameActive = true
     @State private var timeRemaining = 120
     @State private var timer: Timer?
+    @State private var showScorePopup = false
+    @State private var finalScores: [String: Int] = [:]
 
     var body: some View {
         VStack {
-            Text("Game:3กอง")
+            Text("Game: 3 กอง")
                 .font(.largeTitle)
                 .padding()
 
@@ -248,8 +250,7 @@ struct GameView: View {
                 }
                 .padding()
             }
-    
-    struct GameView: View {
+struct GameView: View {
     @ObservedObject var gameLogic: GameLogic  // เชื่อมกับ GameLogic
 
     var body: some View {
@@ -264,61 +265,56 @@ struct GameView: View {
 
     var body: some View {
         GameView(gameLogic: gameLogic)
-    }
-   }
-            Divider()
-
-            // แสดงไพ่ของ Player 3 (index 2)
-            if gameLogic.players.count >= 3 {
-
-
+          }
+    } 
+             
             if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // ผู้เล่นหลัก
+                if gameLogic.players.count >= 3 {
+                    let player3 = gameLogic.players[2] // ผู้เล่นหลัก
 
-                VStack(spacing: 40) {
-     // แถวหัว (3 ช่อง)
-                    CardRowView(title: " ", cards: player3.headCards)
-                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
-                            handleDrop(providers: providers, target: .head)
-                        }
-
-                    // แถวกลาง (5 ช่อง)
-                    CardRowView(title: " ", cards: player3.middleCards)
-                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
-                            handleDrop(providers: providers, target: .middle)
-                        }
-
-                    // แถวท้าย (5 ช่อง)
-                    CardRowView(title: " ", cards: player3.tailCards)
-                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
-                            handleDrop(providers: providers, target: .tail)
-                        }
-
-                    Divider()
-
-                    // ไพ่ที่ยังไม่ได้จัด
-                    Text(" ")
-                        .font(.headline)
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(player3.unarrangedCards, id: \.id) { card in
-                                DraggableCard(card: card)
-                                    .gesture(dragGesture(for: card))
+                    VStack(spacing: 40) {
+                        // แถวหัว
+                        CardRowView(title: " ", cards: player3.headCards)
+                            .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                                handleDrop(providers: providers, target: .head)
                             }
+
+                        // แถวกลาง
+                        CardRowView(title: " ", cards: player3.middleCards)
+                            .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                                handleDrop(providers: providers, target: .middle)
+                            }
+
+                        // แถวท้าย
+                        CardRowView(title: " ", cards: player3.tailCards)
+                            .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                                handleDrop(providers: providers, target: .tail)
+                            }
+
+                        Divider()
+
+                        Text(" ")
+                            .font(.headline)
+
+                        ScrollView(.horizontal) {
+                            HStack {
+                                ForEach(player3.unarrangedCards, id: \.id) { card in
+                                    DraggableCard(card: card)
+                                        .gesture(dragGesture(for: card))
+                                }
+                            }
+                            .padding()
                         }
-                        .padding()
-                    }
 
-                    Button("Done") {
-                        // บันทึกการจัดไพ่
-                        isGameActive = false
-                        isGameOver = true
-                        timer?.invalidate()
+                        Button("Done") {
+                            isGameActive = false
+                            isGameOver = true
+                            timer?.invalidate()
+                        }
+                        .padding(.top)
                     }
-                    .padding(.top)
-                }
-                .padding()
-
+                    .padding()
+                    
                 Text("เวลาที่เหลือ:\(timeRemaining)")
             }
 
@@ -371,6 +367,7 @@ struct GameView: View {
 
         gameLogic.players[2] = player
     }
+        
    private func calculateScores() {
         var scores: [String: Int] = [:]
         let players = gameLogic.players
@@ -386,6 +383,237 @@ struct GameView: View {
 
     private func scoreSummary() -> String {
         finalScores.map { "\($0.key): \($0.value) แต้ม" }.joined(separator: "\n")
+    }
+}
+
+// MARK: - Card Display Components
+
+struct CardRowView: View {
+    let title: String
+    let cards: [Card]
+
+    var body: some View {
+        VStack {
+            Text(title)
+                .font(.title2)
+            HStack {
+                ForEach(cards, id: \ .id) { card in
+                    Text(card.display)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                }
+            }
+        }
+    }
+}
+
+struct DraggableCard: View {
+    let card: Card
+
+    var body: some View {
+        Text(card.display)
+            .padding()
+            .background(Color.yellow)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                NSItemProvider(object: NSString(string: card.display))
+            }
+    }
+}
+
+// MARK: - Game View
+
+struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
+    @State private var gameStarted = false
+    @State private var isGameOver = false
+    @State private var isGameActive = true
+    @State private var timeRemaining = 120
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack {
+            // Top Bar
+            HStack {
+                Button("《 Exit") {
+                    // ออกเกม
+                }
+                Spacer()
+            }
+            .padding()
+
+            Text("Game:3กอง")
+                .font(.largeTitle)
+                .padding()
+
+            if !gameStarted {
+                Button("Start") {
+                    gameLogic.startNewGame()
+                    gameStarted = true
+                    startTimer()
+                }
+                .padding()
+            }
+
+            if gameStarted && isGameActive {
+                let player3 = gameLogic.players[2] // Player 3 คือตัวเรา
+
+                VStack(spacing: 40) {
+                    // แถวหัว (3 ช่อง)
+                    CardRowView(title: "", cards: player3.headCards)
+                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                            handleDrop(providers: providers, target: .head)
+                        }
+
+                    // แถวกลาง (5 ช่อง)
+                    CardRowView(title: "", cards: player3.middleCards)
+                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                            handleDrop(providers: providers, target: .middle)
+                        }
+
+                    // แถวท้าย (5 ช่อง)
+                    CardRowView(title: "", cards: player3.tailCards)
+                        .onDrop(of: [UTType.text], isTargeted: nil) { providers in
+                            handleDrop(providers: providers, target: .tail)
+                        }
+
+                    Divider()
+
+                    Text(" ")
+                        .font(.headline)
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(player3.unarrangedCards, id: \.id) { card in
+                                DraggableCard(card: card)
+                                    .gesture(dragGesture(for: card))
+                            }
+                        }
+                        .padding()
+                    }
+
+                    Button("Done") {
+                        finishGame()
+                    }
+                    .padding(.top)
+                }
+                .padding()
+
+                Text("เวลาที่เหลือ:\(timeRemaining) วินาที")
+                    .font(.headline)
+            }
+
+            if isGameOver {
+                GameEndView(isGameOver: $isGameOver, isGameActive: $isGameActive, onPlayAgain: {
+                    gameStarted = false
+                    isGameActive = true
+                    isGameOver = false
+                    timeRemaining = 120
+                }, onExit: {
+                    // ดำเนินการออกจากเกม
+                })
+            }
+        }
+        .onDisappear {
+            timer?.invalidate()
+        }
+    }
+
+    private func dragGesture(for card: Card) -> some Gesture {
+        DragGesture()
+            .onEnded { value in
+                let y = value.location.y
+                if y < 200 {
+                    gameLogic.players[2].headCards.append(card)
+                } else if y < 400 {
+                    gameLogic.players[2].middleCards.append(card)
+                } else {
+                    gameLogic.players[2].tailCards.append(card)
+                }
+                gameLogic.players[2].unarrangedCards.removeAll { $0.id == card.id }
+            }
+    }
+
+    private func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            } else {
+                finishGame()
+            }
+        }
+    }
+
+    private func finishGame() {
+        timer?.invalidate()
+        isGameActive = false
+        isGameOver = true
+        autoArrangeCards()
+    }
+
+    private func autoArrangeCards() {
+        var player = gameLogic.players[2]
+        let sorted = player.unarrangedCards.sorted { $0.rank.rawValue > $1.rank.rawValue }
+
+        player.headCards = Array(sorted.prefix(3))
+        player.middleCards = Array(sorted.dropFirst(3).prefix(5))
+        player.tailCards = Array(sorted.dropFirst(8).prefix(5))
+        player.unarrangedCards = []
+
+        gameLogic.players[2] = player
+    }
+}
+
+// MARK: - Game End View
+
+struct GameEndView: View {
+    @Binding var isGameOver: Bool
+    @Binding var isGameActive: Bool
+    let onPlayAgain: () -> Void
+    let onExit: () -> Void
+
+    @State private var autoStartCountdown = 10
+    @State private var timer: Timer?
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("เกมจบแล้ว!")
+                .font(.title)
+
+            HStack {
+                Button("เล่นต่อ") {
+                    onPlayAgain()
+                }
+                .padding()
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+
+                Button("ออกจากเกม") {
+                    onExit()
+                }
+                .padding()
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+        }
+        .onAppear {
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if autoStartCountdown > 0 {
+                    autoStartCountdown -= 1
+                } else {
+                    timer?.invalidate()
+                    onPlayAgain()
+                }
+            }
+        }
+        .onDisappear {
+            timer?.invalidate()
+        }
     }
 }
 
