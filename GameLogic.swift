@@ -417,11 +417,16 @@ class GameLogic {
             }
     }
 import Foundation
+              // ส่วนนี้อยู่ใน GameView.swift
+struct GameView: View {
+    @ObservedObject var gameLogic: GameLogic
 
-class GameLogic: ObservableObject {
+    var body: some View {
+        VStack {
+            Text("Player 1 Score:
     @Published var players: [Player]
     var deck: Deck
-
+                 
     init(playerNames: [String]) {
         self.players = playerNames.map { Player(name: $0) }
         self.deck = Deck()
@@ -455,9 +460,7 @@ class GameLogic: ObservableObject {
         return (head, middle, tail)
     }
 }
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
+    
 
 
 // GameLogic.swift
