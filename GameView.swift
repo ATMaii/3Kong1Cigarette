@@ -162,7 +162,7 @@ struct GameView: View {
     }
         
     struct GameView: View {
-        @StateObject var viewModel = GameViewModel()
+    @StateObject var viewModel = GameViewModel()
     @State private var isMenuOpen = false
     @State private var currentTime: String = ""
 
@@ -224,6 +224,7 @@ struct GameView: View {
     }
 
 import SwiftUI
+        
     struct GameView: View {
     @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @State private var gameStarted = false
@@ -255,15 +256,12 @@ import SwiftUI
             Button("Start Game") {
                 gameLogic.startNewGame()
             }
-
+   
             Divider()
 
             // แสดงไพ่ของ Player 3 (index 2)
             if gameLogic.players.count >= 3 {
-                let player3Hand = gameLogic.players[2].hand
-                HStack {
-                    ForEach(player3Hand, id: \.self) { card in
-                        Text("
+
 
             if gameStarted && isGameActive {
                 let player3 = gameLogic.players[2] // ผู้เล่นหลัก
@@ -286,7 +284,13 @@ import SwiftUI
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .tail)
                         }
+struct ContentView: View {
+    @StateObject var gameLogic = GameLogic(playerNames: ["P1", "P2", "P3", "P4"])
 
+    var body: some View {
+        GameView(gameLogic: gameLogic)
+    }
+}
                     Divider()
 
                     // ไพ่ที่ยังไม่ได้จัด
