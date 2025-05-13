@@ -425,7 +425,7 @@ Prop(name: "FourOfAKind"
 }
 
 struct Prop {
-    let name: String // ชื่อของ Prop เช่น RoyalFlush, FullHouse
+    let name: FullHouse
     let props: [Card] // การเก็บไพ่ใน Prop นี้
 }
 
