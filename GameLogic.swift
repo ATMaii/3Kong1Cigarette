@@ -271,13 +271,6 @@ func calculateScores(players: inout [Player]) {
     }
 }
 
-
-
-
-for (index, score) in scores.enumerated() {
-    print("Player
-
-
 enum RowPosition {
     case head, middle, tail
 }
