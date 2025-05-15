@@ -245,6 +245,12 @@ struct Player {
     let tail: [Card]
 }
 
+let player = Player(id: 1, name: "Steve")
+let manager = GameManager(playerNames: [player.name])
+
+if let stadium = manager.stadiumForChips(player.chips) {
+    print("ผู้เล่นเข้า
+
 import Foundation
 
 class GameManager: ObservableObject {
@@ -265,6 +271,49 @@ class GameManager: ObservableObject {
         deck = Deck()
         deck.shuffle()
 
+struct Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var lastBonusDate: Date?
+    var hand: [Card] = []         // ไพ่ 13 ใบ
+    var score: Int = 0            // เก็บคะแนนหลังเปรียบเทียบ
+    var head: [Card] = []
+    var middle: [Card] = []
+    var tail: [Card] = []
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000
+        self.lastBonusDate = Date()
+    }
+
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return
+        }
+        chips += 5000
+        lastBonusDate = Date()
+    }
+}
+func startGame() {
+    let names = ["player1", "player2", "player3", "player4"]
+    players = names.enumerated().map { index, name in
+        var player = Player(id: index + 1, name: name)
+        player.hand = (0..<13).compactMap { _ in deck.drawCard() }
+        player.hand.sort { $0.rank.rawValue < $1.rank.rawValue } // เรียงมือไว้
+        return player
+    }
+
+    // ยังไม่จัดเป็น head, middle, tail
+}
         // แจกไพ่ 13 ใบ และแบ่งไพ่ 3 กอง
         for i in 0..<players.count {
             players[i].hand = (0..<13).compactMap { _ in deck.drawCard() }
