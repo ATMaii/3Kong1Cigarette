@@ -194,6 +194,7 @@ class Player {
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
         print("
 
+@Published var selectedStadium: Stadium? = nil
 
 struct Player {
     var id: Int
