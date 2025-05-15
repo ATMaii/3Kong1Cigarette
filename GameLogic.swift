@@ -374,7 +374,7 @@ func calculateTotalScores(players: [Player]) -> [Int] {
 
     return scores
 }
-if winsAllOpponents {
+if winsAllplayer {
     scores[i] *= 4
 }
 struct Player {
