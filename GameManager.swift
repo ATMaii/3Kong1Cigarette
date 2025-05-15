@@ -373,8 +373,8 @@ class GameManager: ObservableObject {
 
     func calculateScore(player: Player) -> Int {
         let headScore = evaluateHand(player.head)
-        let middleScore = evaluateHand(player.middle) * 2
-        let tailScore = evaluateHand(player.tail) * 3
+        let middleScore = evaluateHand(player.middle) 
+        let tailScore = evaluateHand(player.tail) 
         return headScore + middleScore + tailScore
     }
 
@@ -465,12 +465,12 @@ func evaluateThreePiles(head: [Card], middle: [Card], tail: [Card]) -> Int {
     var score = 0
     score += evaluateHand(head)      // อาจให้คะแนนน้อยหน่อย
     score += evaluateHand(middle) * 2
-    score += evaluateHand(tail) * 3
+    score += evaluateHand(tail)
     return score
 }
 
 func evaluateHand(_ cards: [Card]) -> Int {
-    // ตัวอย่างการให้คะแนนเบื้องต้น: คู่ = 1, ตอง = 3, โฟว์ = 6, ฟูลเฮาส์ = 4, สเตรทฟลัช = 10 ฯลฯ
+    // ตัวอย่างการให้คะแนนเบื้องต้น: คู่ = 1, ตอง = 3, โฟว์ = 6, ฟูลเฮาส์ = 1, สเตรทฟลัช = 8 ฯลฯ
     // TODO: เขียนระบบตรวจมือจริง ๆ
     return Int.random(in: 0...10) // ใช้แบบสุ่มแทนก่อน
 }
