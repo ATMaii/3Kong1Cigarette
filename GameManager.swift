@@ -59,6 +59,8 @@ class GameManager: ObservableObject {
     }
 }
 
+import Foundation
+
 enum Stadium: String {
     case wemley = "Wemley"
     case brazil = "Brazil"
@@ -93,35 +95,7 @@ class Player {
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
         print("
 
-import Foundation
 
-enum Stadium: String {
-    case wemley = "Wemley"
-    case brazil = "Brazil"
-    case allianzArena = "Allianz Arena"
-    case santiagoBernabeu = "Santiago Bernabeu"
-}
-
-class GameManager {
-    func stadiumForChips(_ chips: Int) -> Stadium? {
-        switch chips {
-        case 50_000...:
-            return .santiagoBernabeu
-        case 20_000..<50_000:
-            return .allianzArena
-        case 10_000..<20_000:
-            return .brazil
-        case 5_000..<10_000:
-            return .wemley
-        default:
-            return nil
-        }
-    }
-}
-        }
-        return nil
-    }
-}
       let manager = GameManager()
 if let stadium = manager.stadiumForChips(player.chips) {
     print("ผู้เล่นเข้า
