@@ -1,3 +1,276 @@
+
+// GameManager.swift
+
+import Foundation
+
+class GameManager: ObservableObject {
+    @Published var players: [Player] = []
+    @Published var currentRound: Int = 1
+    @Published var isGameOver: Bool = false
+
+    private var gameLogic: GameLogic
+    private var scoreManager: ScoreManager
+
+    init(playerNames: [String]) {
+        self.players = playerNames.map { Player(name: $0) }
+        self.gameLogic = GameLogic(players: self.players)
+        self.scoreManager = ScoreManager(players: self.players)
+    }
+
+    func startNewGame() {
+        currentRound = 1
+        isGameOver = false
+        for player in players {
+            player.reset()
+        }
+        gameLogic.startGame()
+    }
+
+    func playRound() {
+        gameLogic.startGame()
+
+        let roundScores = gameLogic.calculateRoundScores()
+        scoreManager.updateScores(with: roundScores)
+
+        currentRound += 1
+        if currentRound > 5 {
+            isGameOver = true
+        }
+    }
+
+    func winner() -> Player? {
+        return scoreManager.highestScorePlayer()
+    }
+
+    // Stadium for Chips logic
+    func stadiumForChips(_ chips: Int) -> Stadium? {
+        switch chips {
+        case 50_000...:
+            return .santiagoBernabeu
+        case 20_000..<50_000:
+            return .allianzArena
+        case 10_000..<20_000:
+            return .brazil
+        case 5_000..<10_000:
+            return .wemley
+        default:
+            return nil
+        }
+    }
+}
+
+import Foundation
+
+enum Stadium: String {
+    case wemley = "Wemley"
+    case brazil = "Brazil"
+    case allianzArena = "Allianz Arena"
+    case santiagoBernabeu = "Santiago Bernabeu"
+}
+
+class Player {
+    static private var nextID: Int = 0
+
+    var id: Int
+    var name: String
+    var chips: Int
+    var lastBonusDate: Date?
+
+    // สำหรับเกม
+    var hand: [Card] = []
+    var score: Int = 0
+    var head: [Card] = []
+    var middle: [Card] = []
+    var tail: [Card] = []
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(name: String) {
+        self.id = Player.nextID
+        Player.nextID += 1
+        self.name = name
+        self.chips = 5000
+        self.lastBonusDate = Date()
+    }
+
+    func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return
+        }
+        chips += 5000
+        lastBonusDate = Date()
+        print("Daily bonus received.")
+    }
+
+    func reset() {
+        chips = 5000
+        lastBonusDate = Date()
+    }
+}
+
+players = names.enumerated().map { index, name in
+    let player = Player(id: index + 1, name: name)
+    player.hand = (0..<13).compactMap { _ in deck.drawCard() }
+    player.hand.sort { $0.rank.rawValue < $1.rank.rawValue }
+    return player
+}
+
+class Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var lastBonusDate: Date?
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
+        self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
+    }
+
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return // ถ้ารับแล้ววันนี้ไม่ให้รับโบนัสอีก
+        }
+        chips += 5000 // เพิ่มชิป 5,000
+        lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
+        print("dd/mm/yy")
+
+import Foundation
+
+struct Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var lastBonusDate: Date?
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
+        self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
+    }
+
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return // ถ้ารับแล้ววันนี้ไม่ให้รับโบนัสอีก
+        }
+        chips += 5000 // เพิ่มชิป 5,000
+        lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
+        print("dd/mm/yy")
+
+
+class GameManager: ObservableObject {
+    var playerChips: Int = 0
+
+    func availableStadiums() -> [Stadium] {
+        return Stadium.allCases.filter { playerChips >= $0.minChipsRequired }
+    }
+
+    func stadiumForChips() -> Stadium? {
+        return Stadium.allCases.reversed().first { playerChips >= $0.minChipsRequired }
+    }
+}
+
+@Published var selectedStadium: Stadium? = nil
+
+
+struct Player {
+    let name: String
+    let head: [Card]
+    let middle: [Card]
+    let tail: [Card]
+}
+
+let player = Player(id: 1, name: "Steve")
+let manager = GameManager(playerNames: [player.name])
+
+if let stadium = manager.stadiumForChips(player.chips) {
+    print("ผู้เล่นเข้า
+
+import Foundation
+
+class GameManager: ObservableObject {
+    @Published var players: [Player] = []
+    @Published var winner: Player?
+    private var deck = Deck()
+
+    init() {
+        startGame()
+    }
+
+    func startGame() {
+        // สร้างNewPlayer
+        let names = ["player1", "player2", "player3", "player4"]
+        players = names.enumerated().map { index, name in Player(id: index + 1, name: name) }
+
+        // สร้างและสับไพ่
+        deck = Deck()
+        deck.shuffle()
+
+struct Player {
+    var id: Int
+    var name: String
+    var chips: Int
+    var lastBonusDate: Date?
+    var hand: [Card] = []         // ไพ่ 13 ใบ
+    var score: Int = 0            // เก็บคะแนนหลังเปรียบเทียบ
+    var head: [Card] = []
+    var middle: [Card] = []
+    var tail: [Card] = []
+
+    var isActive: Bool {
+        return chips > 0
+    }
+
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+        self.chips = 5000
+        self.lastBonusDate = Date()
+    }
+
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate,
+           calendar.isDateInToday(lastDate) {
+            return
+        }
+        chips += 5000
+        lastBonusDate = Date()
+    }
+}
+func startGame() {
+    let names = ["player1", "player2", "player3", "player4"]
+    players = names.enumerated().map { index, name in
+        var player = Player(id: index + 1, name: name)
+        player.hand = (0..<13).compactMap { _ in deck.drawCard() }
+        player.hand.sort { $0.rank.rawValue < $1.rank.rawValue } // เรียงมือไว้
+        return player
+    }
+
+    // ยังไม่จัดเป็น head, middle, tail
+}
+players[2].head = headCardsFromUI
+players[2].middle = middleCardsFromUI
+players[2].tail = tailCardsFromUI
+
 import Foundation
 
 enum Stadium: String {
@@ -97,222 +370,6 @@ class GameManager: ObservableObject {
             return nil
         }
     }
-}
-// GameManager.swift
-
-import Foundation
-
-class GameManager: ObservableObject {
-    @Published var players: [Player] = []
-    @Published var currentRound: Int = 1
-    @Published var isGameOver: Bool = false
-
-    private var gameLogic: GameLogic
-    private var scoreManager: ScoreManager
-
-    init(playerNames: [String]) {
-        self.players = playerNames.map { Player(name: $0) }
-        self.gameLogic = GameLogic(players: self.players)
-        self.scoreManager = ScoreManager(players: self.players)
-    }
-
-    func startNewGame() {
-        currentRound = 1
-        isGameOver = false
-        for player in players {
-            player.reset()
-        }
-        gameLogic.startGame()
-    }
-
-    func playRound() {
-        gameLogic.startGame()
-
-        let roundScores = gameLogic.calculateRoundScores()
-        scoreManager.updateScores(with: roundScores)
-
-        currentRound += 1
-        if currentRound > 5 {
-            isGameOver = true
-        }
-    }
-
-    func winner() -> Player? {
-        return scoreManager.highestScorePlayer()
-    }
-
-    // Stadium for Chips logic
-    func stadiumForChips(_ chips: Int) -> Stadium? {
-        switch chips {
-        case 50_000...:
-            return .santiagoBernabeu
-        case 20_000..<50_000:
-            return .allianzArena
-        case 10_000..<20_000:
-            return .brazil
-        case 5_000..<10_000:
-            return .wemley
-        default:
-            return nil
-        }
-    }
-}
-
-import Foundation
-
-enum Stadium: String {
-    case wemley = "Wemley"
-    case brazil = "Brazil"
-    case allianzArena = "Allianz Arena"
-    case santiagoBernabeu = "Santiago Bernabeu"
-}
-
-class Player {
-    var id: Int
-    var name: String
-    var chips: Int
-    var lastBonusDate: Date?
-
-    var isActive: Bool {
-        return chips > 0
-    }
-
-    init(id: Int, name: String) {
-        self.id = id
-        self.name = name
-        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
-        self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
-    }
-
-    mutating func checkDailyBonus() {
-        let calendar = Calendar.current
-        if let lastDate = lastBonusDate,
-           calendar.isDateInToday(lastDate) {
-            return // ถ้ารับแล้ววันนี้ไม่ให้รับโบนัสอีก
-        }
-        chips += 5000 // เพิ่มชิป 5,000
-        lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("dd/mm/yy")
-
-import Foundation
-
-struct Player {
-    var id: Int
-    var name: String
-    var chips: Int
-    var lastBonusDate: Date?
-
-    var isActive: Bool {
-        return chips > 0
-    }
-
-    init(id: Int, name: String) {
-        self.id = id
-        self.name = name
-        self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
-        self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
-    }
-
-    mutating func checkDailyBonus() {
-        let calendar = Calendar.current
-        if let lastDate = lastBonusDate,
-           calendar.isDateInToday(lastDate) {
-            return // ถ้ารับแล้ววันนี้ไม่ให้รับโบนัสอีก
-        }
-        chips += 5000 // เพิ่มชิป 5,000
-        lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("dd/mm/yy")
-
-
-class GameManager: ObservableObject {
-    var playerChips: Int = 0
-
-    func availableStadiums() -> [Stadium] {
-        return Stadium.allCases.filter { playerChips >= $0.minChipsRequired }
-    }
-
-    func stadiumForChips() -> Stadium? {
-        return Stadium.allCases.reversed().first { playerChips >= $0.minChipsRequired }
-    }
-}
-@Published var selectedStadium: Stadium? = nil
-
-
-struct Player {
-    let name: String
-    let head: [Card]
-    let middle: [Card]
-    let tail: [Card]
-}
-
-let player = Player(id: 1, name: "Steve")
-let manager = GameManager(playerNames: [player.name])
-
-if let stadium = manager.stadiumForChips(player.chips) {
-    print("ผู้เล่นเข้า
-
-import Foundation
-
-class GameManager: ObservableObject {
-    @Published var players: [Player] = []
-    @Published var winner: Player?
-    private var deck = Deck()
-
-    init() {
-        startGame()
-    }
-
-    func startGame() {
-        // สร้างNewPlayer
-        let names = ["player1", "player2", "player3", "player4"]
-        players = names.enumerated().map { index, name in Player(id: index + 1, name: name) }
-
-        // สร้างและสับไพ่
-        deck = Deck()
-        deck.shuffle()
-
-struct Player {
-    var id: Int
-    var name: String
-    var chips: Int
-    var lastBonusDate: Date?
-    var hand: [Card] = []         // ไพ่ 13 ใบ
-    var score: Int = 0            // เก็บคะแนนหลังเปรียบเทียบ
-    var head: [Card] = []
-    var middle: [Card] = []
-    var tail: [Card] = []
-
-    var isActive: Bool {
-        return chips > 0
-    }
-
-    init(id: Int, name: String) {
-        self.id = id
-        self.name = name
-        self.chips = 5000
-        self.lastBonusDate = Date()
-    }
-
-    mutating func checkDailyBonus() {
-        let calendar = Calendar.current
-        if let lastDate = lastBonusDate,
-           calendar.isDateInToday(lastDate) {
-            return
-        }
-        chips += 5000
-        lastBonusDate = Date()
-    }
-}
-func startGame() {
-    let names = ["player1", "player2", "player3", "player4"]
-    players = names.enumerated().map { index, name in
-        var player = Player(id: index + 1, name: name)
-        player.hand = (0..<13).compactMap { _ in deck.drawCard() }
-        player.hand.sort { $0.rank.rawValue < $1.rank.rawValue } // เรียงมือไว้
-        return player
-    }
-
-    // ยังไม่จัดเป็น head, middle, tail
 }
         // แจกไพ่ 13 ใบ และแบ่งไพ่ 3 กอง
         for i in 0..<players.count {
