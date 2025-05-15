@@ -204,12 +204,9 @@ let manager = GameManager(playerNames: [player.name])
 if let stadium = manager.stadiumForChips(player.chips) {
     print("ผู้เล่นเข้า
 
-import Foundation
 
 class GameManager: ObservableObject {
-    @Published var players: [Player] = []
-    @Published var winner: Player?
-    private var deck = Deck()
+    var PlayerChips : int = 0
 
     init() {
         startGame()
