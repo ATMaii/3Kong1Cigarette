@@ -192,9 +192,9 @@ class Player {
         }
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("
+        print("dd/mm/yy")
 
-@Published var selectedStadium: Stadium? = nil
+import Foundation
 
 struct Player {
     var id: Int
@@ -221,7 +221,7 @@ struct Player {
         }
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("
+        print("dd/mm/yy")
 
 
 class GameManager: ObservableObject {
