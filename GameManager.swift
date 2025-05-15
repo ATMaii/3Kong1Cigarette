@@ -95,46 +95,6 @@ class Player {
 
 import Foundation
 
-class GameManager: ObservableObject {
-    @Published var players: [Player] = []
-    @Published var currentRound: Int = 1
-    @Published var isGameOver: Bool = false
-
-    private var gameLogic: GameLogic
-    private var scoreManager: ScoreManager
-
-    init(playerNames: [String]) {
-        self.players = playerNames.map { Player(name: $0) }
-        self.gameLogic = GameLogic(players: self.players)
-        self.scoreManager = ScoreManager(players: self.players)
-    }
-
-    func startNewGame() {
-        currentRound = 1
-        isGameOver = false
-        for player in players {
-            player.reset()
-        }
-        gameLogic.startGame()
-    }
-
-    func playRound() {
-        gameLogic.startGame()
-
-        let roundScores = gameLogic.calculateRoundScores()
-        scoreManager.updateScores(with: roundScores)
-
-        currentRound += 1
-        if currentRound > 5 {
-            isGameOver = true
-        }
-    }
-
-    func winner() -> Player? {
-        return scoreManager.highestScorePlayer()
-    }
-}
-
 enum Stadium: String {
     case wemley = "Wemley"
     case brazil = "Brazil"
