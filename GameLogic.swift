@@ -272,46 +272,7 @@ func calculateScores(players: inout [Player]) {
 }
 
 
-func compareThreeRows(playersHands: [[RowPosition: [Card]]]) -> [Int] {
-    var scores = Array(repeating: 0, count: playersHands.count)
 
-    for i in 0..<playersHands.count {
-        for j in 0..<playersHands.count where i != j {
-            let h = GameLogic.compareHands(playersHands[i][.head]!, playersHands[j][.head]!)
-            let m = GameLogic.compareHands(playersHands[i][.middle]!, playersHands[j][.middle]!)
-            let t = GameLogic.compareHands(playersHands[i][.tail]!, playersHands[j][.tail]!)
-
-            var score = h + m + t
-
-            // ชนะครบ 3 แถวจากผู้เล่น j (Super win)
-            if h > 0 && m > 0 && t > 0 {
-                score *= 2
-            }
-
-            scores[i] += score
-            scores[j] -= score
-        }
-    }
-
-    return scores
-}
-
-// สมมุติว่า player1 ถึง player4 ถูกสร้างไว้แล้วตามรูปแบบ
-let player1: [RowPosition: [Card]] = [
-    .head: [...],
-    .middle: [...],
-    .tail: [...]
-]
-
-let player2: ...
-let player3: ...
-let player4: ...
-
-let scores = compareThreeRows(playersHands: [player1, player2, player3, player4])
-
-if winsAllplayer {
-    scores *= 4
-}
 
 for (index, score) in scores.enumerated() {
     print("Player
@@ -420,7 +381,9 @@ func calculateTotalScores(players: [Player]) -> [Int] {
 
     return scores
 }
-
+if winsAllOpponents {
+    scores[i] *= 4
+}
 struct Player {
     var id: Int
     var hand: [Card] // 13 cards (รวมทุกแถว)
