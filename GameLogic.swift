@@ -35,20 +35,6 @@ func isFoul(head: [Card], middle: [Card], tail: [Card]) -> Bool {
     return !(tailRank >= middleRank && middleRank >= headRank)
 }
 
-import Foundation
-
-enum HandType: Int {
-    case HighCard = 1          
-    case Pair                  
-    case TwoPair                
-    case ThreeOfAKind           
-    case Straight               
-    case Flush                 
-    case FullHouse            
-    case FourOfAKind           
-    case StraightFlush          
-    case RoyalFlush             
-}
 
 func getHeadHandTypestraightRank(for cards: [Card]) -> HandType {
 func straightRank(_ hand: [Card]) -> Int? {
@@ -100,33 +86,6 @@ func HandEvaluator(hand: [Card])->HandType {
             return .highCard
         }
     }
-    
-func calculatorScore(cards : [Card], row: RowPosition) -> Int {
-      var score = 0
-    
-      if isRoyalFlush(cards) {
-        score = 8 // Royal Flush
-    } else if isStraightFlush(cards) {
-        score = 7 // Straight Flush
-    } else if isFourOfAKind(cards) {
-        score = 6 // Four of a Kind
-    } else if isFullHouse(cards) {
-        score = 1 // Full House
-    } else if isFlush(cards) {
-        score = 1 // Flush
-    } else if isStraight(cards) {
-        score = 1 // Straight
-    } else if isThreeOfAKind(cards) {
-        score = 1 // Three of a Kind
-    } else if isTwoPair(cards) {
-        score = 1 // Two Pair
-    } else if isPair(cards) {
-        score = 1 // Pair
-    } else if isHighCard(Card) {
-        score = 1 // High Card
-    }
-    return score
-}
 
 func calculateScore(hand : [Card], playerIndex: Int, playersCount: Int) -> Int {
     var score = 0
@@ -156,18 +115,7 @@ func calculateScore(hand : [Card], playerIndex: Int, playersCount: Int) -> Int {
             score = 2 // หัวคู่ A
         }
     }
-    // คูณคะแนนเมื่อได้ทะลุ
-    if didWinAllThreeHands {
-    score *= 2
-    } 
-    // คูณคะแนนเมื่อชนะ 3 คน ดาร์บี้
-    if defeatedPlayers.count == 3 {
-    score *= 4
-    }
-    return score
-    }
-}
-
+    
 import Foundation
 
 struct HandEvaluator {
@@ -305,8 +253,109 @@ struct GameLogic {
     }
 }
 
+
 enum RowPosition {
     case head, middle, tail
+}
+
+struct Player {
+    let index: Int
+    let head: [Card]
+    let middle: [Card]
+    let tail: [Card]
+}
+
+func compareRow(_ cards1: [Card], _ cards2: [Card], row: RowPosition) -> (Int, Int) {
+    let type1 = evaluateHandType(cards: cards1)
+    let type2 = evaluateHandType(cards: cards2)
+
+    if type1 == type2 {
+        return (0, 0)
+    } else if type1 > type2 {
+        return (1, -1)
+    } else {
+        return (-1, 1)
+    }
+}
+
+func bonusScore(for cards: [Card], row: RowPosition) -> Int {
+    var score = 0
+    if isRoyalFlush(cards) {
+        score = 8
+    } else if isStraightFlush(cards) {
+        score = 7
+    } else if isFourOfAKind(cards) {
+        score = 6
+    } else if isFullHouseOfAces(cards) {
+        score = 2
+    } else if isFullHouse(cards) {
+        score = 1
+    } else if isFlush(cards) || isStraight(cards) || isThreeOfAKind(cards) || isTwoPair(cards) || isPair(cards) {
+        score = 1
+    }
+
+    if row == .middle {
+        score *= 2
+    }
+    if row == .head {
+        if isThreeOfAKind(cards) {
+            score = 5
+        } else if isPairOfAces(cards) {
+            score = 2
+        }
+    }
+
+    return score
+}
+
+func calculateTotalScores(players: [Player]) -> [Int] {
+    var scores = Array(repeating: 0, count: players.count)
+
+    for i in 0..<players.count {
+        for j in (i + 1)..<players.count {
+            let p1 = players[i]
+            let p2 = players[j]
+
+            var p1Wins = 0
+            var p2Wins = 0
+            var p1Score = 0
+            var p2Score = 0
+
+            // Head
+            let (h1, h2) = compareRow(p1.head, p2.head, row: .head)
+            p1Wins += (h1 > 0 ? 1 : 0)
+            p2Wins += (h2 > 0 ? 1 : 0)
+            p1Score += h1 + bonusScore(for: p1.head, row: .head)
+            p2Score += h2 + bonusScore(for: p2.head, row: .head)
+
+            // Middle
+            let (m1, m2) = compareRow(p1.middle, p2.middle, row: .middle)
+            p1Wins += (m1 > 0 ? 1 : 0)
+            p2Wins += (m2 > 0 ? 1 : 0)
+            p1Score += m1 + bonusScore(for: p1.middle, row: .middle)
+            p2Score += m2 + bonusScore(for: p2.middle, row: .middle)
+
+            // Tail
+            let (t1, t2) = compareRow(p1.tail, p2.tail, row: .tail)
+            p1Wins += (t1 > 0 ? 1 : 0)
+            p2Wins += (t2 > 0 ? 1 : 0)
+            p1Score += t1 + bonusScore(for: p1.tail, row: .tail)
+            p2Score += t2 + bonusScore(for: p2.tail, row: .tail)
+
+            if p1Wins == 3 {
+                p1Score *= 2
+                p2Score *= 2
+            } else if p2Wins == 3 {
+                p1Score *= 2
+                p2Score *= 2
+            }
+
+            scores[i] += p1Score
+            scores[j] += p2Score
+        }
+    }
+
+    return scores
 }
 
 struct Player {
@@ -314,79 +363,6 @@ struct Player {
     var hand: [Card] // 13 cards (รวมทุกแถว)
     var score: Int = 0
     var chips: Int = 5000 // เริ่มต้นชิป
-}
-
-// ฟังก์ชันเพื่อแยกไพ่เป็น 3 แถว (Head, Middle, Tail)
-func splitHandIntoRows(hand: [Card]) -> (head: [Card], middle: [Card], tail: [Card]) {
-    let head = Array(hand.prefix(3))       // 3 ใบแรก (หัว)
-    let middle = Array(hand[3..<8])        // 5 ใบถัดมา (กลาง)
-    let tail = Array(hand[8..<13])         // 5 ใบสุดท้าย (ท้าย)
-    return (head, middle, tail)
-}
-
-func compareAllAgainstPlayer3() -> [Int] {
-    var scores: [Int] = []
-    let player3 = players[3]
-    
-    for i in 0..<3 {
-        let opponent = players[i]
-        let score = compare(player3, opponent)
-        scores.append(score)
-    }
-    
-    return scores // ตัวอย่าง: [1, -1, 0]
-}
-
-// ฟังก์ชันเปรียบเทียบมือไพ่
-func compareHands(hand1: [Card], hand2: [Card]) -> Int {
-    // เรียกใช้ฟังก์ชันตรวจสอบมือไพ่ต่างๆ (Full House, Flush, ฯลฯ)
-    let score1 = evaluateHand(cards: hand1)
-    let score2 = evaluateHand(cards: hand2)
-    
-    if score1 > score2 {
-        return 1 // hand1 ชนะ
-    } else if score1 < score2 {
-        return -1 // hand2 ชนะ
-    } else {
-        return 0 // เสมอ
-    }
-}
-
-// ฟังก์ชันคำนวณคะแนนของแต่ละผู้เล่น
-func calculateScores(players: [Player]) {
-    for i in 0..<players.count {
-        var totalScore = 0
-        
-        // แยกไพ่เป็น 3 แถว (Head, Middle, Tail)
-        let (head, middle, tail) = splitHandIntoRows(hand: players[i].hand)
-        
-        // เปรียบเทียบ Head กับ Head ของทุกคน
-        for j in 0..<players.count {
-            if i != j {
-                let opponent = players[j]
-                totalScore += compareHands(hand1: head, hand2: opponent.hand.prefix(3)) // เปรียบเทียบ Head
-            }
-        }
-        
-        // เปรียบเทียบ Middle กับ Middle ของทุกคน
-        for j in 0..<players.count {
-            if i != j {
-                let opponent = players[j]
-                totalScore += compareHands(hand1: middle, hand2: opponent.hand[3..<8]) // เปรียบเทียบ Middle
-            }
-        }
-        
-        // เปรียบเทียบ Tail กับ Tail ของทุกคน
-        for j in 0..<players.count {
-            if i != j {
-                let opponent = players[j]
-                totalScore += compareHands(hand1: tail, hand2: opponent.hand[8..<13]) // เปรียบเทียบ Tail
-            }
-        }
-        
-        // เก็บคะแนน
-        players[i].score = totalScore
-    }
 }
 
 // ฟังก์ชันคำนวณ Chips
