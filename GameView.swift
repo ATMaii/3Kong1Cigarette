@@ -297,7 +297,21 @@ struct GameView: View {
                             .font(.headline)
 
                         ScrollView(.horizontal) {
-                            HStack {
+
+                        Button("Done") {
+                            isGameActive =false
+                            isGameOver = true
+                            timer?.invalidate()
+                        }
+                        .padding(.top)
+                    }
+                    .padding()
+
+                Text("เวลาที่เหลือ:\(timeRemaining)")
+            }
+
+
+                          HStack {
                                 ForEach(player3.unarrangedCards, id: \.id) { card in
                                     DraggableCard(card: card)
                                         .gesture(dragGesture(for: card))
