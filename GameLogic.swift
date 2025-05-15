@@ -152,16 +152,10 @@ struct HandEvaluator {
     }
 }
 
-struct GameLogic {
-    
-    static func compareHands(_ handA: [Card], _ handB: [Card]) -> Int {
-        // เปรียบเทียบสองมือ ใครชนะ
-        // return 1 if A ชนะ, -1 if B ชนะ
-        return 0
-    }
-
+// ฟังก์ชันตรวจสอบมือไพ่ต่าง ๆ รวมใน struct
+struct HandEvaluator {
     static func isRoyalFlush(_ hand: [Card]) -> Bool {
-        return isStraightFlush(hand) && hand.contains { $0.rank == .ace }
+        return isStraightFlush(hand) && hand.contains(where: { $0.rank == .ace })
     }
 
     static func isStraightFlush(_ hand: [Card]) -> Bool {
@@ -169,58 +163,113 @@ struct GameLogic {
     }
 
     static func isFourOfAKind(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        let rankCounts = rankCount(hand)
         return rankCounts.values.contains(4)
     }
 
     static func isFullHouse(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        let rankCounts = rankCount(hand)
         return rankCounts.values.contains(3) && rankCounts.values.contains(2)
-    }
-
-    static func isFullHouseOfAces(_ hand: [Card]) -> Bool {
-        let grouped = Dictionary(grouping: hand, by: { $0.rank })
-        return grouped[.ace]?.count == 3 && grouped.values.contains { $0.count == 2 }
     }
 
     static func isFlush(_ hand: [Card]) -> Bool {
         return Set(hand.map { $0.suit }).count == 1
     }
-    
+
     static func isStraight(_ hand: [Card]) -> Bool {
         let ranks = hand.map { $0.rank.rawValue }.sorted()
-        return straights.contains { Set($0) == Set(ranks) }
+        let straights = [
+            [2,3,4,5,6], [3,4,5,6,7], [4,5,6,7,8], [5,6,7,8,9],
+            [6,7,8,9,10], [7,8,9,10,11], [8,9,10,11,12], [9,10,11,12,13],
+            [10,11,12,13,14],
+            [14,2,3,4,5] // A-2-3-4-5
+        ]
+        return straights.contains(where: { Set($0) == Set(ranks) })
     }
 
     static func isThreeOfAKind(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        let rankCounts = rankCount(hand)
         return rankCounts.values.contains(3)
     }
 
     static func isTwoPair(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        let rankCounts = rankCount(hand)
         return rankCounts.values.filter { $0 == 2 }.count == 2
     }
 
     static func isPair(_ hand: [Card]) -> Bool {
-        let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+        let rankCounts = rankCount(hand)
         return rankCounts.values.contains(2)
     }
-    static func isPairOfAces(_ hand: [Card]) -> Bool {
-    let aces = hand.filter { $0.rank == .ace }
-    return aces.count == 2
-    }
+
     static func isHighCard(_ hand: [Card]) -> Bool {
-    let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
-    let hasPairOrBetter = rankCounts.values.contains { $0 >= 2 }
-    return !hasPairOrBetter
+        let rankCounts = rankCount(hand)
+        return !rankCounts.values.contains(where: { $0 >= 2 })
     }
-    static func isPairOfAces(_ hand: [Card]) -> Bool {
-        let aces = hand.filter { $0.rank == .ace }
-        return aces.count == 2
+
+    // Helper function นับจำนวนไพ่แต่ละ Rank
+    static func rankCount(_ hand: [Card]) -> [Card.Rank: Int] {
+        Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
+    }
+
+    // ฟังก์ชันเรียกตรวจสอบประเภทไพ่
+    static func getHandType(_ hand: [Card]) -> HandType {
+        if isRoyalFlush(hand) { return .royalFlush }
+        if isStraightFlush(hand) { return .straightFlush }
+        if isFourOfAKind(hand) { return .fourOfAKind }
+        if isFullHouse(hand) { return .fullHouse }
+        if isFlush(hand) { return .flush }
+        if isStraight(hand) { return .straight }
+        if isThreeOfAKind(hand) { return .threeOfAKind }
+        if isTwoPair(hand) { return .twoPair }
+        if isPair(hand) { return .pair }
+        return .highCard
     }
 }
 
+// ฟังก์ชันแยกไพ่ 13 ใบเป็น 3 แถว: head (3 ใบ), middle (5 ใบ), tail (5 ใบ)
+func splitHandIntoRows(hand: [Card]) -> (head: [Card], middle: [Card], tail: [Card]) {
+    let head = Array(hand.prefix(3))
+    let middle = Array(hand[3..<8])
+    let tail = Array(hand[8..<13])
+    return (head, middle, tail)
+}
+
+// ฟังก์ชันตรวจสอบ foul (ลำดับไพ่ถูกต้องไหม)
+func isFoul(head: [Card], middle: [Card], tail: [Card]) -> Bool {
+    let headRank = HandEvaluator.getHandType(head).rawValue
+    let middleRank = HandEvaluator.getHandType(middle).rawValue
+    let tailRank = HandEvaluator.getHandType(tail).rawValue
+    return !(tailRank >= middleRank && middleRank >= headRank)
+}
+
+// เปรียบเทียบมือไพ่ 2 มือ (แบบง่ายโดยดูแค่ HandType เท่านั้น)
+func compareHands(hand1: [Card], hand2: [Card]) -> Int {
+    let type1 = HandEvaluator.getHandType(hand1)
+    let type2 = HandEvaluator.getHandType(hand2)
+    if type1 > type2 { return 1 }
+    else if type1 < type2 { return -1 }
+    else { 
+        // ถ้าชนิดไพ่เท่ากัน อาจต้องเพิ่ม logic เปรียบเทียบไพ่สูงสุด (ยังไม่เขียน)
+        return 0
+    }
+}
+
+// ฟังก์ชันคำนวณคะแนนรวมระหว่างผู้เล่นทุกคน (ตัวอย่าง)
+func calculateScores(players: inout [Player]) {
+    for i in 0..<players.count {
+        var totalScore = 0
+        let (head, middle, tail) = splitHandIntoRows(hand: players[i].hand)
+        for j in 0..<players.count {
+            if i == j { continue }
+            let (oHead, oMiddle, oTail) = splitHandIntoRows(hand: players[j].hand)
+            totalScore += compareHands(hand1: head, hand2: oHead)
+            totalScore += compareHands(hand1: middle, hand2: oMiddle)
+            totalScore += compareHands(hand1: tail, hand2: oTail)
+        }
+        players[i].score = totalScore
+    }
+}
 
 enum RowPosition {
     case head, middle, tail
@@ -416,40 +465,6 @@ class GameLogic: ObservableObject {
         }
 
         return (head, middle, tail)
-    }
-}
-// ส่วนนี้อยู่ใน GameView.swift
-struct GameView: View {
-    @ObservedObject var gameLogic: GameLogic
-
-    var body: some View {
-        VStack {
-            Text("Player 1 Score:
-// GameLogic.swift
-import SwiftUI
-
-struct ContentView : View {
-    @State private var player1Score = 0
-    @State private var player2Score = 0
-
-private func determineWinner() {
-    let highestScore = players.max { $0.score < $1.score }
-}
-struct Card { 
-    let rank: String  // เช่น "A", "K", "Q", "2", ...
-    let suit: String  // เช่น "♠", "♥", ...
-}
-
-struct PlayerHand {
-    let top: [Card]    // 3 ใบ
-    let middle: [Card] // 5 ใบ
-    let bottom: [Card] // 5 ใบ
-}
-    
-    if let winner = highestScore {
-        self.winner = winner
-        print("Winner:
-             
     }
 }
 
