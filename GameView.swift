@@ -1028,7 +1028,6 @@ func isFlush(_ hand: [Card]) -> Bool {
 
 func isStraight(_ hand: [Card]) -> Bool {
     let sortedRanks = hand.map { $0.rank.rawValue }.sorted()
-    let lowAce = [2, 3, 4, 5, 14] // Ace low straight
     let highStraight = Array(sortedRanks.first!...sortedRanks.first! + hand.count - 1)
     return sortedRanks == lowAce || sortedRanks == highStraight
 }
