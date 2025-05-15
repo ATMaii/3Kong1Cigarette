@@ -260,3 +260,36 @@ struct Player {
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
         print("dd/mm/yy")
+
+struct Player {
+    let id: Int
+    let name: String
+    var chips: Int = 5_000
+    var lastBonusDate: Date? = Date()
+    var hand: [Card] = []
+    var head: [Card] = []
+    var middle: [Card] = []
+    var tail: [Card] = []
+    var score: Int = 0
+
+    var isActive: Bool { chips > 0 }
+
+    mutating func checkDailyBonus() {
+        let calendar = Calendar.current
+        if let lastDate = lastBonusDate, calendar.isDateInToday(lastDate) {
+            return
+        }
+        chips += 5_000
+        lastBonusDate = Date()
+    }
+
+    mutating func sortHand() {
+        hand.sort(by: { $0.rank.rawValue < $1.rank.rawValue })
+    }
+
+    mutating func splitHand() {
+        head = Array(hand.prefix(3))
+        middle = Array(hand[3..<8])
+        tail = Array(hand.suffix(5))
+    }
+}
