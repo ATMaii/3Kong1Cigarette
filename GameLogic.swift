@@ -11,7 +11,21 @@ enum HandType: Int {
     case fourOfAKind
     case straightFlush
     case royalFlush
+
+    static let straights: [[Int]] = [
+        [2, 3, 4, 5, 6],
+        [3, 4, 5, 6, 7],
+        [4, 5, 6, 7, 8],
+        [5, 6, 7, 8, 9],
+        [6, 7, 8, 9, 10],
+        [7, 8, 9, 10, 11],
+        [8, 9, 10, 11, 12],
+        [9, 10, 11, 12, 13],
+        [10, 11, 12, 13, 14], // 10-J-Q-K-A
+        [14, 2, 3, 4, 5]      // A-2-3-4-5
+    ]
 }
+
 
 func getHandType(_ cards: [Card]) -> HandType {
     if isRoyalFlush(cards) { return .royalFlush }
@@ -33,32 +47,6 @@ func isFoul(head: [Card], middle: [Card], tail: [Card]) -> Bool {
 
     // ตรวจสอบลำดับต้องเป็น: tail > middle > head
     return !(tailRank >= middleRank && middleRank >= headRank)
-}
-
-
-func getHeadHandTypestraightRank(for cards: [Card]) -> HandType {
-func straightRank(_ hand: [Card]) -> Int? {
-    let ranks = hand.map { $0.rank.rawValue }.sorted()
-
-    let straights = [
-        [2, 3, 4, 5, 6],
-        [3, 4, 5, 6, 7],
-        [4, 5, 6, 7, 8],
-        [5, 6, 7, 8, 9],
-        [6, 7, 8, 9, 10],
-        [7, 8, 9, 10, 11],
-        [8, 9, 10, 11, 12],
-        [9, 10, 11, 12, 13],
-        [14, 2, 3, 4, 5],    // A-2-3-4-5
-        [10, 11, 12, 13, 14] // 10-J-Q-K-A
-    ]
-
-    for (index, straight) in straights.enumerated() {
-        if Set(ranks) == Set(straight) {
-            return index + 1
-        }
-    }
-    return nil
 }
     
 func HandEvaluator(hand: [Card])->HandType {
@@ -142,31 +130,11 @@ struct HandEvaluator {
         return Set(hand.map { $0.suit }).count == 1
     }
 
-    static func isStraight(_ hand: [Card]) -> Bool {
-        return straightRank(hand) != nil
-    }
-
-    static func straightRank(_ hand: [Card]) -> Int? {
-        let ranks = hand.map { $0.rank.rawValue }.sorted()
-        let straights = [
-            [2, 3, 4, 5, 6],
-            [3, 4, 5, 6, 7],
-            [4, 5, 6, 7, 8],
-            [5, 6, 7, 8, 9],
-            [6, 7, 8, 9, 10],
-            [7, 8, 9, 10, 11],
-            [8, 9, 10, 11, 12],
-            [9, 10, 11, 12, 13],
-            [14, 2, 3, 4, 5],    // A-2-3-4-5 (รองใหญ่สุด)
-            [10, 11, 12, 13, 14] // 10-J-Q-K-A (ใหญ่สุด)
-        ]
-        for (index, straight) in straights.enumerated() {
-            if Set(ranks) == Set(straight) {
-                return index + 1
-            }
-        }
-        return nil
-    }
+ static func isStraight(_ hand: [Card]) -> Bool {
+    let ranks = hand.map
+{ $0.rank.rawValue }.sorted()
+    return HandType.straights.contains { Set($0) == Set(ranks) }
+}
 
     static func isThreeOfAKind(_ hand: [Card]) -> Bool {
         let rankCounts = Dictionary(grouping: hand, by: { $0.rank }).mapValues { $0.count }
