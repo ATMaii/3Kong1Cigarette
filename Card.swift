@@ -12,7 +12,7 @@ enum Suit: String, CaseIterable {
 
 enum Rank: Int, CaseIterable, Comparable {
     case two = 2, three, four, five, six, seven, eight, nine, ten
-    case J = 11, queen, king, A = 14
+    case jack = 11, queen, king, ace = 14
 
     var display: String {
         switch self {
