@@ -95,6 +95,7 @@ class Player {
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
         print("
 
+import Foundation
 
       let manager = GameManager()
 if let stadium = manager.stadiumForChips(player.chips) {
@@ -149,7 +150,6 @@ struct Player {
     let middle: [Card]
     let tail: [Card]
 }
-
 
 import Foundation
 
