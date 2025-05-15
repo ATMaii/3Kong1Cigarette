@@ -202,11 +202,7 @@ let player = Player(id: 1, name: "Steve")
 let manager = GameManager(playerNames: [player.name])
 
 if let stadium = manager.stadiumForChips(player.chips) {
-    print("ผู้เล่นเข้า
-
-
-class GameManager: ObservableObject {
-    var PlayerChips : int = 0
+    print("ผู้เล่นเข้าสนาม")
 
     init() {
         startGame()
