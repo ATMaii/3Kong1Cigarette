@@ -2003,7 +2003,7 @@ struct flushRanks: [[Rank]] = [Prop
 ]
 
 
-struck straightRanks: [[Rank]] = [Prop
+struct straightRanks: [[Rank]] = [Prop
     [.ace, .king, .queen, .jack, .ten],   // Royal Straight (highest)
   [.ace, .two, .three, .four, .five]    // A-2-3-4-5 (under highest)
     [.king, .queen, .jack, .ten, .nine],
