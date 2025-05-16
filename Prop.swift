@@ -625,7 +625,7 @@ props :[
     ]
 
 // ต่อจาก fullHouses
-let moreFullHouses: [Prop] = [
+let moreFullHouses: [Prop]
 
     // KKKAA
 prop(name:HouseKing
