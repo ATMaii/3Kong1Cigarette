@@ -1,4 +1,4 @@
-Player 1
+if Player 1
 
 Head: Q♠️, J♦️, J♠️
 
