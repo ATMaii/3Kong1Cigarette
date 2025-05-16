@@ -1970,3 +1970,29 @@ let fullHouses222_3: [[Card]] = [
 ]
 
 }
+
+
+let flushRanks: [[Rank]] = [Prop
+    [.ace, .king, .queen, .jack, .nine],
+    [.ace, .king, .queen, .jack, .eight],
+    [.ace, .king, .queen, .jack, .seven],
+    [.ace, .king, .queen, .jack, .six],
+    [.ace, .king, .queen, .jack, .five],
+    [.ace, .king, .queen, .jack, .four],
+    [.ace, .king, .queen, .jack, .three],
+    [.ace, .king, .queen, .jack, .two],
+    [.ace, .queen, .jack, .ten, .nine],
+    [.ace, .queen, .jack, .ten, .eight],
+    [.ace, .queen, .jack, .ten, .seven],
+    [.ace, .queen, .jack, .ten, .six],
+    [.ace, .queen, .jack, .ten, .five],
+    [.ace, .queen, .jack, .ten, .four],
+    [.ace, .queen, .jack, .ten, .three],
+    [.ace, .queen, .jack, .ten, .two],
+    [.king, .queen, .jack, .ten, .eight],
+    [.queen, .jack, .nine, .six, .three],
+    [.ten, .eight, .seven, .five, .two],
+    [.eight, .seven, .five, .four, .two]
+
+    // เพิ่มตามลำดับความแข็ง
+]
