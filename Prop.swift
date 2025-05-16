@@ -749,7 +749,7 @@ props :
     ]),
 ]
 
-prop(name:HouseMam
+prop(name : HouseMam
     // QQQAA
 props :[
         Card(rank: .queen, suit: nil),
@@ -845,10 +845,10 @@ props :[
         Card(rank: .queen, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
-    ])
+    ]
 ]
 
-Prop (name:HouseJack
+Prop (name : HouseJack
     // JJJAA
 props : [
         Card(rank: .jack, suit: nil),
@@ -944,10 +944,10 @@ props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
-    ])
+    ]
 ]
 
-Prop (name:Houses10
+Prop (name : Houses10
     // 10-10-10 AA
 props : [
         Card(rank: .ten, suit: nil),
@@ -1043,10 +1043,10 @@ props : [
         Card(rank: .ten, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
-    ])
+    ]
 ]
 
-Prop (name:Houses999
+Prop (name : Houses999
     // 999AA
 props :    [
         Card(rank: .nine, suit: nil),
@@ -1142,7 +1142,7 @@ props :    [
         Card(rank: .nine, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
-    ])
+    ]
 ]
 
 Prop(name : fullHouses888
@@ -1244,7 +1244,7 @@ props :    [
     ]
 ]
 
-Prop(name: fullHouses777
+Prop(name : fullHouses777
     // 777AA
 props :    [
         Card(rank: .seven, suit: nil),
@@ -1342,7 +1342,7 @@ props :    [
         Card(rank: .two, suit: nil)
     ]
 ]
-Prop (name: fullHouses666
+Prop (name : fullHouses666
     // 666AA
 props :    [
         Card(rank: .six, suit: nil),
@@ -1441,7 +1441,7 @@ props :    [
     ]
 ]
 
-Prop (name: fullHouses555
+Prop (name : fullHouses555
     // 555AA
 props :    [
         Card(rank: .five, suit: nil),
