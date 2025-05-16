@@ -1242,9 +1242,11 @@ props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]let fullHouses777: [[Card]] = [
+]
+
+Prop(name: fullHouses777
     // 777AA
-    [
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
@@ -1252,7 +1254,7 @@ props :    [
         Card(rank: .ace, suit: nil)
     ],
     // 777KK
-    [
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
@@ -1260,7 +1262,7 @@ props :    [
         Card(rank: .king, suit: nil)
     ],
     // 777QQ
-    [
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
@@ -1268,7 +1270,7 @@ props :    [
         Card(rank: .queen, suit: nil)
     ],
     // 777JJ
-    [
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
@@ -1276,63 +1278,63 @@ props :    [
         Card(rank: .jack, suit: nil)
     ],
     // 77710
-    [
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .ten, suit: nil),
         Card(rank: .ten, suit: nil)
     ],
-    // 7779
-    [
+    // 77799
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .nine, suit: nil),
         Card(rank: .nine, suit: nil)
     ],
-    // 7778
-    [
+    // 77788
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .eight, suit: nil),
         Card(rank: .eight, suit: nil)
     ],
-    // 7776
-    [
+    // 77766
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil)
     ],
-    // 7775
-    [
+    // 77755
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil)
     ],
-    // 7774
-    [
+    // 77744
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil)
     ],
-    // 7773
-    [
+    // 77733
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil)
     ],
-    // 7772
-    [
+    // 77722
+props :    [
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil),
@@ -1340,9 +1342,9 @@ props :    [
         Card(rank: .two, suit: nil)
     ]
 ]
-let fullHouses666: [[Card]] = [
+Prop (name: fullHouses666
     // 666AA
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1350,7 +1352,7 @@ let fullHouses666: [[Card]] = [
         Card(rank: .ace, suit: nil)
     ],
     // 666KK
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1358,7 +1360,7 @@ let fullHouses666: [[Card]] = [
         Card(rank: .king, suit: nil)
     ],
     // 666QQ
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1366,7 +1368,7 @@ let fullHouses666: [[Card]] = [
         Card(rank: .queen, suit: nil)
     ],
     // 666JJ
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1374,17 +1376,15 @@ let fullHouses666: [[Card]] = [
         Card(rank: .jack, suit: nil)
     ],
     // 66610-10
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .ten, suit: nil),
         Card(rank: .ten, suit: nil)
-    ]
-]
-let fullHouses666_2: [[Card]] = [
+    ],
     // 66699
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1392,7 +1392,7 @@ let fullHouses666_2: [[Card]] = [
         Card(rank: .nine, suit: nil)
     ],
     // 66688
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1400,7 +1400,7 @@ let fullHouses666_2: [[Card]] = [
         Card(rank: .eight, suit: nil)
     ],
     // 66677
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1408,7 +1408,7 @@ let fullHouses666_2: [[Card]] = [
         Card(rank: .seven, suit: nil)
     ],
     // 66655
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1416,7 +1416,7 @@ let fullHouses666_2: [[Card]] = [
         Card(rank: .five, suit: nil)
     ],
     // 66644
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1424,7 +1424,7 @@ let fullHouses666_2: [[Card]] = [
         Card(rank: .four, suit: nil)
     ],
     // 66633
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1432,7 +1432,7 @@ let fullHouses666_2: [[Card]] = [
         Card(rank: .three, suit: nil)
     ],
     // 66622
-    [
+props :    [
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil),
@@ -1440,9 +1440,10 @@ let fullHouses666_2: [[Card]] = [
         Card(rank: .two, suit: nil)
     ]
 ]
-let fullHouses555_2: [[Card]] = [
+
+Prop (name: fullHouses555
     // 555AA
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1450,7 +1451,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .ace, suit: nil)
     ],
     // 555KK
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1458,7 +1459,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .king, suit: nil)
     ],
     // 555QQ
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1466,7 +1467,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .queen, suit: nil)
     ],
     // 555JJ
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1474,7 +1475,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .jack, suit: nil)
     ],
     // 55510
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1482,7 +1483,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .ten, suit: nil)
     ],
     // 55599
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1490,7 +1491,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .nine, suit: nil)
     ],
     // 55588
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1498,7 +1499,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .eight, suit: nil)
     ],
     // 55577
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1506,7 +1507,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .seven, suit: nil)
     ],
     // 55566
-    [
+props :   [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1514,7 +1515,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .six, suit: nil)
     ],
     // 55544
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1522,7 +1523,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .four, suit: nil)
     ],
     // 55533
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1530,7 +1531,7 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .three, suit: nil)
     ],
     // 55522
-    [
+props :    [
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil),
@@ -1538,9 +1539,10 @@ let fullHouses555_2: [[Card]] = [
         Card(rank: .two, suit: nil)
     ]
 ]
-let fullHouses444_2: [[Card]] = [
+
+Prop (name : fullHouses444
     // 444AA
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1548,7 +1550,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .ace, suit: nil)
     ],
     // 444KK
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1556,7 +1558,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .king, suit: nil)
     ],
     // 444QQ
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1564,7 +1566,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .queen, suit: nil)
     ],
     // 444JJ
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1572,7 +1574,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .jack, suit: nil)
     ],
     // 44410
-    [
+ props :   [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1580,7 +1582,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .ten, suit: nil)
     ],
     // 44499
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1588,7 +1590,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .nine, suit: nil)
     ],
     // 44488
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1596,7 +1598,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .eight, suit: nil)
     ],
     // 44477
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1604,7 +1606,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .seven, suit: nil)
     ],
     // 44466
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1612,7 +1614,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .six, suit: nil)
     ],
     // 44455
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1620,7 +1622,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .five, suit: nil)
     ],
     // 44433
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1628,7 +1630,7 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .three, suit: nil)
     ],
     // 44422
-    [
+props :    [
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil),
@@ -1636,9 +1638,10 @@ let fullHouses444_2: [[Card]] = [
         Card(rank: .two, suit: nil)
     ]
 ]
-let fullHouses333_2: [[Card]] = [
+
+Prop (name : fullHouses333
     // 333AA
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1646,7 +1649,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .ace, suit: nil)
     ],
     // 333KK
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1654,7 +1657,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .king, suit: nil)
     ],
     // 333QQ
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1662,7 +1665,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .queen, suit: nil)
     ],
     // 333JJ
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1670,7 +1673,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .jack, suit: nil)
     ],
     // 33310
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1678,7 +1681,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .ten, suit: nil)
     ],
     // 33399
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1686,7 +1689,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .nine, suit: nil)
     ],
     // 33388
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1694,7 +1697,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .eight, suit: nil)
     ],
     // 33377
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1702,7 +1705,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .seven, suit: nil)
     ],
     // 33366
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1710,7 +1713,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .six, suit: nil)
     ],
     // 33355
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1718,7 +1721,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .five, suit: nil)
     ],
     // 33344
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1726,7 +1729,7 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .four, suit: nil)
     ],
     // 33322
-    [
+props :    [
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil),
@@ -1734,9 +1737,10 @@ let fullHouses333_2: [[Card]] = [
         Card(rank: .two, suit: nil)
     ]
 ]
-let fullHouses222_3: [[Card]] = [
+
+Prop (name : fullHouses222
     // 222AA
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1744,7 +1748,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .ace, suit: nil)
     ],
     // 222KK
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1752,7 +1756,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .king, suit: nil)
     ],
     // 222QQ
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1760,7 +1764,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .queen, suit: nil)
     ],
     // 222JJ
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1768,7 +1772,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .jack, suit: nil)
     ],
     // 22210
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1776,7 +1780,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .ten, suit: nil)
     ],
     // 22299
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1784,7 +1788,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .nine, suit: nil)
     ],
     // 22288
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1792,7 +1796,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .eight, suit: nil)
     ],
     // 22277
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1800,7 +1804,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .seven, suit: nil)
     ],
     // 22266
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1808,7 +1812,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .six, suit: nil)
     ],
     // 22255
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1816,7 +1820,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .five, suit: nil)
     ],
     // 22244
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
@@ -1824,7 +1828,7 @@ let fullHouses222_3: [[Card]] = [
         Card(rank: .four, suit: nil)
     ],
     // 22233
-    [
+props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil),
