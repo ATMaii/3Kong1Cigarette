@@ -1842,7 +1842,7 @@ props :    [
 }
 
 
-let flushRanks: [[Rank]] = [Prop
+struct flushRanks: [[Rank]] = [Prop
     [.ace, .king, .queen, .jack, .nine],
     [.ace, .king, .queen, .jack, .eight],
     [.ace, .king, .queen, .jack, .seven],
@@ -2003,7 +2003,7 @@ let flushRanks: [[Rank]] = [Prop
 ]
 
 
-let straightRanks: [[Rank]] = [
+struck straightRanks: [[Rank]] = [
     [.ace, .king, .queen, .jack, .ten],   // Royal Straight (highest)
   [.ace, .two, .three, .four, .five]    // A-2-3-4-5 (under highest)
     [.king, .queen, .jack, .ten, .nine],
