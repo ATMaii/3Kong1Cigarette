@@ -1976,6 +1976,24 @@ let flushRanks: [[Rank]] = [Prop
     [.ace, .ten, .nine, .four, .two],
     [.ace, .ten, .nine, .three, .two],
 
+    [.ace, .nine, .eight, .seven, .six],
+    [.ace, .nine, .eight, .seven, .five],
+    [.ace, .nine, .eight, .seven, .four],
+    [.ace, .nine, .eight, .seven, .three],
+    [.ace, .nine, .eight, .seven, .two],
+    [.ace, .nine, .seven, .six, .five],
+    [.ace, .nine, .seven, .six, .four],
+    [.ace, .nine, .seven, .six, .three],
+    [.ace, .nine, .seven, .six, .two],
+
+    [.ace, .nine, .seven, .five, .four],
+    [.ace, .nine, .seven, .five, .three],
+    [.ace, .nine, .seven, .five, .two],
+
+    [.ace, .nine, .seven, .four, .three],
+    [.ace, .nine, .seven, .four, .two],
+    [.ace, .nine, .seven, .three, .two],
+
     [.king, .queen, .jack, .ten, .eight],
     [.queen, .jack, .nine, .six, .three],
     [.ten, .eight, .seven, .five, .two],
