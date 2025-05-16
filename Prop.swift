@@ -749,12 +749,9 @@ props :
 // ต่อจาก fullHouses
 let moreFullHouses: [Prop] =[
 
-prop(name:HouseQ
-props :
+prop(name:HouseMam
     // QQQAA
-prop(name:HouseQ
-props :
-    [
+props :[
         Card(rank: .queen, suit: nil),
         Card(rank: .queen, suit: nil),
         Card(rank: .queen, suit: nil),
@@ -850,9 +847,12 @@ props :[
         Card(rank: .two, suit: nil)
     ])
 ]
-let jjjFullHouses: [[Card]] = [
+
+let jjjFullHouses: [Prop] = [
+
+Prop (name:HouseJack
     // JJJAA
-    [
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
@@ -860,7 +860,7 @@ let jjjFullHouses: [[Card]] = [
         Card(rank: .ace, suit: nil)
     ],
     // JJJKK
-    [
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
@@ -868,7 +868,7 @@ let jjjFullHouses: [[Card]] = [
         Card(rank: .king, suit: nil)
     ],
     // JJJQQ
-    [
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
@@ -876,78 +876,79 @@ let jjjFullHouses: [[Card]] = [
         Card(rank: .queen, suit: nil)
     ],
     // JJJ10
-    [
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .ten, suit: nil),
         Card(rank: .ten, suit: nil)
     ],
-    // JJJ9
-    [
+    // JJJ99
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .nine, suit: nil),
         Card(rank: .nine, suit: nil)
     ],
-    // JJJ8
-    [
+    // JJJ88
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .eight, suit: nil),
         Card(rank: .eight, suit: nil)
     ],
-    // JJJ7
-    [
+    // JJJ77
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .seven, suit: nil),
         Card(rank: .seven, suit: nil)
     ],
-    // JJJ6
-    [
+    // JJJ66
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .six, suit: nil),
         Card(rank: .six, suit: nil)
     ],
-    // JJJ5
-    [
+    // JJJ55
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .five, suit: nil),
         Card(rank: .five, suit: nil)
     ],
-    // JJJ4
-    [
+    // JJJ44
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .four, suit: nil),
         Card(rank: .four, suit: nil)
     ],
-    // JJJ3
-    [
+    // JJJ33
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .three, suit: nil),
         Card(rank: .three, suit: nil)
     ],
-    // JJJ2
-    [
+    // JJJ22
+props : [
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .jack, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
-    ]
+    ])
 ]
+
 let fullHouses: [[Card]] = [
     // 10-10-10 AA
     [
