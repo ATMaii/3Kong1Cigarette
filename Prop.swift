@@ -140,6 +140,124 @@ Middle: J♥️, 7♥️, 5♥️, 6♥️,2♥️
 Tail: J♣️, 10♣️, 6♣️, 4♣️,3♣️
 
 
+// MARK: - Supporting Types
+
+struct Card { let rank: Int // 2-14 (where 11=J, 12=Q, 13=K, 14=A) let suit: String // "♠", "♥", "♦", "♣" }
+
+enum RowPosition { case head, middle, tail }
+
+enum HandType: Int, Comparable { case highCard = 0 case pair case threeOfAKind case straightFlush case fourOfAKind case fullHouse case fullHouseAces
+
+static func < (lhs: HandType, rhs: HandType) -> Bool {
+    return lhs.rawValue < rhs.rawValue
+}
+
+}
+
+struct Player { let id: Int let head: [Card] let middle: [Card] let tail: [Card] var score: Int = 0 }
+
+// MARK: - Evaluation
+
+func isPairOfAces(cards: [Card]) -> Bool { return cards.filter { $0.rank == 14 }.count == 2 }
+
+func evaluateHand(_ cards: [Card], position: RowPosition) -> HandType { // Dummy logic — replace with actual evaluation rules if position == .head && cards.count == 3 { let ranks = Set(cards.map { $0.rank }) if ranks.count == 1 { return .threeOfAKind } if ranks.count == 2 { return .pair } } else if cards.count == 5 { let ranks = cards.map { $0.rank }.sorted() let isFlush = Set(cards.map { $0.suit }).count == 1 let isStraight = Set(zip(ranks, ranks.dropFirst()).map { $1 - $0 }).max() == 1 && Set(ranks).count == 5
+
+if isStraight && isFlush { return .straightFlush }
+    // Add other rules like 4 of a kind, full house, etc.
+}
+return .highCard
+
+}
+
+func scoreForHandType(_ handType: HandType, cards: [Card], row: RowPosition) -> Int { switch row { case .head: if handType == .pair && isPairOfAces(cards: cards) { return 2 } if handType == .pair { return 1 } if handType == .threeOfAKind { return 5 } return 1 case .middle: switch handType { case .straightFlush: return 14 case .fourOfAKind: return 12 case .fullHouseAces: return 4 case .fullHouse: return 2 default: return 1 } case .tail: switch handType { case .straightFlush: return 7 case .fourOfAKind: return 6 case .fullHouseAces: return 2 case .fullHouse: return 1 default: return 1 } } }
+
+func compareHands(p1: [Card], p2: [Card], position: RowPosition) -> Int { let v1 = evaluateHand(p1, position: position) let v2 = evaluateHand(p2, position: position) if v1 > v2 { return 1 } else if v1 < v2 { return -1 } else { return 0 } }
+
+// MARK: - Calculate All Scores
+
+func calculateScores(players: inout [Player]) { let n = players.count for i in 0..<n { for j in 0..<n where i != j { let head = compareHands(p1: players[i].head, p2: players[j].head, position: .head) let mid = compareHands(p1: players[i].middle, p2: players[j].middle, position: .middle) let tail = compareHands(p1: players[i].tail, p2: players[j].tail, position: .tail)
+
+var wins = 0
+        if head > 0 { wins += 1 }
+        if mid > 0 { wins += 1 }
+        if tail > 0 { wins += 1 }
+
+        let rowScores = (
+            (head > 0 ? scoreForHandType(evaluateHand(players[i].head, position: .head), cards: players[i].head, row: .head) : 0) +
+            (mid > 0 ? scoreForHandType(evaluateHand(players[i].middle, position: .middle), cards: players[i].middle, row: .middle) : 0) +
+            (tail > 0 ? scoreForHandType(evaluateHand(players[i].tail, position: .tail), cards: players[i].tail, row: .tail) : 0)
+        )
+
+        if wins == 3 {
+            let bonus = rowScores * 4
+            players[i].score += bonus
+            players[j].score -= bonus
+        } else {
+            players[i].score += head + mid + tail
+            players[j].score -= head + mid + tail
+        }
+    }
+}
+
+}
+
+func calculateScores(players: inout [Player]) {
+    let n = players.count
+
+    for i in 0..<n {
+        for j in 0..<n where i != j {
+            let h1 = evaluateHand(players[i].head, position: .head)
+            let h2 = evaluateHand(players[j].head, position: .head)
+            let m1 = evaluateHand(players[i].middle, position: .middle)
+            let m2 = evaluateHand(players[j].middle, position: .middle)
+            let t1 = evaluateHand(players[i].tail, position: .tail)
+            let t2 = evaluateHand(players[j].tail, position: .tail)
+
+            let headResult = h1 > h2 ? 1 : (h1 < h2 ? -1 : 0)
+            let midResult = m1 > m2 ? 1 : (m1 < m2 ? -1 : 0)
+            let tailResult = t1 > t2 ? 1 : (t1 < t2 ? -1 : 0)
+
+            var iScore = 0
+            var jScore = 0
+
+            // เก็บคะแนนแต่ละแถว
+            if headResult > 0 {
+                iScore += scoreForHandType(h1.type, cards: players[i].head, row: .head)
+                jScore -= scoreForHandType(h1.type, cards: players[i].head, row: .head)
+            } else if headResult < 0 {
+                iScore -= scoreForHandType(h2.type, cards: players[j].head, row: .head)
+                jScore += scoreForHandType(h2.type, cards: players[j].head, row: .head)
+            }
+
+            if midResult > 0 {
+                iScore += scoreForHandType(m1.type, cards: players[i].middle, row: .middle)
+                jScore -= scoreForHandType(m1.type, cards: players[i].middle, row: .middle)
+            } else if midResult < 0 {
+                iScore -= scoreForHandType(m2.type, cards: players[j].middle, row: .middle)
+                jScore += scoreForHandType(m2.type, cards: players[j].middle, row: .middle)
+            }
+
+            if tailResult > 0 {
+                iScore += scoreForHandType(t1.type, cards: players[i].tail, row: .tail)
+                jScore -= scoreForHandType(t1.type, cards: players[i].tail, row: .tail)
+            } else if tailResult < 0 {
+                iScore -= scoreForHandType(t2.type, cards: players[j].tail, row: .tail)
+                jScore += scoreForHandType(t2.type, cards: players[j].tail, row: .tail)
+            }
+
+            // ตรวจว่าชนะทั้ง 3 ขาไหม (Sweep)
+            if headResult > 0 && midResult > 0 && tailResult > 0 {
+                let sweepBonus = iScore * 4
+                players[i].score += sweepBonus
+                players[j].score -= sweepBonus
+            } else {
+                players[i].score += iScore
+                players[j].score += jScore
+            }
+        }
+    }
+}
+
 
 struct Card {
     let rank: Rank
