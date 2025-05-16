@@ -846,7 +846,7 @@ props :[
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop (name : HouseJack
     // JJJAA
@@ -945,7 +945,7 @@ props : [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop (name : Houses10
     // 10-10-10 AA
@@ -1044,7 +1044,7 @@ props : [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop (name : Houses999
     // 999AA
@@ -1143,7 +1143,7 @@ props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop(name : fullHouses888
     // 888AA
