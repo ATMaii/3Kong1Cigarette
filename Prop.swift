@@ -2238,10 +2238,7 @@ func printFinalScores(players: [Player]) {
     let totalScores = calculateTotalScores(players: players)
 
     for (index, score) in totalScores.enumerated() {
-        print("Player
-
-var Player 1 = score
-    Player 2 = score
-    Player 3 = score
-    Player 4 = score
-")
+        print("Player 1 = score
+               Player 2 = score
+               Player 3 = score
+               Player 4 = score")
