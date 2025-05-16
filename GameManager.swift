@@ -1,4 +1,107 @@
 
+enum GamePhase {
+    case login
+    case selectStadium
+    case selectRoom
+    case waitingForPlayers
+    case dealingCards
+    case arrangingHands
+    case waitingForConfirmation
+    case evaluating
+    case comparing
+    case showingScore
+    case updatingScores
+    case roundFinished
+}
+    
+}
+class GameManager: ObservableObject {
+    @Published var phase: GamePhase = .login
+
+    @Published var selectedStadium: Stadium?
+    @Published var selectedRoom: Room?
+
+    @Published var players: [Player] = []
+    var deck = Deck()
+
+    func login() {
+        phase = .selectStadium
+    }
+
+    func selectStadium(_ stadium: Stadium) {
+        selectedStadium = stadium
+        phase = .selectRoom
+    }
+
+    func selectRoom(_ room: Room) {
+        selectedRoom = room
+        players = []
+        phase = .waitingForPlayers
+    }
+
+    func addPlayer(_ player: Player) {
+        players.append(player)
+        if players.count == 4 {
+            startGame()
+        }
+    }
+
+    func startGame() {
+        phase = .dealingCards
+        deck = Deck()
+        deck.shuffle()
+
+        for i in 0..<players.count {
+            players[i].hand = (0..<13).compactMap { _ in deck.drawCard() }
+        }
+
+        phase = .arrangingHands
+    }
+
+    func playerDidConfirmHand() {
+        if players.allSatisfy({ !$0.head.isEmpty && !$0.middle.isEmpty && !$0.tail.isEmpty }) {
+            phase = .evaluating
+            evaluateHands()
+        }
+    }
+        phase = .arrangingHands
+    }
+    func confirmHands(for playerID: Int, head: [Card], middle: [Card], tail: [Card]) {
+        if let index = players.firstIndex(where: { $0.id == playerID }) {
+            players[index].head = head
+            players[index].middle = middle
+            players[index].tail = tail
+        }
+        if players.allSatisfy({ !$0.head.isEmpty && !$0.middle.isEmpty && !$0.tail.isEmpty }) {
+
+
+            phase = .evaluating
+            evaluateGame()
+    func evaluateHands() {
+        // เทียบคะแนนตามกติกา
+        phase = .showingScore
+    }
+
+    func playAgain() {
+        phase = .waitingForPlayers
+        players.removeAll()
+    }
+}
+       phase = .roundFinished
+    }
+
+    func resetForNextRound() {
+        for i in 0..<players.count {
+            players[i].hand = []
+            players[i].head = []
+            players[i].middle = []
+            players[i].tail = []
+        }
+        deck.reset()
+        phase = .dealingCards
+        startGame()
+    }
+}
 // GameManager.swift
 
 import Foundation
