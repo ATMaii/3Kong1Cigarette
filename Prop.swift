@@ -947,7 +947,7 @@ props : [
     ])
 ]
 
-Prop (name:Houses10
+Prop (name:Houses10-10-10
     // 10-10-10 AA
 props : [
         Card(rank: .ten, suit: nil),
