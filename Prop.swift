@@ -2016,6 +2016,21 @@ struct straightRanks: [[Rank]] = [Prop
     [.six, .five, .four, .three, .two],
   ]
 
+struct threeOfAKinds: [[Rank]] = [
+    [.ace, .ace, .ace],
+    [.king, .king, .king],
+    [.queen, .queen, .queen],
+    [.jack, .jack, .jack],
+    [.ten, .ten, .ten],
+    [.nine, .nine, .nine],
+    [.eight, .eight, .eight],
+    [.seven, .seven, .seven],
+    [.six, .six, .six],
+    [.five, .five, .five],
+    [.four, .four, .four],
+    [.three, .three, .three],
+    [.two, .two, .two]
+]
 
 // MARK: - Supporting Types
 
@@ -2155,22 +2170,6 @@ func isStraight(hand: [Card]) -> Bool {
     // เช็คว่าไพ่ครบตามที่ต้องการในช่วงที่เราคำนวณ
     return validRanks == uniqueRanks
 }
-
-let threeOfAKinds: [[Rank]] = [
-    [.ace, .ace, .ace],
-    [.king, .king, .king],
-    [.queen, .queen, .queen],
-    [.jack, .jack, .jack],
-    [.ten, .ten, .ten],
-    [.nine, .nine, .nine],
-    [.eight, .eight, .eight],
-    [.seven, .seven, .seven],
-    [.six, .six, .six],
-    [.five, .five, .five],
-    [.four, .four, .four],
-    [.three, .three, .three],
-    [.two, .two, .two]
-]
 
 
 func calculateTotalScores(players: [Player]) -> [Int] {
