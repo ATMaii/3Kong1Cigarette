@@ -465,7 +465,7 @@ props: [
     ]),
 
 // Four Fives + Q
-Prop(name: "Four5 
+Prop(name: Four5 
 props: [
         Card(rank: .five, suit: .spades),
         Card(rank: .five, suit: .hearts),
@@ -485,7 +485,7 @@ props: [
     ]),
 
 // Four Threes + A
-Prop(name: "Four3"
+Prop(name: Four3
 props: [
         Card(rank: .three, suit: .spades),
         Card(rank: .three, suit: .hearts),
@@ -495,7 +495,7 @@ props: [
     ]),
 
 // Four Twos + 9
-Prop(name: "Four2"
+Prop(name: Four2
 props: [
         Card(rank: .two, suit: .spades),
         Card(rank: .two, suit: .hearts),
