@@ -1,3 +1,75 @@
+func calculateTotalScores(players: [Player]) -> [Int] {
+    var scores = Array(repeating: 0, count: players.count)
+
+    for i in 0..<players.count {
+        for j in 0..<players.count where i != j {
+            let p1 = players[i]
+            let p2 = players[j]
+
+            var p1Wins = 0
+            var p2Wins = 0
+            var p1Bonus = 0
+            var p2Bonus = 0
+
+            // Head
+            let (h1, h2) = compareRow(p1.head, p2.head, row: .head)
+            p1Wins += (h1 > 0 ? 1 : 0)
+            p2Wins += (h2 > 0 ? 1 : 0)
+            p1Bonus += (h1 > 0 ? bonusScore(for: p1.head, row: .head) : 0)
+            p2Bonus += (h2 > 0 ? bonusScore(for: p2.head, row: .head) : 0)
+
+            // Middle
+            let (m1, m2) = compareRow(p1.middle, p2.middle, row: .middle)
+            p1Wins += (m1 > 0 ? 1 : 0)
+            p2Wins += (m2 > 0 ? 1 : 0)
+            p1Bonus += (m1 > 0 ? bonusScore(for: p1.middle, row: .middle) : 0)
+            p2Bonus += (m2 > 0 ? bonusScore(for: p2.middle, row: .middle) : 0)
+
+            // Tail
+            let (t1, t2) = compareRow(p1.tail, p2.tail, row: .tail)
+            p1Wins += (t1 > 0 ? 1 : 0)
+            p2Wins += (t2 > 0 ? 1 : 0)
+            p1Bonus += (t1 > 0 ? bonusScore(for: p1.tail, row: .tail) : 0)
+            p2Bonus += (t2 > 0 ? bonusScore(for: p2.tail, row: .tail) : 0)
+
+            var p1Score = 0
+            var p2Score = 0
+
+            if p1Wins == 3 {
+                let total = (bonusScore(for: p1.head, row: .head)
+                           + bonusScore(for: p1.middle, row: .middle)
+                           + bonusScore(for: p1.tail, row: .tail))
+                p1Score += total * 4
+                p2Score -= total * 4
+            } else if p2Wins == 3 {
+                let total = (bonusScore(for: p2.head, row: .head)
+                           + bonusScore(for: p2.middle, row: .middle)
+                           + bonusScore(for: p2.tail, row: .tail))
+                p2Score += total * 4
+                p1Score -= total * 4
+            } else {
+                p1Score += h1 + m1 + t1 + p1Bonus
+                p2Score += h2 + m2 + t2 + p2Bonus
+            }
+
+            scores[i] += p1Score
+        }
+    }
+
+    return scores
+}
+
+func printFinalScores(players: [Player]) {
+    let totalScores = calculateTotalScores(players: players)
+
+    for (index, score) in totalScores.enumerated() {
+        print("Player
+
+Player 1 = ?
+Player 2 = ?
+Player 3 = ?
+Player 4 = ?
+
 จากตัวอย่างไพ่ของแต่ละผู้เล่น (สมมติ):
 Player 1 (ผู้เล่น 1) ->
 
