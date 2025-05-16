@@ -89,7 +89,7 @@ struct Prop {
 
 let RoyalFlushProps: [Prop]
 
-Prop(name: "RoyalFlush"
+Prop(name:RoyalFlush
 props: [
         Card(rank: .ace, suit: .spades),
         Card(rank: .king, suit: .spades),
@@ -97,7 +97,7 @@ props: [
         Card(rank: .jack, suit: .spades),
         Card(rank: .ten, suit: .spades)
     ]),
-Prop(name: "RoyalFlush"
+Prop(name:RoyalFlush
 props: [
         Card(rank: .ace, suit: .hearts),
         Card(rank: .king, suit: .hearts),
@@ -105,7 +105,7 @@ props: [
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts)
      ]),
-Prop(name: "RoyalFlush"
+Prop(name:RoyalFlush
 props: [
         Card(rank: .ace, suit: .diamonds),
         Card(rank: .king, suit: .diamonds),
@@ -113,7 +113,7 @@ props: [
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds)
     ]),
-Prop(name: "RoyalFlush"
+Prop(name:RoyalFlush
 props: [
     Card(rank: .ace, suit: .clubs),
     Card(rank: .king, suit: .clubs),
@@ -126,7 +126,7 @@ props: [
 
 let straightFlushProps : [Prop]
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .ace, suit: .spades),
         Card(rank: .two, suit: .spades),
@@ -135,7 +135,7 @@ props: [
         Card(rank: .five, suit: .spades)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .king, suit: .spades),
         Card(rank: .queen, suit: .spades),
@@ -145,7 +145,7 @@ props: [
        ]),
                  
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .queen, suit: .spades),
         Card(rank: .jack, suit: .spades),
@@ -154,7 +154,7 @@ props: [
         Card(rank: .eight, suit: .spades)
        ]),
                          
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .jack, suit: .spades),
         Card(rank: .ten, suit: .spades),
@@ -163,7 +163,7 @@ props: [
         Card(rank: .seven, suit: .spades)
        ]),
                            
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .ten, suit: .spades),
         Card(rank: .nine, suit: .spades),
@@ -172,7 +172,7 @@ props: [
         Card(rank: .six, suit: .spades)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .nine, suit: .spades),
         Card(rank: .eight, suit: .spades),
@@ -181,7 +181,7 @@ props: [
         Card(rank: .five, suit: .spades)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .eight, suit: .spades),
         Card(rank: .seven, suit: .spades),
@@ -190,7 +190,7 @@ props: [
         Card(rank: .four, suit: .spades)
        ]),
            
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .seven, suit: .spades),
         Card(rank: .six, suit: .spades),
@@ -199,7 +199,7 @@ props: [
         Card(rank: .three, suit: .spades)
        ]),
          
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .six, suit: .spades),
         Card(rank: .five, suit: .spades),
@@ -208,7 +208,7 @@ props: [
         Card(rank: .two, suit: .spades)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .ace, suit: .hearts),
         Card(rank: .two, suit: .hearts),
@@ -217,7 +217,7 @@ props: [
         Card(rank: .five, suit: .hearts)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .king, suit: .hearts),
         Card(rank: .queen, suit: .hearts),
@@ -226,7 +226,7 @@ props: [
         Card(rank: .nine, suit: .hearts)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .queen, suit: .hearts),
         Card(rank: .jack, suit: .hearts),
@@ -235,7 +235,7 @@ props: [
         Card(rank: .eight, suit: .hearts)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .jack, suit: .hearts),
         Card(rank: .ten, suit: .hearts),
@@ -244,7 +244,7 @@ props: [
         Card(rank: .seven, suit: .hearts)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .ten, suit: .hearts),
         Card(rank: .nine, suit: .hearts),
@@ -253,7 +253,7 @@ props: [
         Card(rank: .six, suit: .hearts)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props:  [
         Card(rank: .nine, suit: .hearts),
         Card(rank: .eight, suit: .hearts),
@@ -262,7 +262,7 @@ props:  [
         Card(rank: .five, suit: .hearts)
         ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .eight, suit: .hearts),
         Card(rank: .seven, suit: .hearts),
@@ -271,7 +271,7 @@ props: [
         Card(rank: .four, suit: .hearts)
         ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .seven, suit: .hearts),
         Card(rank: .six, suit: .hearts),
@@ -280,7 +280,7 @@ props: [
         Card(rank: .three, suit: .hearts)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .six, suit: .hearts),
         Card(rank: .five, suit: .hearts),
@@ -289,7 +289,7 @@ props: [
         Card(rank: .two, suit: .hearts)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .ace, suit: .diamonds),
         Card(rank: .two, suit: .diamonds),
@@ -298,7 +298,7 @@ props: [
         Card(rank: .five, suit: .diamonds)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .king, suit: .diamonds),
         Card(rank: .queen, suit: .diamonds),
@@ -307,7 +307,7 @@ props: [
         Card(rank: .nine, suit: .diamonds)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .queen, suit: .diamonds),
         Card(rank: .jack, suit: .diamonds),
@@ -316,7 +316,7 @@ props: [
         Card(rank: .eight, suit: .diamonds)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .ten, suit: .diamonds),
@@ -325,7 +325,7 @@ props: [
         Card(rank: .seven, suit: .diamonds)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .ten, suit: .diamonds),
         Card(rank: .nine, suit: .diamonds),
@@ -334,7 +334,7 @@ props: [
         Card(rank: .six, suit: .diamonds)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .nine, suit: .diamonds),
         Card(rank: .eight, suit: .diamonds),
@@ -343,7 +343,7 @@ props: [
         Card(rank: .five, suit: .diamonds)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .eight, suit: .diamonds),
         Card(rank: .seven, suit: .diamonds),
@@ -352,7 +352,7 @@ props: [
         Card(rank: .four, suit: .diamonds)
         ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .seven, suit: .diamonds),
         Card(rank: .six, suit: .diamonds),
@@ -361,7 +361,7 @@ props: [
         Card(rank: .three, suit: .diamonds)
        ]),
 
-Prop(name: "straightFlush"
+Prop(name:StraightFlush
 props: [
         Card(rank: .six, suit: .diamonds),
         Card(rank: .five, suit: .diamonds),
@@ -375,8 +375,7 @@ props: [
 
 let fourOfAKindProps: [Prop]
 
-Prop(name: "FourOfAKind"
-
+Prop(name:FourAce
 props: [
     Card(rank: .ace, suit: .spades),
     Card(rank: .ace, suit: .hearts),
@@ -384,108 +383,120 @@ props: [
     Card(rank: .ace, suit: .diamonds),
     Card(rank: .two, suit: .hearts)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Kings + 3
-  props: [
+
+// Four Kings + 3
+Prop(name: FourKing
+props: [
         Card(rank: .king, suit: .spades),
         Card(rank: .king, suit: .hearts),
         Card(rank: .king, suit: .clubs),
         Card(rank: .king, suit: .diamonds),
         Card(rank: .three, suit: .spades)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Queens + 4
-  props: [  
+
+// Four Queens + 4
+Prop(name: FourMam
+props: [  
         Card(rank: .queen, suit: .spades),
         Card(rank: .queen, suit: .hearts),
         Card(rank: .queen, suit: .clubs),
         Card(rank: .queen, suit: .diamonds),
         Card(rank: .four, suit: .hearts)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Jacks + 5
-   props: [ 
+
+// Four Jacks + 5
+Prop(name: FourJack
+props: [ 
         Card(rank: .jack, suit: .spades),
         Card(rank: .jack, suit: .hearts),
         Card(rank: .jack, suit: .clubs),
         Card(rank: .jack, suit: .diamonds),
         Card(rank: .five, suit: .clubs)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Tens + 6
-   props: [ 
+
+// Four Tens + 6
+Prop(name: Four10
+props: [ 
         Card(rank: .ten, suit: .spades),
         Card(rank: .ten, suit: .hearts),
         Card(rank: .ten, suit: .clubs),
         Card(rank: .ten, suit: .diamonds),
         Card(rank: .six, suit: .diamonds)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Nines + 7
-   props: [ 
+
+// Four Nines + 7
+Prop(name: Four9
+props: [ 
         Card(rank: .nine, suit: .spades),
         Card(rank: .nine, suit: .hearts),
         Card(rank: .nine, suit: .clubs),
         Card(rank: .nine, suit: .diamonds),
         Card(rank: .seven, suit: .spades)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Eights + 8
-  props: [  
+
+// Four Eights + 9
+Prop(name: Four8
+props: [  
         Card(rank: .eight, suit: .spades),
         Card(rank: .eight, suit: .hearts),
         Card(rank: .eight, suit: .clubs),
         Card(rank: .eight, suit: .diamonds),
         Card(rank: .nine, suit: .hearts)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Sevens + 10
-   props: [ 
+
+// Four Sevens + 10
+Prop(name: Four7
+props: [ 
         Card(rank: .seven, suit: .spades),
         Card(rank: .seven, suit: .hearts),
         Card(rank: .seven, suit: .clubs),
         Card(rank: .seven, suit: .diamonds),
         Card(rank: .ten, suit: .clubs)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Sixes + J
-   props: [ 
+
+// Four Sixes + J
+Prop(name: Four6
+props: [ 
         Card(rank: .six, suit: .spades),
         Card(rank: .six, suit: .hearts),
         Card(rank: .six, suit: .clubs),
         Card(rank: .six, suit: .diamonds),
         Card(rank: .jack, suit: .diamonds)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Fives + Q
-    props: [
+
+// Four Fives + Q
+Prop(name: "Four5 
+props: [
         Card(rank: .five, suit: .spades),
         Card(rank: .five, suit: .hearts),
         Card(rank: .five, suit: .clubs),
         Card(rank: .five, suit: .diamonds),
         Card(rank: .queen, suit: .spades)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Fours + K
-   props: [ 
+
+// Four Fours + K
+Prop(name: FourOf4
+props: [ 
         Card(rank: .four, suit: .spades),
         Card(rank: .four, suit: .hearts),
         Card(rank: .four, suit: .clubs),
         Card(rank: .four, suit: .diamonds),
         Card(rank: .king, suit: .hearts)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Threes + A
-    props: [
+
+// Four Threes + A
+Prop(name: "Four3"
+props: [
         Card(rank: .three, suit: .spades),
         Card(rank: .three, suit: .hearts),
         Card(rank: .three, suit: .clubs),
         Card(rank: .three, suit: .diamonds),
         Card(rank: .ace, suit: .clubs)
     ]),
-Prop(name: "FourOfAKind"
-    // Four Twos + 9
-    props: [
+
+// Four Twos + 9
+Prop(name: "Four2"
+props: [
         Card(rank: .two, suit: .spades),
         Card(rank: .two, suit: .hearts),
         Card(rank: .two, suit: .clubs),
@@ -500,7 +511,7 @@ struct Prop {
     let props: [Card] // การเก็บไพ่ใน Prop นี้
 }
 
-let fullHouses: [Prop]
+let fullHousesProp : [Prop]
      
     // AAAKK
 prop(name:HouseAce
