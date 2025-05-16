@@ -947,7 +947,7 @@ props : [
     ])
 ]
 
-Prop (name:Houses10-10-10
+Prop (name:Houses10
     // 10-10-10 AA
 props : [
         Card(rank: .ten, suit: nil),
@@ -1043,7 +1043,7 @@ props : [
         Card(rank: .ten, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
-    ]
+    ])
 ]
 
 Prop (name:Houses999
@@ -1142,7 +1142,7 @@ props :    [
         Card(rank: .nine, suit: nil),
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
-    ]
+    ])
 ]
 
 Prop(name : fullHouses888
