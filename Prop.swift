@@ -1242,7 +1242,7 @@ props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop(name : fullHouses777
     // 777AA
@@ -1341,7 +1341,8 @@ props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
+
 Prop (name : fullHouses666
     // 666AA
 props :    [
@@ -1439,7 +1440,7 @@ props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop (name : fullHouses555
     // 555AA
@@ -1538,7 +1539,7 @@ props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop (name : fullHouses444
     // 444AA
@@ -1637,7 +1638,7 @@ props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop (name : fullHouses333
     // 333AA
@@ -1736,7 +1737,7 @@ props :    [
         Card(rank: .two, suit: nil),
         Card(rank: .two, suit: nil)
     ]
-]
+)
 
 Prop (name : fullHouses222
     // 222AA
@@ -1836,7 +1837,7 @@ props :    [
         Card(rank: .three, suit: nil)
     ]
              point: 1
-]
+)
 
 }
 
