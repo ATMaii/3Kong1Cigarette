@@ -2240,7 +2240,8 @@ func printFinalScores(players: [Player]) {
     for (index, score) in totalScores.enumerated() {
         print("Player
 
-Player 1 = ?
-Player 2 = ?
-Player 3 = ?
-Player 4 = ?
+var Player 1 = score
+    Player 2 = score
+    Player 3 = score
+    Player 4 = score
+")
