@@ -1,3 +1,39 @@
+Player 1
+
+Head: Q♠️, J♦️, J♠️
+
+Middle: K♥️, 10♥️, 9♥️, 4♥️, 3♥️
+
+Tail: A♦️, 9♦️, 8♦️, 7♦️, 2♦️
+
+
+Player 2
+
+Head: K♠️, K♣️, Q♦️
+
+Middle: J♥️, 7♥️, 5♥️, 6♥️, 2♥️
+
+Tail: 5♠️, 4♠️, 3♠️, 2♠️, A♠️
+
+
+Player 3
+
+Head: A♥️, A♣️, 3♦️
+
+Middle: 9♣️, 8♣️, 7♣️, 5♣️, 2♣️
+
+Tail: K♦️, 10♦️, 6♦️, 5♦️, 4♦️
+
+
+Player 4
+
+Head: 8♥️, Q♣️, Q♥️
+
+Middle: J♣️, 10♣️, 6♣️, 4♣️, 3♣️
+
+Tail: 10♠️, 9♠️, 8♠️, 7♠️, 6♠️
+
+
 func calculateTotalScores(players: [Player]) -> [Int] {
     var scores = Array(repeating: 0, count: players.count)
 
