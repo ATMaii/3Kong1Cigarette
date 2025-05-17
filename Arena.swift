@@ -18,9 +18,8 @@ struct Arena {
         playersJoined >= maxPlayers
     }
 
-var roomName: String {
-        if stadium == {
-            
+    if Stadium : {
+    
 var roomName: String {
     "
 enum RookieRoom: String, CaseIterable {
