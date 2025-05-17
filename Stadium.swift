@@ -40,11 +40,32 @@ enum Stadium: String, CaseIterable {
         }
     }
 }
+struct Arena {
+    let stadium: Stadium
+    let roomValue: Int
+    let playersJoined: Int
+    let maxPlayers: Int
 
+    var isFull: Bool {
+        return playersJoined >= maxPlayers
+    }
+
+    var roomName: String {
+        return "
+
+let selectedStadium: Stadium = .Rookie
+
+// ดูห้องที่เปิดให้เล่นในสนามนี้
+let rooms = selectedStadium.availableRooms // [20, 50, 100, 500]
+
+// สร้าง Arena ห้องที่เลือก เช่น ห้อง 50 ชิป
+let arena = Arena(stadium: selectedStadium, roomValue: 50, playersJoined: 3, maxPlayers: 4)
+
+print("สนาม:
 
 *****// Stadium.swift import Foundation
 
-enum Stadium: String, CaseIterable {
+*enum Stadium: String, CaseIterable {
     case Rookie = "Wembley"
     case Beginner = "Maracana"
     case Amature = "Allianz"
@@ -59,7 +80,7 @@ enum Stadium: String, CaseIterable {
     }
     }
 
-enum Stadium: String, CaseIterable {
+*enum Stadium: String, CaseIterable {
     case Rookie = "Wembley"
     case Beginner = "Maracana"
     case Amature = "Allianz"
