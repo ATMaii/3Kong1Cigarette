@@ -64,7 +64,10 @@ struct Card {
     let rank: Rank   // แต้ม (เช่น 2–10, J, Q, K, A)
 }
 enum Suit: String, CaseIterable {
-    case hearts = "Lemal", diamonds = "Alex", clubs = "Ceasar", spades = "David"
+    case spades = "David"
+    case hearts = "Lemal" 
+    case diamonds = "Alex"
+    case clubs = "Ceasar"
 }
 
 enum Rank: Int, CaseIterable {
