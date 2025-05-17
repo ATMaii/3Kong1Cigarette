@@ -1,3 +1,19 @@
+enum Stadium {
+    case Rookie, Beginner, Amature, Master
+
+    var availableRooms: [Arena] {
+        switch self {
+        case .Rookie:
+            return RookieRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Beginner:
+            return BeginnerRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Amature:
+            return AmatureRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Master:
+            return MasterRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        }
+    }
+}
 // Stadium.swift 
 
 import Foundation
@@ -156,3 +172,122 @@ var availableRooms: [Int] {
     let arena = Arena(stadium: selectedStadium, roomValue: 50, playersJoined: 3, maxPlayers: 4)
 
 print("สนาม:
+
+
+enum Stadium {
+    case Rookie, Beginner, Amature, Master
+
+    var availableRooms: [Arena] {
+        switch self {
+        case .Rookie:
+            return RookieRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Beginner:
+            return BeginnerRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Amature:
+            return AmatureRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Master:
+            return MasterRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        }
+    }
+}
+
+extension Stadium {
+    var availableArenas: [Arena] {
+        switch self {
+        case .Rookie:
+            return RookieRoom.allCases.map {
+                Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
+            }
+        case .Beginner:
+            return BeginnerRoom.allCases.map {
+                Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
+            }
+        case .Amature:
+            return AmatureRoom.allCases.map {
+                Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
+            }
+        case .Master:
+            return MasterRoom.allCases.map {
+                Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
+            }
+        }
+    }
+}
+
+import Foundation
+
+enum RookieRoom: String, CaseIterable {
+    case arenaI = "Rookie20"
+    case arenaII = "Rookie50"
+    case arenaIII = "Rookie100"
+    case arenaIV = "Rookie200"
+
+    var roomValue: Int {
+        switch self {
+        case .arenaI: return 20
+        case .arenaII: return 50
+        case .arenaIII: return 100
+        case .arenaIV: return 200
+        }
+    }
+}
+
+let rookieStadium = Stadium.Rookie
+let rookieArenas = rookieStadium.availableRooms
+
+enum BeginnerRoom: String, CaseIterable {
+    case blogI = "BeginnerBlogI"
+    case blogII = "BeginnerBlogII"
+    case blogIII = "BeginnerBlogIII"
+    case blogIV = "BeginnerBlogIV"
+
+    var roomValue: Int {
+        switch self {
+        case .blogI: return 50
+        case .blogII: return 100
+        case .blogIII: return 200
+        case .blogIV: return 500
+        }
+    }
+}
+
+let beginnerStadium = Stadium.Beginner
+let beginnerArenas = beginnerStadium.availableRooms
+
+enum AmatureRoom: String, CaseIterable {
+    case clubI = "AmatureClubI"
+    case clubII = "AmatureClubII"
+    case clubIII = "AmatureClubIII"
+    case clubIV = "AmatureClubIV"
+
+    var roomValue: Int {
+        switch self {
+        case .clubI: return 100
+        case .clubII: return 200
+        case .clubIII: return 500
+        case .clubIV: return 1_000
+        }
+    }
+}
+
+let amatureStadium = Stadium.Amature
+let amatureArenas = amatureStadium.availableRooms
+
+enum MasterRoom: String, CaseIterable {
+    case roomI = "Master500"
+    case roomII = "Master1000"
+    case roomIII = "Master2000"
+    case roomIV = "Master5000"
+
+    var roomValue: Int {
+        switch self {
+        case .roomI: return 500
+        case .roomII: return 1000
+        case .roomIII: return 2000
+        case .roomIV: return 5000
+        }
+    }
+}
+
+let masterStadium = Stadium.Master
+let masterArenas = masterStadium.availableRooms
