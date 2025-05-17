@@ -8,8 +8,6 @@ var isFull: Bool {
     playersJoined >= maxPlayers
 }
 
-var roomName: String {
-    "
 struct Arena {
     let stadium: Stadium
     let roomValue: Int
@@ -20,9 +18,11 @@ struct Arena {
         playersJoined >= maxPlayers
     }
 
-    var roomName: String {
+var roomName: String {
         if stadium == .Rookie {
             
+var roomName: String {
+    "
 enum RookieRoom: String, CaseIterable {
     
     case arenaI = "Rookie20"
