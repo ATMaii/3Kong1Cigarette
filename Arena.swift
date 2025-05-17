@@ -123,7 +123,15 @@ struct Arena {
 }
 
 let arena = Arena(stadium: .Rookie, roomValue: 50, playersJoined: 3, maxPlayers: 4)
-print("สนาม:
+print("สนาม:...")
+
+import Foundation
+
+struct Arena { let stadium: Stadium let roomValue: Int let playersJoined: Int let maxPlayers: Int
+
+var isFull: Bool {
+    playersJoined >= maxPlayers
+}
 
 struct Arena {
     let stadium: Stadium
@@ -138,14 +146,7 @@ struct Arena {
     var roomName: String {
         "room"
 
-
 import Foundation
-
-struct Arena { let stadium: Stadium let roomValue: Int let playersJoined: Int let maxPlayers: Int
-
-var isFull: Bool {
-    playersJoined >= maxPlayers
-}
 
 enum RookieRoom: String, CaseIterable {
     case arenaI = "Rookie20"
