@@ -386,16 +386,17 @@ struct ArenaSelectionView: View {
             
             HStack {
                 Button(action: {
-                    selectedArena = "Allianz Arena"
+                    selectedArena = "Wembley"
                     goToGame()
                 }) {
-                    Text("Allianz Arena")
+                    Text("Wembley")
                         .font(.title)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.red)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
+                
                 .padding()
                 
                 Button(action: {
@@ -413,14 +414,14 @@ struct ArenaSelectionView: View {
             }
             
             HStack {
-                Button(action: {
-                    selectedArena = "Wembley"
+               Button(action: {
+                    selectedArena = "Allianz Arena"
                     goToGame()
                 }) {
-                    Text("Wembley")
+                    Text("Allianz Arena")
                         .font(.title)
                         .padding()
-                        .background(Color.red)
+                        .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
@@ -454,9 +455,9 @@ func selectStadium(by chips: Int) -> String? {
     case 20_000..<50_000:
         return "Allianz Arena" // Amateur
     case 10_000..<20_000:
-        return "Brazil" // Beginner
+        return "Maracana" // Beginner
     case 5_000..<10_000:
-        return "Wemley" // Rookie
+        return "Wembley" // Rookie
     default:
         return nil // ชิปไม่พอเข้าเล่น
     }
