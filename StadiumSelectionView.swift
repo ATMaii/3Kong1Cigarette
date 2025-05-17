@@ -495,3 +495,111 @@ struct Arena {
         "\(stadium.rawValue) Room \(roomValue)"
     }
 }
+
+import SwiftUI
+
+// MARK: - Model
+
+struct Stadium: Identifiable {
+    let id = UUID()
+    let name: String
+    let arenas: [Arena]
+}
+
+struct Arena: Identifiable {
+    let id = UUID()
+    let displayName: String
+    let roomValue: Int
+}
+
+// MARK: - StadiumSelectionView
+
+struct StadiumSelectionView: View {
+    let stadiums: [Stadium] = [
+        Stadium(name: "Wembley", arenas: [
+            Arena(displayName: "Arena I", roomValue: 20),
+            Arena(displayName: "Arena II", roomValue: 50),
+            Arena(displayName: "Arena III", roomValue: 100),
+            Arena(displayName: "Arena IV", roomValue: 200)
+        ]),
+        Stadium(name: "Allianz Arena", arenas: [
+            Arena(displayName: "Club I", roomValue: 100),
+            Arena(displayName: "Club II", roomValue: 200),
+            Arena(displayName: "Club III", roomValue: 500),
+            Arena(displayName: "Club IV", roomValue: 1000)
+        ]),
+        Stadium(name: "Santiago Bernabeu", arenas: [
+            Arena(displayName: "Room I", roomValue: 100),
+            Arena(displayName: "Room II", roomValue: 200),
+            Arena(displayName: "Room III", roomValue: 500),
+            Arena(displayName: "Room IV", roomValue: 1000)
+        ]),
+        Stadium(name: "Maracana", arenas: [
+            Arena(displayName: "Blog I", roomValue: 50),
+            Arena(displayName: "Blog II", roomValue: 100),
+            Arena(displayName: "Blog III", roomValue: 200),
+            Arena(displayName: "Blog IV", roomValue: 500)
+        ]),
+    ]
+
+    @State private var selectedStadium: Stadium? = nil
+    @State private var navigateToArena = false
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 25) {
+                Text("เลือกสนาม (Stadium)")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.top)
+
+                ForEach(stadiums) { stadium in
+                    Button(action: {
+                        selectedStadium = stadium
+                        navigateToArena = true
+                    }) {
+                        Text(stadium.name)
+                            .font(.title3)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(selectedStadium?.id == stadium.id ? Color.blue : Color.gray.opacity(0.7))
+                            .foregroundColor(.white)
+                            .cornerRadius(12)
+                            .shadow(radius: 3)
+                    }
+                    .padding(.horizontal)
+                }
+
+                Spacer()
+
+                NavigationLink(
+                    destination: ArenaSelectionView(stadium: selectedStadium!),
+                    isActive: $navigateToArena,
+                    label: {
+                        Text("ไปเลือกห้อง (Arena)")
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(selectedStadium == nil ? Color.gray : Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(12)
+                            .padding(.horizontal)
+                    })
+                .disabled(selectedStadium == nil)
+
+            }
+            .navigationTitle("สนาม (Stadium)")
+        }
+    }
+}
+
+// MARK: - ArenaSelectionView
+
+struct ArenaSelectionView: View {
+    let stadium: Stadium
+    @State private var selectedArena: Arena? = nil
+    @State private var navigateToGame = false
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("สนาม:
