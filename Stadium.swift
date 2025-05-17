@@ -102,8 +102,7 @@ var isFull: Bool {
 
 var roomName: String {
     " 
-func roomName(for stadium: Stadium) -> String {
-        " 
+
 enum RookieRoom: String, CaseIterable {
     case arenaI = "Rookie20"
     case arenaII = "Rookie50"
@@ -200,5 +199,7 @@ enum MasterRoom: String, CaseIterable {
         }
     }
 }
+func roomName(for stadium: Stadium) -> String {
+        " 
 }
 
