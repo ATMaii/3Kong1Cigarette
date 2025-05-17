@@ -18,7 +18,10 @@ struct Arena {
         playersJoined >= maxPlayers
     }
 
-
+    var roomName: String {
+        "
+    }
+}
 enum RookieRoom: String, CaseIterable {
     
     case arenaI = "Rookie20"
