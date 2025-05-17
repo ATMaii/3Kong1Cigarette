@@ -1,3 +1,5 @@
+import Foundation
+
 enum Stadium {
     case Rookie, Beginner, Amature, Master
 
@@ -173,23 +175,6 @@ var availableRooms: [Int] {
 
 print("สนาม:
 
-
-enum Stadium {
-    case Rookie, Beginner, Amature, Master
-
-    var availableRooms: [Arena] {
-        switch self {
-        case .Rookie:
-            return RookieRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
-        case .Beginner:
-            return BeginnerRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
-        case .Amature:
-            return AmatureRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
-        case .Master:
-            return MasterRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
-        }
-    }
-}
 
 extension Stadium {
     var availableArenas: [Arena] {
