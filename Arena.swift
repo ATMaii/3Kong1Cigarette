@@ -19,7 +19,7 @@ struct Arena {
     }
 
 var roomName: String {
-        if stadium == .Rookie {
+        if stadium == {
             
 var roomName: String {
     "
