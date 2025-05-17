@@ -199,7 +199,7 @@ enum MasterRoom: String, CaseIterable {
         }
     }
 }
+}
 func roomName(for stadium: Stadium) -> String {
         " 
-}
 
