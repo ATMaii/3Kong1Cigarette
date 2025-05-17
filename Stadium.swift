@@ -42,7 +42,7 @@ enum Stadium: String, CaseIterable {
 
     var rooms: [Int] {
         switch self {
-        case .Rookie, return [20, 50, 100, 200]
+        case .Rookie: return [20, 50, 100, 200]
         case .Beginner: return [50, 100, 200, 500]
         case .Amature: return [100, 200, 500, 1000]
         case .Master: return [100, 200, 500, 1000]
