@@ -85,7 +85,8 @@ enum Stadium {
     case Amature
     case Master
 
-    var availableRooms: [Arena] {
+extension Stadium {
+    var availableArenas: [Arena] {
         switch self {
         case .Rookie:
             return RookieRoom.allCases.map {
@@ -95,17 +96,23 @@ enum Stadium {
             return BeginnerRoom.allCases.map {
                 Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
             }
-        default:
-            return []
+        case .Amature:
+            return AmatureRoom.allCases.map {
+                Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
+            }
+        case .Master:
+            return MasterRoom.allCases.map {
+                Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
+            }
         }
     }
 }
 
-enum Stadium {
-    case Rookie
-    case Beginner
-    case Amature
-    case Master
+struct Arena {
+    let stadium: Stadium
+    let roomValue: Int
+    let playersJoined: Int
+    let maxPlayers: Int
 }
 
 enum RookieRoom: String, CaseIterable {
@@ -123,6 +130,9 @@ enum RookieRoom: String, CaseIterable {
         }
     }
 }
+let rookieStadium = Stadium.Rookie
+let rookieArenas = rookieStadium.availableRooms
+
 enum BeginnerRoom: String, CaseIterable {
     case blogI = "Beginner50"
     case blogII = "Beginner100"
@@ -138,16 +148,46 @@ enum BeginnerRoom: String, CaseIterable {
         }
     }
 }
+let beginnerStadium = Stadium.Beginner
+let beginnerArenas = beginnerStadium.availableRooms
 
 
-struct Arena {
-    let stadium: Stadium
-    let roomValue: Int
-    let playersJoined: Int
-    let maxPlayers: Int
+enum AmatureRoom: String, CaseIterable {
+    case clubI = "Amature"
+    case clubII = "AmatureClubII"
+    case clubIII = "AmatureClubIII"
+    case clubIV = "AmatureClubIV"
+
+    var roomValue: Int {
+        switch self {
+        case .clubI: return 100
+        case .clubII: return 200
+        case .clubIII: return 500
+        case .clubIV: return 1_000
+        }
+    }
 }
-let rookieStadium = Stadium.Rookie
-let rookieArenas = rookieStadium.availableRooms
+let amatureStadium = Stadium.Amature
+let amatureArenas = amatureStadium.availableRooms
+
+
+enum MasterRoom: String, CaseIterable {
+    case roomI = "Master500"
+    case roomII = "Master1000"
+    case roomIII = "Master2000"
+    case roomIV = "Master5000"
+
+    var roomValue: Int {
+        switch self {
+        case .roomI: return 500
+        case .roomII: return 1000
+        case .roomIII: return 2000
+        case .roomIV: return 5000
+        }
+    }
+}
+let masterStadium = Stadium.Master
+let masterArenas = masterStadium.availableRooms
 
 extension Stadium {
     var minChips: Int {
@@ -162,7 +202,7 @@ extension Stadium {
 
 import SwiftUI
 
-struct StadiumSelectionView: View {
+struct ArenaSelectionView: View {
     @State private var selectedArena: String? = nil
     
     var body: some View {
