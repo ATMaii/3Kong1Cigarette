@@ -105,9 +105,9 @@ struct ArenaSelectionView: View {
     @State private var selectedArena: String? = nil
 
     let arenaOptions: [(name: String, image: String, color: Color)] = [
-        ("Allianz Arena", "AllianzArena", .blue),
+        ("Wembley", "Wembley", .red)
         ("Maracana", "Maracana", .green),
-        ("Wembley", "Wembley", .red),
+        ("Allianz Arena", "AllianzArena", .blue),
         ("Santiago Bernabeu", "SantiagoBernabeu", .purple)
     ]
 
@@ -245,6 +245,17 @@ struct ArenaSelectionView: View {
                 .padding()
 
             HStack {
+                // Wembley (E)
+                Button(action: {
+                    selectedArena = "Wembley"
+                }) {
+                    Text("Wembley")
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                }
+
                 // Allianz Arena (A)
                 Button(action: {
                     selectedArena = "Allianz Arena"
@@ -255,7 +266,7 @@ struct ArenaSelectionView: View {
                         .cornerRadius(10)
                         .foregroundColor(.white)
                 }
-
+            HStack {
                 // Maracana (B)
                 Button(action: {
                     selectedArena = "Maracana (Brazil)"
@@ -267,18 +278,6 @@ struct ArenaSelectionView: View {
                         .foregroundColor(.white)
                 }
             }
-
-            HStack {
-                // Wembley (E)
-                Button(action: {
-                    selectedArena = "Wembley"
-                }) {
-                    Text("Wembley")
-                        .padding()
-                        .background(Color.red)
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
-                }
 
                 // Santiago Bernabéu (S)
                 Button(action: {
