@@ -1,7 +1,5 @@
 // Arena.swift
 
-
-
 import Foundation
 
 enum RookieRoom: String, CaseIterable {
@@ -259,9 +257,10 @@ enum MasterRoom: String, CaseIterable {
     var roomName: String {
         // หา index ของ roomValue จาก availableRooms
         if let index = stadium.availableRooms.firstIndex(of: roomValue) {
-            let arenaName = "CARB" ABCR
+            
+let arenaName = "CARB" ABCR
 
-            struct Arena {
+struct Arena {
     let stadium: Stadium
     let roomValue: Int
     let playersJoined: Int
@@ -323,3 +322,40 @@ struct ArenaSelectionView: View {
                         destination: GameView(arena: arena.name),
                         label: {
                             Text("เข้าสู่สนาม
+
+struct ArenaSelectionView: View {
+    let arenas = [
+        Arena(name: "Allianz Arena", color: .blue),
+        Arena(name: "Maracana", color: .green),
+        Arena(name: "Wembley", color: .red),
+        Arena(name: "Santiago Bernabeu", color: .purple)
+    ]
+
+    @State private var selectedArena: Arena?
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 20) {
+                Text("เลือกสนาม")
+                    .font(.largeTitle)
+                    .bold()
+
+                ForEach(arenas) { arena in
+                    Button(action: {
+                        selectedArena = arena
+                    }) {
+                        Text(arena.name)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(arena.color)
+                            .foregroundColor(.white)
+                            .cornerRadius(12)
+                    }
+                    .padding(.horizontal)
+                }
+
+                if let arena = selectedArena {
+                    NavigationLink(
+                        destination: WaitingRoomView(arena: arena.name),
+                        label: {
+                            Text("เข้าห้อง
