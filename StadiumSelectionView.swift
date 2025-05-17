@@ -63,9 +63,9 @@ enum Stadium: String {
     
     var availableRooms: [Int] {
         switch self {
-        case .Rookie, .Beginner: return [50, 100, 200]
-        case .Amature: return [50, 100, 200, 500]
-        case .Master: return [100, 200, 500, 1000]
+        case .Rookie: return [20, 50, 100, 200]
+        case .Beginner: return [50, 100, 200, 500]
+        case .Amatute, .Master: return [100, 200, 500, 1000]
         }
     }
 }
