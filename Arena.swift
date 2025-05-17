@@ -19,10 +19,10 @@ struct Arena {
     }
 
     var roomName: String {
-        "Arena
+        "room
     }
 }
-             }
+            
 enum RookieRoom: String, CaseIterable {
     
     case arenaI = "Rookie20"
