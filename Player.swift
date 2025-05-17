@@ -259,7 +259,7 @@ struct Player {
         }
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("
+        print("พรุ่งนี้แก้ตัวใหม่"
 
 struct Player {
     let id: Int
