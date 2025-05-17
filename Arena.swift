@@ -19,7 +19,7 @@ struct Arena {
     }
 
     var roomName: String {
-        "room
+        "room"
 
 import Foundation
 
@@ -37,7 +37,6 @@ enum RookieRoom: String, CaseIterable {
         case .arenaIV: return 200
         }
     }
-}
     var displayName: String {
         switch self {
     case .arenaI: return "Arena I"
