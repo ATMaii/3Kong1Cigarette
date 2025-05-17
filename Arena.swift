@@ -22,6 +22,7 @@ struct Arena {
         "
     }
 }
+             }
 enum RookieRoom: String, CaseIterable {
     
     case arenaI = "Rookie20"
