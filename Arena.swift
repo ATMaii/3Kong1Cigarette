@@ -29,7 +29,7 @@ enum RookieRoom: String, CaseIterable {
     case arenaII = "Rookie50"
     case arenaIII = "Rookie100"
     case arenaIV = "Rookie200"
-    
+}
     var roomValue: Int {
     switch self {
     case .arenaI: return 20
