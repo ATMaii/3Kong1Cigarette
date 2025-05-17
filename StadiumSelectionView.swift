@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct StadiumSelectionView: View {
-    @State private var selectedArena: String?
+    @State private var selectedStadium: String?
 
     var body: some View {
         VStack {
@@ -12,7 +12,7 @@ struct StadiumSelectionView: View {
             HStack {
                 // Wembley (E)
                 Button(action: {
-                    selectedArena = "Wembley"
+                    selectedStadium = "Wembley"
                 }) {
                     Text("Wembley")
                         .padding()
@@ -23,7 +23,7 @@ struct StadiumSelectionView: View {
 
                 // Maracana (B)
                 Button(action: {
-                    selectedArena = "Maracana (Brazil)"
+                    selectedStadium = "Maracana (Brazil)"
                 }) {
                     Text("Maracana")
                         .padding()
@@ -36,7 +36,7 @@ struct StadiumSelectionView: View {
             HStack {
                 // Allianz Arena (A)
                 Button(action: {
-                    selectedArena = "Allianz Arena"
+                    selectedStadium = "Allianz Arena"
                 }) {
                     Text("Allianz Arena")
                         .padding()
@@ -46,7 +46,7 @@ struct StadiumSelectionView: View {
                 }
                 // Santiago Bernabéu (S)
                 Button(action: {
-                    selectedArena = "Santiago Bernabéu"
+                    selectedStadium = "Santiago Bernabéu"
                 }) {
                     Text("Santiago Bernabéu")
                         .padding()
@@ -56,7 +56,7 @@ struct StadiumSelectionView: View {
                 }
             }
 
-            if let selectedArena = selectedArena {
+            if let selectedStadium = selectedArena {
                 Text("คุณเลือกสนาม
 
     // ฟังก์ชันเมื่อเลือกสนาม
@@ -76,6 +76,87 @@ func selectStadium(by chips: Int) -> String? {
         return "Wemley" // Rookie
     default:
         return nil // ชิปไม่พอเข้าเล่น
+    }
+}
+
+enum Stadium {
+    case Rookie
+    case Beginner
+    case Amature
+    case Master
+
+    var availableRooms: [Arena] {
+        switch self {
+        case .Rookie:
+            return RookieRoom.allCases.map {
+                Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
+            }
+        case .Beginner:
+            return BeginnerRoom.allCases.map {
+                Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4)
+            }
+        default:
+            return []
+        }
+    }
+}
+
+enum Stadium {
+    case Rookie
+    case Beginner
+    case Amature
+    case Master
+}
+
+enum RookieRoom: String, CaseIterable {
+    case arenaI = "Rookie20"
+    case arenaII = "Rookie50"
+    case arenaIII = "Rookie100"
+    case arenaIV = "Rookie200"
+
+    var roomValue: Int {
+        switch self {
+        case .arenaI: return 20
+        case .arenaII: return 50
+        case .arenaIII: return 100
+        case .arenaIV: return 200
+        }
+    }
+}
+enum BeginnerRoom: String, CaseIterable {
+    case blogI = "Beginner50"
+    case blogII = "Beginner100"
+    case blogIII = "Beginner200"
+    case blogIV = "Beginner500"
+
+    var roomValue: Int {
+        switch self {
+        case .blogI: return 50
+        case .blogII: return 100
+        case .blogIII: return 200
+        case .blogIV: return 500
+        }
+    }
+}
+
+
+struct Arena {
+    let stadium: Stadium
+    let roomValue: Int
+    let playersJoined: Int
+    let maxPlayers: Int
+}
+let rookieStadium = Stadium.Rookie
+let rookieArenas = rookieStadium.availableRooms
+
+extension Stadium {
+    var minChips: Int {
+        switch self {
+        case .Rookie: return 5_000
+        case .Beginner: return 10_000
+        case .Amature: return 20_000
+        case .Master: return 50_000
+        }
     }
 }
 
