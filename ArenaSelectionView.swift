@@ -2,6 +2,74 @@ import SwiftUI
 
 struct ArenaSelectionView: View {
     @State private var selectedArena: String? = nil
+
+    let arenaOptions: [(name: String, image: String, color: Color)] = [
+        ("Allianz Arena", "AllianzArena", .blue),
+        ("Maracana", "Maracana", .green),
+        ("Wembley", "Wembley", .red),
+        ("Santiago Bernabeu", "SantiagoBernabeu", .orange)
+    ]
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Select Your Arena")
+                    .font(.largeTitle)
+                    .padding(.top)
+
+                ForEach(arenaOptions, id: \.name) { arena in
+                    Button(action: {
+                        selectedArena = arena.name
+                    }) {
+                        VStack {
+                            Image(arena.image)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 100)
+                                .cornerRadius(8)
+
+                            Text(arena.name)
+                                .font(.title3)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 10).fill(arena.color))
+                                .padding(.horizontal)
+                        }
+                    }
+                    .padding(.vertical, 5)
+                }
+
+                if let selectedArena = selectedArena {
+                    NavigationLink(destination: GameView(arena: selectedArena)) {
+                        Text("Enter Arena")
+                            .font(.title2)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding(.top, 20)
+                    }
+                    .padding(.horizontal)
+                }
+
+                Spacer()
+            }
+            .padding()
+        }
+    }
+}
+
+struct GameView: View {
+    let arena: String
+    var body: some View {
+        Text("You entered
+
+import SwiftUI
+
+struct ArenaSelectionView: View {
+    @State private var selectedArena: String? = nil
     @State private var navigateToGame = false
 
     // รายชื่อสนามและชื่อรูป
