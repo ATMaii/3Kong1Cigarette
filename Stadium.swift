@@ -57,15 +57,15 @@ struct Arena {
     var roomName: String {
         return "
 
-let selectedStadium: Stadium = .Rookie
+    let selectedStadium: Stadium = .Rookie
 
-// ดูห้องที่เปิดให้เล่นในสนามนี้
-let rooms = selectedStadium.availableRooms // [20, 50, 100, 500]
+    // ดูห้องที่เปิดให้เล่นในสนามนี้
+    let rooms = selectedStadium.availableRooms // [20, 50, 100, 500]
 
-// สร้าง Arena ห้องที่เลือก เช่น ห้อง 50 ชิป
-let arena = Arena(stadium: selectedStadium, roomValue: 50, playersJoined: 3, maxPlayers: 4)
+    // สร้าง Arena ห้องที่เลือก เช่น ห้อง 50 ชิป
+    let arena = Arena(stadium: selectedStadium, roomValue: 50, playersJoined: 3, maxPlayers: 4)
 
-print("สนาม:Wembley
+print("สนาม:
 
 
 enum Stadium: String, CaseIterable {
