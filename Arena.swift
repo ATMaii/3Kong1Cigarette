@@ -37,21 +37,25 @@ struct Arena {
     var roomName: String {
         if stadium == .Rookie {
             switch roomValue {
-            case 50: return "Arena I"
-            case 100: return "Arena II"
-            case 200: return "Arena III"
+            case 20: return "Arena I"
+            case 50: return "Arena II"
+            case 100: return "Arena III"
+            case 200: return "Arena IV"
             default: return "
 
 enum BeginnerRoom: String, CaseIterable {
+    
     case blogI = "Beginner50"
     case blogII = "Beginner100"
     case blogIII = "Beginner200"
+    case blogIV = "Beginner500"
 
     var roomValue: Int {
         switch self {
         case .blogI: return 50
         case .blogII: return 100
         case .blogIII: return 200
+        case .blogIV: return 500
         }
     }
 
@@ -60,9 +64,9 @@ enum BeginnerRoom: String, CaseIterable {
         case .blogI: return "Blog I"
         case .blogII: return "Blog II"
         case .blogIII: return "Blog III"
+        case .blogIV: return "Blog IV"
         }
     }
-}
                 
 enum AmateurRoom: String, CaseIterable {
     case clubI = "Amateur50"
@@ -72,10 +76,10 @@ enum AmateurRoom: String, CaseIterable {
 
     var roomValue: Int {
         switch self {
-        case .clubI: return 50
-        case .clubII: return 100
-        case .clubIII: return 200
-        case .clubIV: return 500
+        case .clubI: return 100
+        case .clubII: return 200
+        case .clubIII: return 500
+        case .clubIV: return 1000
         }
     }
 
