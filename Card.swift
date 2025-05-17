@@ -4,10 +4,19 @@ import Foundation
 // MARK: - Card Model
 
 enum Suit: String, CaseIterable {
-    case hearts = "♥"
-    case diamonds = "♦"
-    case clubs = "♣"
-    case spades = "♠"
+    case hearts = "💟"    // Lemal
+    case diamonds = "💎"  // Alex
+    case clubs = "☘︎"    // Ceasar
+    case spades = "♠︎"     // David
+
+    var fullName: String {
+        switch self {
+        case .hearts: return "Lemal"
+        case .diamonds: return "Alex"
+        case .clubs: return "Ceasar"
+        case .spades: return "David"
+        }
+    }
 }
 
 enum Rank: Int, CaseIterable, Comparable {
