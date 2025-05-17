@@ -36,7 +36,7 @@ var body: some View {
         }
     }
 }
-Text("ห้อง: 50 Wemley")
+Text("ห้อง: 20 Wemley")
 enum Stadium: String {
     case Rookie = "Wembley"
     case Beginner = "Maracana"
