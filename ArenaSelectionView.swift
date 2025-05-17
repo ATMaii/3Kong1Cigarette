@@ -1,6 +1,69 @@
 import SwiftUI
 
 struct ArenaSelectionView: View {
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 20) {
+                Text("เลือกสนาม")
+                    .font(.largeTitle)
+                    .bold()
+
+                NavigationLink(destination: ArenaView(rooms: RookieRoom.allCases.map {
+                    Room(displayName: $0.displayName, roomValue: $0.roomValue)
+                }, stadiumName: "Rookie Stadium")) {
+                    Text("Rookie Stadium")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                }
+
+                NavigationLink(destination: ArenaView(rooms: BeginnerRoom.allCases.map {
+                    Room(displayName: $0.displayName, roomValue: $0.roomValue)
+                }, stadiumName: "Beginner Stadium")) {
+                    Text("Beginner Stadium")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                }
+
+                NavigationLink(destination: ArenaView(rooms: AmateurRoom.allCases.map {
+                    Room(displayName: $0.displayName, roomValue: $0.roomValue)
+                }, stadiumName: "Amateur Stadium")) {
+                    Text("Amateur Stadium")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                }
+
+                NavigationLink(destination: ArenaView(rooms: MasterRoom.allCases.map {
+                    Room(displayName: $0.displayName, roomValue: $0.roomValue)
+                }, stadiumName: "Master Stadium")) {
+                    Text("Master Stadium")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.purple)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+import SwiftUI
+
+struct ArenaSelectionView: View {
     let arenas = [
         Arena(name: "Allianz Arena", color: .blue),
         Arena(name: "Maracana", color: .green),
