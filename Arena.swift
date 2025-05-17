@@ -321,7 +321,7 @@ struct ArenaSelectionView: View {
                     NavigationLink(
                         destination: GameView(arena: arena.name),
                         label: {
-                            Text("เข้าสู่สนาม
+                            Text("เข้าสู่สนาม")
 
 struct ArenaSelectionView: View {
     let arenas = [
@@ -358,4 +358,4 @@ struct ArenaSelectionView: View {
                     NavigationLink(
                         destination: WaitingRoomView(arena: arena.name),
                         label: {
-                            Text("เข้าห้อง
+                            Text("เข้าห้อง")
