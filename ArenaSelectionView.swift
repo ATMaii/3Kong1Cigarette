@@ -447,5 +447,8 @@ struct ArenaSelectionView: View {
     let             stadium: Stadium
     ...
                      }
-    let arena = Arena(stadium: .Rookie, roomValue: 50, playersJoined: 3, maxPlayers: 4)
+    let arena = Arena(stadium: .Rookie, roomValue: 20, playersJoined: 4, maxPlayers: 4)
 print(arena.roomName) // "Arena I"
+    let area = Arena(stadium: .Rookie, roomValue: 50, playersJoined: 4, maxPlayers: 4) print(arena.roomName) // "Arena II"
+    let area = Arena(stadium: .Rookie, roomValue: 100, playersJoined: 4, maxPlayers: 4) print(arena.roomName) // "Arena III"
+    let area = Arena(stadium: .Rookie, roomValue: 200, playersJoined: 4, maxPlayers: 4) print(arena.roomName) // "Arena IV"
