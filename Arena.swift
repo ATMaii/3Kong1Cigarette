@@ -19,7 +19,7 @@ struct Arena {
     }
 
     var roomName: String {
-        "
+        "Arena
     }
 }
              }
