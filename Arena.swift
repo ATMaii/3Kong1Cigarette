@@ -21,20 +21,6 @@ struct Arena {
     }
 
     var roomName: String {
-        "Arena I" // ใช้ชื่อห้องแบบกำหนดเอง
-    }
-}
-struct Arena {
-    let stadium: Stadium
-    let roomValue: Int
-    let playersJoined: Int
-    let maxPlayers: Int
-
-    var isFull: Bool {
-        playersJoined >= maxPlayers
-    }
-
-    var roomName: String {
         if stadium == .Rookie {
             switch roomValue {
             case 20: return "Arena I"
@@ -67,7 +53,7 @@ enum BeginnerRoom: String, CaseIterable {
         case .blogIV: return "Blog IV"
         }
     }
-                
+}
 enum AmateurRoom: String, CaseIterable {
     case clubI = "Amateur50"
     case clubII = "Amateur100"
