@@ -179,7 +179,7 @@ let masterArenas = masterStadium.availableRooms
 
 }
 func roomName(for stadium: Stadium) -> String {
-        " 
+        " room "
 
 le t rookieStadium = Stadium.Rookie
 le t rookieArenas = rookieStadium.availableRooms
