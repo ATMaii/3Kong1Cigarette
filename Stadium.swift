@@ -1,3 +1,7 @@
+// Stadium.swift 
+
+import Foundation
+
 enum Stadium: String, CaseIterable {
     case Rookie = "Wembley"
     case Beginner = "Maracana"
@@ -63,9 +67,8 @@ let arena = Arena(stadium: selectedStadium, roomValue: 50, playersJoined: 3, max
 
 print("สนาม:
 
-*****// Stadium.swift import Foundation
 
-*enum Stadium: String, CaseIterable {
+enum Stadium: String, CaseIterable {
     case Rookie = "Wembley"
     case Beginner = "Maracana"
     case Amature = "Allianz"
@@ -80,7 +83,7 @@ print("สนาม:
     }
     }
 
-*enum Stadium: String, CaseIterable {
+enum Stadium: String, CaseIterable {
     case Rookie = "Wembley"
     case Beginner = "Maracana"
     case Amature = "Allianz"
