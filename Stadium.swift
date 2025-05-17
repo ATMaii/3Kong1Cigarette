@@ -127,7 +127,7 @@ enum RookieRoom: String, CaseIterable {
         case .arenaIV: return "Arena IV"
         }
     }
-    
+}
 enum BeginnerRoom: String, CaseIterable {
     case blogI = "Beginner50"
     case blogII = "Beginner100"
@@ -201,4 +201,4 @@ enum MasterRoom: String, CaseIterable {
     }
 }
 }
-}
+
