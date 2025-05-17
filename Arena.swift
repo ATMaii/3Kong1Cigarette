@@ -20,22 +20,24 @@ struct Arena {
 
     var roomName: String {
         "room
-           
+
+import Foundation
+
 enum RookieRoom: String, CaseIterable {
-    
     case arenaI = "Rookie20"
     case arenaII = "Rookie50"
     case arenaIII = "Rookie100"
     case arenaIV = "Rookie200"
-}
+
     var roomValue: Int {
-    switch self {
-    case .arenaI: return 20
-    case .arenaII: return 50
-    case .arenaIII: return 100
-    case .arenaIV: return 200
+        switch self {
+        case .arenaI: return 20
+        case .arenaII: return 50
+        case .arenaIII: return 100
+        case .arenaIV: return 200
+        }
     }
-    }
+}
     var displayName: String {
         switch self {
     case .arenaI: return "Arena I"
