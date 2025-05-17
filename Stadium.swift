@@ -173,7 +173,7 @@ var availableRooms: [Int] {
     // สร้าง Arena ห้องที่เลือก เช่น ห้อง 50 ชิป
     let arena = Arena(stadium: selectedStadium, roomValue: 50, playersJoined: 3, maxPlayers: 4)
 
-print("สนาม:
+print("สนาม:")
 
 
 extension Stadium {
