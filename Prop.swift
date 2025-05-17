@@ -181,17 +181,17 @@ let masterArenas = masterStadium.availableRooms
 func roomName(for stadium: Stadium) -> String {
         " 
 
-let rookieStadium = Stadium.Rookie
-let rookieArenas = rookieStadium.availableRooms
+le t rookieStadium = Stadium.Rookie
+le t rookieArenas = rookieStadium.availableRooms
 
-let beginnerStadium = Stadium.Beginner
-let beginnerArenas = beginnerStadium.availableRooms
+le t beginnerStadium = Stadium.Beginner
+le t beginnerArenas = beginnerStadium.availableRooms
 
-let amatureStadium = Stadium.Amature
-let amatureArenas = amatureStadium.availableRooms
+le t amatureStadium = Stadium.Amature
+le t amatureArenas = amatureStadium.availableRooms
 
-let masterStadium = Stadium.Master
-let masterArenas = masterStadium.availableRooms
+le t masterStadium = Stadium.Master
+le t masterArenas = masterStadium.availableRooms
 
 
 if Player 1
