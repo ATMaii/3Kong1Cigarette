@@ -6,18 +6,31 @@ import Foundation
 enum Suit: String, CaseIterable {
     case hearts = "💟"    // Lemal
     case diamonds = "💎"  // Alex
-    case clubs = "☘︎"    // Ceasar
-    case spades = "♠︎"     // David
+    case ceasar = "☘︎"    // Ceasar
+    case david = "♛"     // David
 
     var fullName: String {
         switch self {
         case .hearts: return "Lemal"
         case .diamonds: return "Alex"
-        case .clubs: return "Ceasar"
-        case .spades: return "David"
+        case .ceasar: return "Ceasar"
+        case .david: return "David"
         }
     }
 }
+
+let suit: Suit = .david
+print(suit.rawValue)    // ♛
+print(suit.fullName)    // David
+let suit: Suit = .ceasar
+print(suit.rawValue)    // ☘︎
+print(suit.fullName)    // Ceasar
+let suit: Suit = .diamonds
+print(suit.rawValue)    // 💎
+print(suit.fullName)    // Alex
+let suit: Suit = .hearts
+print(suit.rawValue)    // 💟
+print(suit.fullName)    // Lemal
 
 enum Rank: Int, CaseIterable, Comparable {
     case two = 2, three, four, five, six, seven, eight, nine, ten
