@@ -22,13 +22,31 @@ struct Arena {
 
     var roomName: String {
         if stadium == .Rookie {
-            switch roomValue {
-            case 20: return "Arena I"
-            case 50: return "Arena II"
-            case 100: return "Arena III"
-            case 200: return "Arena IV"
-            default: return "
-
+            
+enum RookieRoom: String, CaseIterable {
+    
+    case arenaI = "Rookie20"
+    case arenaII = "Rookie50"
+    case arenaIII = "Rookie100"
+    case arenaIV = "Rookie200"
+    
+    var roomValue: Int {
+    switch self {
+    case .arenaI: return 20
+    case .arenaII: return 50
+    case .arenaIII: return 100
+    case .arenaIV: return 200
+    }
+    }
+    var displayName: String {
+        switch self {
+    case .arenaI: return "Arena I"
+    case .arenaII: return "Arena II"
+    case .arenaII: return "Arena III"
+    case .arenaIV: return "Arena IV"
+        }
+    }
+}
 enum BeginnerRoom: String, CaseIterable {
     
     case blogI = "Beginner50"
