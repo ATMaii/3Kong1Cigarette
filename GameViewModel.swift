@@ -5,7 +5,7 @@ class GameViewModel: ObservableObject {
     @State private var currentTime: String = ""
     @Published var hasStarted = false
     @Published var sortType: SortType = .rank
-  
+ 
     // เริ่มเกม
     func startGame() {
         resetGame()   // รีเซ็ตสถานะเกม
@@ -62,6 +62,13 @@ class GameViewModel: ObservableObject {
             Player(id: 3, name: "Right", chips: 5000),
             Player(id: 4, name: "You", chips: 5000)
         ]
+
+func timeIsUp() {
+        // คุณสามารถเพิ่มฟังก์ชั่นที่ต้องการให้ทำเมื่อเวลาหมด เช่น จบเกม หรือจัดการคะแนน
+        print("เวลาเสร็จแล้ว!")
+        // ใส่คำสั่งที่จะทำเมื่อเวลาหมด
+    }
+}
         startGame() // แจกไพ่หลังจากเพิ่มครบ 4 คน
     }
 
@@ -76,6 +83,9 @@ class GameViewModel: ObservableObject {
 }
 class GameViewModel: ObservableObject {
     @Published var hasStarted = false
+class GameTimer: ObservableObject {
+    @Published var timeLeft: Int = 120 // เวลานับถอยหลังเริ่มต้นที่ 120 วินาที
+    var timer: Timer?
 
 func startGame() {
     hasStarted = true
@@ -103,6 +113,24 @@ func startGame() {
         }
     }
 }
+
+    func startTimer() {
+        timer?.invalidate() // ถ้ามี timer ที่กำลังทำงานอยู่ ให้หยุดก่อน
+        timeLeft = 120 // เริ่มต้นใหม่ที่ 120 วินาที
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            self.updateTimer()
+        }
+    }
+
+    func updateTimer() {
+        if timeLeft > 0 {
+            timeLeft -= 1
+        } else {
+            timer?.invalidate()
+            // เวลาเต็มแล้ว ให้เรียกฟังก์ชั่นจัดการต่อไป
+            self.timeIsUp()
+        }
+    }
 
 func autoArrange() {
     let sorted = remainingCards.sorted {
