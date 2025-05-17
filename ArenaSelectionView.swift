@@ -1,6 +1,72 @@
 import SwiftUI
 
 struct ArenaSelectionView: View {
+    @State private var selectedArena: String? = nil
+    @State private var navigateToGame = false
+
+    // รายชื่อสนามและชื่อรูป
+    let arenas = [
+        ("Allianz Arena", "AllianzArena", Color.blue),
+        ("Maracana", "Maracana", Color.green),
+        ("Wembley", "Wembley", Color.red),
+        ("Santiago Bernabeu", "SantiagoBernabeu", Color.orange)
+    ]
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 20) {
+                Text("Select Your Arena")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
+
+                ForEach(0..<arenas.count, id: \.self) { index in
+                    let arena = arenas[index]
+                    Button(action: {
+                        selectedArena = arena.0
+                        navigateToGame = true
+                    }) {
+                        HStack {
+                            Image(arena.1)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 120, height: 80)
+                                .cornerRadius(8)
+
+                            Text(arena.0)
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 20)
+                        }
+                        .padding()
+                        .background(arena.2)
+                        .cornerRadius(12)
+                        .shadow(radius: 5)
+                    }
+                }
+
+                NavigationLink(
+                    destination: GameView(arena: selectedArena ?? "Allianz Arena"),
+                    isActive: $navigateToGame
+                ) {
+                    EmptyView()
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+struct ArenaSelectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ArenaSelectionView()
+    }
+}
+
+
+import SwiftUI
+
+struct ArenaSelectionView: View {
     @State private var selectedArena: String?
 
     var body: some View {
