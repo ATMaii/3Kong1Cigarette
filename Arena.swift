@@ -274,8 +274,6 @@ struct Arena {
     var roomName: String {
         roomDisplayName ?? "
                 
-import SwiftUI
-
 struct Arena: Identifiable {
     let id = UUID()
     let name: String
