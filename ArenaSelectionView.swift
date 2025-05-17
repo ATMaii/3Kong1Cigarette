@@ -45,7 +45,7 @@ struct ArenaSelectionView: View {
         ("Allianz Arena", "AllianzArena", .blue),
         ("Maracana", "Maracana", .green),
         ("Wembley", "Wembley", .red),
-        ("Santiago Bernabeu", "SantiagoBernabeu", .orange)
+        ("Santiago Bernabeu", "SantiagoBernabeu", .purple)
     ]
 
     var body: some View {
@@ -115,7 +115,7 @@ struct ArenaSelectionView: View {
         ("Allianz Arena", "AllianzArena", Color.blue),
         ("Maracana", "Maracana", Color.green),
         ("Wembley", "Wembley", Color.red),
-        ("Santiago Bernabeu", "SantiagoBernabeu", Color.orange)
+        ("Santiago Bernabeu", "SantiagoBernabeu", Color.purple)
     ]
 
     var body: some View {
@@ -370,7 +370,7 @@ struct ArenaSelectionView: View {
                     Text("Santiago Bernabeu")
                         .font(.title)
                         .padding()
-                        .background(Color.orange)
+                        .background(Color.purple)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
