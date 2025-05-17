@@ -232,7 +232,7 @@ func initializePlayers() -> [Player] {
 }
 func playerBet(player: inout Player, betAmount: Int, pot: inout Int) {
     if player.bet(amount: betAmount, pot: &pot) {
-        print("ผู้เล่น
+        print("ผู้เล่น"
             
 struct Player {
     var id: Int
@@ -259,7 +259,7 @@ struct Player {
         }
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("dd/mm/yy")
+        print("
 
 struct Player {
     let id: Int
