@@ -273,53 +273,15 @@ struct Arena {
 
     var roomName: String {
         roomDisplayName ?? "
-                
+
+
+import SwiftUI
+
 struct Arena: Identifiable {
     let id = UUID()
     let name: String
     let color: Color
 }
-
-struct ArenaSelectionView: View {
-    let arenas = [
-        Arena(name: "Allianz Arena", color: .blue),
-        Arena(name: "Maracana", color: .green),
-        Arena(name: "Wembley", color: .red),
-        Arena(name: "Santiago Bernabeu", color: .purple)
-    ]
-
-    @State private var selectedArena: Arena?
-
-    var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Text("เลือกสนาม")
-                    .font(.largeTitle)
-                    .bold()
-
-                ForEach(arenas) { arena in
-                    Button(action: {
-                        selectedArena = arena
-                    }) {
-                        Text(arena.name)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(arena.color)
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(selectedArena?.id == arena.id ? Color.white : Color.clear, lineWidth: 3)
-                            )
-                    }
-                    .padding(.horizontal)
-                }
-
-                if let arena = selectedArena {
-                    NavigationLink(
-                        destination: GameView(arena: arena.name),
-                        label: {
-                            Text("เข้าสู่สนาม")
 
 struct ArenaSelectionView: View {
     let arenas = [
