@@ -25,10 +25,10 @@ jobs:
           key: derived-data-${{ runner.os }}-${{ hashFiles('**/*.xcodeproj') }}
 
       - name: Build and test app
-        run: |
-          xcodebuild \
-            -workspace YourApp.xcworkspace \
-            -scheme YourApp \
-            -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 14' \
-            clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+        run: xcodebuild
+-workspace 3Kong1Cigarette.xcworkspace 
+-scheme 3Kong1Cigarette 
+-sdk iphonesimulator 
+-destination 'platform=iOS Simulator,name=iPhone 14' clean build test
+CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
