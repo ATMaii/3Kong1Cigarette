@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build & Test
-    runs-on: Xcode 15
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
