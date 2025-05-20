@@ -3,11 +3,12 @@ name: iOS CI
 on:
   push:
     branches: [ main ]
+  pull_request:
 
 jobs:
   build:
     name: Build & Test
-    runs-on: macos-13
+    runs-on: macos 13
 
     steps:
       - name: Checkout code
@@ -16,15 +17,25 @@ jobs:
       - name: Select Xcode version
         run: sudo xcode-select -s /Applications/Xcode_15.0.app
 
-      - name: Install xcpretty
-        run: gem install xcpretty
+      - name: Cache Derived Data
+        uses: actions/cache@v3
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: derived-data-${{ runner.os }}-${{ hashFiles('**/*.xcodeproj') }}
 
-      - name: Build and Run Tests with Output
+      - name: Build app
         run: |
-          set -o pipefail && \
-          xcodebuild test \
+          xcodebuild \
             -workspace 3Kong1Cigarette.xcworkspace \
             -scheme 3Kong1Cigarette \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 14' \
-          | xcpretty
+            clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      - name: Run Tests
+        run: |
+          xcodebuild \
+            test \
+            -workspace 3Kong1Cigarette.xcworkspace \
+            -scheme 3Kong1Cigarette \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14' clean build
