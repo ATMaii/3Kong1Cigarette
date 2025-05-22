@@ -203,6 +203,9 @@ struct GameView: View {
                     Button("หน้าแรก") {
 Exit
                     }
+                    Button("Switch Language") {
+appLanguage = (appLanguage == "en") ? "th" : "en"
+                    }
                     // เพิ่มเมนูอื่น ๆ ได้ที่นี่
                 }
                 .padding()
