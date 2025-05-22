@@ -3,11 +3,11 @@ name: iOS CI
 on:
   push:
     branches: [ main ]
-
+  
 jobs:
   build:
     name: Build & Test
-    runs-on: macos-13
+    runs-on: macos 13
 
     steps:
       - name: Checkout code
@@ -25,20 +25,22 @@ jobs:
       - name: Build app
         run: |
           xcodebuild \
-            -project 3Kong1Cigarette.xcodeproj \
+            -workspace 3Kong1Cigarette.xcworkspace \
             -scheme 3Kong1Cigarette \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 14' \
             clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-
       - name: Run Tests
         run: |
           xcodebuild \
             test \
-            -project 3Kong1Cigarette.xcodeproj \
+            -workspace 3Kong1Cigarette.xcworkspace \
             -scheme 3Kong1Cigarette \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 14'
+            -destination 'platform=iOS Simulator,name=iPhone 14' clean build
+
+name: iOS CI
+
 
 
       
