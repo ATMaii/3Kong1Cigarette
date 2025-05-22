@@ -319,18 +319,6 @@ struct Arena {
     var roomName: String {
         roomDisplayName ?? "
 
-import SwiftUI
-
-struct ArenaSelectionView: View {
-    @State private var selectedArena: String? = nil
-
-    let arenaOptions: [(name: String, image: String, color: Color)] = [
-        ("Allianz Arena", "AllianzArena", .red),
-        ("Maracana", "Maracana", .purple),
-        ("Wembley", "Wembley", .blue),
-        ("Santiago Bernabeu", "SantiagoBernabeu", .orange)
-    ]
-
     var body: some View {
         NavigationView {
             VStack {
