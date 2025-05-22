@@ -208,14 +208,10 @@ appLanguage = (appLanguage == "en") ? "th" : "en"
                     }
                     Button("ตั้งค่าโปรไฟล์") {
                 showProfileSetup = true
-            }
-            .buttonStyle(.borderedProminent)
-        }
+                    }
         .sheet(isPresented: $showProfileSetup) {
             ProfileSetupView(isPresented: $showProfileSetup)
-        }
-    }
-}
+                    }
                     // เพิ่มเมนูอื่น ๆ ได้ที่นี่
                 }
                 .padding()
