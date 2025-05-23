@@ -247,11 +247,7 @@ appLanguage = (appLanguage == "en") ? "th" : "en"
             self.currentTime = formatter.string(from: Date())
                                                               }
     }
-func startGame() {
-    guard !hasStarted else { return }
-    hasStarted = true
-    // แจกไพ่ / ตั้งค่าเกมอื่น ๆ
-               }
+
 import SwiftUI
 import UniformTypeIdentifiers
 
