@@ -691,8 +691,3 @@ func checkResult(for players: inout [Player]) {
         let totalScore = topScore + middleScore + bottomScore
 
         print(" ")
-
-
-
-
-         
