@@ -569,29 +569,7 @@ struct YourHandView: View {
         .padding()
     }
 }
-
-                        Button("Done") {
-                            isGameActive = false
-                            isGameOver = true
-                            timer?.invalidate()
-                        }
-                        .padding(.top)
-                    }
-                    .padding()
-                    
-                Text("เวลาที่เหลือ:\(timeRemaining)")
-            }
-
-        }
-        .alert(isPresented: $showScorePopup) {
-            Alert(title: Text("Score"), message: Text(scoreSummary()), dismissButton: .default(Text("Ok")))
-        }
-}
-        .onAppear {
-    gameLogic.startNewGame()
-        }
-                                               }
-    private func dragGesture(for card: Card) -> some Gesture {
+private func dragGesture(for card: Card) -> some Gesture {
         DragGesture()
             .onEnded { value in
                 let y = value.location.y
@@ -605,51 +583,6 @@ struct YourHandView: View {
                 gameLogic.players[2].unarrangedCards.removeAll { $0.id == card.id }
             }
     }
-
-    private func startTimer() {
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-            } else {
-                timer?.invalidate()
-                isGameActive = false
-                isGameOver = true
-                autoArrangeCards()
-            }
-        }
-    }
-
-    private func autoArrangeCards() {
-        var player = gameLogic.players[2]
-        let sorted = player.unarrangedCards.sorted { $0.rank.rawValue > $1.rank.rawValue }
-
-        player.headCards = Array(sorted.prefix(3))
-        player.middleCards = Array(sorted.dropFirst(3).prefix(5))
-        player.tailCards = Array(sorted.dropFirst(8).prefix(5))
-        player.unarrangedCards = []
-
-        gameLogic.players[2] = player
-    }
-        
-   private func calculateScores() {
-        var scores: [String: Int] = [:]
-        let players = gameLogic.players
-        for i in 0..<players.count {
-            var score = 0
-            for j in 0..<players.count where i != j {
-                score += gameLogic.compareHands(player1: players[i], player2: players[j])
-            }
-            scores[players[i].name] = score
-        }
-        finalScores = scores
-    }
-
-    private func scoreSummary() -> String {
-        finalScores.map { "\($0.key): \($0.value) แต้ม" }.joined(separator: "\n")
-    }
-}
-
 // MARK: - Card Display Components
 
 struct CardRowView: View {
@@ -687,6 +620,69 @@ struct DraggableCard: View {
             }
     }
 }
+    private func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            } else {
+                timer?.invalidate()
+                isGameActive = false
+                isGameOver = true
+                autoArrangeCards()
+            }
+        }
+    }
+
+    private func autoArrangeCards() {
+        var player = gameLogic.players[2]
+        let sorted = player.unarrangedCards.sorted { $0.rank.rawValue > $1.rank.rawValue }
+
+        player.headCards = Array(sorted.prefix(3))
+        player.middleCards = Array(sorted.dropFirst(3).prefix(5))
+        player.tailCards = Array(sorted.dropFirst(8).prefix(5))
+        player.unarrangedCards = []
+
+        gameLogic.players[2] = player
+    }
+
+                        Button("Done") {
+                            isGameActive = false
+                            isGameOver = true
+                            timer?.invalidate()
+                        }
+                        .padding(.top)
+                    }
+                    .padding()
+                    
+                Text("เวลาที่เหลือ:\(timeRemaining)")
+            }
+private func calculateScores() {
+        var scores: [String: Int] = [:]
+        let players = gameLogic.players
+        for i in 0..<players.count {
+            var score = 0
+            for j in 0..<players.count where i != j {
+                score += gameLogic.compareHands(player1: players[i], player2: players[j])
+            }
+            scores[players[i].name] = score
+        }
+        finalScores = scores
+    }
+
+    private func scoreSummary() -> String {
+        finalScores.map { "\($0.key): \($0.value) แต้ม" }.joined(separator: "\n")
+    }
+}
+        }
+        .alert(isPresented: $showScorePopup) {
+            Alert(title: Text("Score"), message: Text(scoreSummary()), dismissButton: .default(Text("Ok")))
+        }
+}
+        .onAppear {
+    gameLogic.startNewGame()
+        }      
+ }
 
 // MARK: - Game View
 
