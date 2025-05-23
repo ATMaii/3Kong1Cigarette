@@ -18,14 +18,23 @@ jobs:
 
       - name: Build app
         run: |
-          xcodebuild \
-            -project 3Kong1Cigarette.xcodeproj \
-            -scheme 3Kong1Cigarette \
-            -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 15' \
-            clean build \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO
+          if [ -f "3Kong1Cigarette.xcworkspace" ]; then
+            xcodebuild \
+              -workspace 3Kong1Cigarette.xcworkspace \
+              -scheme 3Kong1Cigarette \
+              -sdk iphonesimulator \
+              -destination 'platform=iOS Simulator,name=iPhone 15' \
+              clean build \
+              CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          else
+            xcodebuild \
+              -project 3Kong1Cigarette.xcodeproj \
+              -scheme 3Kong1Cigarette \
+              -sdk iphonesimulator \
+              -destination 'platform=iOS Simulator,name=iPhone 15' \
+              clean build \
+              CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          fi
 
       - name: Run Tests
         run: |
