@@ -440,10 +440,6 @@ Button("Done") {
 }
 .disabled(isDone)
 
-
-PlayerCompareView(player: player3, result: .draw, isDone: $isDone)
-
-isDone = true
     var body: some View {
         VStack {
             Text(player.name)
@@ -467,7 +463,10 @@ isDone = true
                 .stroke(borderColor, lineWidth: 3)
         )
     }
+    PlayerCompareView(player: player3, result: .draw, isDone: $isDone)
 
+    isDone = true
+    
     private var resultText: String {
         switch result {
         case .win: return "Win"
@@ -510,6 +509,7 @@ isDone = true
     }
 }
 
+    
     
 
 struct PlayerCompareView: View {
