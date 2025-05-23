@@ -442,10 +442,11 @@ struct ArenaSelectionView: View {
         }
     }
     
-    // ฟังก์ชันเมื่อเลือกสนาม
-    func goToGame() {
+
+// ฟังก์ชันเมื่อเลือกสนาม
+func goToGame() {
         if let arena = selectedArena {
-            print("You selected:
+            print("You selected: ")
 
 func selectStadium(by chips: Int) -> String? {
     switch chips {
@@ -460,6 +461,8 @@ func selectStadium(by chips: Int) -> String? {
     default:
         return nil // ชิปไม่พอเข้าเล่น
     }
+}
+                 }
 }
 struct Arena {
     let stadium: Stadium
@@ -500,6 +503,7 @@ struct ArenaSelectionView: View {
                         .cornerRadius(10)
                 }
             }
+        }
             .padding()
 
             if let selectedArena = selectedArena {
@@ -515,3 +519,8 @@ print(arena.roomName) // "Arena I"
     let area = Arena(stadium: .Rookie, roomValue: 50, playersJoined: 4, maxPlayers: 4) print(arena.roomName) // "Arena II"
     let area = Arena(stadium: .Rookie, roomValue: 100, playersJoined: 4, maxPlayers: 4) print(arena.roomName) // "Arena III"
     let area = Arena(stadium: .Rookie, roomValue: 200, playersJoined: 4, maxPlayers: 4) print(arena.roomName) // "Arena IV"
+                    }
+            }
+        }
+    }
+}
