@@ -178,11 +178,6 @@ func startGame() {
         viewModel.startGame()
     }
 }
-        func startGame() {
-    guard !hasStarted else { return }
-    hasStarted = true
-    // แจกไพ่ / ตั้งค่าเกมอื่น ๆ
-}
 
     struct GameView: View {
     @StateObject var viewModel = GameViewModel()
