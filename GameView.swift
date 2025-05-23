@@ -404,6 +404,117 @@ struct GameView: View {
 
 struct PlayerCompareView: View {
     let player: Player
+    let result: CompareResult
+    @Binding var isDone: Bool // ให้ ViewModel ส่งเข้ามา
+    @State private var isDone = false
+    @State var isDone = false
+
+    var body: some View {
+        VStack {
+            Text(player.name)
+                .font(.headline)
+
+            HStack {
+                ForEach(player.hand, id: \.self) { card in
+                    CardView(card: card)
+                }
+            }
+
+            Text(resultText)
+                .font(.subheadline)
+                .foregroundColor(resultColor)
+        }
+        .padding()
+        .background(Color.white.opacity(0.85))
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(borderColor, lineWidth: 3)
+        )
+    }
+
+    private var resultText: String {
+        switch result {
+        case .win: return "Win"
+        case .draw: return "Draw"
+        case .lose: return "Lose"
+        }
+    }
+
+    private var resultColor: Color {
+        switch result {
+        case .win: return .green
+        case .draw: return .gray
+        case .lose: return .red
+        }
+    }
+
+    private var borderColor: Color {
+        if isDone {
+            return .gray
+        } else {
+            return isValidArrangement ? .green : .red
+        }
+    }
+
+    private var isValidArrangement: Bool {
+        let head = Array(player.hand[0..<3])
+        let middle = Array(player.hand[3..<8])
+        let tail = Array(player.hand[8..<13])
+
+        let headRank = evaluateHand(head)
+        let middleRank = evaluateHand(middle)
+        let tailRank = evaluateHand(tail)
+
+        return headRank <= middleRank && middleRank <= tailRank
+    }
+
+    private func evaluateHand(_ hand: [Card]) -> Int {
+        // สมมุติใช้ระบบประเมิน Rank ของคุณ
+        return HandRankEvaluator.rank(for: hand)
+    }
+}
+
+    // ตรวจว่าเรียงไพ่ถูกหรือไม่
+    private var isValidArrangement: Bool {
+    gameLogic.isPlayer3Valid // สมมติคุณมี logic ตรวจใน GameLogic
+}
+
+VStack {
+    Text("Player 3")
+        .font(.headline)
+
+    HStack {
+        ForEach(gameLogic.players[2].hand, id: \.self) { card in
+            CardView(card: card)
+        }
+    }
+
+    Text(isDone ? (isValidArrangement ? "Done - Correct" : "Done - Incorrect")
+                : (isValidArrangement ? "Correct" : "Incorrect"))
+        .foregroundColor(.white)
+        .padding(6)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(borderColor)
+        )
+}
+.padding()
+.background(Color.white.opacity(0.85))
+.cornerRadius(12)
+
+Button("Done") {
+    isDone = true
+}
+.disabled(isDone)
+
+
+PlayerCompareView(player: player3, result: .draw, isDone: $isDone)
+
+isDone = true
+
+struct PlayerCompareView: View {
+    let player: Player
     let result: CompareResult // +1 / 0 / -1 หรือ enum
 
     var body: some View {
