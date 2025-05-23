@@ -937,7 +937,7 @@ struct GameEndView: View {
                 HStack {
                     Text(result.name)
                     Spacer()
-                    Text("
+                    Text(" ")
                     
 
 struct GameView: View {
@@ -1102,8 +1102,15 @@ struct GameEndView: View {
             Spacer()
             Text("Player 1")
             Spacer()
-            Text("Time:
-
+            Text("Time: ")
+    var body: some View {
+        VStack {
+            // Top Bar
+            HStack {
+                Button("《 Exit") }
+                    // ออกเกม
+        }
+}
 import SwiftUI
 
 struct GameView: View {
@@ -1114,18 +1121,11 @@ struct GameView: View {
     @State private var timeRemaining = 120
     @State private var timer: Timer?
 
-    var body: some View {
-        VStack {
-            // Top Bar
-            HStack {
-                Button("《 Exit") {
-                    // ออกเกม
-                     
+    
 import Foundation
 
 enum RowPosition {
     case head, middle, tail
-}
 
 struct Card: Equatable {
     enum Suit: String, CaseIterable {
