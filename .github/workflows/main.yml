@@ -22,11 +22,17 @@ jobs:
           path: ~/Library/Developer/Xcode/DerivedData
           key: derived-data-${{ runner.os }}-${{ hashFiles('**/*.xcodeproj') }}
 
+      - name: Install CocoaPods (if needed)
+        run: |
+          if [ -f "Podfile" ]; then
+            sudo gem install cocoapods
+            pod install
+          fi
+
       - name: Build app
         run: |
           xcodebuild \
-            -project 
-3Kong1Cigarette.xcodeproj \
+            -workspace 3Kong1Cigarette.xcworkspace \
             -scheme 3Kong1Cigarette \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 14' \
@@ -41,9 +47,5 @@ jobs:
             -scheme 3Kong1Cigarette \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 14'
-
-
-
-
 
       
