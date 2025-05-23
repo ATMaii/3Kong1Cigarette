@@ -103,7 +103,12 @@ struct GameView: View {
                     .padding(.bottom, 100)
 
                 Spacer()
-   
+               
+func startGame() {
+    guard !hasStarted else { return }
+    hasStarted = true
+    // แจกไพ่ / ตั้งค่าเกมอื่น ๆ
+}
                 if viewModel.hasStarted {
             // ไพ่ของผู้เล่นด้านล่าง + ปุ่ม 《》
             VStack(spacing: 8) {
