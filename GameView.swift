@@ -151,6 +151,7 @@ struct GameView: View {
             .padding(.trailing, 16)
             .padding(.bottom, 100) // ให้สูงกว่าไพ่หน่อย
         }
+
             .onAppear {
     viewModel.loadPlayers()
     viewModel.startGame()
@@ -160,7 +161,24 @@ struct GameView: View {
         viewModel.startGame()                         
         }
     }
-        
+
+            .onAppear {
+    viewModel.loadPlayers()
+    // ไม่ต้อง startGame() ตรงนี้
+            }
+     .onChange(of: viewModel.players.count) 
+{ count in
+    if count == 4 && !
+        viewModel.hasStarted {
+        viewModel.startGame()
+    }
+}
+        func startGame() {
+    guard !hasStarted else { return }
+    hasStarted = true
+    // แจกไพ่ / ตั้งค่าเกมอื่น ๆ
+}
+
     struct GameView: View {
     @StateObject var viewModel = GameViewModel()
     @State private var isMenuOpen = false
