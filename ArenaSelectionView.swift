@@ -491,7 +491,7 @@ struct ArenaSelectionView: View {
 
             Button(action: {
                 selectedArena = "Wembley"
-            })
+            }
                 VStack {
                     Image("Wembley") // รูปภาพสนาม Wembley
                         .resizable()
