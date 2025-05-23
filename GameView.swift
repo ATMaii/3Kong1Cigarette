@@ -232,7 +232,7 @@ appLanguage = (appLanguage == "en") ? "th" : "en"
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm"
             self.currentTime = formatter.string(from: Date())
-                                                                 }
+                                                              }
     }
 
 import SwiftUI
@@ -321,7 +321,6 @@ struct GameView: View {
 
                 Text("เวลาที่เหลือ:\(timeRemaining)")
             }
-
 
                           HStack {
                                 ForEach(player3.unarrangedCards, id: \.id) { card in
@@ -441,7 +440,6 @@ struct YourHandView: View {
         .padding()
     }
 }
-
 
                         Button("Done") {
                             isGameActive = false
