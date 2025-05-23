@@ -104,11 +104,6 @@ struct GameView: View {
 
                 Spacer()
                
-func startGame() {
-    guard !hasStarted else { return }
-    hasStarted = true
-    // แจกไพ่ / ตั้งค่าเกมอื่น ๆ
-}
                 if viewModel.hasStarted {
             // ไพ่ของผู้เล่นด้านล่าง + ปุ่ม 《》
             VStack(spacing: 8) {
@@ -178,7 +173,11 @@ func startGame() {
         viewModel.startGame()
     }
 }
-
+func startGame() {
+    guard !hasStarted else { return }
+    hasStarted = true
+    // แจกไพ่ / ตั้งค่าเกมอื่น ๆ
+}
     struct GameView: View {
     @StateObject var viewModel = GameViewModel()
     @State private var isMenuOpen = false
