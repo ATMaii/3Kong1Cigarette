@@ -71,7 +71,11 @@ func timeIsUp() {
 }
         startGame() // แจกไพ่หลังจากเพิ่มครบ 4 คน
     }
-
+func startGame() {
+    guard !hasStarted else { return }
+    hasStarted = true
+    // แจกไพ่ / ตั้งค่าเกมอื่น ๆ
+}
     func toggleSort() {
         sortType.toggle()
         if hasStarted {
