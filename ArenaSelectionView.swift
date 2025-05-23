@@ -473,9 +473,11 @@ struct Arena {
     var isFull: Bool {
         playersJoined >= maxPlayers
     }
-    
+
     var roomName: String {
         "
+    }
+}
 import SwiftUI
 
 struct ArenaSelectionView: View {
@@ -489,7 +491,7 @@ struct ArenaSelectionView: View {
 
             Button(action: {
                 selectedArena = "Wembley"
-            }) {
+            })
                 VStack {
                     Image("Wembley") // รูปภาพสนาม Wembley
                         .resizable()
@@ -502,11 +504,11 @@ struct ArenaSelectionView: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
-            }
-        }
+                }
+                         }
             .padding()
 
-            if let selectedArena = selectedArena {
+    if let selectedArena = selectedArena {
                 Text("คุณเลือกสนาม
                 
              case Rookie = "Rookie Arena"
@@ -522,5 +524,3 @@ print(arena.roomName) // "Arena I"
                     }
             }
         }
-    }
-}
