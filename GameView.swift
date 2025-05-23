@@ -407,7 +407,43 @@ struct PlayerCompareView: View {
     @Binding var isDone: Bool // ให้ ViewModel ส่งเข้ามา
     @State private var isDone = false
     @State var isDone = false
+   // ตรวจว่าเรียงไพ่ถูกหรือไม่
+    private var isValidArrangement: Bool {
+    gameLogic.isPlayer3Valid // สมมติคุณมี logic ตรวจใน GameLogic
+}
 
+VStack {
+    Text("Player 3")
+        .font(.headline)
+
+    HStack {
+        ForEach(gameLogic.players[2].hand, id: \.self) { card in
+            CardView(card: card)
+        }
+    }
+
+    Text(isDone ? (isValidArrangement ? "Done - Correct" : "Done - Incorrect")
+                : (isValidArrangement ? "Correct" : "Incorrect"))
+        .foregroundColor(.white)
+        .padding(6)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(borderColor)
+        )
+}
+.padding()
+.background(Color.white.opacity(0.85))
+.cornerRadius(12)
+
+Button("Done") {
+    isDone = true
+}
+.disabled(isDone)
+
+
+PlayerCompareView(player: player3, result: .draw, isDone: $isDone)
+
+isDone = true
     var body: some View {
         VStack {
             Text(player.name)
@@ -474,43 +510,7 @@ struct PlayerCompareView: View {
     }
 }
 
-    // ตรวจว่าเรียงไพ่ถูกหรือไม่
-    private var isValidArrangement: Bool {
-    gameLogic.isPlayer3Valid // สมมติคุณมี logic ตรวจใน GameLogic
-}
-
-VStack {
-    Text("Player 3")
-        .font(.headline)
-
-    HStack {
-        ForEach(gameLogic.players[2].hand, id: \.self) { card in
-            CardView(card: card)
-        }
-    }
-
-    Text(isDone ? (isValidArrangement ? "Done - Correct" : "Done - Incorrect")
-                : (isValidArrangement ? "Correct" : "Incorrect"))
-        .foregroundColor(.white)
-        .padding(6)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(borderColor)
-        )
-}
-.padding()
-.background(Color.white.opacity(0.85))
-.cornerRadius(12)
-
-Button("Done") {
-    isDone = true
-}
-.disabled(isDone)
-
-
-PlayerCompareView(player: player3, result: .draw, isDone: $isDone)
-
-isDone = true
+    
 
 struct PlayerCompareView: View {
     let player: Player
