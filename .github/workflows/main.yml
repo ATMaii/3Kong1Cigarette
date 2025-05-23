@@ -26,7 +26,8 @@ jobs:
       - name: Build app
         run: |
           xcodebuild \
-            -workspace 3Kong1Cigarette.xcworkspace \
+            -project 
+3Kong1Cigarette.xcodeproj \
             -scheme 3Kong1Cigarette \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 15' \
