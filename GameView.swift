@@ -343,6 +343,44 @@ struct GameView: View {
                             }
                             .padding()
                         }
+// MARK: - Card Display Components
+
+struct CardRowView: View {
+    let title: String
+    let cards: [Card]
+
+    var body: some View {
+        VStack {
+            Text(title)
+                .font(.title2)
+            HStack {
+                ForEach(cards, id: \ .id) { card in
+                    Text(card.display)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                }
+            }
+        }
+    }
+}
+
+struct DraggableCard: View {
+    let card: Card
+
+    var body: some View {
+        Text(card.display)
+            .padding()
+            .background(Color.yellow)
+            .cornerRadius(8)
+            .shadow(radius: 2)
+            .onDrag {
+                NSItemProvider(object: NSString(string: card.display))
+            }
+    }
+}
+
 import SwiftUI
 
 struct GameView: View {
@@ -505,9 +543,6 @@ Button("Done") {
     }
 }
 
-    
-    
-
 struct PlayerCompareView: View {
     let player: Player
     let result: CompareResult // +1 / 0 / -1 หรือ enum
@@ -578,43 +613,7 @@ private func dragGesture(for card: Card) -> some Gesture {
                 gameLogic.players[2].unarrangedCards.removeAll { $0.id == card.id }
             }
     }
-// MARK: - Card Display Components
 
-struct CardRowView: View {
-    let title: String
-    let cards: [Card]
-
-    var body: some View {
-        VStack {
-            Text(title)
-                .font(.title2)
-            HStack {
-                ForEach(cards, id: \ .id) { card in
-                    Text(card.display)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(8)
-                        .shadow(radius: 2)
-                }
-            }
-        }
-    }
-}
-
-struct DraggableCard: View {
-    let card: Card
-
-    var body: some View {
-        Text(card.display)
-            .padding()
-            .background(Color.yellow)
-            .cornerRadius(8)
-            .shadow(radius: 2)
-            .onDrag {
-                NSItemProvider(object: NSString(string: card.display))
-            }
-    }
-}
     private func startTimer() {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
