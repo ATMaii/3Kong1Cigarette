@@ -68,6 +68,18 @@ class GameViewController: UIViewController {
     }
 }
 
+@Published var showMenu = false
+@Published var language: String = "th"
+
+func toggleLanguage() {
+    language = (language == "th") ? "en" : "th"
+    // ทำอะไรเพิ่มเติมตามภาษาที่เปลี่ยน เช่น โหลดข้อความใหม่
+}
+
+func autoArrange() {
+    // ตรรกะเรียงไพ่อัตโนมัติ
+}
+
 struct Player {
     var id: Int
     var name: String
