@@ -157,4 +157,35 @@ func autoArrange() {
         for i in 0..<3 { // เปรียบเทียบกับ 3 ขาอื่น
             let opponent = players[i]
             let result = compareHands(bottom.handByType, opponent.handByType)
-            print("Bottom vs
+            print("Bottom vs ")
+
+func handleDrop(providers: [NSItemProvider], to target: HandType) -> Bool {
+    guard let provider = providers.first else { return false }
+
+    provider.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { item, _ in
+        if let data = item as? Data,
+           let idString = String(data: data, encoding: .utf8),
+           let uuid = UUID(uuidString: idString),
+           let draggedCard = allCards.first(where: { $0.id == uuid }) {
+
+            DispatchQueue.main.async {
+                moveCard(draggedCard, to: target)
+            }
+        }
+    }
+    return true
+}
+
+func moveCard(_ card: Card, to target: HandType) {
+    // เอาออกจากทุกกองก่อน
+    headCards.removeAll { $0.id == card.id }
+    middleCards.removeAll { $0.id == card.id }
+    tailCards.removeAll { $0.id == card.id }
+
+    // เพิ่มเข้าไปในกองเป้าหมาย
+    switch target {
+    case .head: headCards.append(card)
+    case .middle: middleCards.append(card)
+    case .tail: tailCards.append(card)
+    }
+}
