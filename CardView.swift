@@ -16,3 +16,17 @@ struct CardView: View {
         }
     }
 }
+
+struct CardView: View {
+    let card: Card
+
+    var body: some View {
+        Text(card.description)
+            .padding()
+            .background(Color.white)
+            .cornerRadius(8)
+            .onDrag {
+                return NSItemProvider(object: card.id.uuidString as NSString)
+            }
+    }
+}
