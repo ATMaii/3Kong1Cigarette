@@ -74,8 +74,7 @@ struct Arena {
 
     var roomName: String {
         return " " }
-
-  
+}
 
 enum Stadium: String, CaseIterable {
     case Rookie = "Wembley"
