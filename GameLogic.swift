@@ -26,6 +26,16 @@ enum HandType: Int {
     ]
 }
 
+class GameLogic: ObservableObject {
+    @Published var playerCards: [[Card]] = []
+
+    func dealCards() {
+        let deck = Deck.standard.shuffled()
+        playerCards = stride(from: 0, to: 52, by: 13).map {
+            Array(deck[$0..<$0+13])
+        }
+    }
+}
 
 func getHandType(_ cards: [Card]) -> HandType {
     if isRoyalFlush(cards) { return .royalFlush }
