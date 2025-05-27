@@ -500,7 +500,40 @@ struct GameView: View {
                 // BOTTOM (Player 3 - คุณ)
                 YourHandView(cards: viewModel.playerHand)
             }
+                        Button("Done") {
+                            isGameActive = false
+                            isGameOver = true
+                            timer?.invalidate()
+                        }
+                        .padding(.top)
+                    }
+                    .padding()
 
+                Text("เวลาที่เหลือ:\(timeRemaining)")
+            }
+    private func autoArrangeCards() {
+        var player = gameLogic.players[2]
+        let sorted = player.unarrangedCards.sorted { $0.rank.rawValue > $1.rank.rawValue }
+
+        player.headCards = Array(sorted.prefix(3))
+        player.middleCards = Array(sorted.dropFirst(3).prefix(5))
+        player.tailCards = Array(sorted.dropFirst(8).prefix(5))
+        player.unarrangedCards = []
+
+        gameLogic.players[2] = player
+    }
+
+                        Button("Done") {
+                            isGameActive = false
+                            isGameOver = true
+                            timer?.invalidate()
+                        }
+                        .padding(.top)
+                    }
+                    .padding()
+
+                Text("เวลาที่เหลือ:\(timeRemaining)")
+            }
             // แสดง overlay ช่วง Compare
             if viewModel.isComparing {
                 Color.black.opacity(0.4)
