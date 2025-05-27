@@ -165,7 +165,7 @@ struct ArenaSelectionView: View {
 struct GameView: View {
     let arena: String
     var body: some View {
-        Text("You entered
+        Text("You entered ")
 
 import SwiftUI
 
@@ -524,3 +524,65 @@ print(arena.roomName) // "Arena I"
                     }
             }
         }
+
+func canEnterArena(_ arenaName: String, with chips: Int) -> Bool {
+    switch arenaName {
+    case "Wembley":
+        return chips >= 5_000
+    case "Maracana":
+        return chips >= 10_000
+    case "Allianz Arena":
+        return chips >= 20_000
+    case "Santiago Bernabeu":
+        return chips >= 50_000
+    default:
+        return false
+    }
+}
+
+if let selectedArena = selectedArena, canEnterArena(selectedArena, with: playerChips) {
+    NavigationLink(destination: GameView(arena: selectedArena)) {
+        Text("Enter Arena")
+            .font(.title2)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .padding(.top, 20)
+    }
+    .padding(.horizontal)
+} else {
+    Text("Not enough chips to enter this arena.")
+        .foregroundColor(.red)
+        .padding(.top, 10)
+}
+struct Arena {
+    let name: String
+    let image: String
+    let color: Color
+    let minChips: Int
+}
+let arenaOptions: [Arena] = [
+    Arena(name: "Allianz Arena", image: "AllianzArena", color: .blue, minChips: 20000),
+    Arena(name: "Maracana", image: "Maracana", color: .green, minChips: 10000),
+    Arena(name: "Wembley", image: "Wembley", color: .red, minChips: 5000),
+    Arena(name: "Santiago Bernabeu", image: "SantiagoBernabeu", color: .purple, minChips: 50000)
+]
+func canEnter(_ arena: Arena, with chips: Int) -> Bool {
+    return chips >= arena.minChips
+}
+if let selected = selectedArena {
+    if canEnter(selected, with: playerChips) {
+        NavigationLink(destination: GameView(arena: selected.name)) {
+            Text("Enter Arena")
+                .font(.title2)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+        }
+        .padding(.horizontal)
+    } else {
+        Text("Need at least")
