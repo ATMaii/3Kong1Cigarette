@@ -57,7 +57,7 @@ struct StadiumSelectionView: View {
             }
 
             if let selectedStadium = selectedArena {
-                Text("คุณเลือกสนาม
+                Text("คุณเลือกสนาม")
 
     // ฟังก์ชันเมื่อเลือกสนาม
     func goToGame() {
@@ -225,7 +225,7 @@ struct Arena {
     }
     
     var roomName: String {
-        "
+        " "}
 
 import SwiftUI
 
@@ -402,9 +402,10 @@ struct Arena {
     var isFull: Bool {
         playersJoined >= maxPlayers
     }
-    
+    }
     var roomName: String {
-        "
+        " " 
+}
 
 
 struct StadiumSelectionView: View {
@@ -602,4 +603,4 @@ struct ArenaSelectionView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("สนาม:
+            Text("สนาม: ")
