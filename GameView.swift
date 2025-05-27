@@ -295,23 +295,23 @@ struct GameView: View {
              
             if gameStarted && isGameActive {
                 if gameLogic.players.count >= 4 {
-                    let player4 = gameLogic.players[2] // ผู้เล่นหลัก
+                    let player3 = gameLogic.players[2] // ผู้เล่นหลัก
 
                     VStack(spacing: 40) {
                         // แถวหัว
-                        CardRowView(title: " ", cards: player4.headCards)
+                        CardRowView(title: " ", cards: player3.headCards)
                             .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                                 handleDrop(providers: providers, target: .head)
                             }
 
                         // แถวกลาง
-                        CardRowView(title: " ", cards: player4.middleCards)
+                        CardRowView(title: " ", cards: player3.middleCards)
                             .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                                 handleDrop(providers: providers, target: .middle)
                             }
 
                         // แถวท้าย
-                        CardRowView(title: " ", cards: player4.tailCards)
+                        CardRowView(title: " ", cards: player3.tailCards)
                             .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                                 handleDrop(providers: providers, target: .tail)
                             }
@@ -336,7 +336,7 @@ struct GameView: View {
             }
 
                           HStack {
-                                ForEach(player4.unarrangedCards, id: \.id) { card in
+                                ForEach(player3.unarrangedCards, id: \.id) { card in
                                     DraggableCard(card: card)
                                         .gesture(dragGesture(for: card))
                                 }
@@ -394,33 +394,33 @@ struct GameView: View {
             VStack {
                 Spacer()
                 
-                // TOP (Player 2)
+                // TOP (Player 1)
                 if let topPlayer = viewModel.getPlayer(at: 2) {
-                    PlayerCompareView(player: topPlayer, result: viewModel.getCompareResult(opponentID: 2))
+                    PlayerCompareView(player: topPlayer, result: viewModel.getCompareResult(opponentID: 1))
                         .transition(.move(edge: .top))
                 }
 
                 Spacer()
 
                 HStack {
-                    // LEFT (Player 1)
+                    // LEFT (Player 0)
                     if let leftPlayer = viewModel.getPlayer(at: 1) {
-                        PlayerCompareView(player: leftPlayer, result: viewModel.getCompareResult(opponentID: 1))
+                        PlayerCompareView(player: leftPlayer, result: viewModel.getCompareResult(opponentID: 0))
                             .transition(.move(edge: .leading))
                     }
 
                     Spacer()
 
-                    // RIGHT (Player 3)
+                    // RIGHT (Player 2)
                     if let rightPlayer = viewModel.getPlayer(at: 0) {
-                        PlayerCompareView(player: rightPlayer, result: viewModel.getCompareResult(opponentID: 0))
+                        PlayerCompareView(player: rightPlayer, result: viewModel.getCompareResult(opponentID: 2))
                             .transition(.move(edge: .trailing))
                     }
                 }
                 
                 Spacer()
 
-                // BOTTOM (Player 4 - คุณ)
+                // BOTTOM (Player 3 - คุณ)
                 YourHandView(cards: viewModel.playerHand)
             }
 
@@ -447,7 +447,7 @@ struct PlayerCompareView: View {
 }
 
 VStack {
-    Text("Player 4")
+    Text("Player 3")
         .font(.headline)
 
     HStack {
@@ -497,7 +497,7 @@ Button("Done") {
                 .stroke(borderColor, lineWidth: 3)
         )
     }
-    PlayerCompareView(player: player4, result: .draw, isDone: $isDone)
+    PlayerCompareView(player: player3, result: .draw, isDone: $isDone)
 
     isDone = true
     
@@ -713,23 +713,23 @@ struct GameView: View {
             }
 
             if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // Player 4 คือตัวเรา
+                let player3 = gameLogic.players[2] // Player 3 คือตัวเรา
 
                 VStack(spacing: 40) {
                     // แถวหัว (3 ช่อง)
-                    CardRowView(title: "", cards: player4.headCards)
+                    CardRowView(title: "", cards: player3.headCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .head)
                         }
 
                     // แถวกลาง (5 ช่อง)
-                    CardRowView(title: "", cards: player4.middleCards)
+                    CardRowView(title: "", cards: player3.middleCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .middle)
                         }
 
                     // แถวท้าย (5 ช่อง)
-                    CardRowView(title: "", cards: player4.tailCards)
+                    CardRowView(title: "", cards: player3.tailCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .tail)
                         }
@@ -740,7 +740,7 @@ struct GameView: View {
                         .font(.headline)
                     ScrollView(.horizontal) {
                         HStack {
-                            ForEach(player4.unarrangedCards, id: \.id) { card in
+                            ForEach(player3.unarrangedCards, id: \.id) { card in
                                 DraggableCard(card: card)
                                     .gesture(dragGesture(for: card))
                             }
