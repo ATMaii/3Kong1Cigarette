@@ -73,7 +73,7 @@ struct Arena {
     }
 
     var roomName: String {
-        return "
+        return 
 
   
 
@@ -259,17 +259,17 @@ let amatureStadium = Stadium.Amature
 let amatureArenas = amatureStadium.availableRooms
 
 enum MasterRoom: String, CaseIterable {
-    case roomI = "Master500"
-    case roomII = "Master1000"
-    case roomIII = "Master2000"
-    case roomIV = "Master5000"
+    case roomI = "Master100"
+    case roomII = "Master200"
+    case roomIII = "Master500"
+    case roomIV = "Master1000"
 
     var roomValue: Int {
         switch self {
-        case .roomI: return 500
-        case .roomII: return 1000
-        case .roomIII: return 2000
-        case .roomIV: return 5000
+        case .roomI: return 100
+        case .roomII: return 200
+        case .roomIII: return 500
+        case .roomIV: return 1000
         }
     }
 }
