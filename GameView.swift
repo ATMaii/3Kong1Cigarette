@@ -332,12 +332,12 @@ var body: some View {
         PlayerView(hand: gameLogic.playerCards[1])
             .position(x: screenWidth / 2, y: 100)
 
-        // Player 3 (ขวา)
-        PlayerView(hand: gameLogic.playerCards[2])
+        // Player 4 (ขวา)
+        PlayerView(hand: gameLogic.playerCards[3])
             .position(x: screenWidth - 60, y: screenHeight / 2)
 
-        // Player 4 (ล่าง = คุณ)
-        YourHandView(hand: gameLogic.playerCards[3])
+        // Player 3 (ล่าง = คุณ)
+        YourHandView(hand: gameLogic.playerCards[2])
             .position(x: screenWidth / 2, y: screenHeight - 100)
     }
     .onAppear {
