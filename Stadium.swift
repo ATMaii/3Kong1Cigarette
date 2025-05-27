@@ -1,21 +1,3 @@
-import Foundation
-
-enum Stadium {
-    case Rookie, Beginner, Amature, Master
-
-    var availableRooms: [Arena] {
-        switch self {
-        case .Rookie:
-            return RookieRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
-        case .Beginner:
-            return BeginnerRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
-        case .Amature:
-            return AmatureRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
-        case .Master:
-            return MasterRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
-        }
-    }
-}
 // Stadium.swift 
 
 import Foundation
@@ -62,6 +44,26 @@ enum Stadium: String, CaseIterable {
         }
     }
 }
+
+import Foundation
+
+enum Stadium {
+    case Rookie, Beginner, Amature, Master
+
+    var availableRooms: [Arena] {
+        switch self {
+        case .Rookie:
+            return RookieRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Beginner:
+            return BeginnerRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Amature:
+            return AmatureRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        case .Master:
+            return MasterRoom.allCases.map { Arena(stadium: self, roomValue: $0.roomValue, playersJoined: 0, maxPlayers: 4) }
+        }
+    }
+}
+
 struct Arena {
     let stadium: Stadium
     let roomValue: Int
