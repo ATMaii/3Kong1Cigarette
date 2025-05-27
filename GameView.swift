@@ -297,6 +297,54 @@ struct GameView: View {
                 if gameLogic.players.count >= 4 {
                     let player3 = gameLogic.players[2] // ผู้เล่นหลัก
 
+var players: [[Card]] = []
+
+func dealCardsTo4Players() {
+    let deck = Deck.standard.shuffled() // ไพ่ 52 ใบสุ่มแล้ว
+    players = stride(from: 0, to: 52, by: 13).map {
+        Array(deck[$0..<$0+13])
+    }
+}
+ZStack {
+    PlayerView(hand: players[1]) // ด้านบน (Player 2)
+        .position(x: screenWidth / 2, y: 100)
+
+    PlayerView(hand: players[0]) // ซ้าย (Player 1)
+        .rotationEffect(.degrees(-90))
+        .position(x: 60, y: screenHeight / 2)
+
+    PlayerView(hand: players[2]) // ขวา (Player 3)
+        .rotationEffect(.degrees(90))
+        .position(x: screenWidth - 60, y: screenHeight / 2)
+
+    YourHandView(hand: players[3]) // ล่าง (Player 4 - คุณ)
+        .position(x: screenWidth / 2, y: screenHeight - 100)
+}
+@StateObject var gameLogic = GameLogic()
+
+var body: some View {
+    ZStack {
+        // Player 1 (ซ้าย)
+        PlayerView(hand: gameLogic.playerCards[0])
+            .position(x: 60, y: screenHeight / 2)
+
+        // Player 2 (บน)
+        PlayerView(hand: gameLogic.playerCards[1])
+            .position(x: screenWidth / 2, y: 100)
+
+        // Player 3 (ขวา)
+        PlayerView(hand: gameLogic.playerCards[2])
+            .position(x: screenWidth - 60, y: screenHeight / 2)
+
+        // Player 4 (ล่าง = คุณ)
+        YourHandView(hand: gameLogic.playerCards[3])
+            .position(x: screenWidth / 2, y: screenHeight - 100)
+    }
+    .onAppear {
+        gameLogic.dealCards()
+    }
+}
+
                     VStack(spacing: 40) {
                         // แถวหัว
                         CardRowView(title: " ", cards: player3.headCards)
@@ -959,7 +1007,7 @@ struct GameView: View {
             }
 
             if gameStarted && isGameActive {
-                let player1 = gameLogic.players[2] // สมมุติว่า Player 4 คือตัวเรา
+                let player1 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
 
                 VStack {
                     // Top bar
