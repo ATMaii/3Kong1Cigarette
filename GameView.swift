@@ -299,19 +299,19 @@ struct GameView: View {
 
                     VStack(spacing: 40) {
                         // แถวหัว
-                        CardRowView(title: " ", cards: player3.headCards)
+                        CardRowView(title: " ", cards: player4.headCards)
                             .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                                 handleDrop(providers: providers, target: .head)
                             }
 
                         // แถวกลาง
-                        CardRowView(title: " ", cards: player3.middleCards)
+                        CardRowView(title: " ", cards: player4.middleCards)
                             .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                                 handleDrop(providers: providers, target: .middle)
                             }
 
                         // แถวท้าย
-                        CardRowView(title: " ", cards: player3.tailCards)
+                        CardRowView(title: " ", cards: player4.tailCards)
                             .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                                 handleDrop(providers: providers, target: .tail)
                             }
@@ -336,7 +336,7 @@ struct GameView: View {
             }
 
                           HStack {
-                                ForEach(player3.unarrangedCards, id: \.id) { card in
+                                ForEach(player4.unarrangedCards, id: \.id) { card in
                                     DraggableCard(card: card)
                                         .gesture(dragGesture(for: card))
                                 }
@@ -717,19 +717,19 @@ struct GameView: View {
 
                 VStack(spacing: 40) {
                     // แถวหัว (3 ช่อง)
-                    CardRowView(title: "", cards: player3.headCards)
+                    CardRowView(title: "", cards: player4.headCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .head)
                         }
 
                     // แถวกลาง (5 ช่อง)
-                    CardRowView(title: "", cards: player3.middleCards)
+                    CardRowView(title: "", cards: player4.middleCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .middle)
                         }
 
                     // แถวท้าย (5 ช่อง)
-                    CardRowView(title: "", cards: player3.tailCards)
+                    CardRowView(title: "", cards: player4.tailCards)
                         .onDrop(of: [UTType.text], isTargeted: nil) { providers in
                             handleDrop(providers: providers, target: .tail)
                         }
@@ -740,7 +740,7 @@ struct GameView: View {
                         .font(.headline)
                     ScrollView(.horizontal) {
                         HStack {
-                            ForEach(player3.unarrangedCards, id: \.id) { card in
+                            ForEach(player4.unarrangedCards, id: \.id) { card in
                                 DraggableCard(card: card)
                                     .gesture(dragGesture(for: card))
                             }
@@ -959,7 +959,7 @@ struct GameView: View {
             }
 
             if gameStarted && isGameActive {
-                let player1 = gameLogic.players[2] // สมมุติว่า Player 3 คือตัวเรา
+                let player1 = gameLogic.players[2] // สมมุติว่า Player 4 คือตัวเรา
 
                 VStack {
                     // Top bar
