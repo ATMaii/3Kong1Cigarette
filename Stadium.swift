@@ -73,7 +73,7 @@ struct Arena {
     }
 
     var roomName: String {
-        return 
+        return " " }
 
   
 
