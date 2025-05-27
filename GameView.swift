@@ -313,11 +313,11 @@ ZStack {
         .rotationEffect(.degrees(-90))
         .position(x: 60, y: screenHeight / 2)
 
-    PlayerView(hand: players[2]) // ขวา (Player 3)
+    PlayerView(hand: players[3]) // ขวา (Player 4)
         .rotationEffect(.degrees(90))
         .position(x: screenWidth - 60, y: screenHeight / 2)
 
-    YourHandView(hand: players[3]) // ล่าง (Player 4 - คุณ)
+    YourHandView(hand: players[2]) // ล่าง (Player 3 - คุณ)
         .position(x: screenWidth / 2, y: screenHeight - 100)
 }
 @StateObject var gameLogic = GameLogic()
@@ -413,6 +413,35 @@ struct CardRowView: View {
         }
     }
 }
+struct YourHandView: View {
+    let cards: [Card]
+
+    var body: some View {
+        HStack {
+            ForEach(0..<3) { i in
+    let score = viewModel.compareResults[i]
+    PlayerCompareView(player: viewModel.players[i], result: score)
+}
+
+            }
+        }
+        .padding()
+    }
+}
+private func dragGesture(for card: Card) -> some Gesture {
+        DragGesture()
+            .onEnded { value in
+                let y = value.location.y
+                if y < 200 {
+                    gameLogic.players[2].headCards.append(card)
+                } else if y < 400 {
+                    gameLogic.players[2].middleCards.append(card)
+                } else {
+                    gameLogic.players[2].tailCards.append(card)
+                }
+                gameLogic.players[2].unarrangedCards.removeAll { $0.id == card.id }
+            }
+    }
 
 struct DraggableCard: View {
     let card: Card
