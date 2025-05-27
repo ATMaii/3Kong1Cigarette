@@ -294,8 +294,8 @@ struct GameView: View {
     } 
              
             if gameStarted && isGameActive {
-                if gameLogic.players.count >= 3 {
-                    let player3 = gameLogic.players[2] // ผู้เล่นหลัก
+                if gameLogic.players.count >= 4 {
+                    let player4 = gameLogic.players[2] // ผู้เล่นหลัก
 
                     VStack(spacing: 40) {
                         // แถวหัว
@@ -411,7 +411,7 @@ struct GameView: View {
 
                     Spacer()
 
-                    // RIGHT (Player 0)
+                    // RIGHT (Player 3)
                     if let rightPlayer = viewModel.getPlayer(at: 0) {
                         PlayerCompareView(player: rightPlayer, result: viewModel.getCompareResult(opponentID: 0))
                             .transition(.move(edge: .trailing))
@@ -420,7 +420,7 @@ struct GameView: View {
                 
                 Spacer()
 
-                // BOTTOM (Player 3 - คุณ)
+                // BOTTOM (Player 4 - คุณ)
                 YourHandView(cards: viewModel.playerHand)
             }
 
@@ -447,7 +447,7 @@ struct PlayerCompareView: View {
 }
 
 VStack {
-    Text("Player 3")
+    Text("Player 4")
         .font(.headline)
 
     HStack {
@@ -497,7 +497,7 @@ Button("Done") {
                 .stroke(borderColor, lineWidth: 3)
         )
     }
-    PlayerCompareView(player: player3, result: .draw, isDone: $isDone)
+    PlayerCompareView(player: player4, result: .draw, isDone: $isDone)
 
     isDone = true
     
@@ -713,7 +713,7 @@ struct GameView: View {
             }
 
             if gameStarted && isGameActive {
-                let player3 = gameLogic.players[2] // Player 3 คือตัวเรา
+                let player3 = gameLogic.players[2] // Player 4 คือตัวเรา
 
                 VStack(spacing: 40) {
                     // แถวหัว (3 ช่อง)
