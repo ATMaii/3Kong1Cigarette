@@ -1,5 +1,13 @@
 // Arena.swift
 
+// ตัวอย่าง Swift pseudo code
+if let availableRoom = arenas.first(where: { !$0.isFull }) {
+    availableRoom.add(player)
+} else {
+    let newRoom = Arena(id: UUID(), players: [player])
+    arenas.append(newRoom)
+}
+
 import Foundation
 
 enum RookieRoom: String, CaseIterable {
