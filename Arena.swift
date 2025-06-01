@@ -33,6 +33,9 @@ enum RookieRoom: String, CaseIterable {
     }
 }
 
+let rookieStadium = Stadium.Rookie
+let rookieArenas = rookieStadium.availableRooms
+
 enum BeginnerRoom: String, CaseIterable {
     case blogI = "Beginner50"
     case blogII = "Beginner100"
@@ -56,6 +59,9 @@ enum BeginnerRoom: String, CaseIterable {
         }
     }
 }
+
+let beginnerStadium = Stadium.Beginner
+let beginnerArenas = beginnerStadium.availableRooms
 
 enum AmateurRoom: String, CaseIterable {
     case clubI = "Amateur100"
@@ -81,6 +87,9 @@ enum AmateurRoom: String, CaseIterable {
     }
 }
 
+let amatureStadium = Stadium.Amature
+let amatureArenas = amatureStadium.availableRooms
+
 enum MasterRoom: String, CaseIterable {
     case roomI = "Master100"
     case roomII = "Master200"
@@ -104,6 +113,9 @@ enum MasterRoom: String, CaseIterable {
         }
     }
 }
+
+let masterStadium = Stadium.Master
+let masterArenas = masterStadium.availableRooms
 
 struct Arena {
     let stadium: Stadium
