@@ -262,6 +262,7 @@ struct GameView: View {
     @State private var timer: Timer?
     @State private var showScorePopup = false
     @State private var finalScores: [String: Int] = [:]
+    @State private var players: [[Card]] = []
 
     var body: some View {
         VStack {
@@ -335,7 +336,6 @@ var body: some View {
         gameLogic.dealCards()
     }
 }
-var players: [[Card]] = []
 
 func dealCardsTo4Players() {
     let deck = Deck.standard.shuffled() // ไพ่ 52 ใบสุ่มแล้ว
