@@ -1,3 +1,13 @@
+// MARK: - Waiting Room View
+struct WaitingRoomView: View {
+    let arena: String
+    @State private var playersInRoom = 1
+    @State private var isReady = false
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("คุณอยู่ในห้องรอที่")
+
 enum Stadium: String, CaseIterable {
     case Rookie = "Wembley"
     case Beginner = "Maracana"
