@@ -59,7 +59,6 @@ struct Card: Identifiable, Equatable {
     var description: String {
         return "
 
-struct Card {
     let suit: Suit   // ดอก (เช่น โพธิ์ดำ โพธิ์แดง ข้าวหลามตัด ดอกจิก)
     let rank: Rank   // แต้ม (เช่น 2–10, J, Q, K, A)
 }
