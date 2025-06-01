@@ -222,9 +222,7 @@ appLanguage = (appLanguage == "en") ? "th" : "en"
                     Button("ตั้งค่าโปรไฟล์") {
                 showProfileSetup = true
                     }
-        .sheet(isPresented: $showProfileSetup) {
-            ProfileSetupView(isPresented: $showProfileSetup)
-                    }
+        
                     // เพิ่มเมนูอื่น ๆ ได้ที่นี่
                 }
                 .padding()
@@ -234,6 +232,9 @@ appLanguage = (appLanguage == "en") ? "th" : "en"
                 .position(x: 100, y: 100) // อยู่ข้างใต้ปุ่ม ≡
             }
         }
+.sheet(isPresented: $showProfileSetup) {
+            ProfileSetupView(isPresented: $showProfileSetup)
+                    }
         .onAppear {
     updateTime()
     Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
