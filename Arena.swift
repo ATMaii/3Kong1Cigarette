@@ -1,5 +1,12 @@
 // Arena.swift
 
+if let availableRoom = arenas.first(where: { !$0.isFull }) {
+    availableRoom.add(player)
+} else {
+    let newRoom = Arena(id: UUID(), players: [player])
+    arenas.append(newRoom)
+}
+
 import Foundation
 
 enum RookieRoom: String, CaseIterable {
@@ -132,7 +139,7 @@ struct Arena { let stadium: Stadium let roomValue: Int let playersJoined: Int le
 var isFull: Bool {
     playersJoined >= maxPlayers
 }
-
+struct Arena {
     let stadium: Stadium
     let roomValue: Int
     let playersJoined: Int
@@ -218,7 +225,7 @@ enum AmateurRoom: String, CaseIterable {
         case .clubIV: return "Club IV"
         }
     }
-                }
+}              
 enum MasterRoom: String, CaseIterable {
     case roomI = "Master100"
     case roomII = "Master200"
@@ -243,6 +250,7 @@ enum MasterRoom: String, CaseIterable {
         }
     }
 }
+}
     let stadium: Stadium
     let roomValue: Int
     let playersJoined: Int
@@ -261,13 +269,6 @@ enum MasterRoom: String, CaseIterable {
         if let index = stadium.availableRooms.firstIndex(of: roomValue) {
         let arenaName = " " 
      }
-
-if let availableRoom = arenas.first(where: { !$0.isFull }) {
-    availableRoom.add(player)
-} else {
-    let newRoom = Arena(id: UUID(), players: [player])
-    arenas.append(newRoom)
-}
 
 import SwiftUI
 
