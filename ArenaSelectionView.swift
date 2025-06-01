@@ -173,10 +173,7 @@ struct ArenaSelectionView: View {
     }
 }
 
-struct GameView: View {
-    let arena: String
-    var body: some View {
-        Text("You entered ")
+
 
 import SwiftUI
 
@@ -597,3 +594,8 @@ if let selected = selectedArena {
         .padding(.horizontal)
     } else {
         Text("Need at least")
+
+struct GameView: View {
+    let arena: String
+    var body: some View {
+        Text("You entered ")
