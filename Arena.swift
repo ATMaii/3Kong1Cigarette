@@ -133,7 +133,6 @@ var isFull: Bool {
     playersJoined >= maxPlayers
 }
 
-struct Arena {
     let stadium: Stadium
     let roomValue: Int
     let playersJoined: Int
@@ -244,7 +243,6 @@ enum MasterRoom: String, CaseIterable {
         }
     }
 }
-            struct Arena {
     let stadium: Stadium
     let roomValue: Int
     let playersJoined: Int
