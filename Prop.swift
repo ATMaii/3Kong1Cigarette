@@ -2277,7 +2277,7 @@ var wins = 0
         )
 
         if wins == 3 {
-            let bonus = rowScores * 4
+            let bonus = rowScores * 2
             players[i].score += bonus
             players[j].score -= bonus
         } else {
