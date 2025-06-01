@@ -295,14 +295,7 @@ struct GameView: View {
                 if gameLogic.players.count >= 4 {
                     let player3 = gameLogic.players[2] // ผู้เล่นหลัก
 
-var players: [[Card]] = []
 
-func dealCardsTo4Players() {
-    let deck = Deck.standard.shuffled() // ไพ่ 52 ใบสุ่มแล้ว
-    players = stride(from: 0, to: 52, by: 13).map {
-        Array(deck[$0..<$0+13])
-    }
-}
 ZStack {
     PlayerView(hand: players[1]) // ด้านบน (Player 2)
         .position(x: screenWidth / 2, y: 100)
@@ -340,6 +333,14 @@ var body: some View {
     }
     .onAppear {
         gameLogic.dealCards()
+    }
+}
+var players: [[Card]] = []
+
+func dealCardsTo4Players() {
+    let deck = Deck.standard.shuffled() // ไพ่ 52 ใบสุ่มแล้ว
+    players = stride(from: 0, to: 52, by: 13).map {
+        Array(deck[$0..<$0+13])
     }
 }
 
