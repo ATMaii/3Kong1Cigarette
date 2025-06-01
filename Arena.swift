@@ -363,12 +363,4 @@ struct WaitingRoomView: View {
         VStack(spacing: 20) {
             Text("คุณอยู่ในห้องรอที่")
 
-struct RoomSelectionView: View {
-    let arena: Arena
-    let roomNumbers = [1, 2, 3, 4]
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("เลือกห้องใน")
-
 
