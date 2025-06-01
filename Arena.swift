@@ -378,7 +378,3 @@ struct ArenaSelectionView: View {
     }
 }
 
-struct GameView: View {
-    let arena: String
-    var body: some View {
-        Text("You entered")
