@@ -483,9 +483,7 @@ struct Arena {
     }
 
     var roomName: String {
-        "
-    }
-}
+        " "
 import SwiftUI
 
 struct ArenaSelectionView: View {
