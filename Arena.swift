@@ -283,18 +283,21 @@ struct Arena {
 
 import SwiftUI
 
+// MARK: - Arena Model
 struct Arena: Identifiable {
     let id = UUID()
     let name: String
     let color: Color
+    let image: String
 }
 
+// MARK: - Arena Selection View
 struct ArenaSelectionView: View {
     let arenas = [
-        Arena(name: "Allianz Arena", color: .blue),
-        Arena(name: "Maracana", color: .green),
-        Arena(name: "Wembley", color: .red),
-        Arena(name: "Santiago Bernabeu", color: .purple)
+        Arena(name: "Allianz Arena", color: .blue, image: "allianz"),
+        Arena(name: "Maracana", color: .green, image: "maracana"),
+        Arena(name: "Wembley", color: .red, image: "wembley"),
+        Arena(name: "Santiago Bernabeu", color: .purple, image: "bernabeu")
     ]
 
     @State private var selectedArena: Arena?
@@ -309,34 +312,6 @@ struct ArenaSelectionView: View {
                 ForEach(arenas) { arena in
                     Button(action: {
                         selectedArena = arena
-                    }) {
-                        Text(arena.name)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(arena.color)
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
-                    }
-                    .padding(.horizontal)
-                }
-
-                if let arena = selectedArena {
-                    NavigationLink(
-                        destination: WaitingRoomView(arena: arena.name),
-                        label: {
-                            Text("เข้าห้อง")
-
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Select Your Arena")
-                    .font(.largeTitle)
-                    .padding(.top)
-
-                ForEach(arenaOptions, id: \.name) { arena in
-                    Button(action: {
-                        selectedArena = arena.name
                     }) {
                         VStack {
                             Image(arena.image)
@@ -357,9 +332,9 @@ struct ArenaSelectionView: View {
                     .padding(.vertical, 5)
                 }
 
-                if let selectedArena = selectedArena {
-                    NavigationLink(destination: GameView(arena: selectedArena)) {
-                        Text("Enter Arena")
+                if let arena = selectedArena {
+                    NavigationLink(destination: WaitingRoomView(arena: arena.name)) {
+                        Text("เข้าห้อง")
                             .font(.title2)
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -377,4 +352,23 @@ struct ArenaSelectionView: View {
         }
     }
 }
+
+// MARK: - Waiting Room View
+struct WaitingRoomView: View {
+    let arena: String
+    @State private var playersInRoom = 1
+    @State private var isReady = false
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("คุณอยู่ในห้องรอที่")
+
+struct RoomSelectionView: View {
+    let arena: Arena
+    let roomNumbers = [1, 2, 3, 4]
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("เลือกห้องใน")
+
 
