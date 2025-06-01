@@ -508,8 +508,8 @@ struct GameView: View {
                     }
                     .padding()
 
-                Text("เวลาที่เหลือ:\(timeRemaining)")
-            }
+                Text("เวลาที่เหลือ: timeRemaining")
+            
     private func autoArrangeCards() {
         var player = gameLogic.players[2]
         let sorted = player.unarrangedCards.sorted { $0.rank.rawValue > $1.rank.rawValue }
