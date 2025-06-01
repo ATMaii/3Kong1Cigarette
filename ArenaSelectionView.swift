@@ -300,7 +300,7 @@ struct ArenaSelectionView: View {
             }
 
             if let selectedArena = selectedArena {
-                Text("คุณเลือกสนาม
+                Text("คุณเลือกสนาม")
 
 import SwiftUI
 
@@ -515,13 +515,9 @@ struct ArenaSelectionView: View {
             .padding()
 
     if let selectedArena = selectedArena {
-                Text("คุณเลือกสนาม
+                Text("คุณเลือกสนาม")
                 
-             case Rookie = "Rookie Arena"
-             struct Arena {
-    let             stadium: Stadium
-    ...
-                     }
+    case Rookie = "Rookie Arena"
     let arena = Arena(stadium: .Rookie, roomValue: 20, playersJoined: 4, maxPlayers: 4)
 print(arena.roomName) // "Arena I"
     let area = Arena(stadium: .Rookie, roomValue: 50, playersJoined: 4, maxPlayers: 4) print(arena.roomName) // "Arena II"
