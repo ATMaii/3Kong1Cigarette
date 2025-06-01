@@ -1,11 +1,6 @@
 // Arena.swift
 
-if let availableRoom = arenas.first(where: { !$0.isFull }) {
-    availableRoom.add(player)
-} else {
-    let newRoom = Arena(id: UUID(), players: [player])
-    arenas.append(newRoom)
-}
+
 
 import Foundation
 
@@ -151,7 +146,7 @@ struct Arena {
     }
 
     var roomName: String {
-        "room"
+        " "
 
 import Foundation
 
@@ -251,23 +246,7 @@ enum MasterRoom: String, CaseIterable {
         }
     }
 }
-                struct Arena {
-    let stadium: Stadium
-    let roomValue: Int
-    let playersJoined: Int
-    let maxPlayers: Int
-
-    var isFull: Bool {
-        playersJoined >= maxPlayers
-    }
-
-    var roomName: String {
-        // หา index ของ roomValue จาก availableRooms
-        if let index = stadium.availableRooms.firstIndex(of: roomValue) {
-            
-let arenaName = "CARB" ABCR
-
-struct Arena {
+            struct Arena {
     let stadium: Stadium
     let roomValue: Int
     let playersJoined: Int
@@ -279,7 +258,20 @@ struct Arena {
     }
 
     var roomName: String {
-        roomDisplayName ?? "
+        roomDisplayName ?? " "
+    }
+    var roomName: String {
+        // หา index ของ roomValue จาก availableRooms
+        if let index = stadium.availableRooms.firstIndex(of: roomValue) {
+        let arenaName = " " 
+     }
+
+if let availableRoom = arenas.first(where: { !$0.isFull }) {
+    availableRoom.add(player)
+} else {
+    let newRoom = Arena(id: UUID(), players: [player])
+    arenas.append(newRoom)
+}
 
 import SwiftUI
 
@@ -362,5 +354,4 @@ struct WaitingRoomView: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("คุณอยู่ในห้องรอที่")
-
 
