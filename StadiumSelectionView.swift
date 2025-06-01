@@ -593,14 +593,3 @@ struct StadiumSelectionView: View {
         }
     }
 }
-
-// MARK: - ArenaSelectionView
-
-struct ArenaSelectionView: View {
-    let stadium: Stadium
-    @State private var selectedArena: Arena? = nil
-    @State private var navigateToGame = false
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("สนาม: ")
