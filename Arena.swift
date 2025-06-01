@@ -1,7 +1,5 @@
 // Arena.swift
 
-
-
 import Foundation
 
 enum RookieRoom: String, CaseIterable {
