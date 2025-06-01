@@ -1,3 +1,7 @@
+Strct Card
+    let suit: Suit   // ดอก (เช่น โพธิ์ดำ โพธิ์แดง ข้าวหลามตัด ดอกจิก)
+    let rank: Rank   // แต้ม (เช่น 2–10, J, Q, K, A)
+}
 import SwiftUI
 import Foundation
 
@@ -59,9 +63,6 @@ struct Card: Identifiable, Equatable {
     var description: String {
         return "
 
-    let suit: Suit   // ดอก (เช่น โพธิ์ดำ โพธิ์แดง ข้าวหลามตัด ดอกจิก)
-    let rank: Rank   // แต้ม (เช่น 2–10, J, Q, K, A)
-}
 enum Suit: String, CaseIterable {
     case spades = "David"
     case hearts = "Lemal" 
