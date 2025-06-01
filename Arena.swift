@@ -1,6 +1,5 @@
 // Arena.swift
 
-// ตัวอย่าง Swift pseudo code
 if let availableRoom = arenas.first(where: { !$0.isFull }) {
     availableRoom.add(player)
 } else {
