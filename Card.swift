@@ -4,7 +4,7 @@ import Foundation
 // MARK: - Card Model
 
 enum Suit: String, CaseIterable {
-    case hearts = "💟"    // Lemal
+    case hearts = "🤍"    // Lemal
     case diamonds = "💎"  // Alex
     case ceasar = "☘︎"    // Ceasar
     case david = "♛"     // David
@@ -29,7 +29,7 @@ let suit: Suit = .diamonds
 print(suit.rawValue)    // 💎
 print(suit.fullName)    // Alex
 let suit: Suit = .hearts
-print(suit.rawValue)    // 💟
+print(suit.rawValue)    // 🤍
 print(suit.fullName)    // Lemal
 
 enum Rank: Int, CaseIterable, Comparable {
@@ -78,7 +78,7 @@ enum Rank: Int, CaseIterable {
 // Card.swift
 
 enum Suit: String, CaseIterable {
-    case hearts = "💟"
+    case hearts = "🤍"
     case diamonds = "💎"
     case clubs = "☘︎"
     case spades = "♛"
