@@ -253,6 +253,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct GameView: View {
+    @ObservedObject var gameLogic: GameLogic  // เชื่อมกับ GameLogic
     @ObservedObject var gameLogic: GameLogic
     @State private var gameStarted = false
     @State private var isGameOver = false
@@ -267,6 +268,12 @@ struct GameView: View {
             Text("Game: 3 กอง")
                 .font(.largeTitle)
                 .padding()
+    var body: some View {
+         VStack {
+            // ปุ่มเริ่มเกม
+            Button("Start Game") {
+                gameLogic.startNewGame()
+            }
 
             if !gameStarted {
                 Button("Start") {
@@ -276,16 +283,6 @@ struct GameView: View {
                 }
                 .padding()
             }
-struct GameView: View {
-    @ObservedObject var gameLogic: GameLogic  // เชื่อมกับ GameLogic
-
-    var body: some View {
-         VStack {
-            // ปุ่มเริ่มเกม
-            Button("Start Game") {
-                gameLogic.startNewGame()
-            }
-             
    struct ContentView: View {
     @StateObject var gameLogic = GameLogic(playerNames: ["P1", "P2", "P3", "P4"])
 
