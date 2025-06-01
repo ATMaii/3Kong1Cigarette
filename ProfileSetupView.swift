@@ -1,3 +1,4 @@
+
 import SwiftUI
 import PhotosUI
 import FacebookCore
@@ -43,6 +44,83 @@ struct ProfileSetupView: View {
             .padding(.horizontal)
 
             Button("บันทึก") {
-                print("ชื่อ:
+                print("ชื่อ: ")
 
 }
+
+import SwiftUI
+import PhotosUI
+
+struct ProfileView: View {
+    @State private var profileImage: UIImage? = nil
+    @State private var isShowingPicker = false
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            if let image = profileImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 120, height: 120)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.blue, lineWidth: 2))
+            } else {
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .foregroundColor(.gray)
+                    .frame(width: 120, height: 120)
+            }
+
+            Button("Change Profile Picture") {
+                isShowingPicker = true
+            }
+        }
+        .sheet(isPresented: $isShowingPicker) {
+            PhotoPicker(image: $profileImage)
+        }
+    }
+}
+
+struct PhotoPicker: UIViewControllerRepresentable {
+    @Binding var image: UIImage?
+    
+    func makeUIViewController(context: Context) -> PHPickerViewController {
+        var config = PHPickerConfiguration()
+        config.filter = .images
+        config.selectionLimit = 1
+        
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, PHPickerViewControllerDelegate {
+        let parent: PhotoPicker
+
+        init(_ parent: PhotoPicker) {
+            self.parent = parent
+        }
+
+        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+            picker.dismiss(animated: true)
+            
+            guard let provider = results.first?.itemProvider,
+                  provider.canLoadObject(ofClass: UIImage.self) else {
+                return
+            }
+
+            provider.loadObject(ofClass: UIImage.self) { image, _ in
+                DispatchQueue.main.async {
+                    self.parent.image = image as? UIImage
+                }
+            }
+        }
+    }
+}
+
