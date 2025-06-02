@@ -17,6 +17,7 @@ class GameManager: ObservableObject {
     @Published var selectedStadium: Stadium?
     @Published var selectedRoom: Room?
     @Published var players: [Player] = []
+
     var deck = Deck()
     func login() {
         phase = .selectStadium
