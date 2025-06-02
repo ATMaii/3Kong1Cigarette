@@ -1,4 +1,3 @@
-
 enum GamePhase {
     case login
     case selectStadium
@@ -13,51 +12,39 @@ enum GamePhase {
     case updatingScores
     case roundFinished
 }
-    
-}
 class GameManager: ObservableObject {
     @Published var phase: GamePhase = .login
-
     @Published var selectedStadium: Stadium?
     @Published var selectedRoom: Room?
-
     @Published var players: [Player] = []
     var deck = Deck()
-
     func login() {
         phase = .selectStadium
     }
-
     func selectStadium(_ stadium: Stadium) {
         selectedStadium = stadium
         phase = .selectRoom
     }
-
     func selectRoom(_ room: Room) {
         selectedRoom = room
         players = []
         phase = .waitingForPlayers
     }
-
     func addPlayer(_ player: Player) {
         players.append(player)
         if players.count == 4 {
             startGame()
         }
     }
-
     func startGame() {
         phase = .dealingCards
         deck = Deck()
         deck.shuffle()
-
         for i in 0..<players.count {
             players[i].hand = (0..<13).compactMap { _ in deck.drawCard() }
         }
-
         phase = .arrangingHands
     }
-
     func playerDidConfirmHand() {
         if players.allSatisfy({ !$0.head.isEmpty && !$0.middle.isEmpty && !$0.tail.isEmpty }) {
             phase = .evaluating
@@ -72,22 +59,20 @@ class GameManager: ObservableObject {
             players[index].middle = middle
             players[index].tail = tail
         }
-        if players.allSatisfy({ !$0.head.isEmpty && !$0.middle.isEmpty && !$0.tail.isEmpty }) {
-
-
-            phase = .evaluating
+        if players.allSatisfy({ !$0.head.isEmpty && !$0.middle.isEmpty && !$0.tail.isEmpty }) 
+{
+        phase = .evaluating
             evaluateGame()
     func evaluateHands() {
         // เทียบคะแนนตามกติกา
         phase = .showingScore
     }
-
     func playAgain() {
         phase = .waitingForPlayers
         players.removeAll()
     }
 }
-       phase = .roundFinished
+        phase = .roundFinished
     }
 
     func resetForNextRound() {
@@ -110,16 +95,13 @@ class GameManager: ObservableObject {
     @Published var players: [Player] = []
     @Published var currentRound: Int = 1
     @Published var isGameOver: Bool = false
-
     private var gameLogic: GameLogic
     private var scoreManager: ScoreManager
-
     init(playerNames: [String]) {
         self.players = playerNames.map { Player(name: $0) }
         self.gameLogic = GameLogic(players: self.players)
         self.scoreManager = ScoreManager(players: self.players)
     }
-
     func startNewGame() {
         currentRound = 1
         isGameOver = false
@@ -128,7 +110,6 @@ class GameManager: ObservableObject {
         }
         gameLogic.startGame()
     }
-
     func playRound() {
         gameLogic.startGame()
 
@@ -159,8 +140,6 @@ class GameManager: ObservableObject {
         default:
             return nil
         }
-    }
-}
 
 import Foundation
 
@@ -215,7 +194,7 @@ class Player {
     }
 }
 
-players = names.enumerated().map { index, name in
+    players = names.enumerated().map { index, name in
     let player = Player(id: index + 1, name: name)
     player.hand = (0..<13).compactMap { _ in deck.drawCard() }
     player.hand.sort { $0.rank.rawValue < $1.rank.rawValue }
@@ -256,18 +235,15 @@ struct Player {
     var name: String
     var chips: Int
     var lastBonusDate: Date?
-
     var isActive: Bool {
         return chips > 0
     }
-
     init(id: Int, name: String) {
         self.id = id
         self.name = name
         self.chips = 5000 // เริ่มต้นด้วย 5,000 ชิป
         self.lastBonusDate = Date() // รับชิปทันทีเมื่อสมัคร
     }
-
     mutating func checkDailyBonus() {
         let calendar = Calendar.current
         if let lastDate = lastBonusDate,
@@ -277,7 +253,6 @@ struct Player {
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
         print(" ")
-
 
 class GameManager: ObservableObject {
     var playerChips: Int = 0
@@ -293,7 +268,6 @@ class GameManager: ObservableObject {
 
 @Published var selectedStadium: Stadium? = nil
 
-
 struct Player {
     let name: String
     let head: [Card]
@@ -301,7 +275,7 @@ struct Player {
     let tail: [Card]
 }
 
-let player = Player(id: 1, name: "Steve")
+let player = Player(id: 1, name: " ")
 let manager = GameManager(playerNames: [player.name])
 
 if let stadium = manager.stadiumForChips(player.chips) {
@@ -494,53 +468,18 @@ class GameManager: ObservableObject {
 
     func startGame() {
         deck = Deck()
-        deck.shuffle()
-
         players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
-
         dealCards()
-
-        // แยกไพ่เป็น 3 กอง และเก็บไว้ใน Player
-        for i in 0..<players.count {
-            let (head, middle, tail) = splitIntoThreePiles(player: players[i])
-            players[i].head = head
-            players[i].middle = middle
-            players[i].tail = tail
-        }
-
-        // คำนวณคะแนน
-        for i in 0..<players.count {
-            players[i].score = calculateScore(player: players[i])
-        }
     }
 
     private func dealCards() {
+        deck.shuffle()
         for i in 0..<players.count {
             players[i].hand = (0..<13).compactMap { _ in deck.dealCard() }
-            players[i].sortHand()
+            players[i].sortHand() // เรียงไพ่ตามดอก + แต้ม
         }
     }
-
-    func splitIntoThreePiles(player: Player) -> ([Card], [Card], [Card]) {
-        let tail = Array(player.hand.prefix(5))
-        let middle = Array(player.hand.dropFirst(5).prefix(5))
-        let head = Array(player.hand.suffix(3))
-        return (head, middle, tail)
-    }
-    
-
-    private func evaluateHand(_ hand: [Card]) -> Int {
-        // ตัวอย่าง logic เริ่มต้น: ให้แต้มตามจำนวนไพ่ (สามารถปรับให้ซับซ้อนขึ้นภายหลัง)
-        return hand.count
-    }
-
-    func compareScores() -> Player? {
-        players.max(by: { $0.score < $1.score })
-    }
 }
-
-
-import Foundation
 
 class GameManager: ObservableObject {
     @Published var players: [Player] = []
@@ -634,11 +573,6 @@ class GameManager: ObservableObject {
     }
 
     func calculateScore(player: Player) -> Int {
-        let headScore = evaluateHand(hand: player.head)
-        let middleScore = evaluateHand(hand: player.middle) * 2
-        let tailScore = evaluateHand(hand: player.tail) * 3
-        return headScore + middleScore + tailScore
-    }
 
     private func evaluateHand(hand: [Card]) -> Int {
         // ตัวอย่างเบื้องต้น: ให้แต้มตามจำนวนไพ่
@@ -674,7 +608,7 @@ func startGame() {
 
 func evaluateThreePiles(head: [Card], middle: [Card], tail: [Card]) -> Int {
     var score = 0
-    score += evaluateHand(head) * 5    // อาจให้คะแนนน้อยหน่อย
+    score += evaluateHand(head)   // อาจให้คะแนนน้อยหน่อย
     score += evaluateHand(middle) 
     score += evaluateHand(tail)
     return score
