@@ -47,6 +47,7 @@ class GameManager: ObservableObject {
 
 import Foundation
 
+class GameManager: ObservableObject {
     @Published var players: [Player] = []   
     @Published var currentRound: Int = 1
     @Published var isGameOver: Bool = false
