@@ -1,4 +1,13 @@
-
+class Player: Identifiable, ObservableObject {
+    let id = UUID()
+    let name: String
+    let avatar: String
+    var isReady: Bool = false
+    var hand: [Card] = []
+    var head: [Card] = []
+    var middle: [Card] = []
+    var tail: [Card] = []
+}
 struct Player {
     var id: Int
     var name: String
