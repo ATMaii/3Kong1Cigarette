@@ -247,7 +247,7 @@ class Player {
         }
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("dd/mm/yy")
+        print(" ")
 
 import Foundation
 
@@ -276,7 +276,7 @@ struct Player {
         }
         chips += 5000 // เพิ่มชิป 5,000
         lastBonusDate = Date() // อัพเดทวันที่รับโบนัสล่าสุด
-        print("dd/mm/yy")
+        print(" ")
 
 
 class GameManager: ObservableObject {
@@ -467,29 +467,12 @@ class GameManager: ObservableObject {
         }
     }
 }
-        // แจกไพ่ 13 ใบ และแบ่งไพ่ 3 กอง
-        for i in 0..<players.count {
-            players[i].hand = (0..<13).compactMap { _ in deck.drawCard() }
-            players[i].sortHand()
-            players[i].splitHand() // กำหนดให้ Player มีเมธอดนี้
-        }
-
-        // คำนวณคะแนนรวม 3 กอง
-        for i in 0..<players.count {
-            let player = players[i]
-            let score = evaluateThreePiles(head: player.head, middle: player.middle, tail: player.tail)
-            players[i].score = score
-        }
-
-        // หาผู้ชนะจากคะแนนสูงสุด
-        winner = players.max(by: { $0.score < $1.score })
-    }
 
     private func evaluateThreePiles(head: [Card], middle: [Card], tail: [Card]) -> Int {
         var score = 0
-        score += evaluateHand(head)           // อาจให้ค่าน้อย
-        score += evaluateHand(middle) * 2     // กลางคูณ 2
-        score += evaluateHand(tail) * 3       // ท้ายคูณ 3
+        score += evaluateHand(head) //
+        score += evaluateHand(middle)//
+        score += evaluateHand(tail) //
         return score
     }
 
@@ -667,8 +650,6 @@ class GameManager: ObservableObject {
     }
 }
 
-
-*****
 func startGame() {
     let names = ["ผู้เล่น 1", "ผู้เล่น 2", "ผู้เล่น 3", "ผู้เล่น 4"]
     players = names.map { Player(name: $0) }
@@ -693,8 +674,8 @@ func startGame() {
 
 func evaluateThreePiles(head: [Card], middle: [Card], tail: [Card]) -> Int {
     var score = 0
-    score += evaluateHand(head)      // อาจให้คะแนนน้อยหน่อย
-    score += evaluateHand(middle) * 2
+    score += evaluateHand(head) * 5    // อาจให้คะแนนน้อยหน่อย
+    score += evaluateHand(middle) 
     score += evaluateHand(tail)
     return score
 }
@@ -849,97 +830,6 @@ class GameManager: ObservableObject {
         return winner
     }
 
-    func calculateScore(player: Player) -> Int {
-        let headScore = evaluateHand(player: player, hand: Array(player.hand.prefix(5)))
-        let middleScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(5).prefix(5)))
-        let tailScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(10).prefix(3)))
-        return headScore + middleScore + tailScore
-    }
-
-    private func evaluateHand(player: Player, hand: [Card]) -> Int {
-        // เพิ่มเงื่อนไขในการประเมินคะแนนตามแถวต่าง ๆ
-        return hand.count
-    }
-}
-
-class GameManager: ObservableObject {
-    @Published var players: [Player] = []
-    private var deck = Deck()
-
-    init() {
-        startGame()
-    }
-
-    func startGame() {
-        deck = Deck()
-        players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
-        dealCards()
-    }
-
-    private func dealCards() {
-        deck.shuffle()
-        for i in 0..<players.count {
-            players[i].hand = (0..<13).compactMap { _ in deck.dealCard() }
-            players[i].sortHand()
-        }
-    }
-
-    func calculateScore(player: Player) -> Int {
-        let headScore = evaluateHand(player: player, hand: Array(player.hand.prefix(5)))
-        let middleScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(5).prefix(5)))
-        let tailScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(10).prefix(3)))
-        return headScore + middleScore + tailScore
-    }
-
-    func evaluateHand(player: Player, hand: [Card]) -> Int {
-        // เพิ่มเงื่อนไขในการประเมินคะแนนตามแถวต่าง ๆ
-        return hand.count
-    }
-
-    func compareScores() -> Player? {
-        var winner: Player? = nil
-        var highestScore = 0
-
-        for player in players {
-            let score = calculateScore(player: player)
-            if score > highestScore {
-                highestScore = score
-                winner = player
-            }
-        }
-
-        return winner
-    }
-}
-
-class Player {
-    var name: String
-    var hand: [Card] = [] // การเก็บไพ่ของผู้เล่น
-
-    init(name: String) {
-        self.name = name
-    }
-
-    // ฟังก์ชันเพื่อแบ่งมือของผู้เล่นเป็น 3 กอง (head, middle, tail)
-    func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
-        var head: [Card] = []
-        var middle: [Card] = []
-        var tail: [Card] = []
-
-        // เรียงไพ่จากท้ายไปหัว
-        for i in 0..<13 {
-            if i < 5 {
-                tail.append(hand[i])  // 5 ใบแรกเป็นกองท้าย
-            } else if i < 10 {
-                middle.append(hand[i])  // 5 ใบถัดมาเป็นกองกลาง
-            } else {
-                head.append(hand[i])  // 3 ใบสุดท้ายเป็นกองหัว
-            }
-        }
-
-        return (head, middle, tail)
-    }
-}
 
 class GameManager {
     var players: [Player]
@@ -1240,4 +1130,4 @@ func prepareNextRound() {
         print("Not enough players to continue.")
         // อาจแสดงผล Game Over หรือรอเพิ่มผู้เล่น
     } else {
-        print("Starting next round with
+        print("Starting next round with")
