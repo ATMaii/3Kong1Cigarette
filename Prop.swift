@@ -1,3 +1,95 @@
+
+    func calculateScore(player: Player) -> Int {
+        let headScore = evaluateHand(player: player, hand: Array(player.hand.prefix(3)))
+        let middleScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(5).prefix(5)))
+        let tailScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(10).prefix(5)))
+        return headScore + middleScore + tailScore
+    }
+
+    private func evaluateHand(player: Player, hand: [Card]) -> Int {
+        // เพิ่มเงื่อนไขในการประเมินคะแนนตามแถวต่าง ๆ
+        return hand.count
+    }
+}
+
+class GameManager: ObservableObject {
+    @Published var players: [Player] = []
+    private var deck = Deck()
+
+    init() {
+        startGame()
+    }
+
+    func startGame() {
+        deck = Deck()
+        players = [Player(id: 1), Player(id: 2), Player(id: 3), Player(id: 4)]
+        dealCards()
+    }
+
+    private func dealCards() {
+        deck.shuffle()
+        for i in 0..<players.count {
+            players[i].hand = (0..<13).compactMap { _ in deck.dealCard() }
+            players[i].sortHand()
+        }
+    }
+
+    func calculateScore(player: Player) -> Int {
+        let headScore = evaluateHand(player: player, hand: Array(player.hand.prefix(5)))
+        let middleScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(5).prefix(5)))
+        let tailScore = evaluateHand(player: player, hand: Array(player.hand.dropFirst(10).prefix(3)))
+        return headScore + middleScore + tailScore
+    }
+
+    func evaluateHand(player: Player, hand: [Card]) -> Int {
+        // เพิ่มเงื่อนไขในการประเมินคะแนนตามแถวต่าง ๆ
+        return hand.count
+    }
+
+    func compareScores() -> Player? {
+        var winner: Player? = nil
+        var highestScore = 0
+
+        for player in players {
+            let score = calculateScore(player: player)
+            if score > highestScore {
+                highestScore = score
+                winner = player
+            }
+        }
+
+        return winner
+    }
+}
+
+class Player {
+    var name: String
+    var hand: [Card] = [] // การเก็บไพ่ของผู้เล่น
+
+    init(name: String) {
+        self.name = name
+    }
+
+    // ฟังก์ชันเพื่อแบ่งมือของผู้เล่นเป็น 3 กอง (head, middle, tail)
+    func splitIntoThreePiles() -> ([Card], [Card], [Card]) {
+        var head: [Card] = []
+        var middle: [Card] = []
+        var tail: [Card] = []
+
+        // เรียงไพ่จากท้ายไปหัว
+        for i in 0..<13 {
+            if i < 5 {
+                tail.append(hand[i])  // 5 ใบแรกเป็นกองท้าย
+            } else if i < 10 {
+                middle.append(hand[i])  // 5 ใบถัดมาเป็นกองกลาง
+            } else {
+                head.append(hand[i])  // 3 ใบสุดท้ายเป็นกองหัว
+            }
+        }
+
+        return (head, middle, tail)
+    }
+}
 // MARK: - Waiting Room View
 struct WaitingRoomView: View {
     let arena: String
