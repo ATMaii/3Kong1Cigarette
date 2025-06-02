@@ -15,22 +15,12 @@ enum GamePhase {
 
 // GameManager.swift
 
-import Foundation
-
 class GameManager: ObservableObject {
     @Published var phase: GamePhase = .login
     @Published var selectedStadium: Stadium?
     @Published var selectedRoom: Room?
     @Published var players: [Player] = []
-    @Published var currentRound: Int = 1
-    @Published var isGameOver: Bool = false
-    private var gameLogic: GameLogic
-    private var scoreManager: ScoreManager
-    init(playerNames: [String]) {
-        self.players = playerNames.map { Player(name: $0) }
-        self.gameLogic = GameLogic(players: self.players)
-        self.scoreManager = ScoreManager(players: self.players)
-    }
+    
     var deck = Deck()
 
     func login() {
@@ -53,6 +43,19 @@ class GameManager: ObservableObject {
         if players.count == 4 {
             startGame()
         }
+    }
+
+import Foundation
+
+    @Published var players: [Player] = []   
+    @Published var currentRound: Int = 1
+    @Published var isGameOver: Bool = false
+    private var gameLogic: GameLogic
+    private var scoreManager: ScoreManager
+    init(playerNames: [String]) {
+        self.players = playerNames.map { Player(name: $0) }
+        self.gameLogic = GameLogic(players: self.players)
+        self.scoreManager = ScoreManager(players: self.players)
     }
 
     func startGame() {
@@ -332,8 +335,7 @@ func startGame() {
         player.hand.sort { $0.rank.rawValue < $1.rank.rawValue } // เรียงมือไว้
         return player
     }
-
-    // ยังไม่จัดเป็น head, middle, tail
+// ยังไม่จัดเป็น head, middle, tail
 }
 players[2].head = headCardsFromUI
 players[2].middle = middleCardsFromUI
