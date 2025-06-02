@@ -1,3 +1,5 @@
+import Foundation
+
 enum GamePhase {
     case login
     case selectStadium
@@ -13,15 +15,23 @@ enum GamePhase {
     case roundFinished
 }
 
-// GameManager.swift
-
 class GameManager: ObservableObject {
     @Published var phase: GamePhase = .login
     @Published var selectedStadium: Stadium?
     @Published var selectedRoom: Room?
     @Published var players: [Player] = []
-    
+    @Published var currentRound: Int = 1
+    @Published var isGameOver: Bool = false
+
     var deck = Deck()
+    private var gameLogic: GameLogic
+    private var scoreManager: ScoreManager
+
+    init(playerNames: [String]) {
+        self.players = playerNames.map { Player(name: $0) }
+        self.gameLogic = GameLogic(players: self.players)
+        self.scoreManager = ScoreManager(players: self.players)
+    }
 
     func login() {
         phase = .selectStadium
@@ -34,7 +44,7 @@ class GameManager: ObservableObject {
 
     func selectRoom(_ room: Room) {
         selectedRoom = room
-        players = []
+        players.removeAll()
         phase = .waitingForPlayers
     }
 
@@ -43,20 +53,6 @@ class GameManager: ObservableObject {
         if players.count == 4 {
             startGame()
         }
-    }
-
-import Foundation
-
-class GameManager: ObservableObject {
-    @Published var players: [Player] = []   
-    @Published var currentRound: Int = 1
-    @Published var isGameOver: Bool = false
-    private var gameLogic: GameLogic
-    private var scoreManager: ScoreManager
-    init(playerNames: [String]) {
-        self.players = playerNames.map { Player(name: $0) }
-        self.gameLogic = GameLogic(players: self.players)
-        self.scoreManager = ScoreManager(players: self.players)
     }
 
     func startGame() {
@@ -83,13 +79,22 @@ class GameManager: ObservableObject {
     }
 
     func evaluateHands() {
-        // TODO: เทียบคะแนนตามกติกา
+        let roundScores = gameLogic.calculateRoundScores()
+        scoreManager.updateScores(with: roundScores)
         phase = .showingScore
+
+        currentRound += 1
+        if currentRound > 5 {
+            isGameOver = true
+            phase = .roundFinished
+        }
     }
 
     func playAgain() {
         phase = .waitingForPlayers
         players.removeAll()
+        currentRound = 1
+        isGameOver = false
     }
 
     func resetForNextRound() {
@@ -102,33 +107,11 @@ class GameManager: ObservableObject {
         deck.reset()
         startGame()
     }
-}
-    
-    func startNewGame() {
-        currentRound = 1
-        isGameOver = false
-        for player in players {
-            player.reset()
-        }
-        gameLogic.startGame()
-    }
-    func playRound() {
-        gameLogic.startGame()
-
-        let roundScores = gameLogic.calculateRoundScores()
-        scoreManager.updateScores(with: roundScores)
-
-        currentRound += 1
-        if currentRound > 5 {
-            isGameOver = true
-        }
-    }
 
     func winner() -> Player? {
         return scoreManager.highestScorePlayer()
     }
 
-    // Stadium for Chips logic
     func stadiumForChips(_ chips: Int) -> Stadium? {
         switch chips {
         case 50_000...:
@@ -142,6 +125,8 @@ class GameManager: ObservableObject {
         default:
             return nil
         }
+    }
+}
 
 import Foundation
 
