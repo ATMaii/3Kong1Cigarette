@@ -13,12 +13,25 @@ enum GamePhase {
     case roundFinished
 }
 
+// GameManager.swift
+
+import Foundation
+
 class GameManager: ObservableObject {
     @Published var phase: GamePhase = .login
     @Published var selectedStadium: Stadium?
     @Published var selectedRoom: Room?
     @Published var players: [Player] = []
-
+    @Published var players: [Player] = []
+    @Published var currentRound: Int = 1
+    @Published var isGameOver: Bool = false
+    private var gameLogic: GameLogic
+    private var scoreManager: ScoreManager
+    init(playerNames: [String]) {
+        self.players = playerNames.map { Player(name: $0) }
+        self.gameLogic = GameLogic(players: self.players)
+        self.scoreManager = ScoreManager(players: self.players)
+    }
     var deck = Deck()
 
     func login() {
@@ -87,22 +100,7 @@ class GameManager: ObservableObject {
         startGame()
     }
 }
-
-// GameManager.swift
-
-import Foundation
-
-class GameManager: ObservableObject {
-    @Published var players: [Player] = []
-    @Published var currentRound: Int = 1
-    @Published var isGameOver: Bool = false
-    private var gameLogic: GameLogic
-    private var scoreManager: ScoreManager
-    init(playerNames: [String]) {
-        self.players = playerNames.map { Player(name: $0) }
-        self.gameLogic = GameLogic(players: self.players)
-        self.scoreManager = ScoreManager(players: self.players)
-    }
+    
     func startNewGame() {
         currentRound = 1
         isGameOver = false
