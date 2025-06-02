@@ -22,7 +22,6 @@ class GameManager: ObservableObject {
     @Published var selectedStadium: Stadium?
     @Published var selectedRoom: Room?
     @Published var players: [Player] = []
-    @Published var players: [Player] = []
     @Published var currentRound: Int = 1
     @Published var isGameOver: Bool = false
     private var gameLogic: GameLogic
