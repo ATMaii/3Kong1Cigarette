@@ -12,6 +12,7 @@ enum GamePhase {
     case updatingScores
     case roundFinished
 }
+
 class GameManager: ObservableObject {
     @Published var phase: GamePhase = .login
     @Published var selectedStadium: Stadium?
@@ -19,24 +20,29 @@ class GameManager: ObservableObject {
     @Published var players: [Player] = []
 
     var deck = Deck()
+
     func login() {
         phase = .selectStadium
     }
+
     func selectStadium(_ stadium: Stadium) {
         selectedStadium = stadium
         phase = .selectRoom
     }
+
     func selectRoom(_ room: Room) {
         selectedRoom = room
         players = []
         phase = .waitingForPlayers
     }
+
     func addPlayer(_ player: Player) {
         players.append(player)
         if players.count == 4 {
             startGame()
         }
     }
+
     func startGame() {
         phase = .dealingCards
         deck = Deck()
@@ -46,34 +52,28 @@ class GameManager: ObservableObject {
         }
         phase = .arrangingHands
     }
-    func playerDidConfirmHand() {
-        if players.allSatisfy({ !$0.head.isEmpty && !$0.middle.isEmpty && !$0.tail.isEmpty }) {
-            phase = .evaluating
-            evaluateHands()
-        }
-    }
-        phase = .arrangingHands
-    }
-    func confirmHands(for playerID: Int, head: [Card], middle: [Card], tail: [Card]) {
+
+    func confirmHands(for playerID: UUID, head: [Card], middle: [Card], tail: [Card]) {
         if let index = players.firstIndex(where: { $0.id == playerID }) {
             players[index].head = head
             players[index].middle = middle
             players[index].tail = tail
         }
-        if players.allSatisfy({ !$0.head.isEmpty && !$0.middle.isEmpty && !$0.tail.isEmpty }) 
-{
-        phase = .evaluating
-            evaluateGame()
+
+        if players.allSatisfy({ !$0.head.isEmpty && !$0.middle.isEmpty && !$0.tail.isEmpty }) {
+            phase = .evaluating
+            evaluateHands()
+        }
+    }
+
     func evaluateHands() {
-        // เทียบคะแนนตามกติกา
+        // TODO: เทียบคะแนนตามกติกา
         phase = .showingScore
     }
+
     func playAgain() {
         phase = .waitingForPlayers
         players.removeAll()
-    }
-}
-        phase = .roundFinished
     }
 
     func resetForNextRound() {
@@ -84,10 +84,10 @@ class GameManager: ObservableObject {
             players[i].tail = []
         }
         deck.reset()
-        phase = .dealingCards
         startGame()
     }
 }
+
 // GameManager.swift
 
 import Foundation
