@@ -867,7 +867,7 @@ class GameManager {
         }
         // อื่น ๆ...
         return score
-    }
+    
 
     func straightRank(_ hand: [Card]) -> Int? {
         let ranks = hand.map { $0.rank.rawValue }.sorted()
@@ -887,7 +887,7 @@ class GameManager {
         for (index, straight) in straights.enumerated() {
             if Set(ranks) == Set(straight) {
                 return index + 1
-            }
+
 
 
 
@@ -923,8 +923,6 @@ func compareHands(_ hand1: [Card], _ hand2: [Card]) -> Int {
             }
         }
         return 0 // เสมอ
-    }
-}
 
 func calculateScore(players: [Player]) -> [String: Int] {
     var scores: [String: Int] = [:]
@@ -945,9 +943,7 @@ func calculateScore(players: [Player]) -> [String: Int] {
             scores[p1.name, default: 0] += resultHead + resultMiddle + resultTail
         }
     }
-
     return scores
-}
         
 func compareMiddleRow(p1: [Card], p2: [Card], p3: [Card], p4: [Card]) {
     let allMiddleHands = [p1, p2, p3, p4]
@@ -957,9 +953,9 @@ func compareMiddleRow(p1: [Card], p2: [Card], p3: [Card], p4: [Card]) {
     if let maxRank = middleRanks.max() {
         for (index, rank) in middleRanks.enumerated() {
             if rank == maxRank {
-                print("Player
+                print("Player")
 
-                      class GameLogic {
+class GameLogic {
     var players: [Player]
 
     init(players: [Player]) {
@@ -974,10 +970,8 @@ func compareMiddleRow(p1: [Card], p2: [Card], p3: [Card], p4: [Card]) {
             let playerScore = evaluatePlayerScore(player: player)
             scores.append(playerScore)
         }
-        
         return scores
-    }
-    
+   
     // คำนวณคะแนนของผู้เล่น
     func evaluatePlayerScore(player: Player) -> Int {
         var totalScore = 0
@@ -1049,5 +1043,7 @@ func prepareNextRound() {
     if players.count < 2 {
         print("Not enough players to continue.")
         // อาจแสดงผล Game Over หรือรอเพิ่มผู้เล่น
-    } else {
+    } 
+    else {
         print("Starting next round with")
+}
