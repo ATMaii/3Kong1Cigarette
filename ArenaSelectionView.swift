@@ -110,7 +110,8 @@ struct ArenaSelectionView: View {
                         destination: WaitingRoomView(arena: arena.name),
                         label: {
                             Text("เข้าห้อง")
-
+                }
+}
 
 struct ArenaSelectionView: View {
     @State private var selectedArena: String? = nil
