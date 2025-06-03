@@ -109,7 +109,7 @@ struct ArenaSelectionView: View {
                     NavigationLink(
                         destination: WaitingRoomView(arena: arena.name),
                         label: {
-                            Text("เข้าห้อง
+                            Text("เข้าห้อง")
 
 
 struct ArenaSelectionView: View {
