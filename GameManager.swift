@@ -867,7 +867,7 @@ class GameManager {
         }
         // อื่น ๆ...
         return score
-    
+    }
 
     func straightRank(_ hand: [Card]) -> Int? {
         let ranks = hand.map { $0.rank.rawValue }.sorted()
@@ -887,9 +887,9 @@ class GameManager {
         for (index, straight) in straights.enumerated() {
             if Set(ranks) == Set(straight) {
                 return index + 1
-
-
-
+       }
+    }
+}
 
 enum HandRank: Int {
     case highCard = 1
@@ -923,6 +923,7 @@ func compareHands(_ hand1: [Card], _ hand2: [Card]) -> Int {
             }
         }
         return 0 // เสมอ
+}
 
 func calculateScore(players: [Player]) -> [String: Int] {
     var scores: [String: Int] = [:]
@@ -944,6 +945,7 @@ func calculateScore(players: [Player]) -> [String: Int] {
         }
     }
     return scores
+}
         
 func compareMiddleRow(p1: [Card], p2: [Card], p3: [Card], p4: [Card]) {
     let allMiddleHands = [p1, p2, p3, p4]
@@ -971,7 +973,8 @@ class GameLogic {
             scores.append(playerScore)
         }
         return scores
-   
+   }
+
     // คำนวณคะแนนของผู้เล่น
     func evaluatePlayerScore(player: Player) -> Int {
         var totalScore = 0
