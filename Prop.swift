@@ -366,6 +366,13 @@ Middle: J♥️, 7♥️, 5♥️, 6♥️,2♥️
 Tail: J♣️, 10♣️, 6♣️, 4♣️,3♣️
 
 
+enum HandProp: Int, Comparable {
+    case highCard = 0, onePair, twoPair, trips, straight, flush, fullHouse, quads, straightFlush, royalFlush
+
+    static func < (lhs: HandProp, rhs: HandProp) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
 
 struct Card {
     let rank: Rank
