@@ -1,3 +1,34 @@
+enum HandProp: Int, Comparable {
+    case highCard = 0, onePair, twoPair, trips, straight, flush, fullHouse, quads, straightFlush, royalFlush
+
+    static func < (lhs: HandProp, rhs: HandProp) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
+
+func compareHands(_ hand1: [Card], _ hand2: [Card]) -> Int {
+    let prop1 = evaluateHand(hand1)
+    let prop2 = evaluateHand(hand2)
+
+    // เทียบว่าใคร Prop ดีกว่า
+    if prop1 != prop2 {
+        return prop1.rawValue > prop2.rawValue ? 1 : -1
+    }
+
+    // ถ้า prop เหมือนกัน → ดู kicker (เรียงลำดับจากใหญ่ไปเล็กก่อน)
+    let sorted1 = hand1.sorted(by: { $0.rank.rawValue > $1.rank.rawValue })
+    let sorted2 = hand2.sorted(by: { $0.rank.rawValue > $1.rank.rawValue })
+
+    for i in 0..<min(sorted1.count, sorted2.count) {
+        if sorted1[i].rank.rawValue > sorted2[i].rank.rawValue {
+            return 1
+        } else if sorted1[i].rank.rawValue < sorted2[i].rank.rawValue {
+            return -1
+        }
+    }
+
+    return 0 // เสมอทุกใบจริง
+}
 
     func calculateScore(player: Player) -> Int {
         let headScore = evaluateHand(player: player, hand: Array(player.hand.prefix(3)))
@@ -365,14 +396,6 @@ Middle: J♥️, 7♥️, 5♥️, 6♥️,2♥️
 
 Tail: J♣️, 10♣️, 6♣️, 4♣️,3♣️
 
-
-enum HandProp: Int, Comparable {
-    case highCard = 0, onePair, twoPair, trips, straight, flush, fullHouse, quads, straightFlush, royalFlush
-
-    static func < (lhs: HandProp, rhs: HandProp) -> Bool {
-        return lhs.rawValue < rhs.rawValue
-    }
-}
 
 struct Card {
     let rank: Rank
