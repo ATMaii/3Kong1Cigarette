@@ -253,6 +253,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct GameView: View {
+    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
     @ObservedObject var gameLogic: GameLogic  // เชื่อมกับ GameLogic
     @ObservedObject var gameLogic: GameLogic
     @State private var gameStarted = false
@@ -263,7 +264,7 @@ struct GameView: View {
     @State private var showScorePopup = false
     @State private var finalScores: [String: Int] = [:]
     @State private var players: [[Card]] = []
-
+    
     var body: some View {
         VStack {
             Text("Game: 3 กอง")
@@ -786,16 +787,6 @@ private func calculateScores() {
     gameLogic.startNewGame()
         }      
  }
-
-// MARK: - Game View
-
-struct GameView: View {
-    @StateObject private var gameLogic = GameLogic(playerNames: ["Player 1", "Player 2", "Player 3", "Player 4"])
-    @State private var gameStarted = false
-    @State private var isGameOver = false
-    @State private var isGameActive = true
-    @State private var timeRemaining = 120
-    @State private var timer: Timer?
 
     var body: some View {
         VStack {
@@ -1731,5 +1722,5 @@ return score
 
 func checkResult(for players: inout [Player]) { for index in players.indices { let topScore = calculateHandScore(hand: players[index].arrangedCards[0], row: .head) let middleScore = calculateHandScore(hand: players[index].arrangedCards[1], row: .middle) let bottomScore = calculateHandScore(hand: players[index].arrangedCards[2], row: .tail) let totalScore = topScore + middleScore + bottomScore
 
-print("Player
+print("Player")
 
