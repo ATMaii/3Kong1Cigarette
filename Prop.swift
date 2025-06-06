@@ -2454,6 +2454,7 @@ struct flushRanks: [[Rank]] = [Prop
     [.king, .six, .five, .four, .two],
     [.king, .six, .five, .three, .two],
     [.king, .six, .four, .three, .two],
+    [.king, .five,.four, .three, .two],
 
     [.queen, .jack, .ten, .nine, .eight],
     [.queen, .jack, .ten, .nine, .seven],
@@ -2538,6 +2539,7 @@ struct flushRanks: [[Rank]] = [Prop
     [.queen, .six, .five, .four, .two],
     [.queen, .six, .five, .three, .two],
     [.queen, .six, .four, .three, .two],
+    [.queen, .five,.four, .three, .two],
 
     [.jack, .ten, .nine, .eight, .six],
     [.jack, .ten, .nine, .eight, .five],
@@ -2622,7 +2624,6 @@ struct flushRanks: [[Rank]] = [Prop
     [.jack, .nine, .seven, .four, .three],
     [.jack, .nine, .seven, .four, .two],
     [.jack, .nine, .seven, .three, .two],
-
 
     [.jack, .eight, .seven, .six, .five],
     [.jack, .eight, .seven, .six, .four],
