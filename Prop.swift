@@ -452,7 +452,7 @@ props: [
           point: 8
 }
 
-let straightFlushProps : [Prop]
+let straightFlushProps: [Prop]
 
 Prop(name:StraightFlush
 props: [
