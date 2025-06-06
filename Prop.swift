@@ -313,7 +313,7 @@ let masterArenas = masterStadium.availableRooms
 }
 func roomName(for stadium: Stadium) -> String {
         " room "
-
+}
 le t rookieStadium = Stadium.Rookie
 le t rookieArenas = rookieStadium.availableRooms
 
@@ -450,7 +450,6 @@ props: [
     Card(rank: .ten, suit: .clubs),
        ]),
           point: 8
-}
 
 let StraightFlushProps: [Prop]
 
