@@ -2156,6 +2156,7 @@ struct flushRanks: [[Rank]] = [Prop
     [.ace, .queen, .six, .three, .two],
     [.ace, .queen, .five, .four, .three],
     [.ace, .queen, .five, .four, .two],
+    [.ace, .queen, .five, .three, .two],
     [.ace, .queen, .four, .three, .two],
 
     [.ace, .jack, .ten, .nine, .eight],
