@@ -194,6 +194,12 @@ struct HandEvaluator {
     }
 }
 
+// ฟังก์ชันเช็คคู่ A ที่หัว
+func isPairOfAces(cards: [Card]) -> Bool {
+    // ตรวจสอบว่าคู่ในหัวเป็น A จริงไหม
+    return cards.filter { $0.rank == .ace }.count == 2 && evaluateHandType(cards: cards) == .pair
+}
+
 // ฟังก์ชันตรวจสอบมือไพ่ต่าง ๆ รวมใน struct
 struct HandEvaluator {
     static func isRoyalFlush(_ hand: [Card]) -> Bool {
