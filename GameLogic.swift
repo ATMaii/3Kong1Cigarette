@@ -1,3 +1,103 @@
+//
+//  StructHeadRow.swift
+//  3kong1ciggalate
+//
+//  Created by Mr. Anujit Trassaru on 8.6.2025.
+//  Copyright © 2025 Your Name. All rights reserved.
+//
+//  Description:
+//  Utility for comparing Head Row (3-card hand) with custom Thai 13-card poker rules.
+//
+
+import Foundation
+
+struct Card {
+    let rank: Int // 2-14, where 11=J, 12=Q, 13=K, 14=A
+    let suit: String // "♠️", "♥", "♦", "♣"
+}
+
+enum HandRank: Int, Comparable {
+    case highCard = 0
+    case pair
+    case threeOfAKind
+
+    static func < (lhs: HandRank, rhs: HandRank) -> Bool {
+        lhs.rawValue < rhs.rawValue
+    }
+}
+
+struct HeadRow {
+    let cards: [Card] // Should be exactly 3 cards
+
+    func evaluate() -> (rank: HandRank, strength: [Int]) {
+        guard cards.count == 3 else { return (.highCard, []) }
+
+        let ranks = cards.map { $0.rank }.sorted(by: >)
+        let rankCounts = Dictionary(grouping: ranks, by: { $0 }).mapValues { $0.count }
+
+        if rankCounts.contains(where: { $0.value == 3 }) {
+            return (.threeOfAKind, ranks)
+        } else if rankCounts.contains(where: { $0.value == 2 }) {
+            let pairRank = rankCounts.first(where: { $0.value == 2 })!.key
+            let kicker = rankCounts.first(where: { $0.value == 1 })!.key
+            return (.pair, [pairRank, kicker])
+        } else {
+            return (.highCard, ranks)
+        }
+    }
+
+    static func >(lhs: HeadRow, rhs: HeadRow) -> Bool {
+        let evalL = lhs.evaluate()
+        let evalR = rhs.evaluate()
+        if evalL.rank != evalR.rank {
+            return evalL.rank > evalR.rank
+        } else {
+            return evalL.strength.lexicographicallyPrecedes(evalR.strength) == false
+        }
+    }
+
+    static func <(lhs: HeadRow, rhs: HeadRow) -> Bool {
+        return !(lhs > rhs) && lhs.evaluate() != rhs.evaluate()
+    }
+
+    static func ==(lhs: HeadRow, rhs: HeadRow) -> Bool {
+        return lhs.evaluate().rank == rhs.evaluate().rank &&
+               lhs.evaluate().strength == rhs.evaluate().strength
+    }
+}
+
+// MARK: - Pair of Aces Checker
+struct PairOfAce {
+    static func isMatch(_ cards: [Card]) -> Bool {
+        guard cards.count == 3 else { return false }
+        let ranks = cards.map { $0.rank }
+        let rankCounts = Dictionary(grouping: ranks, by: { $0 })
+        return rankCounts[14]?.count == 2 // Pair of Aces
+    }
+}
+
+// MARK: - Compare Function
+func compareHeadRow(_ handA: HeadRow, _ handB: HeadRow) -> (scoreA: Int, scoreB: Int) {
+    let isAA = PairOfAce.isMatch(handA.cards) || PairOfAce.isMatch(handB.cards)
+    let isThreeOfAKindA = handA.evaluate().rank == .threeOfAKind
+    let isThreeOfAKindB = handB.evaluate().rank == .threeOfAKind
+
+    var winPoint = 1
+    if isThreeOfAKindA || isThreeOfAKindB {
+        winPoint = 5
+    } else if isAA {
+        winPoint = 2
+    }
+
+    if handA > handB {
+        return (winPoint, -winPoint)
+    } else if handA < handB {
+        return (-winPoint, winPoint)
+    } else {
+        return (0, 0)
+    }
+}
+
 import Foundation
 
 enum HandProp: Int, Comparable {
